@@ -10,6 +10,6 @@ import Foundation
 struct Cart {
     var productId: String
     var productName: String
-    var productNum: Int
+    var productCount: Int
     var productPrice: Int
 }
