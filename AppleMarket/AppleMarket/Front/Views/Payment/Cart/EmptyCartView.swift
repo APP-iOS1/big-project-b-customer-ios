@@ -14,6 +14,7 @@ struct EmptyCartView: View {
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .foregroundColor(.black)
                 .padding()
             
             VStack {
@@ -27,7 +28,7 @@ struct EmptyCartView: View {
                     .fontWeight(.semibold)
             }
             .foregroundColor(Color(UIColor.systemGray))
-            .offset(y: 100)
+            .offset(y: 70)
             
             Spacer()
         }
