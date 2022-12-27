@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		261FC179295ABFF5001F9211 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261FC178295ABFF5001F9211 /* LoginView.swift */; };
+		261FC17B295AD4EB001F9211 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261FC17A295AD4EB001F9211 /* SignUpView.swift */; };
 		1AC0A72A295ACD7E00A7CE8E /* ModelOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC0A729295ACD7D00A7CE8E /* ModelOptionView.swift */; };
 		1AC0A72C295ADB0300A7CE8E /* ColorOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC0A72B295ADB0300A7CE8E /* ColorOptionView.swift */; };
 		1AC0A72F295AE22A00A7CE8E /* AppleCareOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC0A72E295AE22A00A7CE8E /* AppleCareOptionView.swift */; };
@@ -43,7 +45,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-
+		261FC178295ABFF5001F9211 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		261FC17A295AD4EB001F9211 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		1AC0A729295ACD7D00A7CE8E /* ModelOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelOptionView.swift; sourceTree = "<group>"; };
 		1AC0A72B295ADB0300A7CE8E /* ColorOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorOptionView.swift; sourceTree = "<group>"; };
 		1AC0A72E295AE22A00A7CE8E /* AppleCareOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleCareOptionView.swift; sourceTree = "<group>"; };
@@ -51,7 +54,6 @@
 
 		02FEB662295AE003003EF536 /* MyProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileView.swift; sourceTree = "<group>"; };
 		02FEB664295AE79A003EF536 /* MyDeviceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDeviceListView.swift; sourceTree = "<group>"; };
-
 		2C7A8C67295A8298000D55C5 /* AppleMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppleMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C7A8C6A295A8298000D55C5 /* AppleMarketApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMarketApp.swift; sourceTree = "<group>"; };
 		2C7A8C6C295A8298000D55C5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -94,6 +96,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		261FC177295ABFCD001F9211 /* Login&SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				261FC178295ABFF5001F9211 /* LoginView.swift */,
+				261FC17A295AD4EB001F9211 /* SignUpView.swift */,
+			);
+			path = "Login&SignUp";
+			sourceTree = "<group>";
+		};
 		2C7A8C5E295A8298000D55C5 = {
 			isa = PBXGroup;
 			children = (
@@ -114,7 +125,6 @@
 		2C7A8C69295A8298000D55C5 /* AppleMarket */ = {
 			isa = PBXGroup;
 			children = (
-				2C7A8C8E295AA700000D55C5 /* Back */,
 				2C7A8C8C295AA6E2000D55C5 /* Info.plist */,
 				5BB36F93295AB79A004D1683 /* Front */,
 				2C7A8C6A295A8298000D55C5 /* AppleMarketApp.swift */,
@@ -131,13 +141,6 @@
 				2C7A8C71295A8299000D55C5 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		2C7A8C8E295AA700000D55C5 /* Back */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Back;
 			sourceTree = "<group>";
 		};
 		5BB36F93295AB79A004D1683 /* Front */ = {
@@ -199,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				5BB36FA0295AB842004D1683 /* MypageView.swift */,
+				261FC177295ABFCD001F9211 /* Login&SignUp */,
 				02FEB662295AE003003EF536 /* MyProfileView.swift */,
 				02FEB664295AE79A003EF536 /* MyDeviceListView.swift */,
 			);
@@ -318,6 +322,8 @@
 				3A5B5077295AD8440066739F /* MyProductDetailView.swift in Sources */,
 				5BB36F98295AB7EF004D1683 /* MainView.swift in Sources */,
 				5BB36F9D295AB81F004D1683 /* DetailView.swift in Sources */,
+				261FC179295ABFF5001F9211 /* LoginView.swift in Sources */,
+				261FC17B295AD4EB001F9211 /* SignUpView.swift in Sources */,
 				1AC0A72C295ADB0300A7CE8E /* ColorOptionView.swift in Sources */,
 				2C7A8C6B295A8298000D55C5 /* AppleMarketApp.swift in Sources */,
 				1AC0A72F295AE22A00A7CE8E /* AppleCareOptionView.swift in Sources */,
