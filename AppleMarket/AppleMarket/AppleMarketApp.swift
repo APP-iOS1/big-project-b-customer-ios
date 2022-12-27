@@ -7,25 +7,26 @@
 
 import SwiftUI
 import FirebaseCore
-
+import Firebase
 
 class AppDelegate: NSObject, UIApplicationDelegate {
-    func application(_ application: UIApplication,
-                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        FirebaseApp.configure()
-        
-        return true
-    }
+  func application(_ application: UIApplication,
+                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    FirebaseApp.configure()
+
+    return true
+  }
 }
 
 @main
 struct AppleMarketApp: App {
-    // register app delegate for Firebase setup
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @StateObject var userInfoStore: UserInfoStore = UserInfoStore()
     
     var body: some Scene {
         WindowGroup {
-            OrderTestView()
+            ContentView()
+                .environmentObject(UserInfoStore())
         }
     }
 }
