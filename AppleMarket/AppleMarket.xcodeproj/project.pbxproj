@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02FEB663295AE003003EF536 /* MyProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FEB662295AE003003EF536 /* MyProfileView.swift */; };
+		02FEB665295AE79A003EF536 /* MyDeviceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FEB664295AE79A003EF536 /* MyDeviceListView.swift */; };
 		2C7A8C6B295A8298000D55C5 /* AppleMarketApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7A8C6A295A8298000D55C5 /* AppleMarketApp.swift */; };
 		2C7A8C6D295A8298000D55C5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7A8C6C295A8298000D55C5 /* ContentView.swift */; };
 		2C7A8C6F295A8299000D55C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C7A8C6E295A8299000D55C5 /* Assets.xcassets */; };
@@ -31,9 +33,12 @@
 		5BB36F9F295AB835004D1683 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB36F9E295AB835004D1683 /* CartView.swift */; };
 		5BB36FA1295AB842004D1683 /* MypageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB36FA0295AB842004D1683 /* MypageView.swift */; };
 		5BB36FA7295AC659004D1683 /* SearchProcessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB36FA6295AC659004D1683 /* SearchProcessView.swift */; };
+		5BB36FA9295AD396004D1683 /* MainProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB36FA8295AD396004D1683 /* MainProductDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		02FEB662295AE003003EF536 /* MyProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileView.swift; sourceTree = "<group>"; };
+		02FEB664295AE79A003EF536 /* MyDeviceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDeviceListView.swift; sourceTree = "<group>"; };
 		2C7A8C67295A8298000D55C5 /* AppleMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppleMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C7A8C6A295A8298000D55C5 /* AppleMarketApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMarketApp.swift; sourceTree = "<group>"; };
 		2C7A8C6C295A8298000D55C5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -52,6 +57,7 @@
 		5BB36F9E295AB835004D1683 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 		5BB36FA0295AB842004D1683 /* MypageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageView.swift; sourceTree = "<group>"; };
 		5BB36FA6295AC659004D1683 /* SearchProcessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProcessView.swift; sourceTree = "<group>"; };
+		5BB36FA8295AD396004D1683 /* MainProductDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProductDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +169,7 @@
 				3A5B5074295AD0E60066739F /* MainPromotionView.swift */,
 				3A5B5070295ABEEE0066739F /* MainMyProductView.swift */,
 				3A5B5072295ABF280066739F /* MainProductView.swift */,
+				5BB36FA8295AD396004D1683 /* MainProductDetailView.swift */,
 				5BB36F9C295AB81F004D1683 /* DetailView.swift */,
 			);
 			path = Main;
@@ -189,6 +196,8 @@
 			isa = PBXGroup;
 			children = (
 				5BB36FA0295AB842004D1683 /* MypageView.swift */,
+				02FEB662295AE003003EF536 /* MyProfileView.swift */,
+				02FEB664295AE79A003EF536 /* MyDeviceListView.swift */,
 			);
 			path = Mypage;
 			sourceTree = "<group>";
@@ -278,11 +287,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02FEB663295AE003003EF536 /* MyProfileView.swift in Sources */,
 				5BB36F9F295AB835004D1683 /* CartView.swift in Sources */,
 				3A5B5079295ADA6C0066739F /* MyProductResultView.swift in Sources */,
+				02FEB665295AE79A003EF536 /* MyDeviceListView.swift in Sources */,
 				3A5B5071295ABEEE0066739F /* MainMyProductView.swift in Sources */,
 				5BB36F9B295AB801004D1683 /* SearchView.swift in Sources */,
 				5BB36FA7295AC659004D1683 /* SearchProcessView.swift in Sources */,
+				5BB36FA9295AD396004D1683 /* MainProductDetailView.swift in Sources */,
 				5BB36FA1295AB842004D1683 /* MypageView.swift in Sources */,
 				2C7A8C6D295A8298000D55C5 /* ContentView.swift in Sources */,
 				3A5B5077295AD8440066739F /* MyProductDetailView.swift in Sources */,
