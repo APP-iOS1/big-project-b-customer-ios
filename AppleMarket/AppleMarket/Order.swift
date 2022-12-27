@@ -22,7 +22,7 @@ struct OrderList: Identifiable {
     var isDeposit: Bool
     
     /// 주문 날짜
-    var orderAt: Date
+    var orderAt: Date 
     
     /// 주문 날짜 Formmatt  변경
     var orderDate: String {
