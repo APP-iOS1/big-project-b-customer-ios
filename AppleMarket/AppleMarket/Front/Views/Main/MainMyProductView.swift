@@ -59,6 +59,10 @@ struct MainMyProductView: View {
                     
                     ForEach(myProducts){ product in
                         // 내 기기 이미지 사용 예정
+                        
+                        NavigationLink{
+                            MyProductDetailView(selectedProduct_2: Product(id: 0, imagePath: "", productName: "", prices: ""))
+                        } label:{
                         ZStack{
                             RoundedRectangle(cornerRadius: 20)
                                 .frame(width: 240, height: 300)
@@ -70,19 +74,21 @@ struct MainMyProductView: View {
                                         .resizable()
                                         .scaledToFit()
                                         .frame(height: 180)
-                                        
+                                    
                                 } placeholder: {
                                     ProgressView()
                                 }
                                 Spacer()
                                     .frame(height: 20)
-                
+                                
                                 Text(product.productName)
                                     .padding(.bottom, 1)
                                 
                             }
                             
                         }
+                        .foregroundColor(.black)
+                    }
                     }
                 }
             }
