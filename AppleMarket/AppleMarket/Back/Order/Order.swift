@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct OrderList: Identifiable {
+struct Order: Identifiable {
     
     /// 주문내역 ID
     var id: String
