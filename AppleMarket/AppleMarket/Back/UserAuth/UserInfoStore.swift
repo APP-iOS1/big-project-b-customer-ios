@@ -12,7 +12,7 @@ import FirebaseFirestore
 final class UserInfoStore: ObservableObject{
     @Published var userInfo: UserInfo?
     @Published var cart: [Cart] = []
-    @Published var orderList: [OrderList] = []
+    @Published var orderList: [Order] = []
     
     let database = Firestore.firestore()
 

@@ -25,6 +25,8 @@
 		2CEFEC41295ABA3E006DA0AA /* DetailOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEFEC3F295ABA3E006DA0AA /* DetailOrder.swift */; };
 		2CEFEC42295ABA3E006DA0AA /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEFEC40295ABA3E006DA0AA /* Order.swift */; };
 		82206F81295AAC6E008D3D36 /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82206F80295AAC6E008D3D36 /* Cart.swift */; };
+		8B4376FE295ABC4D002D4AAB /* OrderStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4376FD295ABC4D002D4AAB /* OrderStore.swift */; };
+		8B437700295ACB40002D4AAB /* OrderTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4376FF295ACB40002D4AAB /* OrderTestView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		2CEFEC3F295ABA3E006DA0AA /* DetailOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailOrder.swift; sourceTree = "<group>"; };
 		2CEFEC40295ABA3E006DA0AA /* Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		82206F80295AAC6E008D3D36 /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
+		8B4376FD295ABC4D002D4AAB /* OrderStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderStore.swift; sourceTree = "<group>"; };
+		8B4376FF295ACB40002D4AAB /* OrderTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderTestView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +134,8 @@
 			isa = PBXGroup;
 			children = (
 				2CEFEC3F295ABA3E006DA0AA /* DetailOrder.swift */,
+				8B4376FD295ABC4D002D4AAB /* OrderStore.swift */,
+				8B4376FF295ACB40002D4AAB /* OrderTestView.swift */,
 				2CEFEC40295ABA3E006DA0AA /* Order.swift */,
 			);
 			path = Order;
@@ -232,9 +238,11 @@
 				82206F81295AAC6E008D3D36 /* Cart.swift in Sources */,
 				2C293046295AAA09003C77F8 /* UserInfo.swift in Sources */,
 				2CEFEC41295ABA3E006DA0AA /* DetailOrder.swift in Sources */,
+				8B4376FE295ABC4D002D4AAB /* OrderStore.swift in Sources */,
 				2C293048295AAC36003C77F8 /* UserInfoStore.swift in Sources */,
 				2C7A8C6B295A8298000D55C5 /* AppleMarketApp.swift in Sources */,
 				2CEFEC42295ABA3E006DA0AA /* Order.swift in Sources */,
+				8B437700295ACB40002D4AAB /* OrderTestView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
