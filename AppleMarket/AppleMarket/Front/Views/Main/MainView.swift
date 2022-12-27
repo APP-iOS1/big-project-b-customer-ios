@@ -15,7 +15,7 @@ struct MainView: View {
                     
                     MainPromotionView()
                     
-                    MainMyProductView()
+                    MainMyProductView(selectedMyProduct: MyProduct(id: 0, imagePath: "", productName: ""))
                     
                     Text("제품별로 쇼핑하기")
                         .font(.title)

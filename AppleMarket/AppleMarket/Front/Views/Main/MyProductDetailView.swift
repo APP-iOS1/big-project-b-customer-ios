@@ -7,13 +7,6 @@
 
 import SwiftUI
 
-struct Product_2: Identifiable{
-    var id: Int
-    let imagePath: String
-    let productName: String
-    let prices: String
-}
-
 var products_2: [Product] = [
     Product(id: 0, imagePath: "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/airtag-4pack-select-202104_FV1?wid=890&hei=740&fmt=jpeg&qlt=90&.v=1617761668000", productName: "AirTag 4개 팩", prices: "149,000"),
     Product(id: 1, imagePath: "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MM073?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1624640865000", productName: "AirTag 가죽 키링 - 포레스트 그린", prices: "58,000"),
@@ -21,21 +14,13 @@ var products_2: [Product] = [
     Product(id: 3, imagePath: "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MK0W3?wid=2000&hei=2000&fmt=jpeg&qlt=90&.v=1618028904000", productName: "AirTag 루프 - 선플라워", prices: "45,000")
 ]
 
-enum SelectedProduct_2 {
-    case iPad
-    case my_iPhone
-    case Mac
-    case MacBook
-    case Accessory
-}
-
 struct MyProductDetailView: View {
     // store에 무슨 값 있는지 몰라서 일단 공홈대로 적음
     var menuArray: [String] = ["AirTag 및 액세서리", "MagSafe", "건강 및 피트니스", "무선 충전기", "사진", "전원 & 케이블", " 창의성", "케이스 & 보호장비"]
     
     var menuImageArray: [String] = ["airtag.fill", "magsafe.batterypack.fill", "figure.run", "battery.100.bolt", "camera.fill", "cable.connector", "signature", "iphone"]
     
-    let selectedProduct_2: Products
+    let selectedProduct_2: Product
     
     var body: some View {
         ScrollView{
@@ -59,7 +44,7 @@ struct MyProductDetailView: View {
                             .fontWeight(.bold)
                             .padding(.bottom, 1)
                         // "기기 종류" + "사양"
-                        Text("iPhon 14 Pro 256GB 스페이스 블랙")
+                        Text("iPhone 14 Pro 256GB 스페이스 블랙")
                             .font(.system(size: 14))
                     }
                     .frame(alignment: .leading)
@@ -107,6 +92,7 @@ struct MyProductDetailView: View {
                     }
                 }
                 
+                // "기기 종류" 용
                 Text("iPhone 14 Pro용")
                     .font(.title)
                     .fontWeight(.bold)
@@ -134,6 +120,6 @@ struct MyProductDetailView: View {
 
 struct MyProductDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        MyProductDetailView(selectedProduct_2: Products.iPhone)
+        MyProductDetailView(selectedProduct_2: Product(id: 0, imagePath: "", productName: "", prices: ""))
     }
 }
