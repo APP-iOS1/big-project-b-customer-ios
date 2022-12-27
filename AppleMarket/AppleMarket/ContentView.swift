@@ -12,6 +12,7 @@ struct ContentView: View {
     
     var body: some View {
         TabView(selection: $tabSelection) {
+            
             MainView()
                 .tabItem {
                     Image(systemName: "macbook.and.iphone")
@@ -33,7 +34,7 @@ struct ContentView: View {
                 }
                 .tag(3)
             
-            MypageView()
+            LoginView()
                 .tabItem {
                     Image(systemName: "person.circle")
                     Text("마이페이지")
