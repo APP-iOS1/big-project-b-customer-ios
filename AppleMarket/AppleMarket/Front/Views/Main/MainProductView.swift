@@ -25,18 +25,17 @@ struct MainProductView: View {
     
     var body: some View {
         NavigationStack {
+           
             VStack {
-                Text("제품별로 쇼핑하기")
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .frame(alignment: .leading)
-                    .padding(.top, 50)
                 
                 VStack(alignment: .center){
                     
                     // 신제품
                     RoundedRectangle(cornerRadius: 20)
                         .frame(width: 360, height: 220)
+                        .foregroundColor(.white)
+                        .shadow(radius: 5)
+                        .frame(width: 165, height: 240)
                     
                     LazyVGrid(columns: columns) {
                         ForEach(Products.allCases) { (product: Products) in
@@ -45,12 +44,15 @@ struct MainProductView: View {
                                     .navigationTitle(product.rawValue)
                             } label: {
                                 RoundedRectangle(cornerRadius: 20)
-                                    .frame(width: 175, height: 220)
+                                    .frame(width: 165, height: 220)
+                                    .foregroundColor(.white)
+                                    .shadow(radius: 5)
+                                    .frame(width: 165, height: 240)
                             }
                             
                         }
                     }
-                        
+//                    .padding(.horizontal, 20)
                     }
                 }
             }//VStack_End
