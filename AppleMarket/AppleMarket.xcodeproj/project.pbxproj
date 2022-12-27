@@ -22,6 +22,8 @@
 		2C7A8C86295AA678000D55C5 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 2C7A8C85295AA678000D55C5 /* FirebaseStorage */; };
 		2C7A8C89295AA6CC000D55C5 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 2C7A8C88295AA6CC000D55C5 /* GoogleSignIn */; };
 		2C7A8C8B295AA6CC000D55C5 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2C7A8C8A295AA6CC000D55C5 /* GoogleSignInSwift */; };
+		2CEFEC3D295AB46D006DA0AA /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEFEC3B295AB467006DA0AA /* Order.swift */; };
+		2CEFEC3E295AB46D006DA0AA /* DetailOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEFEC3C295AB467006DA0AA /* DetailOrder.swift */; };
 		82206F81295AAC6E008D3D36 /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82206F80295AAC6E008D3D36 /* Cart.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +37,8 @@
 		2C7A8C71295A8299000D55C5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2C7A8C78295A88B1000D55C5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2C7A8C8C295AA6E2000D55C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		2CEFEC3B295AB467006DA0AA /* Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Order.swift; path = AppleMarket/Order.swift; sourceTree = SOURCE_ROOT; };
+		2CEFEC3C295AB467006DA0AA /* DetailOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailOrder.swift; path = AppleMarket/DetailOrder.swift; sourceTree = SOURCE_ROOT; };
 		82206F80295AAC6E008D3D36 /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -115,10 +119,20 @@
 		2C7A8C8E295AA700000D55C5 /* Back */ = {
 			isa = PBXGroup;
 			children = (
+				2CEFEC3A295AB456006DA0AA /* Order */,
 				82206F82295AAE9C008D3D36 /* Cart */,
 				2C293044295AA91A003C77F8 /* UserAuth */,
 			);
 			path = Back;
+			sourceTree = "<group>";
+		};
+		2CEFEC3A295AB456006DA0AA /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				2CEFEC3C295AB467006DA0AA /* DetailOrder.swift */,
+				2CEFEC3B295AB467006DA0AA /* Order.swift */,
+			);
+			path = Order;
 			sourceTree = "<group>";
 		};
 		82206F82295AAE9C008D3D36 /* Cart */ = {
@@ -214,6 +228,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CEFEC3D295AB46D006DA0AA /* Order.swift in Sources */,
+				2CEFEC3E295AB46D006DA0AA /* DetailOrder.swift in Sources */,
 				2C7A8C6D295A8298000D55C5 /* ContentView.swift in Sources */,
 				82206F81295AAC6E008D3D36 /* Cart.swift in Sources */,
 				2C293046295AAA09003C77F8 /* UserInfo.swift in Sources */,
