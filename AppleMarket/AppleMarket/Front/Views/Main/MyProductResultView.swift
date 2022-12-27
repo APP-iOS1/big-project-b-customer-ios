@@ -1,20 +1,20 @@
 //
-//  CartView.swift
+//  MyProductResultView.swift
 //  AppleMarket
 //
-//  Created by Martin on 2022/12/27.
+//  Created by youngseo on 2022/12/27.
 //
 
 import SwiftUI
 
-struct CartView: View {
+struct MyProductResultView: View {
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 
-struct CartView_Previews: PreviewProvider {
+struct MyProductResultView_Previews: PreviewProvider {
     static var previews: some View {
-        CartView()
+        MyProductResultView()
     }
 }
