@@ -7,62 +7,56 @@
 
 import SwiftUI
 
+enum Products: String, CaseIterable, Identifiable {
+    case Mac
+    case iPhone
+    case iPad
+    case AppleWatch
+    case AppleTV4K
+    case AirPods
+    case AirTag
+    case Accessory
+    
+    var id: String { self.rawValue }
+}
+
 struct MainProductView: View {
+    private let columns: [GridItem] = .init(repeating: .init(.flexible(), spacing: 10), count: 2)
+    
     var body: some View {
-        
-        Text("제품별로 쇼핑하기")
-            .font(.title)
-            .fontWeight(.bold)
-            .frame(alignment: .leading)
-            .padding(.top, 50)
-        
-        VStack(alignment: .center){
-            
-            // 신제품
-            RoundedRectangle(cornerRadius: 20)
-                .frame(width: 360, height: 220)
-            
-            HStack{
-                // Mac
-                RoundedRectangle(cornerRadius: 20)
-                    .frame(width: 175, height: 220)
+        NavigationStack {
+            VStack {
+                Text("제품별로 쇼핑하기")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .frame(alignment: .leading)
+                    .padding(.top, 50)
                 
-                // iPhone
-                RoundedRectangle(cornerRadius: 20)
-                    .frame(width: 175, height: 220)
-            }
-            
-            HStack{
-                //iPad
-                RoundedRectangle(cornerRadius: 20)
-                    .frame(width: 175, height: 220)
-                
-                // Apple Watch
-                RoundedRectangle(cornerRadius: 20)
-                    .frame(width: 175, height: 220)
-            }
-            
-            HStack{
-                // Apple TV 4K
-                RoundedRectangle(cornerRadius: 20)
-                    .frame(width: 175, height: 220)
-                
-                // AirPods
-                RoundedRectangle(cornerRadius: 20)
-                    .frame(width: 175, height: 220)
-            }
-            
-            HStack{
-                // AirTag
-                RoundedRectangle(cornerRadius: 20)
-                    .frame(width: 175, height: 220)
-                
-                // 액세서리
-                RoundedRectangle(cornerRadius: 20)
-                    .frame(width: 175, height: 220)
-            }
-        }
-    }
+                VStack(alignment: .center){
+                    
+                    // 신제품
+                    RoundedRectangle(cornerRadius: 20)
+                        .frame(width: 360, height: 220)
+                    
+                    LazyVGrid(columns: columns) {
+                        ForEach(Products.allCases) { (product: Products) in
+                            NavigationLink {
+                                MainProductDetailView(selectedProduct: product)
+                                    .navigationTitle(product.rawValue)
+                            } label: {
+                                RoundedRectangle(cornerRadius: 20)
+                                    .frame(width: 175, height: 220)
+                            }
+                            
+                        }
+                    }
+                        
+                    }
+                }
+            }//VStack_End
+        }//NavigationStack_End
+       
+    
 }
 
 struct MainProductView_Previews: PreviewProvider {

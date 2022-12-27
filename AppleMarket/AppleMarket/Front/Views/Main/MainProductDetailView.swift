@@ -1,5 +1,5 @@
 //
-//  MainProducDetailView.swift
+//  MainProductDetailView.swift
 //  AppleMarket
 //
 //  Created by Martin on 2022/12/27.
@@ -31,8 +31,8 @@ enum SelectedProduct {
     case Accessory
 }
 
-struct MainProducDetailView: View {
-    @State private var selectedProduct: SelectedProduct = .iPad
+struct MainProductDetailView: View {
+    let selectedProduct: Products
     
     var body: some View {
         ScrollView {
@@ -66,8 +66,8 @@ struct MainProducDetailView: View {
     }
 }
 
-struct MainProducDetailView_Previews: PreviewProvider {
+struct MainProductDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        MainProducDetailView()
+        MainProductDetailView(selectedProduct: Products.iPad)
     }
 }
