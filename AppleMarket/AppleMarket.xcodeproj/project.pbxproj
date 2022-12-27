@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C293046295AAA09003C77F8 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C293045295AAA09003C77F8 /* UserInfo.swift */; };
+		2C293048295AAC36003C77F8 /* UserInfoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C293047295AAC36003C77F8 /* UserInfoStore.swift */; };
 		2C7A8C6B295A8298000D55C5 /* AppleMarketApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7A8C6A295A8298000D55C5 /* AppleMarketApp.swift */; };
 		2C7A8C6D295A8298000D55C5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7A8C6C295A8298000D55C5 /* ContentView.swift */; };
 		2C7A8C6F295A8299000D55C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C7A8C6E295A8299000D55C5 /* Assets.xcassets */; };
@@ -23,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C293045295AAA09003C77F8 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		2C293047295AAC36003C77F8 /* UserInfoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoStore.swift; sourceTree = "<group>"; };
 		2C7A8C67295A8298000D55C5 /* AppleMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppleMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C7A8C6A295A8298000D55C5 /* AppleMarketApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMarketApp.swift; sourceTree = "<group>"; };
 		2C7A8C6C295A8298000D55C5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -51,11 +55,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2C293044295AA91A003C77F8 /* New Group */ = {
+		2C293044295AA91A003C77F8 /* UserAuth */ = {
 			isa = PBXGroup;
 			children = (
+				2C293045295AAA09003C77F8 /* UserInfo.swift */,
+				2C293047295AAC36003C77F8 /* UserInfoStore.swift */,
 			);
-			path = "New Group";
+			path = UserAuth;
 			sourceTree = "<group>";
 		};
 		2C7A8C5E295A8298000D55C5 = {
@@ -107,7 +113,7 @@
 		2C7A8C8E295AA700000D55C5 /* Back */ = {
 			isa = PBXGroup;
 			children = (
-				2C293044295AA91A003C77F8 /* New Group */,
+				2C293044295AA91A003C77F8 /* UserAuth */,
 			);
 			path = Back;
 			sourceTree = "<group>";
@@ -198,6 +204,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C7A8C6D295A8298000D55C5 /* ContentView.swift in Sources */,
+				2C293046295AAA09003C77F8 /* UserInfo.swift in Sources */,
+				2C293048295AAC36003C77F8 /* UserInfoStore.swift in Sources */,
 				2C7A8C6B295A8298000D55C5 /* AppleMarketApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
