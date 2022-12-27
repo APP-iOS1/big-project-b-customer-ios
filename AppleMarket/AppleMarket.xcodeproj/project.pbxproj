@@ -22,11 +22,16 @@
 		2C7A8C86295AA678000D55C5 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 2C7A8C85295AA678000D55C5 /* FirebaseStorage */; };
 		2C7A8C89295AA6CC000D55C5 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 2C7A8C88295AA6CC000D55C5 /* GoogleSignIn */; };
 		2C7A8C8B295AA6CC000D55C5 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2C7A8C8A295AA6CC000D55C5 /* GoogleSignInSwift */; };
+		3A5B5071295ABEEE0066739F /* MainMyProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5B5070295ABEEE0066739F /* MainMyProductView.swift */; };
+		3A5B5073295ABF280066739F /* MainProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5B5072295ABF280066739F /* MainProductView.swift */; };
+		3A5B5075295AD0E60066739F /* MainPromotionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5B5074295AD0E60066739F /* MainPromotionView.swift */; };
 		5BB36F98295AB7EF004D1683 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB36F97295AB7EF004D1683 /* MainView.swift */; };
 		5BB36F9B295AB801004D1683 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB36F9A295AB801004D1683 /* SearchView.swift */; };
 		5BB36F9D295AB81F004D1683 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB36F9C295AB81F004D1683 /* DetailView.swift */; };
 		5BB36F9F295AB835004D1683 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB36F9E295AB835004D1683 /* CartView.swift */; };
 		5BB36FA1295AB842004D1683 /* MypageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB36FA0295AB842004D1683 /* MypageView.swift */; };
+		5BB36FA7295AC659004D1683 /* SearchProcessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB36FA6295AC659004D1683 /* SearchProcessView.swift */; };
+		5BB36FA9295AD396004D1683 /* MainProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB36FA8295AD396004D1683 /* MainProductDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,11 +44,16 @@
 		2C7A8C71295A8299000D55C5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2C7A8C78295A88B1000D55C5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2C7A8C8C295AA6E2000D55C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		3A5B5070295ABEEE0066739F /* MainMyProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMyProductView.swift; sourceTree = "<group>"; };
+		3A5B5072295ABF280066739F /* MainProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProductView.swift; sourceTree = "<group>"; };
+		3A5B5074295AD0E60066739F /* MainPromotionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPromotionView.swift; sourceTree = "<group>"; };
 		5BB36F97295AB7EF004D1683 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		5BB36F9A295AB801004D1683 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		5BB36F9C295AB81F004D1683 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		5BB36F9E295AB835004D1683 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 		5BB36FA0295AB842004D1683 /* MypageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageView.swift; sourceTree = "<group>"; };
+		5BB36FA6295AC659004D1683 /* SearchProcessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProcessView.swift; sourceTree = "<group>"; };
+		5BB36FA8295AD396004D1683 /* MainProductDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProductDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +160,10 @@
 			isa = PBXGroup;
 			children = (
 				5BB36F97295AB7EF004D1683 /* MainView.swift */,
+				3A5B5074295AD0E60066739F /* MainPromotionView.swift */,
+				3A5B5070295ABEEE0066739F /* MainMyProductView.swift */,
+				3A5B5072295ABF280066739F /* MainProductView.swift */,
+				5BB36FA8295AD396004D1683 /* MainProductDetailView.swift */,
 				5BB36F9C295AB81F004D1683 /* DetailView.swift */,
 			);
 			path = Main;
@@ -159,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				5BB36F9A295AB801004D1683 /* SearchView.swift */,
+				5BB36FA6295AC659004D1683 /* SearchProcessView.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -269,12 +284,17 @@
 				02FEB663295AE003003EF536 /* MyProfileView.swift in Sources */,
 				5BB36F9F295AB835004D1683 /* CartView.swift in Sources */,
 				02FEB665295AE79A003EF536 /* MyDeviceListView.swift in Sources */,
+				3A5B5071295ABEEE0066739F /* MainMyProductView.swift in Sources */,
 				5BB36F9B295AB801004D1683 /* SearchView.swift in Sources */,
+				5BB36FA7295AC659004D1683 /* SearchProcessView.swift in Sources */,
+				5BB36FA9295AD396004D1683 /* MainProductDetailView.swift in Sources */,
 				5BB36FA1295AB842004D1683 /* MypageView.swift in Sources */,
 				2C7A8C6D295A8298000D55C5 /* ContentView.swift in Sources */,
 				5BB36F98295AB7EF004D1683 /* MainView.swift in Sources */,
 				5BB36F9D295AB81F004D1683 /* DetailView.swift in Sources */,
+				3A5B5075295AD0E60066739F /* MainPromotionView.swift in Sources */,
 				2C7A8C6B295A8298000D55C5 /* AppleMarketApp.swift in Sources */,
+				3A5B5073295ABF280066739F /* MainProductView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
