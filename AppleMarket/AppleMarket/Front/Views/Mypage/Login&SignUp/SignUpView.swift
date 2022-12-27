@@ -22,15 +22,13 @@ struct SignUpView: View {
         
         ScrollView {
             VStack(spacing: 30) {
-                VStack(spacing: 10) {
+                VStack {
                     Text("이메일 ID 생성")
                         .font(.largeTitle)
-                        .fontWeight(.medium)
+                       
                     Text("하나의 ID로 모든 서비스를 이용할 수 있습니다.")
-                    
                 }
-               
-               
+                .lineSpacing(10)
                 
                 CustomSignUpTextFieldView(nameText: $nameText, phoneNumberText: $phoneNumberText, emailText: $emailText, passwordText: $passwordText, passwordAgainText: $passwordAgainText)
                     .padding(.bottom, 15)
@@ -49,8 +47,7 @@ struct SignUpView: View {
                 Spacer()
             }.padding()
         }
-      
-      
+  
     }
 }
 
@@ -69,7 +66,10 @@ struct CustomSignUpTextFieldView: View {
     @Binding var emailText: String
     @Binding var passwordText: String
     @Binding var passwordAgainText: String
-
+    
+    var trimNameText: String {
+        nameText.trimmingCharacters(in: .whitespaces)
+    }
     
     var body: some View {
         VStack(spacing: 20) {
@@ -78,19 +78,15 @@ struct CustomSignUpTextFieldView: View {
             
             VStack(alignment: .leading) {
                 Text("이름")
-                    .font(.headline)
-                    TextField("이름을 입력해주세요", text: $nameText)
-                        .padding()
-                        .background(.thinMaterial)
-                        .cornerRadius(10)
-                    .textInputAutocapitalization(.never)
-                
-               
+                TextField("이름을 입력해주세요", text: $nameText)
+                    .padding()
+                    .background(.thinMaterial)
+                    .cornerRadius(10)
+                .textInputAutocapitalization(.never)
             }
             
             VStack(alignment: .leading) {
                 Text("전화번호")
-                    .font(.headline)
                 TextField("전화번호를 입력해주세요", text: $phoneNumberText)
                     .padding()
                     .background(.thinMaterial)
@@ -100,7 +96,6 @@ struct CustomSignUpTextFieldView: View {
       
             VStack(alignment: .leading) {
                 Text("이메일")
-                    .font(.headline)
                 TextField("이메일을 입력해주세요", text: $emailText)
                     .padding()
                     .background(.thinMaterial)
@@ -110,7 +105,6 @@ struct CustomSignUpTextFieldView: View {
             
             VStack(alignment: .leading) {
                 Text("비밀번호")
-                    .font(.headline)
                 SecureField("비밀번호를 입력해주세요", text: $passwordText)
                     .padding()
                     .background(.thinMaterial)
@@ -120,7 +114,6 @@ struct CustomSignUpTextFieldView: View {
             
             VStack(alignment: .leading) {
                 Text("비밀번호 재확인")
-                    .font(.headline)
                 SecureField("비밀번호를 입력해주세요", text: $passwordAgainText)
                     .padding()
                     .background(.thinMaterial)

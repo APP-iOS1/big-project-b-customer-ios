@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// focus를 위한 열거형
+/// focus를 위한 열거형
 enum Field {
     case email
     case password
@@ -18,6 +18,7 @@ enum Field {
 struct LoginView: View {
     @State var emailText: String = ""
     @State var passwordText: String = ""
+    @State var loginButtonisActive: Bool = true
     
     var body: some View {
         
@@ -29,7 +30,7 @@ struct LoginView: View {
                     .font(.largeTitle)
                     .lineSpacing(10)
                 
-                CustomTextFieldView(emailText: $emailText, passwordText: $passwordText)
+                CustomTextFieldView(emailText: $emailText, passwordText: $passwordText, loginButtonisAcitve: $loginButtonisActive)
                 
                 
            
@@ -53,6 +54,7 @@ struct LoginView_Previews: PreviewProvider {
 struct CustomTextFieldView: View {
     @Binding var emailText: String
     @Binding var passwordText: String
+    @Binding var loginButtonisAcitve: Bool
     @FocusState private var focusField: Field?
     
     var body: some View {
@@ -76,7 +78,6 @@ struct CustomTextFieldView: View {
                 } else if passwordText.isEmpty {
                     focusField = .password
                 } else {
-                    // 텍스트 필드 작성후 로그인 누르면 키보드 내려감
                     hideKeyboard()
                     print("로그인 되었습니다.")
                 }
@@ -119,8 +120,7 @@ struct IdAndPasswordFindView: View {
     }
 }
 
-
-// MARK: - 완료시 키보드 내리기
+/// 키보드 내리기
 extension View {
   func hideKeyboard() {
     UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
