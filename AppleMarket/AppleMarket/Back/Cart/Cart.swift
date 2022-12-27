@@ -11,5 +11,5 @@ struct Cart: Hashable {
     var productId: String
     var productName: String
     var productCount: Int
-    var productPrice: String
+    var productPrice: Int
 }
