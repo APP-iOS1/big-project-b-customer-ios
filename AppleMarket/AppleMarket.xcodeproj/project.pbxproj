@@ -30,6 +30,7 @@
 		5BB36F9D295AB81F004D1683 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB36F9C295AB81F004D1683 /* DetailView.swift */; };
 		5BB36F9F295AB835004D1683 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB36F9E295AB835004D1683 /* CartView.swift */; };
 		5BB36FA1295AB842004D1683 /* MypageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB36FA0295AB842004D1683 /* MypageView.swift */; };
+		5BB36FA7295AC659004D1683 /* SearchProcessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB36FA6295AC659004D1683 /* SearchProcessView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		5BB36F9C295AB81F004D1683 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		5BB36F9E295AB835004D1683 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 		5BB36FA0295AB842004D1683 /* MypageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageView.swift; sourceTree = "<group>"; };
+		5BB36FA6295AC659004D1683 /* SearchProcessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProcessView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				5BB36F9A295AB801004D1683 /* SearchView.swift */,
+				5BB36FA6295AC659004D1683 /* SearchProcessView.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 				3A5B5079295ADA6C0066739F /* MyProductResultView.swift in Sources */,
 				3A5B5071295ABEEE0066739F /* MainMyProductView.swift in Sources */,
 				5BB36F9B295AB801004D1683 /* SearchView.swift in Sources */,
+				5BB36FA7295AC659004D1683 /* SearchProcessView.swift in Sources */,
 				5BB36FA1295AB842004D1683 /* MypageView.swift in Sources */,
 				2C7A8C6D295A8298000D55C5 /* ContentView.swift in Sources */,
 				3A5B5077295AD8440066739F /* MyProductDetailView.swift in Sources */,
