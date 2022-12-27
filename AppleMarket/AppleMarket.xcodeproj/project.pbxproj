@@ -25,6 +25,7 @@
 		2CEFEC3D295AB46D006DA0AA /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEFEC3B295AB467006DA0AA /* Order.swift */; };
 		2CEFEC3E295AB46D006DA0AA /* DetailOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEFEC3C295AB467006DA0AA /* DetailOrder.swift */; };
 		82206F81295AAC6E008D3D36 /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82206F80295AAC6E008D3D36 /* Cart.swift */; };
+		82B0359F295AB7FE00A03B7D /* CartStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B0359E295AB7FE00A03B7D /* CartStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		2CEFEC3B295AB467006DA0AA /* Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Order.swift; path = AppleMarket/Order.swift; sourceTree = SOURCE_ROOT; };
 		2CEFEC3C295AB467006DA0AA /* DetailOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailOrder.swift; path = AppleMarket/DetailOrder.swift; sourceTree = SOURCE_ROOT; };
 		82206F80295AAC6E008D3D36 /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
+		82B0359E295AB7FE00A03B7D /* CartStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				82206F80295AAC6E008D3D36 /* Cart.swift */,
+				82B0359E295AB7FE00A03B7D /* CartStore.swift */,
 			);
 			path = Cart;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CEFEC3D295AB46D006DA0AA /* Order.swift in Sources */,
+				82B0359F295AB7FE00A03B7D /* CartStore.swift in Sources */,
 				2CEFEC3E295AB46D006DA0AA /* DetailOrder.swift in Sources */,
 				2C7A8C6D295A8298000D55C5 /* ContentView.swift in Sources */,
 				82206F81295AAC6E008D3D36 /* Cart.swift in Sources */,
