@@ -7,7 +7,11 @@
 
 import SwiftUI
 
+
 struct MainMyProductView: View {
+    
+    var myProductsArray: [String] = ["airtag.fill", "magsafe.batterypack.fill", "figure.run", "battery.100.bolt", "camera.fill", "cable.connector", "signature", "iphone"]
+    
     var body: some View {
         VStack(alignment: .leading){
             Text("기기별로 쇼핑하기")

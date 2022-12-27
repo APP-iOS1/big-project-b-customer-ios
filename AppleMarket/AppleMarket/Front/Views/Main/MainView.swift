@@ -17,6 +17,12 @@ struct MainView: View {
                     
                     MainMyProductView()
                     
+                    Text("제품별로 쇼핑하기")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .frame(alignment: .leading)
+                        .padding(.top, 50)
+                    
                     MainProductView()
                     
                 }
