@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		261FC179295ABFF5001F9211 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261FC178295ABFF5001F9211 /* LoginView.swift */; };
+		261FC17B295AD4EB001F9211 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261FC17A295AD4EB001F9211 /* SignUpView.swift */; };
 		2C7A8C6B295A8298000D55C5 /* AppleMarketApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7A8C6A295A8298000D55C5 /* AppleMarketApp.swift */; };
 		2C7A8C6D295A8298000D55C5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7A8C6C295A8298000D55C5 /* ContentView.swift */; };
 		2C7A8C6F295A8299000D55C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C7A8C6E295A8299000D55C5 /* Assets.xcassets */; };
@@ -28,6 +30,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		261FC178295ABFF5001F9211 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		261FC17A295AD4EB001F9211 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		2C7A8C67295A8298000D55C5 /* AppleMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppleMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C7A8C6A295A8298000D55C5 /* AppleMarketApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMarketApp.swift; sourceTree = "<group>"; };
 		2C7A8C6C295A8298000D55C5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -61,6 +65,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		261FC177295ABFCD001F9211 /* Login&SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				261FC178295ABFF5001F9211 /* LoginView.swift */,
+				261FC17A295AD4EB001F9211 /* SignUpView.swift */,
+			);
+			path = "Login&SignUp";
+			sourceTree = "<group>";
+		};
 		2C7A8C5E295A8298000D55C5 = {
 			isa = PBXGroup;
 			children = (
@@ -81,7 +94,6 @@
 		2C7A8C69295A8298000D55C5 /* AppleMarket */ = {
 			isa = PBXGroup;
 			children = (
-				2C7A8C8E295AA700000D55C5 /* Back */,
 				2C7A8C8C295AA6E2000D55C5 /* Info.plist */,
 				5BB36F93295AB79A004D1683 /* Front */,
 				2C7A8C6A295A8298000D55C5 /* AppleMarketApp.swift */,
@@ -100,18 +112,9 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		2C7A8C8E295AA700000D55C5 /* Back */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Back;
-			sourceTree = "<group>";
-		};
 		5BB36F93295AB79A004D1683 /* Front */ = {
 			isa = PBXGroup;
 			children = (
-				5BB36F96295AB7C7004D1683 /* Models */,
-				5BB36F95295AB7BE004D1683 /* ViewModels */,
 				5BB36F94295AB7A8004D1683 /* Views */,
 			);
 			path = Front;
@@ -126,20 +129,6 @@
 				5BB36FA5295AB9A6004D1683 /* Mypage */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		5BB36F95295AB7BE004D1683 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		5BB36F96295AB7C7004D1683 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		5BB36FA2295AB974004D1683 /* Main */ = {
@@ -171,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				5BB36FA0295AB842004D1683 /* MypageView.swift */,
+				261FC177295ABFCD001F9211 /* Login&SignUp */,
 			);
 			path = Mypage;
 			sourceTree = "<group>";
@@ -266,6 +256,8 @@
 				2C7A8C6D295A8298000D55C5 /* ContentView.swift in Sources */,
 				5BB36F98295AB7EF004D1683 /* MainView.swift in Sources */,
 				5BB36F9D295AB81F004D1683 /* DetailView.swift in Sources */,
+				261FC179295ABFF5001F9211 /* LoginView.swift in Sources */,
+				261FC17B295AD4EB001F9211 /* SignUpView.swift in Sources */,
 				2C7A8C6B295A8298000D55C5 /* AppleMarketApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

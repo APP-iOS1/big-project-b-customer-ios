@@ -33,7 +33,7 @@ struct ContentView: View {
                 }
                 .tag(3)
             
-            MypageView()
+            LoginView()
                 .tabItem {
                     Image(systemName: "person.circle")
                     Text("마이페이지")
