@@ -60,6 +60,9 @@ struct MyProductDetailView: View {
                 ScrollView(.horizontal){
                     HStack(alignment: .center){
                         ForEach(products_2){ product in
+                            NavigationLink{
+                                DetailView()
+                            } label:{
                             // 추천 제품 이미지 사용 예정
                             ZStack{
                                 RoundedRectangle(cornerRadius: 20)
@@ -74,13 +77,13 @@ struct MyProductDetailView: View {
                                             .resizable()
                                             .scaledToFit()
                                             .frame(height: 180)
-                                            
+                                        
                                     } placeholder: {
                                         ProgressView()
                                     }
                                     Spacer()
                                         .frame(height: 50)
-                    
+                                    
                                     Text(product.productName)
                                         .padding(.bottom, 1)
                                     
@@ -88,6 +91,8 @@ struct MyProductDetailView: View {
                                 }
                                 
                             }
+                            .foregroundColor(.black)
+                        }
                         }
                     }
                 }
