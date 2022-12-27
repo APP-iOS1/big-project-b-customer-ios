@@ -22,7 +22,7 @@ class CartStore: ObservableObject {
                     let productId: String = docData["productId"] as? String ?? ""
                     let productName: String = docData["productName"] as? String ?? ""
                     let productCount: Int = docData["productCount"] as? Int ?? 0
-                    let productPrice: Int = docData["productPrice"] as? Int ?? ""
+                    let productPrice: Int = docData["productPrice"] as? Int ?? 0
                     
                     let products: Cart = Cart(productId: productId, productName: productName, productCount: productCount, productPrice: productPrice)
                     
