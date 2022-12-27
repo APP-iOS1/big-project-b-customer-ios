@@ -47,6 +47,7 @@ class OrderStore: ObservableObject {
             }
     }
     
+    // MARK: - 주문 상세정보 리스트 조회 기능
     func fetchDetailOrderList(userId: String, order: Order) {
         self.detailOrderList.removeAll()
         
@@ -74,19 +75,40 @@ class OrderStore: ObservableObject {
             }
     }
     
-    func addOrder
-    /*
-    func addPostit(_ postit: Postit) {
-        database.collection("Postits")
-            .document(postit.id)
-            .setData(["username": postit.username,
-                      "memo": postit.memo,
-                      "colorIndex": postit.colorIndex,
-                      "createdAt": postit.createdAt])
+    
+    // MARK: - 주문 정보 추가 기능(임시)
+    
+    /**
+     장바구니에 5개가 담겨있다가 5개를 결제해서 넘어온 상황이면
+     [cart] , userId, address 중에서
+     [cart]의 count횟수 만큼 반복문 ?
+     */
+    
+    func addOrder(userId: String) {
+        let uuid: String = UUID().uuidString
+        let uuid2: String = UUID().uuidString
+        let orderAddress: String = "test orderAddress"
         
-        fetchPostits()
+        database.collection("ConsumerAccount").document(userId).collection("OrderList")
+            .document(uuid)
+            .setData(["id" : uuid,
+                      "isDeposit" : false,
+                      "orderAddress" : orderAddress,
+                      "orderAt" : Timestamp(),
+                      "orderTotalPrice" : 1000])
+        
+        database.collection("ConsumerAccount").document(userId).collection("OrderList").document(uuid).collection("DetailOrder")
+            .document(uuid2)
+            .setData(["productId" : uuid,
+                      "productName" : "iPhone_14_Pro_Max_256G_Silver",
+                      "productPrice" : 10000,
+                      "productCount" : 1])
+        
+        fetchOrderList(userId: userId)
+        
     }
     
+    /*
     func removePostit(_ postit: Postit) {
         database.collection("Postits")
             .document(postit.id).delete()

@@ -23,11 +23,14 @@ struct OrderTestView: View {
 
                     }
                 }
-
-                
             }
             .onAppear{
                 orderStore.fetchOrderList(userId: userId)
+            }
+            
+            // MARK: - 테스트용 주문목록 데이터 추가
+            Button("TestDataAdd") {
+                orderStore.addOrder(userId: userId)
             }
         }
     }
