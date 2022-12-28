@@ -8,39 +8,62 @@
 import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+
 class CartStore: ObservableObject {
+    
     @Published var cartStore: [Cart] = []
     let database = Firestore.firestore().collection("ConsumerAccount")
     
-    func fetchCart() {
-        database.document("mUzu710p6zgGOPk64s7D6DhMIq32").collection("Cart").getDocuments { (snapshot, error) in
-            self.cartStore.removeAll()
+    func fetchCart(uid: String) {
+        database.document(uid).collection("Cart").getDocuments { (snapshot, error) in
             
             if let snapshot {
+                var tempCart: [Cart] = []
                 for document in snapshot.documents {
                     let docData = document.data()
                     let productId: String = docData["productId"] as? String ?? ""
                     let productName: String = docData["productName"] as? String ?? ""
                     let productCount: Int = docData["productCount"] as? Int ?? 0
                     let productPrice: Int = docData["productPrice"] as? Int ?? 0
+                    let productImage: String = docData["productImage"] as? String ?? ""
                     
-                    let products: Cart = Cart(productId: productId, productName: productName, productCount: productCount, productPrice: productPrice)
+                    let products: Cart = Cart(productId: productId, productName: productName, productCount: productCount, productPrice: productPrice, productImage: productImage)
                     
-                    self.cartStore.append(products)
+                    tempCart.append(products)
                 }
+                self.cartStore = tempCart
             }
         }
     }
     
-    func addCart(product: Product, productCount: Int) {
-        database.document("mUzu710p6zgGOPk64s7D6DhMIq32").collection("Cart").document(product.id)
+    func addCart(uid: String, product: Product, productCount: Int) {
+        database.document(uid).collection("Cart").document(product.id)
             .setData([
                 "productId": product.id,
                 "productName": product.productName,
                 "productCount": productCount,
-                "productPrice": product.price
+                "productPrice": product.price,
+                "productImage": product.image
             ])
         
-        fetchCart()
+        fetchCart(uid: uid)
+    }
+    
+    func updateCart(uid: String, product: Product, productCount: Int){
+        database.document(uid).collection("Cart").document(product.id)
+            .setData([
+                "productId": product.id,
+                "productName": product.productName,
+                "productCount": productCount,
+                "productPrice": product.price,
+                "productImage": product.image
+            ])
+        fetchCart(uid: uid)
+    }
+    
+    func removeCart(uid: String, product: Product){
+        database.document(uid).collection("Cart").document(product.id)
+            .delete()
+        fetchCart(uid: uid)
     }
 }
