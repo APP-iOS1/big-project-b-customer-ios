@@ -30,8 +30,6 @@ struct MainMyProductView: View {
     
     var body: some View {
         
-        let _ = print(userProductStore.userProductStores)
-        
         VStack(alignment: .leading){
             Text("기기별로 쇼핑하기")
                 .font(.title)
