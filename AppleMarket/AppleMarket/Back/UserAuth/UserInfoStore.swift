@@ -166,9 +166,9 @@ final class UserInfoStore: ObservableObject{
                         let productPrice: Int = docData["productPrice"] as? Int ?? 1000
                         let productCount: Int = docData["productCount"] as? Int ?? 1
                         
-                        let cart: Cart = Cart(productId: productId, productName: productName, productCount: productCount, productPrice: productPrice)
-                        
-                        tempCart.append(cart)
+//                        let cart: Cart = Cart(productId: productId, productName: productName, productCount: productCount, productPrice: productPrice)
+//                        
+//                        tempCart.append(cart)
                     }
                     self.cart = tempCart
                 }

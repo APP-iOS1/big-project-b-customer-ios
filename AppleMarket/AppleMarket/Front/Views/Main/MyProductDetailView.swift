@@ -108,7 +108,7 @@ struct MyProductDetailView: View {
                 List{
                     ForEach(Array(0..<8), id: \.self) { index in
                         NavigationLink {
-                            MyProductResultView(selectedProduct_3: Product(id: 0, imagePath: "", productName: "", prices: ""))
+                            MyProductResultView(selectedProduct_3: MainProduct(id: 0, imagePath: "", productName: "", prices: ""))
                                 .navigationTitle(menuArray[index])
                         } label: {
                             Image(systemName: "\(menuImageArray[index])")

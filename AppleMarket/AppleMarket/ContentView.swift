@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var tabSelection: Int = 1
+    @StateObject private var userProductStore = UserProductStore()
     
     var body: some View {
         TabView(selection: $tabSelection) {
@@ -40,7 +41,7 @@ struct ContentView: View {
                     Text("마이페이지")
                 }
                 .tag(4)
-        }
+        }.environmentObject(userProductStore)
     }
 }
 

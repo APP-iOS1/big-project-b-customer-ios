@@ -18,6 +18,9 @@ struct MainProduct: Identifiable, Hashable{
 }
 
 struct MainProductDetailView: View {
+    
+    
+    
     let products: [MainProduct] = [
         MainProduct(id: 0, imagePath: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/ipad-pro-13-select-wifi-spacegray-202210?wid=940&hei=1112&fmt=p-jpg&qlt=95&.v=1664411207212", productName: "iPad Pro", prices: "1,249,000"),
         MainProduct(id: 1, imagePath: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/refurb-ipad-air-wifi-gold-2021?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1644268571040", productName: "iPad Air", prices: "1,249,000"),
@@ -118,8 +121,8 @@ struct MainProductDetailView: View {
     }
 }
 
-struct MainProductDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainProductDetailView(selectedProduct: MainProduct.iPad)
-    }
-}
+//struct MainProductDetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MainProductDetailView(selectedProduct: MainProduct.iPad)
+//    }
+//}
