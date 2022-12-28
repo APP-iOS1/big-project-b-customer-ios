@@ -94,11 +94,11 @@ struct CartView: View {
                                         disabled = false
                                     }
                                 }) {
-                                    Image(systemName: selectProducts[index] ? "checkmark.circle.fill" : "checkmark.circle")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 20)
-                                        .foregroundColor(Color("MainColor"))
+//                                    Image(systemName: selectProducts[index] ? "checkmark.circle.fill" : "checkmark.circle")
+//                                        .resizable()
+//                                        .aspectRatio(contentMode: .fit)
+//                                        .frame(width: 20)
+//                                        .foregroundColor(Color("MainColor"))
                                 }
                                 
                                 // 상품 이미지
