@@ -13,7 +13,6 @@ import FirebaseFirestore
 final class UserInfoStore: ObservableObject{
     @Published var state: SignInState = .signedOut
     @Published var userInfo: UserInfo?
-    @Published var cart: [Cart] = []
     
     let database = Firestore.firestore()
     
@@ -108,7 +107,7 @@ final class UserInfoStore: ObservableObject{
             UserDefaults.standard.reset()
             state = .signedOut
             self.userInfo = nil
-            self.cart = []
+//            self.cart = []
         } catch let signOutError as NSError{
             self.errorMessage = signOutError.localizedDescription
             print("Error signing out: \(self.errorMessage)")
