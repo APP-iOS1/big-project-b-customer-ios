@@ -10,7 +10,7 @@ import SwiftUI
 import SwiftUI
 
 struct CartView: View {
-    @State private var selectProducts: [Bool] = [] // 선택 상품 확인
+    @State private var selectProducts: [Bool] = Array(repeating: true, count: 10) // 선택 상품 확인
     @State private var allSelect: Bool = true // 상품 전체선택 확인
     @State private var disabled: Bool = false // 결제 버튼 활성화
     @State private var emptyCart: Bool = false
@@ -59,11 +59,12 @@ struct CartView: View {
                         NavigationLink(destination: EmptyCartView(), isActive: $emptyCart) {
                             // 지우기
                             Button(action: {
-//                                for index in 0..<selectProducts {
-//
-//                                }
-                                cartStore.removeCart(uid: "mUzu710p6zgGOPk64s7D6DhMIq32", product: Cart(productId: cartStore.cartStore[0].productId, productName: cartStore.cartStore[0].productName, productCount: cartStore.cartStore[0].productCount, productPrice: cartStore.cartStore[0].productPrice, productImage: cartStore.cartStore[0].productImage))
-                                selectProducts = Array(repeating: false, count: selectProducts.filter{!$0}.count)
+                                for index in 0..<cartStore.cartStore.count {
+                                    if selectProducts[index] {
+                                        cartStore.removeCart(uid: "mUzu710p6zgGOPk64s7D6DhMIq32", product: Cart(productId: cartStore.cartStore[index].productId, productName: cartStore.cartStore[index].productName, productCount: cartStore.cartStore[index].productCount, productPrice: cartStore.cartStore[index].productPrice, productImage: cartStore.cartStore[index].productImage))
+                                    }
+                                }
+                                selectProducts = Array(repeating: false, count: cartStore.cartStore.count)
                                 
                                 if cartStore.cartStore.isEmpty {
                                     emptyCart = true
@@ -84,21 +85,21 @@ struct CartView: View {
                                 // 체크 버튼
                                 Button(action: {
                                     selectProducts[index] = !selectProducts[index]
-                                    if selectProducts == Array(repeating: true, count: cartStore.cartStore.count) {
+                                    if (0..<cartStore.cartStore.count).map({selectProducts[$0]}) == Array(repeating: true, count: cartStore.cartStore.count) {
                                         allSelect = true
                                         disabled = false
-                                    } else if selectProducts == Array(repeating: false, count: cartStore.cartStore.count) {
+                                    } else if 10 - selectProducts.filter({!$0}).count == cartStore.cartStore.count {
                                         disabled = true
                                     } else {
                                         allSelect = false
                                         disabled = false
                                     }
                                 }) {
-//                                    Image(systemName: selectProducts[index] ? "checkmark.circle.fill" : "checkmark.circle")
-//                                        .resizable()
-//                                        .aspectRatio(contentMode: .fit)
-//                                        .frame(width: 20)
-//                                        .foregroundColor(Color("MainColor"))
+                                    Image(systemName: selectProducts[index] ? "checkmark.circle.fill" : "checkmark.circle")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 20)
+                                        .foregroundColor(Color("MainColor"))
                                 }
                                 
                                 // 상품 이미지
