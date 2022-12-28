@@ -157,6 +157,7 @@ struct SearchResultView: View {
                 }
                 Spacer()
             }
+            .toolbar(.hidden)
         }
     }
 }

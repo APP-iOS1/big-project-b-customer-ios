@@ -7,16 +7,16 @@
 
 import SwiftUI
 
-var products_3: [Product] = [
-    Product(id: 0, imagePath: "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MPPX3?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1661458144539", productName: "MagSafe형 iPhone 가죽 카드지갑 - 엄버", prices: "85,000"),
-    Product(id: 1, imagePath: "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MPPJ3_AV3?wid=2000&hei=2000&fmt=jpeg&qlt=90&.v=1662046154511", productName: "MagSafe형 iPhone 14 |\n 14 Pro 가죽 케이스 - 잉크", prices: "85,000"),
-    Product(id: 2, imagePath: "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MPU63_AV3?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1661471392622", productName: "MagSafe형 iPhone 14 |\n 14 Pro 투명 케이스", prices: "69,000"),
-    Product(id: 3, imagePath: "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MPTL3_AV3?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1661466613645", productName: "MagSafe형 iPhone 14 |\n Pro 실리콘 케이스", prices: "69,000")
+var products_3: [MainProduct] = [
+    MainProduct(id: 0, imagePath: "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MPPX3?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1661458144539", productName: "MagSafe형 iPhone 가죽 카드지갑 - 엄버", prices: "85,000"),
+    MainProduct(id: 1, imagePath: "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MPPJ3_AV3?wid=2000&hei=2000&fmt=jpeg&qlt=90&.v=1662046154511", productName: "MagSafe형 iPhone 14 |\n 14 Pro 가죽 케이스 - 잉크", prices: "85,000"),
+    MainProduct(id: 2, imagePath: "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MPU63_AV3?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1661471392622", productName: "MagSafe형 iPhone 14 |\n 14 Pro 투명 케이스", prices: "69,000"),
+    MainProduct(id: 3, imagePath: "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MPTL3_AV3?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1661466613645", productName: "MagSafe형 iPhone 14 |\n Pro 실리콘 케이스", prices: "69,000")
 ]
 
 struct MyProductResultView: View {
     
-    let selectedProduct_3: Product
+    let selectedProduct_3: MainProduct
     
     let columns = [GridItem(.flexible()), GridItem(.flexible())]
     
@@ -84,6 +84,6 @@ struct MyProductResultView: View {
 
 struct MyProductResultView_Previews: PreviewProvider {
     static var previews: some View {
-        MyProductResultView(selectedProduct_3: Product(id: 0, imagePath: "", productName: "", prices: ""))
+        MyProductResultView(selectedProduct_3: MainProduct(id: 0, imagePath: "", productName: "", prices: ""))
     }
 }
