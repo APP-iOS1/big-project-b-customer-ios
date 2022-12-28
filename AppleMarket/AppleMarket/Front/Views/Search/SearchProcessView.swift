@@ -14,7 +14,7 @@ struct SearchProcessView: View {
         VStack {
  
             HStack {
-                Text("최근결과")
+                Text("최근검색")
                     .font(.headline)
                 
                 Spacer()
