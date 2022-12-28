@@ -45,7 +45,9 @@ struct OrderDetailTestView: View {
     var body: some View{
         List(orderStore.detailOrderList){ detailOrder in
             Text("\(detailOrder.productName)")
-            
+            Button("remove"){
+                orderStore.removeOrder(userId: userId, orderId: order.id)
+            }
         }
         .onAppear{
             orderStore.fetchDetailOrderList(userId: userId, order: order)

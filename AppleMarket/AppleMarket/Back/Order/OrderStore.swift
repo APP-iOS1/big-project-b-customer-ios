@@ -99,13 +99,21 @@ class OrderStore: ObservableObject {
         
         database.collection("ConsumerAccount").document(userId).collection("OrderList").document(uuid).collection("DetailOrder")
             .document(uuid2)
-            .setData(["productId" : uuid,
+            .setData(["productId" : uuid2,
                       "productName" : "iPhone_14_Pro_Max_256G_Silver",
                       "productPrice" : 10000,
                       "productCount" : 1])
         
         fetchOrderList(userId: userId)
         
+    }
+    
+    func removeOrder(userId: String, orderId: String) {
+        database.collection("ConsumerAccount").document(userId).collection("OrderList")
+            .document(orderId).collection("DetailOrder")
+        
+        fetchOrderList(userId: userId)
+
     }
     
     /*
