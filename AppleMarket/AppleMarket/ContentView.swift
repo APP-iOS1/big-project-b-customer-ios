@@ -8,44 +8,26 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var tabSelection: Int = 1
+    @EnvironmentObject var userInfoStore: UserInfoStore
     
     var body: some View {
-        TabView(selection: $tabSelection) {
-            
-            MainView()
-                .tabItem {
-                    Image(systemName: "macbook.and.iphone")
-                    Text("쇼핑하기")
-                }
-                .tag(1)
-            
-            SearchView()
-                .tabItem {
-                    Image(systemName: "magnifyingglass")
-                    Text("검색")
-                }
-                .tag(2)
-            
-            CartView()
-                .tabItem {
-                    Image(systemName: "bag")
-                    Text("장바구니")
-                }
-                .tag(3)
-            
-            LoginView()
-                .tabItem {
-                    Image(systemName: "person.circle")
-                    Text("마이페이지")
-                }
-                .tag(4)
+        VStack {
+            Text("")
+            Image(systemName: "globe")
+                .imageScale(.large)
+                .foregroundColor(.accentColor)
+            Text("Hello, world!")
         }
+        .onAppear{
+            userInfoStore.emailAuthSignIn(email: "123123@gmail.com", password: "123123")
+        }
+        .padding()
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(UserInfoStore())
     }
 }
