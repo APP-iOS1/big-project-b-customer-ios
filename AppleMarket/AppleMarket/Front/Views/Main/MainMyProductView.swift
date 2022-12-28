@@ -26,7 +26,7 @@ struct MainMyProductView: View {
     
 //    let selectedMyProduct: MyProduct
     
-    @StateObject private var userProductStore = UserProductStore()
+    @EnvironmentObject var userProductStore: UserProductStore
     
     var body: some View {
         
@@ -70,7 +70,7 @@ struct MainMyProductView: View {
                         } label:{
                         ZStack{
                             RoundedRectangle(cornerRadius: 20)
-                                .frame(width: 240, height: 300)
+                                .frame(width: 230, height: 300)
                                 .foregroundColor(.white)
                             
                             VStack {
@@ -78,7 +78,7 @@ struct MainMyProductView: View {
                                     image
                                         .resizable()
                                         .scaledToFit()
-                                        .frame(height: 180)
+                                        .frame(height: 160)
                                     
                                 } placeholder: {
                                     ProgressView()

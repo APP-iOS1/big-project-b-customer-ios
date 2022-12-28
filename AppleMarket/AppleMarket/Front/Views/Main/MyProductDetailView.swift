@@ -46,8 +46,21 @@ struct MyProductDetailView: View {
                             .fontWeight(.bold)
                             .padding(.bottom, 1)
                         // "기기 종류" + "사양"
-                        Text("\(myProducts.productName)")
-                            .font(.system(size: 14))
+                        if myProducts.device == "iPhone"{
+                            Text("\(myProducts.productName) \(myProducts.storage[0])GB \(myProducts.color[0] ?? "")")
+                                .font(.system(size: 14))
+                        }
+                        
+                        else if myProducts.device == "iPad"{
+                            Text("\(myProducts.series[0] ?? "") \(myProducts.productName) \(myProducts.storage[0])GB \(myProducts.color[0] ?? "")")
+                                .font(.system(size: 14))
+                        }
+                        
+                        else{
+                            Text("\(myProducts.productName) \(myProducts.color[0] ?? "")")
+                                .font(.system(size: 14))
+                        }
+                        
                     }
                     .frame(alignment: .leading)
                     .padding()
