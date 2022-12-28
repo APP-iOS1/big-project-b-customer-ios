@@ -8,10 +8,8 @@
 import SwiftUI
 
 struct ColorOptionView: View {
-    @State var isChecking1: Bool = false
-    @State var isChecking2: Bool = false
-    @State var isChecking3: Bool = false
-    @State var isChecking4: Bool = false
+    @State private var isChecking = [false, false, false, false]
+    @Binding var color: String
     
     var body: some View {
         VStack(alignment: .leading, spacing: 15) {
@@ -25,10 +23,8 @@ struct ColorOptionView: View {
             
             HStack(alignment: .bottom, spacing: 15) {
                 Button {
-                    isChecking1 = true
-                    isChecking2 = false
-                    isChecking3 = false
-                    isChecking4 = false
+                    isChecking = [true, false, false, false]
+                    color = "딥 퍼플"
                 } label: {
                     
                     VStack(alignment: .center, spacing: 5) {
@@ -42,13 +38,13 @@ struct ColorOptionView: View {
                     .foregroundColor(.black)
                     .frame(width:170 ,height: 70)
                     .overlay(RoundedRectangle(cornerRadius: 15)
-                        .stroke(isChecking1 ? Color("MainColor") : Color.gray, lineWidth: 1.5))
+                        .stroke(isChecking[0] ? Color("MainColor") : Color.gray, lineWidth: 1.5))
                 }
+                .disabled(isChecking[0])
+                
                 Button {
-                    isChecking1 = false
-                    isChecking2 = true
-                    isChecking3 = false
-                    isChecking4 = false
+                    isChecking = [false, true, false, false]
+                    color = "골드"
                 } label: {
                     
                     VStack(alignment: .center, spacing: 5) {
@@ -62,16 +58,15 @@ struct ColorOptionView: View {
                     .foregroundColor(.black)
                     .frame(width:170 ,height: 70)
                     .overlay(RoundedRectangle(cornerRadius: 15)
-                        .stroke(isChecking2 ? Color("MainColor") : Color.gray, lineWidth: 1.5))
+                        .stroke(isChecking[1] ? Color("MainColor") : Color.gray, lineWidth: 1.5))
                 }
+                .disabled(isChecking[1])
             }
             
             HStack(alignment: .bottom, spacing: 15) {
                 Button {
-                    isChecking1 = false
-                    isChecking2 = false
-                    isChecking3 = true
-                    isChecking4 = false
+                    isChecking = [false, false, true, false]
+                    color = "실버"
                 } label: {
                     
                     VStack(alignment: .center, spacing: 5) {
@@ -85,13 +80,13 @@ struct ColorOptionView: View {
                     .foregroundColor(.black)
                     .frame(width:170 ,height: 70)
                     .overlay(RoundedRectangle(cornerRadius: 15)
-                        .stroke(isChecking3 ? Color("MainColor") : Color.gray, lineWidth: 1.5))
+                        .stroke(isChecking[2] ? Color("MainColor") : Color.gray, lineWidth: 1.5))
                 }
+                .disabled(isChecking[2])
+                
                 Button {
-                    isChecking1 = false
-                    isChecking2 = false
-                    isChecking3 = false
-                    isChecking4 = true
+                    isChecking = [false, false, false, true]
+                    color = "스페이스 블랙"
                 } label: {
                     
                     VStack(alignment: .center, spacing: 5) {
@@ -105,8 +100,9 @@ struct ColorOptionView: View {
                     .foregroundColor(.black)
                     .frame(width:170 ,height: 70)
                     .overlay(RoundedRectangle(cornerRadius: 15)
-                        .stroke(isChecking4 ? Color("MainColor") : Color.gray, lineWidth: 1.5))
+                        .stroke(isChecking[3] ? Color("MainColor") : Color.gray, lineWidth: 1.5))
                 }
+                .disabled(isChecking[3])
             }
             
             
@@ -114,8 +110,8 @@ struct ColorOptionView: View {
     }
 }
 
-struct ColorOptionView_Previews: PreviewProvider {
-    static var previews: some View {
-        ColorOptionView()
-    }
-}
+//struct ColorOptionView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ColorOptionView()
+//    }
+//}
