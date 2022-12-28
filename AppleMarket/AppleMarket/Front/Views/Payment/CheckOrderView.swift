@@ -27,8 +27,14 @@ struct CheckOrderView: View {
                             .padding(.bottom, 10)
                             .fontWeight(.bold)
                         HStack {
-                            Rectangle()
-                                .frame(width: 100, height: 100)
+                            AsyncImage(url: URL(string: "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/airpods-max-select-silver-202011?wid=470&hei=556&fmt=png-alpha&.v=1604021221000")) { image in
+                                image
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 100, height: 100)
+                            } placeholder: {
+                                ProgressView()
+                            }
                             VStack(alignment: .leading) {
                                 Text("AirPods Max - 실버")
                                     .padding(.bottom, -3)
@@ -150,7 +156,7 @@ struct CheckOrderView: View {
                             .frame(width: 310, height: 20)
                             .padding(20)
                     }
-                    .background(.blue)
+                    .background(Color("MainColor"))
                     .cornerRadius(15)
                 }
                 .padding(25)

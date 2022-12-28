@@ -40,7 +40,7 @@ struct ShippingView: View {
                         .fontWeight(.bold)
                     VStack(alignment: .leading) {
                         Button(action: {
-                            print("주문제품 선택")
+                            print("결제방법 선택")
                         }) {
                             HStack {
                                 VStack(alignment: .leading) {
@@ -80,7 +80,7 @@ struct ShippingView: View {
                                 .frame(width: 310, height: 20)
                                 .padding(20)
                         }
-                        .background(.blue)
+                        .background(Color("MainColor"))
                         .cornerRadius(15)
                     }
                 }
