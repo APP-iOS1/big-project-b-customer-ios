@@ -36,33 +36,43 @@ class CartStore: ObservableObject {
         }
     }
     
-    func addCart(uid: String, product: Product, productCount: Int) {
+    func addCart(uid: String, product: UserProduct, productCount: Int) {
         database.document(uid).collection("Cart").document(product.id)
             .setData([
-                "productId": product.id,
+                "id": product.id,
                 "productName": product.productName,
-                "productCount": productCount,
-                "productPrice": product.price,
-                "productImage": product.image
+                "device": product.device,
+                "category": product.category,
+                "description": product.description,
+                "price": product.price,
+                "images": product.images,
+                "count": product.count,
+                "storage": product.storage,
+                "color": product.color,
+                "status": product.status,
+                "series": product.series,
+                "createdAt": product.createdAt,
+                "productCount": productCount
+                
             ])
         
         fetchCart(uid: uid)
     }
-    
-    func updateCart(uid: String, product: Product, productCount: Int){
-        database.document(uid).collection("Cart").document(product.id)
+
+    func updateCart(uid: String, product: Cart, productCount: Int){
+        database.document(uid).collection("Cart").document(product.productId)
             .setData([
-                "productId": product.id,
+                "productId": product.productId,
                 "productName": product.productName,
                 "productCount": productCount,
-                "productPrice": product.price,
-                "productImage": product.image
+                "productPrice": product.productPrice,
+                "productImage": product.productImage
             ])
         fetchCart(uid: uid)
     }
     
-    func removeCart(uid: String, product: Product){
-        database.document(uid).collection("Cart").document(product.id)
+    func removeCart(uid: String, product: Cart){
+        database.document(uid).collection("Cart").document(product.productId)
             .delete()
         fetchCart(uid: uid)
     }

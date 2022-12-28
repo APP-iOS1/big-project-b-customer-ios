@@ -22,19 +22,19 @@ struct CartTest: View {
             
             
             Button {
-                cartStore.addCart(uid: uid, product: Product(id: "asdfasdfasdf", category: "iPhone", color: "silver", createdAt: Date(), descroption: "필요한 정보를 한눈에 볼 수 있는 상시표시 기능을 탑재한, 더 밝아진 15.5cm Super Retina XDR 디스플레이¹", device: "iPhone", image: ["test"], price: 1000, productName: "아이폰14", status: "0", storage: "128"), productCount: 0)
+//                cartStore.addCart(uid: uid, product: Product(id: "asdfasdfasdf", category: "iPhone", color: "silver", createdAt: Date(), descroption: "필요한 정보를 한눈에 볼 수 있는 상시표시 기능을 탑재한, 더 밝아진 15.5cm Super Retina XDR 디스플레이¹", device: "iPhone", image: ["test"], price: 1000, productName: "아이폰14", status: "0", storage: "128"), productCount: 0)
             } label: {
                 Text("추가")
             }
             
             Button {
-                cartStore.updateCart(uid: uid, product: Product(id: "asdfasdfasdf", category: "iPhone", color: "silver", createdAt: Date(), descroption: "필요한 정보를 한눈에 볼 수 있는 상시표시 기능을 탑재한, 더 밝아진 15.5cm Super Retina XDR 디스플레이¹", device: "iPhone", image: ["test"], price: 1000, productName: "아이폰14", status: "0", storage: "128"), productCount: 3)
+//                cartStore.updateCart(uid: uid, product: Product(id: "asdfasdfasdf", category: "iPhone", color: "silver", createdAt: Date(), descroption: "필요한 정보를 한눈에 볼 수 있는 상시표시 기능을 탑재한, 더 밝아진 15.5cm Super Retina XDR 디스플레이¹", device: "iPhone", image: ["test"], price: 1000, productName: "아이폰14", status: "0", storage: "128"), productCount: 3)
             } label: {
                 Text("변경")
             }
             
             Button {
-                cartStore.removeCart(uid: uid, product: Product(id: "asdfasdfasdf", category: "iPhone", color: "silver", createdAt: Date(), descroption: "필요한 정보를 한눈에 볼 수 있는 상시표시 기능을 탑재한, 더 밝아진 15.5cm Super Retina XDR 디스플레이¹", device: "iPhone", image: ["test"], price: 1000, productName: "아이폰14", status: "0", storage: "128"))
+//                cartStore.removeCart(uid: uid, product: Product(id: "asdfasdfasdf", category: "iPhone", color: "silver", createdAt: Date(), descroption: "필요한 정보를 한눈에 볼 수 있는 상시표시 기능을 탑재한, 더 밝아진 15.5cm Super Retina XDR 디스플레이¹", device: "iPhone", image: ["test"], price: 1000, productName: "아이폰14", status: "0", storage: "128"))
             } label: {
                 Text("삭제")
             }
