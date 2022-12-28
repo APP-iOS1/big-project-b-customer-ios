@@ -10,6 +10,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 class ProductStore: ObservableObject {
+    
     @Published var productStore: [Product] = []
     let database = Firestore.firestore().collection("Product")
     

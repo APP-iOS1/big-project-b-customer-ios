@@ -10,6 +10,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 class CartStore: ObservableObject {
+    
     @Published var cartStore: [Cart] = []
     let database = Firestore.firestore().collection("ConsumerAccount")
     
