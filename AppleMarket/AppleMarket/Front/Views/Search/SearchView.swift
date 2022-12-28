@@ -9,31 +9,69 @@ import SwiftUI
 
 struct SearchView: View {
     
-    @State var transitionView: Bool = false
+    @State private var transitionView: Bool = false
     @State private var searchInput: String = ""
+    @State private var hasResult: Bool = false
+    
+    @Environment(\.isSearching) var isSearching
 
     var body: some View {
         VStack {
-            HStack {
-                TextField("\(Image(systemName:"magnifyingglass")) 제품 검색", text: $searchInput)
-                    .padding()
-                    .frame(height: 36)
-                    .background(Color(UIColor.systemGray5))
-                    .cornerRadius(15)
-                    .textInputAutocapitalization(.never)
-                    .lineLimit(1)
-                Button {
-                    searchInput.removeAll()
-                } label: {
-                    Text("취소")
-                }
-                .padding(.horizontal, 16)
-                .accentColor(Color("MainColor"))
-            }
-            .padding(.bottom, 16)
-            
+            SearchContent(searchInput: searchInput, hasResult: $hasResult)
         }
-        .padding(16)
+        .searchable(text: $searchInput, prompt: "제품 및 매장 검색")
+        .onSubmit(of: .search) {
+            print("서치버튼 클릭")
+            hasResult = true
+        }
+        .navigationTitle("검색")
+    }
+}
+
+struct SearchContent: View {
+    var searchInput: String
+    @Binding var hasResult: Bool
+    
+    @Environment(\.isSearching) var isSearching
+    @Environment(\.dismissSearch) var dismissSearch // 1
+    
+    var body: some View {
+        VStack {
+            Text(searchInput)
+            if isSearching {
+                HStack {
+                    Text("최근결과")
+                        .font(.headline)
+                    
+                    Spacer()
+                    
+//                    Button {
+//                        recents.removeAll()
+//                        //이 다음 동작은 데이터베이스에 있는 유저의 최근 검색 결과 지우기
+//                    } label: {
+//                        Text("지우기")
+//                    }
+//                    .accentColor(Color("MainColor"))
+                    
+                }
+//                List(recents, id: \.self) { recent in
+//                    HStack {
+//                        Image(systemName:"magnifyingglass")
+//                            .foregroundColor(.secondary)
+//                        Text(recent)
+//
+//                    }
+//                }
+//                .listStyle(.plain)
+//                .padding(0)
+            } else {
+                if hasResult {
+                    SearchResultView()
+                } else {
+                    Text("검색어 입력중")
+                }
+            }
+        }
     }
 }
 
