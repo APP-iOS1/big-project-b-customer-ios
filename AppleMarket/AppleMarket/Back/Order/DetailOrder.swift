@@ -20,7 +20,10 @@ struct DetailOrder: Identifiable {
     // 제품 가격
     var productPrice: Int
     
+    // 제품 이미지 주소
+    var productImage: String
     
+    // 제품 전체 가격
     var producTotalPrice: Int {
         productPrice * productCount
     }

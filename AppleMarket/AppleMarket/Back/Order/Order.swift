@@ -35,4 +35,18 @@ struct Order: Identifiable {
         
         return dateFormatter.string(from: orderDateAt)
     }
+    
+    /// 주문 품목 갯수
+    var detailOrderCount: Int
+    
+    /// 메인 제품을 제외한 나머지 제품 갯수
+    var otherProductCount: Int {
+        detailOrderCount - 1
+    }
+    
+    /// 주문 목록 메인 제품 이미지
+    var mainProductImage: String
+    
+    /// 주문 목록 메인 제품 이름
+    var mainProductName: String
 }
