@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct MainView: View {
+    @EnvironmentObject var userProductStore: UserProductStore
+    
     var body: some View {
+        let _ = print(userProductStore.userProductStores)
         NavigationStack{
             ScrollView{
                 LazyVStack(alignment: .leading){
@@ -38,7 +41,7 @@ struct MainView: View {
                 }
             }
         }
-
+        .onAppear{userProductStore.fetchData()}
     }
 }
 
