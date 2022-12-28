@@ -2,10 +2,8 @@
 
 ## 판매자가 직접 운영하는 쇼핑 앱
 
-- 최소 요구사항
-    - 소비자용 iOS App
-    - 시스템 관리자용 iPad App
-    - Firebase로 Back-end 구축(Auth, Firestore 사용)
+- 소비자용 iOS App
+- Firebase로 Back-end 구축(Auth, Firestore 사용)
 - Apple Inc.의 디바이스와 관련 악세서리 판매
 - 결제는 무통장 입금으로만 진행
 
@@ -60,9 +58,3 @@
         - 이름
         - 주소
         - 전화번호
-
-## 진행순서
-
-## 스크린샷
-
-## 참여자
