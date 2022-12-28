@@ -25,8 +25,12 @@ struct AppleMarketApp: App {
     
     var body: some Scene {
         WindowGroup {
+            /*
             CartTest()
                 .environmentObject(UserInfoStore())
+             */
+            
+            UserProductTestView()
         }
     }
 }
