@@ -153,27 +153,27 @@ final class UserInfoStore: ObservableObject{
     }
     
     // MARK: 유저 장바구니 패치
-    func fetchUserCart(){
-        database.collection("ConsumerAccount").document(self.userInfo?.userId ?? "").collection("Cart")
-            .getDocuments{snapshot, error in
-                if let snapshot{
-                    var tempCart: [Cart] = []
-                    for document in snapshot.documents{
-                        let docData = document.data()
-                        
-                        let productId: String = docData["productId"] as? String ?? ""
-                        let productName: String = docData["productName"] as? String ?? ""
-                        let productPrice: Int = docData["productPrice"] as? Int ?? 1000
-                        let productCount: Int = docData["productCount"] as? Int ?? 1
-                        
-                        let cart: Cart = Cart(productId: productId, productName: productName, productCount: productCount, productPrice: productPrice)
-                        
-                        tempCart.append(cart)
-                    }
-                    self.cart = tempCart
-                }
-            }
-    }
+//    func fetchUserCart(){
+//        database.collection("ConsumerAccount").document(self.userInfo?.userId ?? "").collection("Cart")
+//            .getDocuments{snapshot, error in
+//                if let snapshot{
+//                    var tempCart: [Cart] = []
+//                    for document in snapshot.documents{
+//                        let docData = document.data()
+//                        
+//                        let productId: String = docData["productId"] as? String ?? ""
+//                        let productName: String = docData["productName"] as? String ?? ""
+//                        let productPrice: Int = docData["productPrice"] as? Int ?? 1000
+//                        let productCount: Int = docData["productCount"] as? Int ?? 1
+//                        
+//                        let cart: Cart = Cart(productId: productId, productName: productName, productCount: productCount, productPrice: productPrice)
+//                        
+//                        tempCart.append(cart)
+//                    }
+//                    self.cart = tempCart
+//                }
+//            }
+//    }
     
 }
 

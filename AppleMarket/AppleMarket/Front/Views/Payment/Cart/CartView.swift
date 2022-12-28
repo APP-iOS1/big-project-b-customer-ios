@@ -7,14 +7,15 @@
 
 import SwiftUI
 
+import SwiftUI
+
 struct CartView: View {
-    @State var productNames: [String] = ["AirPods(3세대) Lightning 충전 케이스 모델", "10.2형 iPad 256GB - 스페이스 그레이", "Magic Trackpad - 화이트 Multi-Touch"]
-    var prices: [String] = ["₩259,000", "₩939,000", "₩149,000"]
-    @State private var productCount: [Int] = [1, 1, 1]
-    @State private var selectProducts: [Bool] = Array(repeating: true, count: 3) // 선택 상품 확인
+    @State private var selectProducts: [Bool] = [] // 선택 상품 확인
     @State private var allSelect: Bool = true // 상품 전체선택 확인
     @State private var disabled: Bool = false // 결제 버튼 활성화
     @State private var emptyCart: Bool = false
+    @StateObject private var cartStore: CartStore = CartStore()
+    @StateObject private var productStore: ProductStore = ProductStore()
     
     init() {
         UINavigationBar.setAnimationsEnabled(false)
@@ -36,10 +37,10 @@ struct CartView: View {
                         // 전체선택
                         Button(action: {
                             if allSelect {
-                                selectProducts = Array(repeating: false, count: productNames.count)
+                                selectProducts = Array(repeating: false, count: cartStore.cartStore.count)
                                 disabled = true
                             } else {
-                                selectProducts = Array(repeating: true, count: productNames.count)
+                                selectProducts = Array(repeating: true, count: cartStore.cartStore.count)
                                 disabled = false
                             }
                             allSelect = !allSelect
@@ -58,14 +59,13 @@ struct CartView: View {
                         NavigationLink(destination: EmptyCartView(), isActive: $emptyCart) {
                             // 지우기
                             Button(action: {
-                                for index in stride(from: productNames.count-1, through: 0, by: -1) {
-                                    if selectProducts[index] {
-                                        productNames.remove(at: index)
-                                    }
-                                }
+//                                for index in 0..<selectProducts {
+//
+//                                }
+                                cartStore.removeCart(uid: "mUzu710p6zgGOPk64s7D6DhMIq32", product: Cart(productId: cartStore.cartStore[0].productId, productName: cartStore.cartStore[0].productName, productCount: cartStore.cartStore[0].productCount, productPrice: cartStore.cartStore[0].productPrice, productImage: cartStore.cartStore[0].productImage))
                                 selectProducts = Array(repeating: false, count: selectProducts.filter{!$0}.count)
                                 
-                                if productNames.isEmpty {
+                                if cartStore.cartStore.isEmpty {
                                     emptyCart = true
                                 }
                             }) {
@@ -79,15 +79,15 @@ struct CartView: View {
                     
                     // 상품 리스트
                     ScrollView {
-                        ForEach(0..<productNames.count, id: \.self) { index in
+                        ForEach(0..<cartStore.cartStore.count, id: \.self) { index in
                             HStack {
                                 // 체크 버튼
                                 Button(action: {
                                     selectProducts[index] = !selectProducts[index]
-                                    if selectProducts == Array(repeating: true, count: productNames.count) {
+                                    if selectProducts == Array(repeating: true, count: cartStore.cartStore.count) {
                                         allSelect = true
                                         disabled = false
-                                    } else if selectProducts == Array(repeating: false, count: productNames.count) {
+                                    } else if selectProducts == Array(repeating: false, count: cartStore.cartStore.count) {
                                         disabled = true
                                     } else {
                                         allSelect = false
@@ -102,19 +102,22 @@ struct CartView: View {
                                 }
                                 
                                 // 상품 이미지
-                                AsyncImage(url: URL(string: "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MME73_AV2?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1632861338000"), scale: 13)
+                                AsyncImage(url: URL(string: cartStore.cartStore[index].productImage), scale: 13)
                                 
                                 VStack(alignment: .leading, spacing: 18) {
                                     // 상품명
-                                    Text(productNames[index])
+                                    Text(cartStore.cartStore[index].productName)
                                         .fontWeight(.bold)
                                     
                                     // 상품 개수
                                     HStack(spacing: 12) {
                                         // - 버튼
                                         Button(action: {
-                                            if productCount[index] > 1 {
-                                                productCount[index] -= 1
+                                            
+                                            let price = cartStore.cartStore[index].productPrice / cartStore.cartStore[index].productCount
+                                            if cartStore.cartStore[index].productCount > 1 {
+                                                cartStore.cartStore[index].productCount -= 1
+                                                cartStore.updateCart(uid: "mUzu710p6zgGOPk64s7D6DhMIq32", product: Cart(productId: cartStore.cartStore[index].productId, productName: cartStore.cartStore[index].productName, productCount: cartStore.cartStore[index].productCount, productPrice: price * cartStore.cartStore[index].productCount, productImage: cartStore.cartStore[index].productImage), productCount: cartStore.cartStore[index].productCount)
                                             }
                                         }) {
                                             ZStack {
@@ -130,13 +133,16 @@ struct CartView: View {
                                         }
                                         
                                         // 개수
-                                        Text("\(productCount[index])")
+                                        Text("\(cartStore.cartStore[index].productCount)")
                                             .font(.system(size: 17))
                                         
                                         // + 버튼
                                         Button(action: {
-                                            if productCount[index] < 10 {
-                                                productCount[index] += 1
+                                            let price = cartStore.cartStore[index].productPrice / cartStore.cartStore[index].productCount
+                                            
+                                            if cartStore.cartStore[index].productCount < 10 {
+                                                cartStore.cartStore[index].productCount += 1
+                                                cartStore.updateCart(uid: "mUzu710p6zgGOPk64s7D6DhMIq32", product: Cart(productId: cartStore.cartStore[index].productId, productName: cartStore.cartStore[index].productName, productCount: cartStore.cartStore[index].productCount, productPrice: price * cartStore.cartStore[index].productCount, productImage: cartStore.cartStore[index].productImage), productCount: cartStore.cartStore[index].productCount)
                                             }
                                         }) {
                                             ZStack {
@@ -154,7 +160,7 @@ struct CartView: View {
                                         Spacer()
                                         
                                         // 상품 가격
-                                        Text(prices[index])
+                                        Text("\(cartStore.cartStore[index].productPrice)")
                                             .fontWeight(.semibold)
                                     }
                                 }
@@ -171,7 +177,7 @@ struct CartView: View {
                         Text("결제금액")
                         Spacer()
                         // 총 금액
-                        Text("₩1,347,000")
+                        Text("\(cartStore.cartStore.map{$0.productPrice}.reduce(0, +))")
                     }
                     .fontWeight(.bold)
                     .padding()
@@ -195,7 +201,9 @@ struct CartView: View {
                 .padding(.bottom, 90)
             }
             .ignoresSafeArea(.all)
-            
+        }
+        .onAppear {
+            cartStore.fetchCart(uid: "mUzu710p6zgGOPk64s7D6DhMIq32")
         }
     }
 }
