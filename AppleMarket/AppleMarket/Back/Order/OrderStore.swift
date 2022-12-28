@@ -20,28 +20,40 @@ class OrderStore: ObservableObject {
     func fetchOrderList(userId: String) {
         self.orderList.removeAll()
         
+        /// 전체 주문목록 리스트 조회하기
         database.collection("ConsumerAccount").document(userId).collection("OrderList")
             .getDocuments{ (snapshot, error) in
                 
                 if let snapshot {
                     for document in snapshot.documents {
+                        
                         let id: String = document.documentID
                         
                         let docData = document.data()
                         
                         let orderAddress: String = docData["orderAddress"] as? String ?? ""
-                        
                         let orderTotalPrice: Int = docData["orderTotalPrice"] as? Int ?? 0
-                        
                         let isDeposit: Bool = docData["isDeposit"] as? Bool ?? false
-                        
                         let orderAtTimeStamp: Timestamp = docData["orderAt"] as? Timestamp ?? Timestamp()
                         let orderAt: Date = orderAtTimeStamp.dateValue()
+                        let detailOrderCount: Int = docData["detailOrderCount"] as? Int ?? 0
                         
-                        let order: Order = Order(id: id, orderAddress: orderAddress, orderTotalPrice: orderTotalPrice, isDeposit: isDeposit, orderAt: orderAt)
+                        let mainProductImage: String = docData["mainProductImage"] as? String ?? ""
+                        let mainProductName: String = docData["mainProductName"] as? String ?? ""
+//                        var detailOrderCount: Int = 0
+//
+//                        /// 상세 주문내역 확인하여 몇 종류의 상품인가 확인
+//                        self.database.collection("ConsumerAccount").document(userId).collection("OrderList").document(id).collection("DetailOrder")
+//                            .getDocuments{ (querySnapshot, error) in
+//                                let count = querySnapshot!.count
+//                                detailOrderCount = count
+//                                print("count : \(count)")
+//                                print("detailOrderCount : \(detailOrderCount)")
+//                            }
+                        
+                        let order: Order = Order(id: id, orderAddress: orderAddress, orderTotalPrice: orderTotalPrice, isDeposit: isDeposit, orderAt: orderAt, detailOrderCount: detailOrderCount, mainProductImage: mainProductImage, mainProductName: mainProductName)
                         
                         self.orderList.append(order)
-                        
                     }
                 }
             }
@@ -61,12 +73,16 @@ class OrderStore: ObservableObject {
                         let docData = document.data()
                         
                         let productName: String = docData["productName"] as? String ?? ""
-                        
                         let productPrice: Int = docData["productPrice"] as? Int ?? 0
-                        
                         let productCount: Int = docData["productCount"] as? Int ?? 0
+                        let productImage: String = docData["productImage"] as? String ?? ""
                         
-                        let detailOrder: DetailOrder = DetailOrder(id: id, productName: productName, productCount: productCount, productPrice: productPrice)
+                        let detailOrder = DetailOrder(
+                                            id: id,
+                                            productName: productName,
+                                            productCount: productCount,
+                                            productPrice: productPrice,
+                                            productImage: productImage)
                         
                         self.detailOrderList.append(detailOrder)
                         
