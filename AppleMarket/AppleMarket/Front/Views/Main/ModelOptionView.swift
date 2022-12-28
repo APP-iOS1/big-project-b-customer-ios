@@ -11,6 +11,8 @@ struct ModelOptionView: View {
     @State var isChecking1: Bool = false
     @State var isChecking2: Bool = false
     @Binding var price: Int
+    @Binding var model: String
+    @Binding var memoryPrice: Int
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -25,6 +27,8 @@ struct ModelOptionView: View {
                 isChecking1 = true
                 isChecking2 = false
                 price = 1550000
+                memoryPrice = 1550000
+                model = "iPhone 14 Pro"
             } label: {
                 HStack {
                     VStack(alignment: .leading, spacing: 5) {
@@ -48,6 +52,8 @@ struct ModelOptionView: View {
                 isChecking1 = false
                 isChecking2 = true
                 price = 1750000
+                memoryPrice = 1750000
+                model = "iPhone 14 Pro Max"
             } label: {
                 HStack {
                     VStack(alignment: .leading, spacing: 5) {
