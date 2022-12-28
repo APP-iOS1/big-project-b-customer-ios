@@ -12,7 +12,8 @@ struct ContentView: View {
     @State private var tabSelection: Int = 1
     @StateObject private var userProductStore = UserProductStore()
     @EnvironmentObject var userInfoStore: UserInfoStore
-    
+    @State private var isShowingSheet: Bool = false
+    @State private var isShowingLogin: Bool = false
     var body: some View {
         TabView(selection: $tabSelection) {
             

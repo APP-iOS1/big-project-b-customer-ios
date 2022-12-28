@@ -10,8 +10,8 @@ import FirebaseAuth
 
 // MARK: - 회원가입 뷰
 struct SignUpView: View {
-    // 그냥 dismiss만 썼을때는 어떻게 변하는지 확인해보기
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
+    @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var userInfoStore: UserInfoStore
     @State private var nameText: String = ""
     @State private var emailText: String = ""
@@ -19,7 +19,7 @@ struct SignUpView: View {
     @State private var passwordAgainText: String = ""
     @State private var adressText: String = ""
     @State var signUpProcessing = false
-    
+    @State var isShowingAlert: Bool = false
     var body: some View {
         
         ScrollView {
@@ -44,14 +44,28 @@ struct SignUpView: View {
                         signUpProcessing = false
                     }
                     print("회원가입 완료")
-                   // dismiss()
+                    isShowingAlert = true
                 } label: {
                     Text("회원 가입")
+                    
                         .frame(width: 100, height: 50)
                         .background(.blue)
                         .foregroundColor(.white)
                         .cornerRadius(10)
-                }.disabled(nameText.isEmpty || adressText.isEmpty || emailText.isEmpty || passwordText.isEmpty || passwordAgainText.isEmpty ? true : false)
+                    // 얼럿트 창 
+                        .alert(" ", isPresented: $isShowingAlert) {
+                            Button {
+                              dismiss()
+                            } label: {
+                                Text("OK")
+                            }
+
+                        } message: {
+                            Text("회원가입이 완료되었습니다.")
+                        }
+                }
+               
+                .disabled(nameText.isEmpty || adressText.isEmpty || emailText.isEmpty || passwordText.isEmpty || passwordAgainText.isEmpty ? true : false)
                 
                 // 회원가입 과정이 false이면   ProgressView() 실행
                 if signUpProcessing {
@@ -61,10 +75,6 @@ struct SignUpView: View {
                 if !userInfoStore.errorMessage.isEmpty {
                     Text("회원 정보가 일치하지 않습니다.")
                         .foregroundColor(.red)
-                }
-                // 회원가입 되어 있다면 뒤로가기
-                if userInfoStore.signUpState {
-                    let _ = presentationMode.wrappedValue.dismiss()
                 }
 
                 Spacer()
