@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var userInfoStore: UserInfoStore
     @State private var tabSelection: Int = 1
     
     var body: some View {
@@ -47,5 +48,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(UserInfoStore())
     }
 }
