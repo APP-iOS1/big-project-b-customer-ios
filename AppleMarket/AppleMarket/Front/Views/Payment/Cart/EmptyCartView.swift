@@ -32,6 +32,7 @@ struct EmptyCartView: View {
             
             Spacer()
         }
+        .navigationBarHidden(true)
     }
 }
 
