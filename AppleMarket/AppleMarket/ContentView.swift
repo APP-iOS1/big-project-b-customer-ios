@@ -11,6 +11,7 @@ struct ContentView: View {
     
     @State private var tabSelection: Int = 1
     @StateObject private var userProductStore = UserProductStore()
+    @EnvironmentObject var userInfoStore: UserInfoStore
     
     var body: some View {
         TabView(selection: $tabSelection) {
@@ -45,11 +46,20 @@ struct ContentView: View {
                 }
                 .tag(4)
         }.environmentObject(userProductStore)
+            .onAppear {
+                // 이전 로그인 기록이 있다면 자동 로그인
+                if let email = UserDefaults.standard.string(forKey: UserDefaults.Keys.email.rawValue) {
+                    if let password = UserDefaults.standard.string(forKey: UserDefaults.Keys.password.rawValue) {
+                        userInfoStore.emailAuthSignIn(email: email, password: password)
+                    }
+                }
+            }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+           
     }
 }
