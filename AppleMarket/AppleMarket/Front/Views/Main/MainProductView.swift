@@ -9,7 +9,7 @@ import SwiftUI
 
 let tempImgPaths: [String] = [
     "https://www.apple.com/newsroom/images/product/mac/standard/Apple-Mac-Studio-Studio-Display-hero-220308_big.jpg.slideshow-xlarge_2x.jpg",
-    "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-14-pro-finish-select-202209-6-1inch-deeppurple?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1663703840578",
+    "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/refurb-iphone-12-purple-2021?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1635202738000",
     "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/refurb-ipad-pro-11-wifi-silver-2019_AV1?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1581985474458",
     "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MKYP3ref_VW_34FR+watch-45-alum-silver-nc-8s_VW_34FR_WF_CO?wid=1400&hei=1400&trim=1%2C0&fmt=p-jpg&qlt=95&.v=1630364852000%2C1661969952538",
     "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/apple-tv-4k-hero-select-202210_FMT_WHH?wid=640&hei=600&fmt=jpeg&qlt=90&.v=1664896361164",
@@ -49,9 +49,7 @@ struct MainProductView: View {
     
     var body: some View {
         NavigationStack {
-           
-            VStack {
-                
+            
                 VStack(alignment: .center){
                     
                     // 신제품
@@ -103,9 +101,10 @@ struct MainProductView: View {
                     }
 //                    .padding(.horizontal, 20)
                     }
-                }
-            }//VStack_End
-        }//NavigationStack_End
+                
+            //VStack_End
+            }//NavigationStack_End
+        }
        
     
 }
