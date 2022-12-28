@@ -64,6 +64,7 @@ struct SearchResultView: View {
                             MyDeviceFilterView()
                         }
                         
+                        /*
                         Button {
                             // 기타 필터 모달 동작
                             showEtcModal = true
@@ -81,6 +82,7 @@ struct SearchResultView: View {
                         .sheet(isPresented: $showEtcModal) {
                             EtcFilterView()
                         }
+                        */
                         Spacer()
                     }
                     .padding(.horizontal, 20)
@@ -97,7 +99,7 @@ struct SearchResultView: View {
                     VStack {
                         HStack {
                             Text("최우선 결과")
-                                .font(.title)
+                                .font(.headline)
                                 .bold()
                             Spacer()
                         }
@@ -121,7 +123,7 @@ struct SearchResultView: View {
                         //MARK: 추가 결과
                         HStack {
                             Text("추가 결과")
-                                .font(.title)
+                                .font(.headline)
                                 .bold()
                             Spacer()
                         }
@@ -172,10 +174,6 @@ struct SearchResultView_Previews: PreviewProvider {
     }
 }
 
-class Model: ObservableObject {
-    @Published var pushed = false
-}
-
 struct FirstItemCell: View {
     var body: some View {
         VStack {
@@ -210,8 +208,10 @@ struct FirstItemCell: View {
 struct FirstItemOrderInfoView: View {
     var body: some View {
         VStack(alignment: .leading) {
-            
-            Text("오늘 주문 시 배송:")
+            HStack {
+                Text("오늘 주문 시 배송:")
+                Spacer()
+            }
             Text("목 2022/12/29 - 무료 배송")
                 .foregroundColor(Color(UIColor.systemGray2))
             
@@ -219,6 +219,8 @@ struct FirstItemOrderInfoView: View {
             Text("오늘, 위치: Apple 가로수길")
                 .foregroundColor(Color(UIColor.systemGray2))
         }
+        .padding(.horizontal, 20)
+        .padding(.top, 20)
         
     }
 }
