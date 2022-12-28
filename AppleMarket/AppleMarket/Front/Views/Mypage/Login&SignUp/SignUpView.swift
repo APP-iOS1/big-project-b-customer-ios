@@ -78,16 +78,8 @@ struct CustomSignUpTextFieldView: View {
             
             VStack(alignment: .leading) {
                 Text("이름")
+                    .font(.headline)
                 TextField("이름을 입력해주세요", text: $nameText)
-                    .padding()
-                    .background(.thinMaterial)
-                    .cornerRadius(10)
-                .textInputAutocapitalization(.never)
-            }
-            
-            VStack(alignment: .leading) {
-                Text("전화번호")
-                TextField("전화번호를 입력해주세요", text: $phoneNumberText)
                     .padding()
                     .background(.thinMaterial)
                     .cornerRadius(10)
@@ -96,6 +88,7 @@ struct CustomSignUpTextFieldView: View {
       
             VStack(alignment: .leading) {
                 Text("이메일")
+                    .font(.headline)
                 TextField("이메일을 입력해주세요", text: $emailText)
                     .padding()
                     .background(.thinMaterial)
@@ -105,6 +98,7 @@ struct CustomSignUpTextFieldView: View {
             
             VStack(alignment: .leading) {
                 Text("비밀번호")
+                    .font(.headline)
                 SecureField("비밀번호를 입력해주세요", text: $passwordText)
                     .padding()
                     .background(.thinMaterial)
