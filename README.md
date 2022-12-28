@@ -71,3 +71,47 @@
 ## 스크린샷
 
 ## 참여자
+## 팀원 소개
+| 염성필 [팀장]<br/>[@ㅇㅇㄴㄹㄴㄹㅇㄴㄹ](https://github.com/)<br/> | 📎ㄴㅇㄹㄴㄹ<br/> [@ㄴㅇㄹㄴㅇ](https://github.com/)<br/> | 📎ㅇㄴㄹㄴ<br/>[@ㅇㄴㄹㄴㅇㄴㄹ](https://github.com/)<br/> |
+| :----------------------------------------------------------: | :---------------------------------------------: | :-------------------------------------------------: |
+|<img src="https://avatars.githubusercontent.com/u/64416520?v=4" width=200> | <img src="https://avatars.githubusercontent.com/u/66459715?v=4" width=200>  | <img src="https://avatars.githubusercontent.com/u/80815221?v=4" width=200> |
+
+## 🙌 참여자 🙌
+<div align="center">
+<table style="font-weight : bold">
+<tr>
+<td align="center">
+<a href="https://github.com/kyungeee">                 
+<img alt="박희경" src="https://avatars.githubusercontent.com/kyungeee" width="80" />            
+</a>
+</td>
+<td align="center">
+<a href="https://github.com/sohee120">                 
+<img alt="윤소희" src="https://avatars.githubusercontent.com/sohee120" width="80" />            
+</a>
+</td>
+<td align="center">
+<a href="https://github.com/SMizzz">                 
+<img alt="신미지" src="https://avatars.githubusercontent.com/SMizzz" width="80" />            
+</a>
+</td>
+<td align="center">
+<a href="https://github.com/blaire-pi">                 
+<img alt="윤예린" src="https://avatars.githubusercontent.com/blaire-pi" width="80" />            
+</a>
+</td>
+<td align="center">
+<a href="https://github.com/cho407">                 
+<img alt="윤예린" src="https://avatars.githubusercontent.com/cho407" width="80" />            
+</a>
+</td>
+</tr>
+<tr>
+<td align="center">박희경</td>
+<td align="center">윤소희</td>
+<td align="center">신미지</td>
+<td align="center">윤예린</td>
+<td align="center">조형구</td>
+</tr>
+</table>
+</div>
