@@ -16,8 +16,14 @@ struct PaymentView: View {
                         .font(.title)
                         .bold()
                     HStack {
-                        Rectangle()
-                            .frame(width: 60, height: 60)
+                        AsyncImage(url: URL(string: "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/airpods-max-select-silver-202011?wid=470&hei=556&fmt=png-alpha&.v=1604021221000")) { image in
+                            image
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 60, height: 60)
+                        } placeholder: {
+                            ProgressView()
+                        }
                         Text("AirPods Max - 실버")
                             .padding(.leading, 10)
                     }
@@ -67,7 +73,7 @@ struct PaymentView: View {
                                 .padding(20)
                             
                         }
-                        .background(.blue)
+                        .background(Color("MainColor"))
                         .cornerRadius(15)
                     }
                 }
