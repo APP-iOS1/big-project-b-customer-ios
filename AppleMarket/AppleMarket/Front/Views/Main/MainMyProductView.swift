@@ -61,7 +61,7 @@ struct MainMyProductView: View {
                         // 내 기기 이미지 사용 예정
                         
                         NavigationLink{
-                            MyProductDetailView(selectedProduct_2: Product(id: 0, imagePath: "", productName: "", prices: ""))
+                            MyProductDetailView(selectedProduct_2: Product(id: 0, imagePath: "", productName: "", prices: ""), myProducts: MyProduct(id: 0, imagePath: "", productName: ""))
                         } label:{
                         ZStack{
                             RoundedRectangle(cornerRadius: 20)

@@ -22,6 +22,8 @@ struct MyProductDetailView: View {
     
     let selectedProduct_2: Product
     
+    var myProducts: MyProduct
+    
     var body: some View {
         ScrollView{
             VStack(alignment: .leading){
@@ -106,7 +108,8 @@ struct MyProductDetailView: View {
                 List{
                     ForEach(Array(0..<8), id: \.self) { index in
                         NavigationLink {
-                            MyProductResultView()
+                            MyProductResultView(selectedProduct_3: Product(id: 0, imagePath: "", productName: "", prices: ""))
+                                .navigationTitle(menuArray[index])
                         } label: {
                             Image(systemName: "\(menuImageArray[index])")
                             Text("\(menuArray[index])")
@@ -117,14 +120,20 @@ struct MyProductDetailView: View {
                 .foregroundColor(.black)
                 .listStyle(.inset)
                 .frame(height: 400)
+                // \(myProducts.productName)용
+                .navigationBarTitle("iPhone 14 Pro용")
             }
             .padding()
+            // \(myProducts.productName)용
+            .navigationBarTitle("iPhone 14 Pro용")
+            .navigationBarTitleDisplayMode(.inline)
+
         }
     }
 }
 
 struct MyProductDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        MyProductDetailView(selectedProduct_2: Product(id: 0, imagePath: "", productName: "", prices: ""))
+        MyProductDetailView(selectedProduct_2: Product(id: 0, imagePath: "", productName: "", prices: ""), myProducts: MyProduct(id: 0, imagePath: "", productName: ""))
     }
 }
