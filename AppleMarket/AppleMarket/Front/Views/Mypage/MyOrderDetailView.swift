@@ -21,23 +21,57 @@ struct MyOrderDetailView: View {
                     .font(.callout)
                 
                 // 제품정보
-                AsyncImage(url: URL(string: "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/airpods-max-select-silver-202011?wid=470&hei=556&fmt=png-alpha&.v=1604021221000")) { image in
-                    image
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 240, height: 240)
-                        .padding(.leading, 50)
-                } placeholder: {
-                    ProgressView()
-                }
-                
-          Text("AirPods Max - 실버")
+                HStack {
+                    AsyncImage(url: URL(string: "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/airpods-max-select-silver-202011?wid=470&hei=556&fmt=png-alpha&.v=1604021221000")) { image in
+                        image
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 60, height: 60)
+                    } placeholder: {
+                        ProgressView()
+                    }
+                    VStack(alignment: .leading) {
+                        Text("AirPods Max - 실버")
+                        HStack {
+                            Text("₩ 750,000")
+                                .bold()
+                            Text("1개")
+                                .padding(.leading, 10)
+                        }
+                    }
                     .font(.callout)
+                    .padding(.leading, 10)
+                    
+                    Spacer()
+                }
+                .padding(.bottom, 10) //
                 
-                Text("2022년 9월 20일 배송완료")
-                    .font(.title2)
-                    .fontWeight(.bold)
-                    .padding(.vertical, 5)
+                // 제품정보
+                HStack {
+                    AsyncImage(url: URL(string: "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/airpods-max-select-silver-202011?wid=470&hei=556&fmt=png-alpha&.v=1604021221000")) { image in
+                        image
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 60, height: 60)
+                    } placeholder: {
+                        ProgressView()
+                    }
+                    VStack(alignment: .leading) {
+                        Text("AirPods Max - 실버")
+                        HStack {
+                            Text("₩ 750,000")
+                                .bold()
+                            Text("1개")
+                                .padding(.leading, 10)
+                        }
+                    }
+                    .font(.callout)
+                    .padding(.leading, 10)
+                    
+                    Spacer()
+                }
+                .padding(.bottom, 10) //
+                
                 
                 Divider()
                     .padding(.vertical, 10)

@@ -274,12 +274,12 @@
 		2CEFEC56295C0FBB006DA0AA /* Mypage */ = {
 			isa = PBXGroup;
 			children = (
+				2CEFEC5C295C0FBB006DA0AA /* MyOrderView.swift */,
 				2CEFEC57295C0FBB006DA0AA /* MyOrderDetailView.swift */,
 				2CEFEC58295C0FBB006DA0AA /* AddMyAddressView.swift */,
 				2CEFEC59295C0FBB006DA0AA /* AddMyDeviceView.swift */,
 				2CEFEC5A295C0FBB006DA0AA /* MyAddressListView.swift */,
 				2CEFEC5B295C0FBB006DA0AA /* MyProfileView.swift */,
-				2CEFEC5C295C0FBB006DA0AA /* MyOrderView.swift */,
 				2CEFEC5D295C0FBB006DA0AA /* Login&SignUp */,
 				2CEFEC60295C0FBB006DA0AA /* MyDeviceListView.swift */,
 				2CEFEC61295C0FBB006DA0AA /* MypageView.swift */,
