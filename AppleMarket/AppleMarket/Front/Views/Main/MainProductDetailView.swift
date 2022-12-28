@@ -118,8 +118,8 @@ struct MainProductDetailView: View {
     }
 }
 
-struct MainProductDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainProductDetailView(selectedProduct: MainProduct.iPad)
-    }
-}
+//struct MainProductDetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MainProductDetailView(selectedProduct: MainProduct.iPad)
+//    }
+//}
