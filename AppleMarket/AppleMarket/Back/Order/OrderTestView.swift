@@ -20,7 +20,7 @@ struct OrderTestView: View {
                     VStack{
                         Text("\(order.orderAddress)")
                         Text("\(order.orderTotalPrice)")
-
+                        
                     }
                 }
             }
@@ -43,10 +43,15 @@ struct OrderDetailTestView: View {
     let userId: String
     
     var body: some View{
-        List(orderStore.detailOrderList){ detailOrder in
+        List(orderStore.detailOrderList) { detailOrder in
+            
             Text("\(detailOrder.productName)")
-            Button("remove"){
-                orderStore.removeOrder(userId: userId, orderId: order.id)
+            Button {
+                async {
+                    try? await orderStore.removeOrder(userId: userId, orderId: order.id)
+                }
+            } label: {
+                 Text("remove")
             }
         }
         .onAppear{

@@ -108,21 +108,25 @@ class OrderStore: ObservableObject {
         
     }
     
-    func removeOrder(userId: String, orderId: String) {
-        database.collection("ConsumerAccount").document(userId).collection("OrderList")
-            .document(orderId).collection("DetailOrder")
+    // MARK: - 주문 정보 삭제 기능(임시)
+    func removeOrder(userId: String, orderId: String) async throws {
+        
+        // 하위 컬랙션(DeatilOrder) 삭제
+        let subCollection = database.collection("ConsumerAccount").document(userId).collection("OrderList").document(orderId).collection("DetailOrder")
+        
+        let snapshot = try await subCollection.getDocuments()
+        
+        for doc in snapshot.documents {
+           try await doc.reference.delete()
+        }
+        
+        // OrderList의 지정된 주문목록(document)를 삭제
+        try await database.collection("ConsumerAccount").document(userId).collection("OrderList").document(orderId)
+            .delete()
         
         fetchOrderList(userId: userId)
-
     }
     
-    /*
-    func removePostit(_ postit: Postit) {
-        database.collection("Postits")
-            .document(postit.id).delete()
-        fetchPostits()
-    }
-    */
 }
 
 
