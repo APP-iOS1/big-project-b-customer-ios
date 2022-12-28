@@ -151,7 +151,7 @@ final class UserInfoStore: ObservableObject{
                 }
             }
     }
-    
+    /*
     // MARK: 유저 장바구니 패치
     func fetchUserCart(){
         database.collection("ConsumerAccount").document(self.userInfo?.userId ?? "").collection("Cart")
@@ -174,7 +174,7 @@ final class UserInfoStore: ObservableObject{
                 }
             }
     }
-    
+    */
 }
 
 
