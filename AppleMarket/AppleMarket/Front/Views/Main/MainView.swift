@@ -15,7 +15,9 @@ struct MainView: View {
                     
                     MainPromotionView()
                     
+
                     MainMyProductView()
+
                     
                     Text("제품별로 쇼핑하기")
                         .font(.title)

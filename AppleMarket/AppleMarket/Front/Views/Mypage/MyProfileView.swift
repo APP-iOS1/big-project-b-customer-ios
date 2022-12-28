@@ -10,7 +10,7 @@ import SwiftUI
 struct MyProfileView: View {
     let listTitle: [String] = ["내 기기 추가", "주소지 등록"]
     @Binding var isShowingSheet: Bool
-    
+    @State private var isEditName: Bool = false
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading, spacing: 0) {
@@ -41,8 +41,12 @@ struct MyProfileView: View {
                                 ProgressView()
                             }
                             
-                            VStack(alignment:. leading) {
-                                Text("신미지")
+                            VStack(alignment:. leading, spacing: 3) {
+                                HStack(alignment: .center) {
+                                    Text("신미지")
+                                        .font(.title3)
+                                }
+                   
                                 Text("shinn.mizzz@gmail.com")
                                     .font(.subheadline)
                             }
@@ -50,10 +54,18 @@ struct MyProfileView: View {
                     }
                     .frame(height: 55)
                     ForEach(listTitle, id: \.self) { title in
-                        NavigationLink {
-                            
-                        } label: {
-                            Text(title)
+                        if title == "내 기기 추가" {
+                            NavigationLink {
+                                MyDeviceListView()
+                            } label: {
+                                Text(title)
+                            }
+                        } else {
+                            NavigationLink {
+                               MyAddressListView()
+                            } label: {
+                                Text(title)
+                            }
                         }
                     }
                     

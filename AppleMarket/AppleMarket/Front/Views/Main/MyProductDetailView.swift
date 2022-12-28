@@ -7,13 +7,6 @@
 
 import SwiftUI
 
-struct Product_2: Identifiable{
-    var id: Int
-    let imagePath: String
-    let productName: String
-    let prices: String
-}
-
 var products_2: [Product] = [
     Product(id: 0, imagePath: "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/airtag-4pack-select-202104_FV1?wid=890&hei=740&fmt=jpeg&qlt=90&.v=1617761668000", productName: "AirTag 4개 팩", prices: "149,000"),
     Product(id: 1, imagePath: "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MM073?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1624640865000", productName: "AirTag 가죽 키링 - 포레스트 그린", prices: "58,000"),
@@ -21,21 +14,15 @@ var products_2: [Product] = [
     Product(id: 3, imagePath: "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MK0W3?wid=2000&hei=2000&fmt=jpeg&qlt=90&.v=1618028904000", productName: "AirTag 루프 - 선플라워", prices: "45,000")
 ]
 
-enum SelectedProduct_2 {
-    case iPad
-    case my_iPhone
-    case Mac
-    case MacBook
-    case Accessory
-}
-
 struct MyProductDetailView: View {
     // store에 무슨 값 있는지 몰라서 일단 공홈대로 적음
     var menuArray: [String] = ["AirTag 및 액세서리", "MagSafe", "건강 및 피트니스", "무선 충전기", "사진", "전원 & 케이블", " 창의성", "케이스 & 보호장비"]
     
     var menuImageArray: [String] = ["airtag.fill", "magsafe.batterypack.fill", "figure.run", "battery.100.bolt", "camera.fill", "cable.connector", "signature", "iphone"]
     
-    let selectedProduct_2: Products
+//    let selectedProduct_2: Product
+    
+    var myProducts: MyProduct
     
     var body: some View {
         ScrollView{
@@ -43,7 +30,7 @@ struct MyProductDetailView: View {
                 
                 HStack{
                     // 기기 사진
-                    AsyncImage(url: URL(string: "https://cdn.shopify.com/s/files/1/1684/4603/products/iphone-14-Pro-Max_Graphite_600x.png?v=1662809202")) { image in
+                    AsyncImage(url: URL(string: myProducts.imagePath)) { image in
                         image
                             .resizable()
                             .scaledToFit()
@@ -54,12 +41,12 @@ struct MyProductDetailView: View {
                     
                     VStack(alignment: .leading){
                         // "사용자" 의 "기기명"
-                        Text("김영서의 iPhone")
-                            .font(.system(size: 24))
+                        Text("김영서의 \(myProducts.category)")
+                            .font(.system(size: 17))
                             .fontWeight(.bold)
                             .padding(.bottom, 1)
                         // "기기 종류" + "사양"
-                        Text("iPhon 14 Pro 256GB 스페이스 블랙")
+                        Text(myProducts.details)
                             .font(.system(size: 14))
                     }
                     .frame(alignment: .leading)
@@ -67,7 +54,7 @@ struct MyProductDetailView: View {
                 }
                 
                 // "기기 종류" 용 추천
-                Text("iPhone 14 Pro용 추천")
+                Text("\(myProducts.productName)용 추천")
                     .font(.title)
                     .fontWeight(.bold)
                     .padding(.top, 30)
@@ -75,6 +62,9 @@ struct MyProductDetailView: View {
                 ScrollView(.horizontal){
                     HStack(alignment: .center){
                         ForEach(products_2){ product in
+                            NavigationLink{
+                                DetailView()
+                            } label:{
                             // 추천 제품 이미지 사용 예정
                             ZStack{
                                 RoundedRectangle(cornerRadius: 20)
@@ -89,13 +79,13 @@ struct MyProductDetailView: View {
                                             .resizable()
                                             .scaledToFit()
                                             .frame(height: 180)
-                                            
+                                        
                                     } placeholder: {
                                         ProgressView()
                                     }
                                     Spacer()
                                         .frame(height: 50)
-                    
+                                    
                                     Text(product.productName)
                                         .padding(.bottom, 1)
                                     
@@ -103,11 +93,14 @@ struct MyProductDetailView: View {
                                 }
                                 
                             }
+                            .foregroundColor(.black)
+                        }
                         }
                     }
                 }
                 
-                Text("iPhone 14 Pro용")
+                // "기기 종류" 용
+                Text("\(myProducts.productName)용")
                     .font(.title)
                     .fontWeight(.bold)
                     .padding(.top, 30)
@@ -115,7 +108,8 @@ struct MyProductDetailView: View {
                 List{
                     ForEach(Array(0..<8), id: \.self) { index in
                         NavigationLink {
-                            MyProductResultView()
+                            MyProductResultView(selectedProduct_3: Product(id: 0, imagePath: "", productName: "", prices: ""))
+                                .navigationTitle(menuArray[index])
                         } label: {
                             Image(systemName: "\(menuImageArray[index])")
                             Text("\(menuArray[index])")
@@ -126,14 +120,21 @@ struct MyProductDetailView: View {
                 .foregroundColor(.black)
                 .listStyle(.inset)
                 .frame(height: 400)
+                // \(myProducts.productName)용
+                .navigationBarTitle("\(myProducts.productName)용")
             }
             .padding()
+            // \(myProducts.productName)용
+            .navigationBarTitle("\(myProducts.productName)용")
+            .navigationBarTitleDisplayMode(.inline)
+
         }
     }
 }
 
 struct MyProductDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        MyProductDetailView(selectedProduct_2: Products.iPhone)
+//        MyProductDetailView(selectedProduct_2: Product(id: 0, imagePath: "", productName: "", prices: ""), myProducts: MyProduct(id: 0, imagePath: "", productName: ""))
+        MyProductDetailView(myProducts: MyProduct(id: 0, imagePath: "", productName: "", category: "", details: ""))
     }
 }
