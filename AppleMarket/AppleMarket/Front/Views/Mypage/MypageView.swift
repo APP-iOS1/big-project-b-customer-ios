@@ -13,18 +13,18 @@ struct DeviceInform: Hashable {
     let deviceModelName: String
 }
 
+var myDeviceInform: [DeviceInform] = [
+    DeviceInform(
+        imageName: "https://www.pngarts.com/files/8/Apple-iPhone-11-PNG-Image-Transparent-Background.png",
+        deviceName: "Jero Iphone",
+        deviceModelName: "iPhone 11"),
+    DeviceInform(
+        imageName: "https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP858/mbp16-gray.png",
+        deviceName: "Jero의 MacBook Pro",
+        deviceModelName: "MacBook Pro 16")
+]
+
 struct MypageView: View {
-    let myDeviceInform: [DeviceInform] = [
-        DeviceInform(
-            imageName: "https://www.pngarts.com/files/8/Apple-iPhone-11-PNG-Image-Transparent-Background.png",
-            deviceName: "Jero Iphone",
-            deviceModelName: "iPhone 11"),
-        DeviceInform(
-            imageName: "https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP858/mbp16-gray.png",
-            deviceName: "Jero의 MacBook Pro",
-            deviceModelName: "MacBook Pro 16")
-    ]
-    
     @State private var isShowingSheet: Bool = false
     
     var body: some View {
@@ -113,7 +113,7 @@ struct MypageView: View {
                                 Spacer()
                                 
                                 NavigationLink {
-                                    
+                                    MyDeviceListView()
                                 } label: {
                                     Text("모두 보기")
                                 }
@@ -121,16 +121,25 @@ struct MypageView: View {
                             .padding()
                             
                             ScrollView(.horizontal, showsIndicators: false) {
-                                HStack(alignment: .center, spacing: 10) {
+                                HStack(alignment: .center, spacing: 0) {
                                     ForEach (myDeviceInform, id: \.self) { device in
                                         
                                         Spacer()
                                         VStack(spacing: 5) {
                                             AsyncImage(url: URL(string: device.imageName)) { image in
-                                                image
-                                                    .resizable()
-                                                    .aspectRatio(contentMode: .fit)
-                                                    .frame(height: 200)
+                                                
+                                                if device.deviceModelName == "iPhone 11" {
+                                                    image
+                                                        .resizable()
+                                                        .aspectRatio(contentMode: .fit)
+                                                        .frame(height: 150)
+                                                } else if device.deviceModelName == "MacBook Pro 16" {
+                                                    image
+                                                        .resizable()
+                                                        .aspectRatio(contentMode: .fit)
+                                                        .frame(width: 200, height: 150)
+                                                }
+                                               
                                             } placeholder: {
                                                 ProgressView()
                                             }

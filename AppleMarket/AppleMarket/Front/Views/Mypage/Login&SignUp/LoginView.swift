@@ -16,9 +16,9 @@ enum Field {
 
 // MARK: - 로그인 뷰
 struct LoginView: View {
+   
     @State var emailText: String = ""
     @State var passwordText: String = ""
-    @State var loginButtonisActive: Bool = true
     
     var body: some View {
         
@@ -30,11 +30,9 @@ struct LoginView: View {
                     .font(.largeTitle)
                     .lineSpacing(10)
                 
-                CustomTextFieldView(emailText: $emailText, passwordText: $passwordText, loginButtonisAcitve: $loginButtonisActive)
+                CustomTextFieldView(emailText: $emailText, passwordText: $passwordText)
                 
-                
-           
-               //
+
                 IdAndPasswordFindView()
             }
             .padding()
@@ -52,9 +50,10 @@ struct LoginView_Previews: PreviewProvider {
 
 // MARK: - 로그인 텍스트 필드 및 로그인 버튼
 struct CustomTextFieldView: View {
+    // 로그인 되면 전 화면으로 이동 
+    @Environment(\.dismiss) private var dismiss
     @Binding var emailText: String
     @Binding var passwordText: String
-    @Binding var loginButtonisAcitve: Bool
     @FocusState private var focusField: Field?
     
     var body: some View {
@@ -79,6 +78,7 @@ struct CustomTextFieldView: View {
                     focusField = .password
                 } else {
                     hideKeyboard()
+                    dismiss()
                     print("로그인 되었습니다.")
                 }
             } label: {
@@ -120,7 +120,8 @@ struct IdAndPasswordFindView: View {
     }
 }
 
-/// 키보드 내리기
+
+// MARK: - 키보드 내리기
 extension View {
   func hideKeyboard() {
     UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)

@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct AppleCareOptionView: View {
-    @State var isChecking1: Bool = false
-    @State var isChecking2: Bool = false
+    @State private var isChecking = [false, false]
+    
+    @Binding var price: Int
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -21,8 +22,8 @@ struct AppleCareOptionView: View {
             .padding(.bottom, 10)
             
             Button {
-                isChecking1 = true
-                isChecking2 = false
+                isChecking = [true, false]
+                price += 296000
             } label: {
                 VStack(alignment: .leading, spacing: 5) {
                         Text("AppleCare+")
@@ -41,12 +42,13 @@ struct AppleCareOptionView: View {
                 .padding()
                 .frame(width: 355)
                 .overlay(RoundedRectangle(cornerRadius: 15)
-                    .stroke(isChecking1 ? Color("MainColor") : Color.gray, lineWidth: 1.5))
+                    .stroke(isChecking[0] ? Color("MainColor") : Color.gray, lineWidth: 1.5))
             }
+            .disabled(isChecking[0])
 
             Button {
-                isChecking1 = false
-                isChecking2 = true
+                isChecking = [false, true]
+                price -= 296000
             } label: {
                 HStack {
                     Text("AppleCare+ 보증 추가 안 함")
@@ -56,16 +58,17 @@ struct AppleCareOptionView: View {
                 .foregroundColor(.black)
                 .frame(width: 355, height: 70)
                 .overlay(RoundedRectangle(cornerRadius: 15)
-                    .stroke(isChecking2 ? Color("MainColor") : Color.gray, lineWidth: 1.5))
+                    .stroke(isChecking[1] ? Color("MainColor") : Color.gray, lineWidth: 1.5))
             }
+            .disabled(isChecking[1])
             
         }
         .padding()
     }
 }
 
-struct AppleCare_OptionView_Previews: PreviewProvider {
-    static var previews: some View {
-        AppleCareOptionView()
-    }
-}
+//struct AppleCare_OptionView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AppleCareOptionView()
+//    }
+//}

@@ -7,8 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02DA561D295BC5FA00962589 /* AddMyDeviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DA561C295BC5FA00962589 /* AddMyDeviceView.swift */; };
+		02DA561F295BDBD100962589 /* AddMyAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DA561E295BDBD100962589 /* AddMyAddressView.swift */; };
+		02DA5623295BE1F600962589 /* CarouselTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DA5622295BE1F600962589 /* CarouselTestView.swift */; };
+		02DA5625295BE54300962589 /* CarouselHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DA5624295BE54300962589 /* CarouselHomeView.swift */; };
+		02DA5627295BE63000962589 /* MyAddressListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DA5626295BE63000962589 /* MyAddressListView.swift */; };
 		02FEB663295AE003003EF536 /* MyProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FEB662295AE003003EF536 /* MyProfileView.swift */; };
 		02FEB665295AE79A003EF536 /* MyDeviceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FEB664295AE79A003EF536 /* MyDeviceListView.swift */; };
+		1A30D840295BD022002F5E73 /* DetailButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A30D83F295BD022002F5E73 /* DetailButtonView.swift */; };
 		1AC0A72A295ACD7E00A7CE8E /* ModelOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC0A729295ACD7D00A7CE8E /* ModelOptionView.swift */; };
 		1AC0A72C295ADB0300A7CE8E /* ColorOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC0A72B295ADB0300A7CE8E /* ColorOptionView.swift */; };
 		1AC0A72F295AE22A00A7CE8E /* AppleCareOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC0A72E295AE22A00A7CE8E /* AppleCareOptionView.swift */; };
@@ -53,8 +59,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		02DA561C295BC5FA00962589 /* AddMyDeviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMyDeviceView.swift; sourceTree = "<group>"; };
+		02DA561E295BDBD100962589 /* AddMyAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMyAddressView.swift; sourceTree = "<group>"; };
+		02DA5622295BE1F600962589 /* CarouselTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselTestView.swift; sourceTree = "<group>"; };
+		02DA5624295BE54300962589 /* CarouselHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselHomeView.swift; sourceTree = "<group>"; };
+		02DA5626295BE63000962589 /* MyAddressListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAddressListView.swift; sourceTree = "<group>"; };
 		02FEB662295AE003003EF536 /* MyProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileView.swift; sourceTree = "<group>"; };
 		02FEB664295AE79A003EF536 /* MyDeviceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDeviceListView.swift; sourceTree = "<group>"; };
+		1A30D83F295BD022002F5E73 /* DetailButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailButtonView.swift; sourceTree = "<group>"; };
 		1AC0A729295ACD7D00A7CE8E /* ModelOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelOptionView.swift; sourceTree = "<group>"; };
 		1AC0A72B295ADB0300A7CE8E /* ColorOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorOptionView.swift; sourceTree = "<group>"; };
 		1AC0A72E295AE22A00A7CE8E /* AppleCareOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleCareOptionView.swift; sourceTree = "<group>"; };
@@ -181,13 +193,14 @@
 			isa = PBXGroup;
 			children = (
 				5BB36F97295AB7EF004D1683 /* MainView.swift */,
-				3A5B5078295ADA6C0066739F /* MyProductResultView.swift */,
 				3A5B5074295AD0E60066739F /* MainPromotionView.swift */,
 				3A5B5070295ABEEE0066739F /* MainMyProductView.swift */,
 				3A5B5072295ABF280066739F /* MainProductView.swift */,
 				3A5B5076295AD8440066739F /* MyProductDetailView.swift */,
 				5BB36FA8295AD396004D1683 /* MainProductDetailView.swift */,
+				3A5B5078295ADA6C0066739F /* MyProductResultView.swift */,
 				5BB36F9C295AB81F004D1683 /* DetailView.swift */,
+				1A30D83F295BD022002F5E73 /* DetailButtonView.swift */,
 				1AC0A730295AE6F300A7CE8E /* MemoryOptionView.swift */,
 				1AC0A72E295AE22A00A7CE8E /* AppleCareOptionView.swift */,
 				1AC0A72B295ADB0300A7CE8E /* ColorOptionView.swift */,
@@ -222,12 +235,20 @@
 		5BB36FA5295AB9A6004D1683 /* Mypage */ = {
 			isa = PBXGroup;
 			children = (
-				5BB36FA0295AB842004D1683 /* MypageView.swift */,
 				261FC177295ABFCD001F9211 /* Login&SignUp */,
+				5BB36FA0295AB842004D1683 /* MypageView.swift */,
 				02FEB662295AE003003EF536 /* MyProfileView.swift */,
 				02FEB664295AE79A003EF536 /* MyDeviceListView.swift */,
+
 				6E640BF3295BC49D00432B9A /* MyOrderView.swift */,
 				6E640BF7295BDB2A00432B9A /* MyOrderDetailView.swift */,
+
+				02DA561C295BC5FA00962589 /* AddMyDeviceView.swift */,
+				02DA5626295BE63000962589 /* MyAddressListView.swift */,
+				02DA561E295BDBD100962589 /* AddMyAddressView.swift */,
+				02DA5622295BE1F600962589 /* CarouselTestView.swift */,
+				02DA5624295BE54300962589 /* CarouselHomeView.swift */,
+
 			);
 			path = Mypage;
 			sourceTree = "<group>";
@@ -331,7 +352,9 @@
 				1AC0A731295AE6F300A7CE8E /* MemoryOptionView.swift in Sources */,
 				6E640BF4295BC49D00432B9A /* MyOrderView.swift in Sources */,
 				02FEB663295AE003003EF536 /* MyProfileView.swift in Sources */,
+				02DA5625295BE54300962589 /* CarouselHomeView.swift in Sources */,
 				92D3B1CE295ADA96000455D7 /* CartLoginView.swift in Sources */,
+				02DA5627295BE63000962589 /* MyAddressListView.swift in Sources */,
 				5BB36F9B295AB801004D1683 /* SearchView.swift in Sources */,
 				92D3B1C8295AD625000455D7 /* EmptyCartView.swift in Sources */,
 				333DA306295AF8AC00285AF9 /* SearchResultView.swift in Sources */,
@@ -343,8 +366,10 @@
 				5BB36F9B295AB801004D1683 /* SearchView.swift in Sources */,
 				5BB36FA7295AC659004D1683 /* SearchProcessView.swift in Sources */,
 				5BB36FA9295AD396004D1683 /* MainProductDetailView.swift in Sources */,
+				1A30D840295BD022002F5E73 /* DetailButtonView.swift in Sources */,
 				9246B9AF295B7713004A60A1 /* CartView.swift in Sources */,
 				333DA308295AF8C200285AF9 /* MyDeviceFilterView.swift in Sources */,
+				02DA561D295BC5FA00962589 /* AddMyDeviceView.swift in Sources */,
 				5BB36FA1295AB842004D1683 /* MypageView.swift in Sources */,
 				6E06A71E295AD50400577292 /* ShippingView.swift in Sources */,
 				2C7A8C6D295A8298000D55C5 /* ContentView.swift in Sources */,
@@ -353,8 +378,10 @@
 				6E640BF0295AE50500432B9A /* CheckOrderView.swift in Sources */,
 				6E06A71A295ABEED00577292 /* PaymentView.swift in Sources */,
 				5BB36F9D295AB81F004D1683 /* DetailView.swift in Sources */,
+				02DA5623295BE1F600962589 /* CarouselTestView.swift in Sources */,
 				261FC179295ABFF5001F9211 /* LoginView.swift in Sources */,
 				261FC17B295AD4EB001F9211 /* SignUpView.swift in Sources */,
+				02DA561F295BDBD100962589 /* AddMyAddressView.swift in Sources */,
 				1AC0A72C295ADB0300A7CE8E /* ColorOptionView.swift in Sources */,
 				2C7A8C6B295A8298000D55C5 /* AppleMarketApp.swift in Sources */,
 				1AC0A72F295AE22A00A7CE8E /* AppleCareOptionView.swift in Sources */,

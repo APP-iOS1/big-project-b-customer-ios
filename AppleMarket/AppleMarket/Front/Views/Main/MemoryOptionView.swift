@@ -8,11 +8,10 @@
 import SwiftUI
 
 struct MemoryOptionView: View {
-    @State var isChecking1: Bool = false
-    @State var isChecking2: Bool = false
-    @State var isChecking3: Bool = false
-    @State var isChecking4: Bool = false
+    @State private var isChecking = [false, false, false, false]
     @Binding var price: Int
+    @Binding var memory: String
+    @Binding var memoryPrice: Int
     
     var body: some View {
         VStack(alignment: .leading, spacing: 15) {
@@ -26,15 +25,14 @@ struct MemoryOptionView: View {
             
             HStack(alignment: .bottom, spacing: 15) {
                 Button {
-                    isChecking1 = true
-                    isChecking2 = false
-                    isChecking3 = false
-                    isChecking4 = false
+                    isChecking = [true, false, false, false]
+                    memory = "128GB"
+                    price = memoryPrice
                 } label: {
                     
                     VStack(alignment: .center, spacing: 5) {
                         Text("128GB")
-                        Text("₩\(price)")
+                        Text("₩\(memoryPrice)")
                             .font(.caption)
                             .foregroundColor(.gray)
                         
@@ -42,18 +40,20 @@ struct MemoryOptionView: View {
                     .foregroundColor(.black)
                     .frame(width:170 ,height: 70)
                     .overlay(RoundedRectangle(cornerRadius: 15)
-                        .stroke(isChecking1 ? Color("MainColor") : Color.gray, lineWidth: 1.5))
+                        .stroke(isChecking[0] ? Color("MainColor") : Color.gray, lineWidth: 1.5))
                 }
+                .disabled(isChecking[0])
+                
                 Button {
-                    isChecking1 = false
-                    isChecking2 = true
-                    isChecking3 = false
-                    isChecking4 = false
+                    isChecking = [false, true, false, false]
+                    memory = "256GB"
+                    price = memoryPrice
+                    price += 150000
                 } label: {
                     
                     VStack(alignment: .center, spacing: 5) {
                         Text("256GB")
-                        Text("₩\(price+150000)")
+                        Text("₩\(memoryPrice+150000)")
                             .font(.caption)
                             .foregroundColor(.gray)
                         
@@ -61,21 +61,22 @@ struct MemoryOptionView: View {
                     .foregroundColor(.black)
                     .frame(width:170 ,height: 70)
                     .overlay(RoundedRectangle(cornerRadius: 15)
-                        .stroke(isChecking2 ? Color("MainColor") : Color.gray, lineWidth: 1.5))
+                        .stroke(isChecking[1] ? Color("MainColor") : Color.gray, lineWidth: 1.5))
                 }
+                .disabled(isChecking[1]) //isChecking2가 true일때 비활성화
             }
             
             HStack(alignment: .bottom, spacing: 15) {
                 Button {
-                    isChecking1 = false
-                    isChecking2 = false
-                    isChecking3 = true
-                    isChecking4 = false
+                    isChecking = [false, false, true, false]
+                    memory = "512GB"
+                    price = memoryPrice
+                    price += 450000
                 } label: {
                     
                     VStack(alignment: .center, spacing: 5) {
                         Text("512GB")
-                        Text("₩\(price+450000)")
+                        Text("₩\(memoryPrice+450000)")
                             .font(.caption)
                             .foregroundColor(.gray)
                         
@@ -83,18 +84,20 @@ struct MemoryOptionView: View {
                     .foregroundColor(.black)
                     .frame(width:170 ,height: 70)
                     .overlay(RoundedRectangle(cornerRadius: 15)
-                        .stroke(isChecking3 ? Color("MainColor") : Color.gray, lineWidth: 1.5))
+                        .stroke(isChecking[2] ? Color("MainColor") : Color.gray, lineWidth: 1.5))
                 }
+                .disabled(isChecking[2])
+                
                 Button {
-                    isChecking1 = false
-                    isChecking2 = false
-                    isChecking3 = false
-                    isChecking4 = true
+                    isChecking = [false, false, false, true]
+                    memory = "1TB"
+                    price = memoryPrice
+                    price += 750000
                 } label: {
                     
                     VStack(alignment: .center, spacing: 5) {
                         Text("1TB")
-                        Text("₩\(price+750000)")
+                        Text("₩\(memoryPrice+750000)")
                             .font(.caption)
                             .foregroundColor(.gray)
                         
@@ -102,8 +105,9 @@ struct MemoryOptionView: View {
                     .foregroundColor(.black)
                     .frame(width:170 ,height: 70)
                     .overlay(RoundedRectangle(cornerRadius: 15)
-                        .stroke(isChecking4 ? Color("MainColor") : Color.gray, lineWidth: 1.5))
+                        .stroke(isChecking[3] ? Color("MainColor") : Color.gray, lineWidth: 1.5))
                 }
+                .disabled(isChecking[3])
             }
             
             
@@ -111,8 +115,8 @@ struct MemoryOptionView: View {
     }
 }
 
-//struct MemoryOptionView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        MemoryOptionView(price: price)
-//    }
-//}
+struct MemoryOptionView_Previews: PreviewProvider {
+    static var previews: some View {
+        DetailView()
+    }
+}
