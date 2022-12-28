@@ -10,8 +10,9 @@ import SwiftUI
 struct MyProfileView: View {
     let listTitle: [String] = ["내 기기 추가", "주소지 등록"]
     @Binding var isShowingSheet: Bool
-    @State private var showingAlert = false
+    @State private var showingAlertProfile = false
     @State private var isEditName: Bool = false
+    @StateObject var userInfoStore: UserInfoStore
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading, spacing: 0) {
@@ -70,20 +71,26 @@ struct MyProfileView: View {
                         }
                     }
                  
-                    Button("로그아웃") {
-                        showingAlert = true
+                    Button {
+                        showingAlertProfile = true
+                    } label: {
+                        Text("로그아웃")
                     }
-                    .alert("알럿 타이틀", isPresented: $isShowingSheet) {
-                        Button("OK") {
-                            
-                        }
-                        
+                    .alert(" ", isPresented: $showingAlertProfile) {
+                       
                         Button("Cancel", role: .cancel) {
                             
                         }
+                        
+                        Button("Yes", role: .destructive) {
+                            userInfoStore.emailAuthSignOut()
+                        }
+
                     } message: {
                         Text("로그아웃 하시겠습니까?")
                     }
+
+                    
 
 
                     
@@ -100,6 +107,6 @@ struct MyProfileView: View {
 struct MyProfileView_Previews: PreviewProvider {
     @State static var isShowingSheet: Bool = false
     static var previews: some View {
-        MyProfileView(isShowingSheet: $isShowingSheet)
+        MyProfileView(isShowingSheet: $isShowingSheet, userInfoStore: UserInfoStore())
     }
 }

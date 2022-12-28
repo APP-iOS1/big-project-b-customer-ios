@@ -9,12 +9,13 @@ import SwiftUI
 
 // MARK: - 로그인 뷰
 struct LoginView: View {
-    // dismiss 위한 작업
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
+    @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var userInfoStore: UserInfoStore
     @State var emailText: String = ""
     @State var passwordText: String = ""
     @State var signInProcessing: Bool = false
+    @State var isShowingLogin: Bool = false
     
     var body: some View {
         
@@ -38,11 +39,7 @@ struct LoginView: View {
                     
                     // 로그인 접속중에 signInProcessing = false 이거나 유저 정보가 비어있다면
                     if signInProcessing && userInfoStore.errorMessage.isEmpty {
-                        MainProductView()
-                    }
-                    // 로그인되면 화면 뒤로가기
-                    if userInfoStore.state == .signedIn {
-                        let _ = presentationMode.wrappedValue.dismiss()
+                        ProgressView()
                     }
                 }
                 
@@ -52,7 +49,7 @@ struct LoginView: View {
                     signInProcessing = true
                     userInfoStore.emailAuthSignIn(email: emailText, password: passwordText)
                         print("로그인 되었습니다.")
-                    
+                    dismiss()
                 } label: {
                         Text("로그인")
                             .padding()
