@@ -31,4 +31,16 @@ class CartStore: ObservableObject {
             }
         }
     }
+    
+    func addCart(product: Product, productCount: Int) {
+        database.document("mUzu710p6zgGOPk64s7D6DhMIq32").collection("Cart").document(product.id)
+            .setData([
+                "productId": product.id,
+                "productName": product.productName,
+                "productCount": productCount,
+                "productPrice": product.price
+            ])
+        
+        fetchCart()
+    }
 }
