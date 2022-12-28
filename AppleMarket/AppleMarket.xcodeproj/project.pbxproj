@@ -28,7 +28,6 @@
 		82B0359F295AB7FE00A03B7D /* CartStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B0359E295AB7FE00A03B7D /* CartStore.swift */; };
 		82B035A9295B2E1800A03B7D /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B035A8295B2E1700A03B7D /* Product.swift */; };
 		82B035AB295B2E1D00A03B7D /* ProductStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B035AA295B2E1D00A03B7D /* ProductStore.swift */; };
-		82B035AD295B2E2200A03B7D /* CartTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B035AC295B2E2200A03B7D /* CartTest.swift */; };
 		8B4376FE295ABC4D002D4AAB /* OrderStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4376FD295ABC4D002D4AAB /* OrderStore.swift */; };
 		8B437700295ACB40002D4AAB /* OrderTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4376FF295ACB40002D4AAB /* OrderTestView.swift */; };
 /* End PBXBuildFile section */
@@ -49,7 +48,6 @@
 		82B0359E295AB7FE00A03B7D /* CartStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartStore.swift; sourceTree = "<group>"; };
 		82B035A8295B2E1700A03B7D /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		82B035AA295B2E1D00A03B7D /* ProductStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductStore.swift; sourceTree = "<group>"; };
-		82B035AC295B2E2200A03B7D /* CartTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartTest.swift; sourceTree = "<group>"; };
 		8B4376FD295ABC4D002D4AAB /* OrderStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderStore.swift; sourceTree = "<group>"; };
 		8B4376FF295ACB40002D4AAB /* OrderTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderTestView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -154,7 +152,6 @@
 			children = (
 				82B035A8295B2E1700A03B7D /* Product.swift */,
 				82B035AA295B2E1D00A03B7D /* ProductStore.swift */,
-				82B035AC295B2E2200A03B7D /* CartTest.swift */,
 				82206F80295AAC6E008D3D36 /* Cart.swift */,
 				82B0359E295AB7FE00A03B7D /* CartStore.swift */,
 			);
@@ -257,7 +254,6 @@
 				2C293048295AAC36003C77F8 /* UserInfoStore.swift in Sources */,
 				2C7A8C6B295A8298000D55C5 /* AppleMarketApp.swift in Sources */,
 				2CEFEC42295ABA3E006DA0AA /* Order.swift in Sources */,
-				82B035AD295B2E2200A03B7D /* CartTest.swift in Sources */,
 				8B437700295ACB40002D4AAB /* OrderTestView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
