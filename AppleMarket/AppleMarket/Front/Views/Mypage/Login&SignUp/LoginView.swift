@@ -7,18 +7,14 @@
 
 import SwiftUI
 
-/// focus를 위한 열거형
-enum Field {
-    case email
-    case password
-}
-
-
 // MARK: - 로그인 뷰
 struct LoginView: View {
-   
+    // dismiss 위한 작업
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @EnvironmentObject var userInfoStore: UserInfoStore
     @State var emailText: String = ""
     @State var passwordText: String = ""
+    @State var signInProcessing: Bool = false
     
     var body: some View {
         
@@ -30,19 +26,58 @@ struct LoginView: View {
                     .font(.largeTitle)
                     .lineSpacing(10)
                 
-                CustomTextFieldView(emailText: $emailText, passwordText: $passwordText)
+                Group {
+                    
+                    CustomTextFieldView(emailText: $emailText, passwordText: $passwordText)
+                    
+                    //회원정보가 비어있으면
+                    if !userInfoStore.errorMessage.isEmpty {
+                        Text("회원 정보가 일치하지 않습니다.")
+                            .foregroundColor(.red)
+                    }
+                    
+                    // 로그인 접속중에 signInProcessing = false 이거나 유저 정보가 비어있다면
+                    if signInProcessing && userInfoStore.errorMessage.isEmpty {
+                        MainProductView()
+                    }
+                    // 로그인되면 화면 뒤로가기
+                    if userInfoStore.state == .signedIn {
+                        let _ = presentationMode.wrappedValue.dismiss()
+                    }
+                }
                 
+                
+                Button {
+                    
+                    signInProcessing = true
+                    userInfoStore.emailAuthSignIn(email: emailText, password: passwordText)
+                        print("로그인 되었습니다.")
+                    
+                } label: {
+                        Text("로그인")
+                            .padding()
+                            .foregroundColor(.white)
+                            .background(buttonBackColor)
+                            .cornerRadius(10)
+                            .padding(.bottom, 40)
+                }
+                .disabled(emailText.isEmpty || passwordText.isEmpty ? true : false)
 
                 IdAndPasswordFindView()
             }
             .padding()
         }
     }
+    
+    var buttonBackColor: Color {
+        emailText.isEmpty || passwordText.isEmpty == true ? .gray : .red
+    }
 }
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()
+            .environmentObject(UserInfoStore())
     }
 }
 
@@ -50,11 +85,9 @@ struct LoginView_Previews: PreviewProvider {
 
 // MARK: - 로그인 텍스트 필드 및 로그인 버튼
 struct CustomTextFieldView: View {
-    // 로그인 되면 전 화면으로 이동 
-    @Environment(\.dismiss) private var dismiss
+    
     @Binding var emailText: String
     @Binding var passwordText: String
-    @FocusState private var focusField: Field?
     
     var body: some View {
         VStack {
@@ -63,33 +96,12 @@ struct CustomTextFieldView: View {
                 .background(.thinMaterial)
                 .cornerRadius(10)
                 .textInputAutocapitalization(.never)
-                .focused($focusField, equals: .email)
             SecureField("비밀번호를 입력하세요", text: $passwordText)
                 .padding()
                 .background(.thinMaterial)
                 .cornerRadius(10)
                 .padding(.bottom, 30)
-                .focused($focusField, equals: .password)
-            
-            Button {
-                if emailText.isEmpty {
-                    focusField = .email
-                } else if passwordText.isEmpty {
-                    focusField = .password
-                } else {
-                    hideKeyboard()
-                    dismiss()
-                    print("로그인 되었습니다.")
-                }
-            } label: {
-                    Text("로그인")
-                        .padding()
-                        .foregroundColor(.white)
-                        .background(buttonBackColor)
-                        .cornerRadius(10)
-                        .padding(.bottom, 40)
-            }
-            .disabled(emailText.isEmpty || passwordText.isEmpty ? true : false)
+
             
         }
     }
@@ -118,12 +130,4 @@ struct IdAndPasswordFindView: View {
   
             }
     }
-}
-
-
-// MARK: - 키보드 내리기
-extension View {
-  func hideKeyboard() {
-    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-  }
 }

@@ -10,6 +10,7 @@ import SwiftUI
 struct MyProfileView: View {
     let listTitle: [String] = ["내 기기 추가", "주소지 등록"]
     @Binding var isShowingSheet: Bool
+    @State private var showingAlert = false
     @State private var isEditName: Bool = false
     var body: some View {
         NavigationStack {
@@ -43,11 +44,11 @@ struct MyProfileView: View {
                             
                             VStack(alignment:. leading, spacing: 3) {
                                 HStack(alignment: .center) {
-                                    Text("신미지")
+                                    Text("파베에서 이름 불러오기")
                                         .font(.title3)
                                 }
                    
-                                Text("shinn.mizzz@gmail.com")
+                                Text("파베에서 불러온 이메일")
                                     .font(.subheadline)
                             }
                         }
@@ -68,12 +69,24 @@ struct MyProfileView: View {
                             }
                         }
                     }
-                    
-                    Button {
-                        
-                    } label: {
-                        Text("로그아웃")
+                 
+                    Button("로그아웃") {
+                        showingAlert = true
                     }
+                    .alert("알럿 타이틀", isPresented: $isShowingSheet) {
+                        Button("OK") {
+                            
+                        }
+                        
+                        Button("Cancel", role: .cancel) {
+                            
+                        }
+                    } message: {
+                        Text("로그아웃 하시겠습니까?")
+                    }
+
+
+                    
 
                 }
                 Spacer()

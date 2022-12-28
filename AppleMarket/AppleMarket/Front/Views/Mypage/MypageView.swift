@@ -50,7 +50,7 @@ struct MypageView: View {
                             }
                         }
                         .sheet(isPresented: $isShowingSheet) {
-                            MyProfileView(isShowingSheet: $isShowingSheet)
+                            ProgressView()
                         }
                     }
                     .padding()
