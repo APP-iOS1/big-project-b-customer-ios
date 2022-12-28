@@ -17,7 +17,7 @@ class UserProductStore: ObservableObject {
     func fetchData() -> Void {
         
         database.collection("UserProduct").getDocuments { snapshot, error in
-            
+            self.userProductStores.removeAll()
             if let snapshot {
                 
                 for docs in snapshot.documents {

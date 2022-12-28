@@ -22,7 +22,7 @@ struct MyProductDetailView: View {
     
 //    let selectedProduct_2: Product
     
-    var myProducts: MyProduct
+    var myProducts: UserProduct
     
     var body: some View {
         ScrollView{
@@ -30,7 +30,7 @@ struct MyProductDetailView: View {
                 
                 HStack{
                     // 기기 사진
-                    AsyncImage(url: URL(string: myProducts.imagePath)) { image in
+                    AsyncImage(url: URL(string: myProducts.images[0] ?? "")) { image in
                         image
                             .resizable()
                             .scaledToFit()
@@ -46,7 +46,7 @@ struct MyProductDetailView: View {
                             .fontWeight(.bold)
                             .padding(.bottom, 1)
                         // "기기 종류" + "사양"
-                        Text(myProducts.details)
+                        Text("\(myProducts.productName)")
                             .font(.system(size: 14))
                     }
                     .frame(alignment: .leading)
@@ -134,6 +134,6 @@ struct MyProductDetailView: View {
 
 struct MyProductDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        MyProductDetailView(myProducts: MyProduct(id: 0, imagePath: "", productName: "", category: "", details: ""))
+        MyProductDetailView(myProducts: UserProduct(id: "", productName: "", device: "", category: "", description: "", price: 0, images: [], count: 0, storage: [0], color: [], status: 0, createdAt: Date(), series: []))
     }
 }

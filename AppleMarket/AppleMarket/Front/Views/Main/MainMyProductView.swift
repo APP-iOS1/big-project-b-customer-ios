@@ -26,7 +26,12 @@ struct MainMyProductView: View {
     
 //    let selectedMyProduct: MyProduct
     
+    @StateObject private var userProductStore = UserProductStore()
+    
     var body: some View {
+        
+        let _ = print(userProductStore.userProductStores)
+        
         VStack(alignment: .leading){
             Text("기기별로 쇼핑하기")
                 .font(.title)
@@ -59,11 +64,11 @@ struct MainMyProductView: View {
                     Spacer()
                         .frame(width: 50)
                     
-                    ForEach(myProducts){ product in
+                    ForEach(userProductStore.userProductStores){ product in
                         // 내 기기 이미지 사용 예정
                         
                         NavigationLink{
-                            MyProductDetailView(myProducts: MyProduct(id: product.id, imagePath: product.imagePath, productName: product.productName, category: product.category, details: product.details))
+                            MyProductDetailView(myProducts: product)
                         } label:{
                         ZStack{
                             RoundedRectangle(cornerRadius: 20)
@@ -71,7 +76,7 @@ struct MainMyProductView: View {
                                 .foregroundColor(.white)
                             
                             VStack {
-                                AsyncImage(url: URL(string: product.imagePath)) { image in
+                                AsyncImage(url: URL(string: product.images[0] ?? "")) { image in
                                     image
                                         .resizable()
                                         .scaledToFit()
@@ -102,7 +107,7 @@ struct MainMyProductView: View {
             //            }
         }
         .padding(.top, 50)
-        
+        .onAppear{userProductStore.fetchData()}
         
     }
 }
