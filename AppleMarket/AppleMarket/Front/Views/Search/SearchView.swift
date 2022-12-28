@@ -7,76 +7,83 @@
 
 import SwiftUI
 
-struct SearchView: View {
-    
-    @State private var transitionView: Bool = false
-    @State private var searchInput: String = ""
-    @State private var hasResult: Bool = false
-    
-    @Environment(\.isSearching) var isSearching
 
+enum SearchingState {
+    case none, finished
+}
+
+final class SearchViewModel: ObservableObject {
+    @Published var searchResults: [UserProduct] = []
+    @Published var recentResults: [String] = []
+    @Published var searchInput: String = ""
+    @Published var searchingState: SearchingState = .none
+    
+    
+    
+    
+    func clearResults() {
+        self.searchResults.removeAll()
+    }
+    
+    func updateRecentResults() {
+        self.recentResults.append(self.searchInput)
+    }
+    
+    func clearRecentResults() {
+        self.recentResults.removeAll()
+    }
+}
+
+struct SearchView: View {
+    @Environment(\.isSearching) var isSearching
+    @EnvironmentObject var userProductStore: UserProductStore
+    @ObservedObject var viewModel: SearchViewModel = SearchViewModel()
+    
     var body: some View {
         VStack {
-            SearchContent(searchInput: searchInput, hasResult: $hasResult)
+            switch viewModel.searchingState {
+            case .none:
+                if !viewModel.searchInput.isEmpty {
+                    List(viewModel.searchResults) { product in
+                        Button {
+                            viewModel.searchInput = product.productName
+                        } label: {
+                            Text(product.productName)
+                                .foregroundColor(.black)
+                        }
+                    }
+                } else {
+                    SearchProcessView(viewModel: viewModel)
+                }
+            case .finished:
+                SearchResultView()
+            }
         }
-        .searchable(text: $searchInput, prompt: "제품 및 매장 검색")
+        .searchable(text: $viewModel.searchInput, prompt: "제품 및 매장 검색")
         .onSubmit(of: .search) {
-            print("서치버튼 클릭")
-            hasResult = true
+            print("검색완료")
+            viewModel.searchingState = .finished
+            viewModel.updateRecentResults()
+            viewModel.clearResults()
         }
+        .onAppear {
+            userProductStore.fetchData()
+        }
+        .onChange(of: viewModel.searchInput) { input in
+            viewModel.searchingState = .none
+
+            viewModel.searchResults = userProductStore.userProductStores.filter({ $0.productName.localizedCaseInsensitiveContains(input)})
+                
+        }
+        .transaction { $0.animation = .default.speed(1.3) }
         .navigationTitle("검색")
     }
 }
 
-struct SearchContent: View {
-    var searchInput: String
-    @Binding var hasResult: Bool
-    
-    @Environment(\.isSearching) var isSearching
-    @Environment(\.dismissSearch) var dismissSearch // 1
-    
-    var body: some View {
-        VStack {
-            Text(searchInput)
-            if isSearching {
-                HStack {
-                    Text("최근결과")
-                        .font(.headline)
-                    
-                    Spacer()
-                    
-//                    Button {
-//                        recents.removeAll()
-//                        //이 다음 동작은 데이터베이스에 있는 유저의 최근 검색 결과 지우기
-//                    } label: {
-//                        Text("지우기")
-//                    }
-//                    .accentColor(Color("MainColor"))
-                    
-                }
-//                List(recents, id: \.self) { recent in
-//                    HStack {
-//                        Image(systemName:"magnifyingglass")
-//                            .foregroundColor(.secondary)
-//                        Text(recent)
-//
-//                    }
-//                }
-//                .listStyle(.plain)
-//                .padding(0)
-            } else {
-                if hasResult {
-                    SearchResultView()
-                } else {
-                    Text("검색어 입력중")
-                }
-            }
-        }
-    }
-}
 
-struct SearchView_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchView()
-    }
-}
+
+//struct SearchView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SearchView()
+//    }
+//}

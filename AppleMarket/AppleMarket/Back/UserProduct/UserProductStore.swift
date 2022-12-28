@@ -15,6 +15,8 @@ class UserProductStore: ObservableObject {
     let database: Firestore = Firestore.firestore()
     
     func fetchData() -> Void {
+        //MARK: 배열을 비워줘야 해서 추가합니다! _ 소비자프론트 이석준
+        userProductStores.removeAll()
         
         database.collection("UserProduct").getDocuments { snapshot, error in
             
