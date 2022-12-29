@@ -6,7 +6,7 @@ struct UserProduct: Identifiable, Codable {
     var id: String
     var productName: String // 제품명
     var device: String // 기기종류(ex) iPhone, iPad, Mac, 액세서리 등..)
-    var category: String // 악세서리(일 경우 해당 단말기명!?)를 위한 변수, 단말기일 경우 단말기명
+    var category: String // 악세서리(일 경우 해당 단말기명!?)를 위한 변수, 단말기일 경우 단말기명 / maindetail 하단 리스트명
     var description: String
     var price: Int
     var images: [String?]
