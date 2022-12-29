@@ -18,9 +18,6 @@ final class SearchViewModel: ObservableObject {
     @Published var searchInput: String = ""
     @Published var searchingState: SearchingState = .none
     
-    
-    
-    
     func clearResults() {
         self.searchResults.removeAll()
     }
@@ -31,6 +28,11 @@ final class SearchViewModel: ObservableObject {
     
     func clearRecentResults() {
         self.recentResults.removeAll()
+    }
+    
+    func sortByPrice() -> [UserProduct] {
+        let result = self.searchResults.sorted {$0.price < $1.price}
+        return result
     }
 }
 
@@ -57,7 +59,7 @@ struct SearchView: View {
                     SearchProcessView(viewModel: viewModel)
                 }
             case .finished:
-                SearchResultView()
+                SearchResultView(viewModel: viewModel)
             }
         }
         .searchable(text: $viewModel.searchInput, prompt: "제품 및 매장 검색")

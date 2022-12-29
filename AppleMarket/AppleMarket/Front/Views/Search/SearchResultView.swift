@@ -10,7 +10,8 @@ import SwiftUI
 struct SearchResultView: View {
     
     @Environment(\.presentationMode) var presentationMode
-    @State var inputSearch: String = ""
+    @ObservedObject var viewModel: SearchViewModel
+    
     @State var showMyDeviceModal : Bool = false
     @State var showEtcModal: Bool = false
     
@@ -115,10 +116,10 @@ struct SearchResultView: View {
                                     .frame(width: 350, height: 250)
                                     .cornerRadius(15)
                                     .shadow(radius: 10)
-                                FirstItemCell()
+                                firstItemcell
                             }
                         }
-                        FirstItemOrderInfoView()
+                        firstItemOrderInfoView
                         
                         //MARK: 추가 결과
                         HStack {
@@ -157,7 +158,10 @@ struct SearchResultView: View {
                 }
                 Spacer()
             }
-//            .toolbar(.hidden)
+            .onAppear {
+                print(viewModel.sortByPrice())
+            }
+
         
     }
 }
@@ -171,12 +175,13 @@ func filterButton() -> some View {
 
 struct SearchResultView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchResultView()
+        SearchResultView(viewModel: SearchViewModel())
     }
 }
 
-struct FirstItemCell: View {
-    var body: some View {
+extension SearchResultView {
+    
+    var firstItemcell: some View {
         VStack {
             Image("sample_airpods")
                 .resizable()
@@ -204,10 +209,9 @@ struct FirstItemCell: View {
         }
         .padding(.horizontal, 20)
     }
-}
-
-struct FirstItemOrderInfoView: View {
-    var body: some View {
+    
+    
+    var firstItemOrderInfoView: some View {
         VStack(alignment: .leading) {
             HStack {
                 Text("오늘 주문 시 배송:")
@@ -222,6 +226,8 @@ struct FirstItemOrderInfoView: View {
         }
         .padding(.horizontal, 20)
         .padding(.top, 20)
-        
     }
 }
+
+
+
