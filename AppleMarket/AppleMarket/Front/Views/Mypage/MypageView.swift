@@ -70,7 +70,7 @@ struct MypageView: View {
                             
                             Divider()
                             NavigationLink {
-                                
+                                MyOrderView()
                             } label: {
                                 HStack {
                                     Image(systemName: "list.bullet")
@@ -84,6 +84,7 @@ struct MypageView: View {
                                         }
                                     
                                     VStack(alignment: .leading, spacing: 5) {
+                                      
                                         Text("주문 관련 실시간 정보를 받아보세요.")
                                             .foregroundColor(.black)
                                             .bold()
