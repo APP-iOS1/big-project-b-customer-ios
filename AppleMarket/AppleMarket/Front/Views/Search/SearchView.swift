@@ -52,6 +52,7 @@ struct SearchView: View {
                                 .foregroundColor(.black)
                         }
                     }
+                    .listStyle(.plain)
                 } else {
                     SearchProcessView(viewModel: viewModel)
                 }
