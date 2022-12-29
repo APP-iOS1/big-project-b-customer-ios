@@ -15,32 +15,32 @@ struct SearchResultView: View {
     @State var showEtcModal: Bool = false
     
     var body: some View {
-        NavigationStack {
+        
             VStack {
                 VStack {
                     
-                    //MARK: 검색창 및 취소 버튼
-                    HStack {
-                        HStack {
-                            Image(systemName: "magnifyingglass")
-                            TextField("제품 및 매장 검색", text: $inputSearch)
-                        }
-                        .padding()
-                        .frame(height: 36)
-                        .background(Color(UIColor.systemGray5))
-                        .cornerRadius(15)
-                        .textInputAutocapitalization(.never)
-                        .lineLimit(1)
-                        
-                        NavigationLink {
-                            SearchView()
-                        } label: {
-                            Text("취소")
-                                .foregroundColor(Color("MainColor"))
-                        }
-                        .navigationBarBackButtonHidden(true)
-                    }
-                    .padding(.horizontal, 20)
+//                    //MARK: 검색창 및 취소 버튼
+//                    HStack {
+//                        HStack {
+//                            Image(systemName: "magnifyingglass")
+//                            TextField("제품 및 매장 검색", text: $inputSearch)
+//                        }
+//                        .padding()
+//                        .frame(height: 36)
+//                        .background(Color(UIColor.systemGray5))
+//                        .cornerRadius(15)
+//                        .textInputAutocapitalization(.never)
+//                        .lineLimit(1)
+//
+//                        NavigationLink {
+//                            SearchView()
+//                        } label: {
+//                            Text("취소")
+//                                .foregroundColor(Color("MainColor"))
+//                        }
+//                        .navigationBarBackButtonHidden(true)
+//                    }
+//                    .padding(.horizontal, 20)
                     
                     //MARK: 필터 버튼
                     HStack {
@@ -157,8 +157,8 @@ struct SearchResultView: View {
                 }
                 Spacer()
             }
-            .toolbar(.hidden)
-        }
+//            .toolbar(.hidden)
+        
     }
 }
 
