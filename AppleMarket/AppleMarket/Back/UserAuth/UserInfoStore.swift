@@ -133,7 +133,9 @@ final class UserInfoStore: ObservableObject{
                     }
                 }
             }
-        
+    }
+    
+    func fetchMyDevice(){
         database.collection("ConsumerAccount").document(userInfo?.userId ?? "").collection("MyDevice")
             .getDocuments{snapshot, error in
                 if let snapshot{
@@ -152,29 +154,26 @@ final class UserInfoStore: ObservableObject{
             }
     }
     
-    // MARK: 유저 장바구니 패치
+    func addMyDevice(myDevice: MyDevice){
+        print("Add My Device")
+        database.collection("ConsumerAccount").document(userInfo?.userId ?? "").collection("MyDevice").document(myDevice.myDeviceId)
+            .setData([
+                "myDeviceId" = myDevice.myDeviceId,
+                "deviceName" = myDevice.deviceName,
+                "deviceImage" = myDevice.deviceImage,
+                "deviceDescription" = myDevice.deviceDescription
+            ])
+        
+        fetchMyDevice()
+    }
+    
+    func removeMyDevice(myDevice: MyDevice){
+        database.collection("ConsumerAccount").document(userInfo?.userId ?? "").collection("MyDevice").document(myDevice.myDeviceId)
+            .delete()
+        
+        fetchMyDevice()
 
-//    func fetchUserCart(){
-//        database.collection("ConsumerAccount").document(self.userInfo?.userId ?? "").collection("Cart")
-//            .getDocuments{snapshot, error in
-//                if let snapshot{
-//                    var tempCart: [Cart] = []
-//                    for document in snapshot.documents{
-//                        let docData = document.data()
-//                        
-//                        let productId: String = docData["productId"] as? String ?? ""
-//                        let productName: String = docData["productName"] as? String ?? ""
-//                        let productPrice: Int = docData["productPrice"] as? Int ?? 1000
-//                        let productCount: Int = docData["productCount"] as? Int ?? 1
-//                        
-//                        let cart: Cart = Cart(productId: productId, productName: productName, productCount: productCount, productPrice: productPrice)
-//                        
-//                        tempCart.append(cart)
-//                    }
-//                    self.cart = tempCart
-//                }
-//            }
-//    }
+    }
 
     
 }
