@@ -46,20 +46,8 @@ struct MyProductDetailView: View {
                             .fontWeight(.bold)
                             .padding(.bottom, 1)
                         // "기기 종류" + "사양"
-                        if myProducts.device == "iPhone"{
-                            Text("\(myProducts.productName) \(myProducts.storage[0])GB \(myProducts.color[0] ?? "")")
+                            Text("\(myProducts.productName)")
                                 .font(.system(size: 14))
-                        }
-                        
-                        else if myProducts.device == "iPad"{
-                            Text("\(myProducts.series[0] ?? "") \(myProducts.productName) \(myProducts.storage[0])GB \(myProducts.color[0] ?? "")")
-                                .font(.system(size: 14))
-                        }
-                        
-                        else{
-                            Text("\(myProducts.productName) \(myProducts.color[0] ?? "")")
-                                .font(.system(size: 14))
-                        }
                         
                     }
                     .frame(alignment: .leading)
@@ -67,13 +55,13 @@ struct MyProductDetailView: View {
                 }
                 
                 // "기기 종류" 용 추천
-                Text("\(myProducts.productName)용 추천")
-                    .font(.title)
+                Text("\(myProducts.productName) 액세서리 추천")
+                    .font(.system(size: 24))
                     .fontWeight(.bold)
                     .padding(.top, 30)
                 
-                ScrollView(.horizontal){
-                    HStack(alignment: .center){
+                TabView{
+
                         ForEach(products_2){ product in
                             NavigationLink{
                                 DetailView()
@@ -109,12 +97,12 @@ struct MyProductDetailView: View {
                             .foregroundColor(.black)
                         }
                         }
-                    }
-                }
+
+                }.tabViewStyle(.page(indexDisplayMode: .never))
                 
                 // "기기 종류" 용
-                Text("\(myProducts.productName)용")
-                    .font(.title)
+                Text("액세서리 더보기")
+                    .font(.system(size: 24))
                     .fontWeight(.bold)
                     .padding(.top, 30)
                 
