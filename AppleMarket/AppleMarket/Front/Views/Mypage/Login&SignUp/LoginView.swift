@@ -15,7 +15,7 @@ struct LoginView: View {
     @State var emailText: String = ""
     @State var passwordText: String = ""
     @State var signInProcessing: Bool = false
-    @Binding var isShowingSheet: Bool
+    @Binding var isShowingLoginSheet: Bool
     var body: some View {
         
        
@@ -50,7 +50,7 @@ struct LoginView: View {
                             signInProcessing = true
                             userInfoStore.emailAuthSignIn(email: emailText, password: passwordText)
                                 print("로그인 되었습니다.")
-                            isShowingSheet.toggle()
+                            isShowingLoginSheet.toggle()
                         } label: {
                                 Text("로그인")
                                     .padding()
@@ -77,7 +77,7 @@ struct LoginView: View {
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            LoginView(isShowingSheet: .constant(true))
+            LoginView(isShowingLoginSheet: .constant(true))
                 .environmentObject(UserInfoStore())
         }
     }
@@ -106,10 +106,6 @@ struct CustomTextFieldView: View {
 
             
         }
-    }
-    
-    var buttonBackColor: Color {
-        return emailText.isEmpty || passwordText.isEmpty == true ? .gray : .blue
     }
 }
 

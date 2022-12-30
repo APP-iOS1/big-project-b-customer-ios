@@ -14,7 +14,9 @@ struct ContentView: View {
     @EnvironmentObject var userInfoStore: UserInfoStore
     @State private var isShowingSheet: Bool = false
     var body: some View {
-     
+        
+        
+        NavigationStack {
             TabView(selection: $tabSelection) {
                 
                 MainView()
@@ -24,14 +26,14 @@ struct ContentView: View {
                     }
                     .tag(1)
                 
-                NavigationStack {
-                    SearchView()
-                }
-                        .tabItem {
-                            Image(systemName: "magnifyingglass")
-                            Text("검색")
-                        }
-                        .tag(2)
+                
+                SearchView()
+                
+                    .tabItem {
+                        Image(systemName: "magnifyingglass")
+                        Text("검색")
+                    }
+                    .tag(2)
                 
                 CartView()
                     .tabItem {
@@ -40,21 +42,25 @@ struct ContentView: View {
                     }
                     .tag(3)
                 
+                
                 MypageView(userInfoStore: userInfoStore)
                     .tabItem {
                         Image(systemName: "person.circle")
                         Text("마이페이지")
                     }
                     .tag(4)
+    //                .onAppear {
+    //                    // 이전 로그인 기록이 있다면 자동 로그인
+    //                    if let email = UserDefaults.standard.string(forKey: UserDefaults.Keys.email.rawValue) {
+    //                        if let password = UserDefaults.standard.string(forKey: UserDefaults.Keys.password.rawValue) {
+    //                            userInfoStore.emailAuthSignIn(email: email, password: password)
+    //                        }
+    //                    }
+    //                }
             }
-                .onAppear {
-                    // 이전 로그인 기록이 있다면 자동 로그인
-                    if let email = UserDefaults.standard.string(forKey: UserDefaults.Keys.email.rawValue) {
-                        if let password = UserDefaults.standard.string(forKey: UserDefaults.Keys.password.rawValue) {
-                            userInfoStore.emailAuthSignIn(email: email, password: password)
-                        }
-                    }
-            }
+        }
+   
+        
     }
 }
 
@@ -63,6 +69,6 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
             .environmentObject(UserInfoStore())
             .environmentObject(UserProductStore())
-           
+        
     }
 }

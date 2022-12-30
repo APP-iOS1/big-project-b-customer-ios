@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MyProfileView: View {
     let listTitle: [String] = ["내 기기 추가", "주소지 등록"]
-    @Binding var isShowingSheet: Bool
+    @Binding var isShowingLoginSheet: Bool
     @State private var showingAlertProfile = false
     @State private var isEditName: Bool = false
     @StateObject var userInfoStore: UserInfoStore
@@ -71,7 +71,7 @@ struct MyProfileView: View {
                                         
                                         Button("Yes", role: .destructive) {
                                             userInfoStore.emailAuthSignOut()
-                                            isShowingSheet.toggle()
+                                            isShowingLoginSheet.toggle()
                                         }
                                     } message: {
                                         Text("로그아웃 하시겠습니까?")
@@ -88,11 +88,10 @@ struct MyProfileView: View {
 }
 
 struct MyProfileView_Previews: PreviewProvider {
-    @State static var isShowingSheet: Bool = false
     static var previews: some View {
 
         NavigationStack {
-            MyProfileView(isShowingSheet: $isShowingSheet, userInfoStore: UserInfoStore())
+            MyProfileView(isShowingLoginSheet: .constant(true), userInfoStore: UserInfoStore())
         }
 
     }

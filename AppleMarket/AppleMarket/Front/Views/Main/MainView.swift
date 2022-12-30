@@ -32,12 +32,6 @@ struct MainView: View {
                 }
                 .padding()
                 .navigationBarTitle("쇼핑하기")
-                .toolbar { // <-
-                    NavigationLink(
-                        destination: MypageView(userInfoStore: UserInfoStore())) {
-                            Label("Profile", systemImage: "person.crop.circle")
-                        }
-                }
             }
         }
         .onAppear{userProductStore.fetchData()}

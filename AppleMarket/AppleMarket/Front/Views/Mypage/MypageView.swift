@@ -26,165 +26,147 @@ var myDeviceInform: [DeviceInform] = [
 
 struct MypageView: View {
     
-    @State private var isShowingSheet: Bool = false
+    @State private var isShowingLoginSheet: Bool = false
     @StateObject var userInfoStore: UserInfoStore
     var body: some View {
-         
-        NavigationStack {
+        
+        
             ScrollView {
-                    VStack(alignment: .leading) {
-                        HStack {
-                            Text("마이페이지")
-                                .font(.largeTitle)
-                                .bold()
-                            Spacer()
-                            
-                            
-                            Button {
-                                
-                            } label: {
-                            
-                            }
-
-                            // 로그인 버튼
-                            Button {
-                                isShowingSheet.toggle()
-                            } label: {
-                                // 로그인 되면 사람모양으로 바뀌기 조건문
-                                // Text("로그인")
-                                HStack {
-                                    
-                                    Text(userInfoStore.state == .signedIn ? "내정보" : "로그인")
-                                }
-                            }
-                            .sheet(isPresented: $isShowingSheet) {
-                                if userInfoStore.state == .signedIn {
-                                    MyProfileView(isShowingSheet: $isShowingSheet, userInfoStore: userInfoStore)
-                                } else {
-                                    LoginView(isShowingSheet: $isShowingSheet)
-                                }
-                                   
-                            }
+                VStack(alignment: .leading) {
+                    HStack {
+                        Text("마이페이지")
+                            .font(.largeTitle)
+                            .bold()
+                        Spacer()
+                        // 로그인 버튼
+                        Button {
+                            isShowingLoginSheet.toggle()
+                        } label: {
+                                Text(userInfoStore.state == .signedIn ? "내정보" : "로그인")
                         }
-                        .padding()
-                        
-                       
-                        
-                        
-                        
-                        Divider()
-                        
-                        VStack(alignment: .leading, spacing: 15) {
-                            Section {
-                                
-                                Text("고객님을 위한 제안")
-                                    .font(.headline)
-                                
-                                Divider()
-                                NavigationLink {
-                                    
-                                } label: {
-                                    HStack {
-                                        Image(systemName: "list.bullet")
-                                            .foregroundColor(.pink)
-                                            .font(.title2)
-                                            .frame(width: 45, height: 45)
-                                            .overlay {
-                                                RoundedRectangle(cornerRadius: 10)
-                                                    .inset(by: 3)
-                                                    .stroke(.pink, lineWidth: 2)
-                                            }
-                                        
-                                        VStack(alignment: .leading, spacing: 5) {
-                                            Text("주문 관련 실시간 정보를 받아보세요.")
-                                                .foregroundColor(.black)
-                                                .bold()
-                                            Text("주문 내역 및 현황 보러가기")
-                                                .font(.subheadline)
-                                                .foregroundColor(.gray)
+                        .sheet(isPresented: $isShowingLoginSheet) {
+                            if userInfoStore.state == .signedIn {
+                                    MyProfileView(isShowingLoginSheet: $isShowingLoginSheet, userInfoStore: userInfoStore)
+              
+                            } else {
+                                    LoginView(isShowingLoginSheet: $isShowingLoginSheet)
+                            }
+                    }
+                    }
+                    .padding()
+                    
+                    Divider()
+                    
+                    VStack(alignment: .leading, spacing: 15) {
+                        Section {
+                            
+                            Text("고객님을 위한 제안")
+                                .font(.headline)
+                            
+                            Divider()
+                            NavigationLink {
+                                EmptyView()
+                            } label: {
+                                HStack {
+                                    Image(systemName: "list.bullet")
+                                        .foregroundColor(.pink)
+                                        .font(.title2)
+                                        .frame(width: 45, height: 45)
+                                        .overlay {
+                                            RoundedRectangle(cornerRadius: 10)
+                                                .inset(by: 3)
+                                                .stroke(.pink, lineWidth: 2)
                                         }
-                                        
-                                        Spacer()
-                                        Image(systemName: "chevron.right")
+                                    
+                                    VStack(alignment: .leading, spacing: 5) {
+                                        Text("주문 관련 실시간 정보를 받아보세요.")
+                                            .foregroundColor(.black)
+                                            .bold()
+                                        Text("주문 내역 및 현황 보러가기")
+                                            .font(.subheadline)
                                             .foregroundColor(.gray)
                                     }
+                                    Spacer()
                                 }
                             }
-                            Divider()
                         }
-                        .padding()
-                        
-                        VStack {
-                            Section {
-                                Text("")
-                                    .font(.largeTitle)
-                                HStack(alignment: .bottom) {
-                                    Text("고객님의 기기")
-                                        .font(.title)
-                                        .bold()
-                                    Spacer()
-                                    
-                                    NavigationLink {
-                                        MyDeviceListView()
-                                    } label: {
-                                        Text("모두 보기")
-                                    }
-                                }
-                                .padding()
+                        Divider()
+                    }
+                    .padding()
+                    
+                    VStack {
+                        Section {
+                            Text("")
+                                .font(.largeTitle)
+                            HStack(alignment: .bottom) {
+                                Text("고객님의 기기")
+                                    .font(.title)
+                                    .bold()
+                                Spacer()
                                 
-                                ScrollView(.horizontal, showsIndicators: false) {
-                                    HStack(alignment: .center, spacing: 0) {
-                                        ForEach (myDeviceInform, id: \.self) { device in
-                                            
-                                            Spacer()
-                                            VStack(spacing: 5) {
-                                                AsyncImage(url: URL(string: device.imageName)) { image in
-                                                    
-                                                    if device.deviceModelName == "iPhone 11" {
-                                                        image
-                                                            .resizable()
-                                                            .aspectRatio(contentMode: .fit)
-                                                            .frame(height: 150)
-                                                    } else if device.deviceModelName == "MacBook Pro 16" {
-                                                        image
-                                                            .resizable()
-                                                            .aspectRatio(contentMode: .fit)
-                                                            .frame(width: 200, height: 150)
-                                                    }
-                                                   
-                                                } placeholder: {
-                                                    ProgressView()
+                                NavigationLink {
+                                    MyDeviceListView()
+                                } label: {
+                                    Text("모두 보기")
+                                }
+                            }
+                            .padding()
+                            
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack(alignment: .center, spacing: 0) {
+                                    ForEach (myDeviceInform, id: \.self) { device in
+                                        
+                                        Spacer()
+                                        VStack(spacing: 5) {
+                                            AsyncImage(url: URL(string: device.imageName)) { image in
+                                                
+                                                if device.deviceModelName == "iPhone 11" {
+                                                    image
+                                                        .resizable()
+                                                        .aspectRatio(contentMode: .fit)
+                                                        .frame(height: 150)
+                                                } else if device.deviceModelName == "MacBook Pro 16" {
+                                                    image
+                                                        .resizable()
+                                                        .aspectRatio(contentMode: .fit)
+                                                        .frame(width: 200, height: 150)
                                                 }
                                                 
-                                                Text(device.deviceName)
-                                                    .font(.headline)
-                                                Text(device.deviceModelName)
-                                                    .font(.subheadline)
-                                                
-                                                Text("")
-                                                    .font(.largeTitle)
-                                                NavigationLink {
-                                                    
-                                                } label: {
-                                                    Text("액세서리 등을 쇼핑하기")
-                                                        .font(.subheadline)
-                                                }
+                                            } placeholder: {
+                                                ProgressView()
                                             }
-                                            Spacer()
+                                            
+                                            Text(device.deviceName)
+                                                .font(.headline)
+                                            Text(device.deviceModelName)
+                                                .font(.subheadline)
+                                            
+                                            Text("")
+                                                .font(.largeTitle)
+                                            NavigationLink {
+                                                
+                                            } label: {
+                                                Text("액세서리 등을 쇼핑하기")
+                                                    .font(.subheadline)
+                                            }
                                         }
+                                        Spacer()
                                     }
                                 }
                             }
                         }
                     }
+                }
             }
-        }
-         
+        
     }
 }
 
 struct MypageView_Previews: PreviewProvider {
     static var previews: some View {
-        MypageView(userInfoStore: UserInfoStore())
+        NavigationStack {
+            MypageView(userInfoStore: UserInfoStore())
+                .environmentObject(UserInfoStore())
+        }
     }
 }
