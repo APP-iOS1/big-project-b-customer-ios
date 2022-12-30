@@ -113,5 +113,6 @@ struct MainMyProductView: View {
 struct MainMyProductView_Previews: PreviewProvider {
     static var previews: some View {
         MainMyProductView()
+            .environmentObject(UserProductStore())
     }
 }
