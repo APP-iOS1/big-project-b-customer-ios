@@ -11,7 +11,7 @@ struct UserProduct: Identifiable, Codable {
     var category: String // 악세서리(일 경우 해당 단말기명!?)를 위한 변수, 단말기일 경우 단말기명
     var description: String // 간단한 설명글
     var price: Int // 상품 가격. 단말기인 경우, 최저 가격을 입력한다. // iPhone 14 1,000,000원 부터!
-    var mainImages: String? // 상품 메인 이미지
+    var mainImage: String // 상품 메인 이미지
     var status: Int // 판매 가능 여부
     
     // MARK: iPhone 추가 프로퍼티
@@ -20,6 +20,7 @@ struct UserProduct: Identifiable, Codable {
                             // iPhone 14 Pro Max 액세서리 검색 -> model.contains("iPhone 14 Pro Max") 메소드 이용해서 추출
     var color: [String]? // 색상이 있는 상품만 값 입력
     var storage: [Int]? // 상품 용량(단말기인 경우 해당), 해당 안되는 상품은 nil으로 냅둠
+    var recommendedProduct: [String]? // 해당 상품의 추천 액세서리 
     
     // MARK: iPad 추가 프로퍼티
     var netWork: [String]? // Wi-Fi, Cellular가 들어감

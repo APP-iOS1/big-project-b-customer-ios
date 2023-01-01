@@ -25,24 +25,58 @@ class UserProductStore: ObservableObject {
                     let docData = docs.data()
                     
                     let id = docs.documentID
-                    let category: String = docData["Category"] as? String ?? ""
-                    let color: [String?] = docData["Color"] as? [String] ?? []
-                    let productName: String = docData["ProductName"] as? String ?? ""
-                    let device: String = docData["Device"] as? String ?? ""
-                    let description: String = docData["Description"] as? String ?? ""
-                    let price: Int = docData["Price"] as? Int ?? 0
-                    let images: [String?] = docData["Images"] as? [String] ?? []
-                    let count: Int = docData["Count"] as? Int ?? 0
-                    let status: Int = docData["Status"] as? Int ?? 0
-                    let series: [String?] = docData["Series"] as? [String] ?? []
-                    let storage: [Int] = docData["Storage"] as? [Int] ?? []
-                    let createdAt: Date = docData["CreatedAt"] as? Date ?? Date()
+                    let productName: String = docData["productName"] as? String ?? ""
+                    let device: [String] = docData["device"] as? [String] ?? []
+                    let category: String = docData["category"] as? String ?? ""
+                    let description: String = docData["description"] as? String ?? ""
+                    let price: Int = docData["price"] as? Int ?? 0
+                    let mainImage: String = docData["mainImage"] as? String ?? ""
+                    let status: Int = docData["status"] as? Int ?? 0
                     
-                    let userProduct = UserProduct(id: id, productName: productName, device: device, category: category, description: description, price: price, images: images, count: count, storage: storage, color: color, status: status, createdAt: createdAt, series: series)
+                    let model: [String]? = docData["model"] as? [String] ?? nil
+                    let descriptionImages: [String]? = docData["descriptionImages"] as? [String] ?? nil
+                    let recommendedProduct: [String]? = docData["recommendedProduct"] as? [String] ?? nil
+                    
+                    let storage: [Int] = docData["storage"] as? [Int] ?? []
+                    let color: [String]? = docData["color"] as? [String] ?? nil
+                    
+                    let netWork: [String]? = docData["netWork"] as? [String] ?? nil
+                    
+                    let processor: [String]? = docData["processor"] as? [String] ?? nil
+                    let memory: [String]? = docData["memory"] as? [String] ?? nil
+                    
+                    let userProduct: UserProduct = UserProduct(id: id, productName: productName, device: device, category: category, description: description, price: price, mainImage: mainImage, status: status, descriptionImages: descriptionImages, model: model, color: color, storage: storage, recommendedProduct: recommendedProduct, netWork: netWork, processor: processor, memory: memory)
                     
                     self.userProductStores.append(userProduct)
                 }
             }
         }
+    }
+    
+    func addUserProduct(userProduct: UserProduct){
+        database.collection("UserProduct").document(userProduct.id)
+            .setData([
+                "id" : userProduct.id,
+                "productName" : userProduct.productName,
+                "device" : userProduct.device,
+                "category" : userProduct.category,
+                "description" : userProduct.description,
+                "price" : userProduct.price,
+                "mainImage" : userProduct.mainImage,
+                "status" : userProduct.status,
+                
+                "model" : userProduct.model,
+                "descriptionImages" : userProduct.descriptionImages,
+                
+                "storage" : userProduct.storage,
+                "color" : userProduct.color,
+                "recommendedProduct": userProduct.recommendedProduct,
+                
+                "netWork" : userProduct.netWork,
+
+                "processor" : userProduct.processor,
+                "memory" : userProduct.memory,
+            ])
+        fetchData()
     }
 }
