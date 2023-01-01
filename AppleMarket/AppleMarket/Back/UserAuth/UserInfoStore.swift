@@ -142,11 +142,12 @@ final class UserInfoStore: ObservableObject{
                     var tempDevice: [MyDevice] = []
                     for document in snapshot.documents{
                         let docData = document.data()
-                        
+                        let myDeviceId: String = docData["myDeviceId"] as? String ?? ""
                         let deviceName: String = docData["deviceName"] as? String ?? ""
                         let deviceImage: String = docData["deviceImage"] as? String ?? ""
+                        let deviceDescription: String = docData["deviceDescription"] as? String ?? ""
                         
-                        let myDevice: MyDevice = MyDevice(productName: deviceName, productImage: deviceImage)
+                        let myDevice: MyDevice = MyDevice(myDeviceId: myDeviceId, deviceName: deviceName, deviceImage: deviceImage, deviceDescription: deviceDescription)
                         tempDevice.append(myDevice)
                     }
                     self.userInfo?.myDevices = tempDevice
@@ -158,10 +159,10 @@ final class UserInfoStore: ObservableObject{
         print("Add My Device")
         database.collection("ConsumerAccount").document(userInfo?.userId ?? "").collection("MyDevice").document(myDevice.myDeviceId)
             .setData([
-                "myDeviceId" = myDevice.myDeviceId,
-                "deviceName" = myDevice.deviceName,
-                "deviceImage" = myDevice.deviceImage,
-                "deviceDescription" = myDevice.deviceDescription
+                "myDeviceId" : myDevice.myDeviceId,
+                "deviceName" : myDevice.deviceName,
+                "deviceImage" : myDevice.deviceImage,
+                "deviceDescription" : myDevice.deviceDescription
             ])
         
         fetchMyDevice()
