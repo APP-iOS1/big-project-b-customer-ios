@@ -159,7 +159,7 @@ struct SearchResultView: View {
                 Spacer()
             }
             .onAppear {
-                print(viewModel.sortByPrice())
+                viewModel.sortByPrice()
             }
 
         
@@ -183,10 +183,23 @@ extension SearchResultView {
     
     var firstItemcell: some View {
         VStack {
-            Image("sample_airpods")
-                .resizable()
-                .frame(width: 100, height: 110)
-                .aspectRatio(contentMode: .fit)
+//            Image("sample_airpods")
+//                .resizable()
+//                .frame(width: 100, height: 110)
+//                .aspectRatio(contentMode: .fit)
+            
+            //MARK: 뷰모델의 검색결과가 빈 배열일 때 index out of range 오류를 해결하기 위한 조치
+            // 검색결과가 없을 때의 대응 필요함
+            AsyncImage(url: URL(string: viewModel.getFirstElement()?.images[0] ?? "" )) { Image in
+                Image
+                    .resizable()
+                    .frame(width: 100, height: 110)
+                    .aspectRatio(contentMode: .fit)
+            } placeholder: {
+                ProgressView()
+            }
+
+            
             HStack {
                 Text("New")
                     .foregroundColor(.orange)
@@ -194,14 +207,14 @@ extension SearchResultView {
             }
             .padding(.leading, 20)
             HStack {
-                Text("AirPods Pro(2세대)")
+                Text(viewModel.getFirstElement()?.productName ?? "제품이름을 가져올 수 없습니다")
                     .foregroundColor(.black)
                     .bold()
                 Spacer()
             }
             .padding(.leading, 20)
             HStack {
-                Text("₩359,000")
+                Text("₩\(viewModel.getFirstElement()?.price ?? 0)")
                     .foregroundColor(.black)
                 Spacer()
             }

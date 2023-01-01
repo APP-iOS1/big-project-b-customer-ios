@@ -30,9 +30,15 @@ final class SearchViewModel: ObservableObject {
         self.recentResults.removeAll()
     }
     
-    func sortByPrice() -> [UserProduct] {
-        let result = self.searchResults.sorted {$0.price < $1.price}
-        return result
+    func sortByPrice() {
+        self.searchResults = self.searchResults.sorted {$0.price < $1.price}
+    }
+    
+    func getFirstElement() -> UserProduct? {
+        if searchResults.isEmpty {
+            return nil
+        }
+        return self.searchResults[0]
     }
 }
 
@@ -67,7 +73,6 @@ struct SearchView: View {
             print("검색완료")
             viewModel.searchingState = .finished
             viewModel.updateRecentResults()
-            viewModel.clearResults()
         }
         .onAppear {
             userProductStore.fetchData()
@@ -77,6 +82,11 @@ struct SearchView: View {
 
             viewModel.searchResults = userProductStore.userProductStores.filter({ $0.productName.localizedCaseInsensitiveContains(input)})
                 
+        }
+        .onChange(of: viewModel.searchingState ){ state in
+            if state == .none {
+                viewModel.clearResults()
+            }
         }
         .transaction { $0.animation = .default.speed(1.3) }
         .navigationTitle("검색")
