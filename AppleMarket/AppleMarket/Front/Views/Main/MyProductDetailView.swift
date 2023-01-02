@@ -32,9 +32,11 @@ struct MyProductDetailView: View {
         ScrollView{
             VStack(alignment: .leading){
                 
+                var tempImgPath: String = myProducts.thumbnailImage.isEmpty ? "" : (myProducts.thumbnailImage ?? "" )
+                
                 HStack{
                     // 기기 사진
-                    AsyncImage(url: URL(string: myProducts.images[0] ?? "")) { image in
+                    AsyncImage(url: URL(string: tempImgPath)) { image in
                         image
                             .resizable()
                             .scaledToFit()
@@ -139,6 +141,6 @@ struct MyProductDetailView: View {
 
 struct MyProductDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        MyProductDetailView(myProducts: CatalogueProduct(id: "", productName: "", device: "", category: "", description: "", price: 0, images: [], count: 0, storage: [0], color: [], status: 0, createdAt: Date(), series: []))
+        MyProductDetailView(myProducts: CatalogueProduct(id: "", productName: "", device: [], category: "", description: "", price: 0, thumbnailImage: "", status: 0))
     }
 }
