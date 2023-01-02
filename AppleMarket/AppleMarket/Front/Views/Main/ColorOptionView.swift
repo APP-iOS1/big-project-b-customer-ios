@@ -12,7 +12,7 @@ struct ColorOptionView: View {
     @Binding var color: String
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 15) {
+        VStack(alignment: .leading, spacing: 10) {
             HStack {
                 Text("색상.")
                     .bold()
@@ -21,7 +21,7 @@ struct ColorOptionView: View {
             .padding(.bottom, 10)
             
             
-            HStack(alignment: .bottom, spacing: 15) {
+            HStack(alignment: .bottom, spacing: 10) {
                 Button {
                     isChecking = [true, false, false, false]
                     color = "딥 퍼플"
@@ -63,7 +63,7 @@ struct ColorOptionView: View {
                 .disabled(isChecking[1])
             }
             
-            HStack(alignment: .bottom, spacing: 15) {
+            HStack(alignment: .bottom, spacing: 10) {
                 Button {
                     isChecking = [false, false, true, false]
                     color = "실버"
