@@ -36,7 +36,7 @@ class CartStore: ObservableObject {
         }
     }
     
-    func addCart(uid: String, product: UserProduct, productCount: Int) {
+    func addCart(uid: String, product: CatalogueProduct, productCount: Int) {
         database.document(uid).collection("Cart").document(product.id)
             .setData([
                 "id": product.id,

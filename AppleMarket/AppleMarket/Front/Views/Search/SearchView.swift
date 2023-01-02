@@ -13,7 +13,7 @@ enum SearchingState {
 }
 
 final class SearchViewModel: ObservableObject {
-    @Published var searchResults: [UserProduct] = []
+    @Published var searchResults: [CatalogueProduct] = []
     @Published var recentResults: [String] = []
     @Published var searchInput: String = ""
     @Published var searchingState: SearchingState = .none
@@ -34,7 +34,7 @@ final class SearchViewModel: ObservableObject {
         self.searchResults = self.searchResults.sorted {$0.price < $1.price}
     }
     
-    func getFirstElement() -> UserProduct? {
+    func getFirstElement() -> CatalogueProduct? {
         if searchResults.isEmpty {
             return nil
         }
@@ -44,7 +44,7 @@ final class SearchViewModel: ObservableObject {
 
 struct SearchView: View {
     @Environment(\.isSearching) var isSearching
-    @EnvironmentObject var userProductStore: UserProductStore
+    @EnvironmentObject var caltalogueProductStore: CatalogueProductStore
     @ObservedObject var viewModel: SearchViewModel = SearchViewModel()
     
     var body: some View {
@@ -75,12 +75,12 @@ struct SearchView: View {
             viewModel.updateRecentResults()
         }
         .onAppear {
-            userProductStore.fetchData()
+            caltalogueProductStore.fetchData()
         }
         .onChange(of: viewModel.searchInput) { input in
             viewModel.searchingState = .none
 
-            viewModel.searchResults = userProductStore.userProductStores.filter({ $0.productName.localizedCaseInsensitiveContains(input)})
+            viewModel.searchResults = caltalogueProductStore.catalogueProductStores.filter({ $0.productName.localizedCaseInsensitiveContains(input)})
                 
         }
         .onChange(of: viewModel.searchingState ){ state in

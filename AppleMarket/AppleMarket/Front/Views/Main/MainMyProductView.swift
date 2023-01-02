@@ -26,7 +26,7 @@ struct MainMyProductView: View {
     
 //    let selectedMyProduct: MyProduct
     
-    @EnvironmentObject var userProductStore: UserProductStore
+    @EnvironmentObject var caltalogueProductStore: CatalogueProductStore
     
     var body: some View {
         
@@ -62,8 +62,10 @@ struct MainMyProductView: View {
                     Spacer()
                         .frame(width: 50)
                     
-                    ForEach(userProductStore.userProductStores){ product in
+                    ForEach(caltalogueProductStore.catalogueProductStores){ product in
                         // 내 기기 이미지 사용 예정
+                        
+                        var tempImgPath: String = product.images.isEmpty ? "" : (product.images[0] ?? "" )
                         
                         NavigationLink{
                             MyProductDetailView(myProducts: product)
@@ -74,7 +76,7 @@ struct MainMyProductView: View {
                                 .foregroundColor(.white)
                             
                             VStack {
-                                AsyncImage(url: URL(string: product.images[0] ?? "")) { image in
+                                AsyncImage(url: URL(string: tempImgPath)) { image in
                                     image
                                         .resizable()
                                         .scaledToFit()
@@ -105,7 +107,7 @@ struct MainMyProductView: View {
             //            }
         }
         .padding(.top, 50)
-        .onAppear{userProductStore.fetchData()}
+        .onAppear{caltalogueProductStore.fetchData()}
         
     }
 }
@@ -114,7 +116,7 @@ struct MainMyProductView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack{
             MainMyProductView()
-                .environmentObject(UserProductStore())
+                .environmentObject(CatalogueProductStore())
         }
     }
 }

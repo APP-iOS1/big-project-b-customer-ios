@@ -22,12 +22,13 @@ struct MyProductDetailView: View {
     
 //    let selectedProduct_2: Product
     
-    var myProducts: UserProduct
+    var myProducts: CatalogueProduct
     
     // device로 분류
     // 악세서리는 리스트 내 이름으로 분류
     
     var body: some View {
+         
         ScrollView{
             VStack(alignment: .leading){
                 
@@ -138,6 +139,6 @@ struct MyProductDetailView: View {
 
 struct MyProductDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        MyProductDetailView(myProducts: UserProduct(id: "", productName: "", device: "", category: "", description: "", price: 0, images: [], count: 0, storage: [0], color: [], status: 0, createdAt: Date(), series: []))
+        MyProductDetailView(myProducts: CatalogueProduct(id: "", productName: "", device: "", category: "", description: "", price: 0, images: [], count: 0, storage: [0], color: [], status: 0, createdAt: Date(), series: []))
     }
 }

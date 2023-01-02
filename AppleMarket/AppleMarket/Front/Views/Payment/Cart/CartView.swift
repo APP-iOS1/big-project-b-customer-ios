@@ -6,15 +6,16 @@
 //
 
 import SwiftUI
-import FirebaseAuth
+
 
 struct CartView: View {
-    @State private var userId = Auth.auth().currentUser?.uid ?? ""
+    @EnvironmentObject var userInfoStore: UserInfoStore
+    
     @StateObject private var cartStore: CartStore = CartStore()
     
     var body: some View {
         VStack {
-            if Auth.auth().currentUser?.uid != "" {
+            if userInfoStore.userInfo?.userId != "" {
                 if cartStore.cartStore.isEmpty {
                     EmptyCartView()
                 } else {
@@ -24,9 +25,9 @@ struct CartView: View {
                 CartSignOutView()
             }
         }
-        .onAppear {
-            cartStore.fetchCart(uid: userId)
-        }
+//        .onAppear {
+//            cartStore.fetchCart(uid: userInfoStore.userInfo?.userId ?? "")
+//        }
     }
 }
 

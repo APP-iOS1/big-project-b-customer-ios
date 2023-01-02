@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MainView: View {
-    @EnvironmentObject var userProductStore: UserProductStore
+    @EnvironmentObject var caltalogueProductStore: CatalogueProductStore
     
     var body: some View {
         NavigationStack{
@@ -34,7 +34,7 @@ struct MainView: View {
                 .navigationBarTitle("쇼핑하기")
             }
         }
-        .onAppear{userProductStore.fetchData()}
+        .onAppear{caltalogueProductStore.fetchData()}
     }
 }
 
@@ -42,7 +42,7 @@ struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack{
             MainView()
-                .environmentObject(UserProductStore())
+                .environmentObject(CatalogueProductStore())
                 .environmentObject(UserInfoStore())
 
         }

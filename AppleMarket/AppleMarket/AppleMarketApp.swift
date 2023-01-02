@@ -27,7 +27,7 @@ struct AppleMarketApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(userInfoStore)
-                .environmentObject(UserProductStore())
+                .environmentObject(CatalogueProductStore())
         }
     }
 }
