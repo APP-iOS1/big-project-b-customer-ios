@@ -45,13 +45,11 @@ class CartStore: ObservableObject {
                 "category": product.category,
                 "description": product.description,
                 "price": product.price,
-                "images": product.images,
-                "count": product.count,
+                "images": product.thumbnailImage,
                 "storage": product.storage,
                 "color": product.color,
                 "status": product.status,
-                "series": product.series,
-                "createdAt": product.createdAt,
+                "series": product.model,
                 "productCount": productCount
                 
             ])
