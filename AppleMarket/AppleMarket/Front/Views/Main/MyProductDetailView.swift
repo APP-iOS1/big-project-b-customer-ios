@@ -24,6 +24,9 @@ struct MyProductDetailView: View {
     
     var myProducts: UserProduct
     
+    // device로 분류
+    // 악세서리는 리스트 내 이름으로 분류
+    
     var body: some View {
         ScrollView{
             VStack(alignment: .leading){
