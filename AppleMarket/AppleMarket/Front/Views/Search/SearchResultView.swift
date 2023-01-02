@@ -11,7 +11,6 @@ struct SearchResultView: View {
     
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var viewModel: SearchViewModel
-    
     @State var showMyDeviceModal : Bool = false
     @State var showEtcModal: Bool = false
     
@@ -24,6 +23,7 @@ struct SearchResultView: View {
                     HStack {
                         Text("필터: ")
                             .bold()
+                            .padding(.bottom, 8)
                         Button {
                             // 내 기기 필터 모달 동작
                             showMyDeviceModal = true
@@ -41,7 +41,7 @@ struct SearchResultView: View {
                         .sheet(isPresented: $showMyDeviceModal) {
                             MyDeviceFilterView()
                         }
-                        
+                        .padding(.bottom, 8)
                         /*
                         Button {
                             // 기타 필터 모달 동작
@@ -64,8 +64,6 @@ struct SearchResultView: View {
                         Spacer()
                     }
                     .padding(.horizontal, 20)
-                    .padding(.bottom, 20)
-                    
                 }
                 .background(Color(UIColor.systemGray6))
                 .padding(.bottom, -8)
@@ -81,34 +79,35 @@ struct SearchResultView: View {
                                 .bold()
                             Spacer()
                         }
-                        .padding([.leading, .top], 20)
+                        .padding(.top, 12)
+                        .padding(.leading, 20)
                         
                         //MARK: 최우선 결과
                         NavigationLink {
                             // 최우선 결과 제품 디테일뷰 이동
                             ContentView()
                         } label: {
-                            ZStack {
-                                Rectangle().fill(.white)
-                                    .frame(width: 350, height: 250)
-                                    .cornerRadius(15)
-                                    .shadow(radius: 10)
+//                            ZStack {
+//                                Rectangle().fill(Color(red: 245/255, green: 245/255, blue: 247/255))
+//                                    .frame(width: 350, height: 250)
                                 firstItemcell
-                            }
+//                            }
                         }
                         //firstItemOrderInfoView
                         
                         //MARK: 추가 결과
-                        HStack {
-                            Text("추가 결과")
-                                .font(.headline)
-                                .bold()
-                            Spacer()
+                        if viewModel.searchResults.count > 1 {
+                            HStack {
+                                Text("추가 결과")
+                                    .font(.headline)
+                                    .bold()
+                                Spacer()
+                            }
+                            .padding(.top, 12)
+                            .padding(.leading, 20)
+                            
+                            Divider()
                         }
-                        .padding([.leading, .top], 20)
-                        
-                        Divider()
-                        
                         ForEach (Array(viewModel.searchResults.enumerated()), id: \.offset) { index, item in
                             if index > 0 {
                                 NavigationLink {
@@ -118,7 +117,7 @@ struct SearchResultView: View {
                                     AsyncImage(url: URL(string: item.thumbnailImage )) { img in
                                         img
                                             .resizable()
-                                            .aspectRatio(contentMode: .fit)
+                                            .aspectRatio(contentMode: .fill)
                                             .frame(width: 80, height: 80)
                                             .padding(.horizontal, 50)
                                     } placeholder: {
@@ -144,6 +143,7 @@ struct SearchResultView: View {
                 Spacer()
             }
             .onAppear {
+                //userInfoStore.fetchUserInfo()
                 viewModel.sortByPrice()
             }
 
@@ -178,33 +178,38 @@ extension SearchResultView {
             AsyncImage(url: URL(string: viewModel.getFirstElement()?.thumbnailImage ?? "")) { Image in
                 Image
                     .resizable()
-                    .frame(width: 100, height: 110)
-                    .aspectRatio(contentMode: .fit)
+                    .scaledToFill()
+                    .frame(width: 350, height: 260)
+                    .cornerRadius(15)
+                    .shadow(radius: 10)
             } placeholder: {
                 ProgressView()
                     .frame(width: 100, height: 110)
             }
 
-            
-            HStack {
-                Text("New")
-                    .foregroundColor(.orange)
-                Spacer()
+            VStack {
+                HStack {
+                    Text("New")
+                        .foregroundColor(.orange)
+                    Spacer()
+                }
+                .padding(.leading, 20)
+                HStack {
+                    Text(viewModel.getFirstElement()?.productName ?? "제품이름을 가져올 수 없습니다")
+                        .foregroundColor(.black)
+                        .bold()
+                    Spacer()
+                }
+                .padding(.leading, 20)
+                HStack {
+                    Text("₩\(viewModel.getFirstElement()?.price ?? 0)")
+                        .foregroundColor(.black)
+                    Spacer()
+                }
+                .padding(.leading, 20)
             }
-            .padding(.leading, 20)
-            HStack {
-                Text(viewModel.getFirstElement()?.productName ?? "제품이름을 가져올 수 없습니다")
-                    .foregroundColor(.black)
-                    .bold()
-                Spacer()
-            }
-            .padding(.leading, 20)
-            HStack {
-                Text("₩\(viewModel.getFirstElement()?.price ?? 0)")
-                    .foregroundColor(.black)
-                Spacer()
-            }
-            .padding(.leading, 20)
+            .offset(y: -80)
+            .padding(.bottom, -80)
         }
         .padding(.horizontal, 20)
     }

@@ -129,7 +129,7 @@ final class UserInfoStore: ObservableObject{
                             self.userInfo?.userName = docData["userName"] as! String
                             self.userInfo?.address = docData["address"] as! String
                             self.userInfo?.phoneNumber = docData["phoneNumber"] as! String
-                            self.userInfo?.recentProduct = docData["recentProduct"] as! [String]
+                            //self.userInfo?.recentProduct = docData["recentProduct"] as! [String]
                         }
                     }
                 }
@@ -141,12 +141,12 @@ final class UserInfoStore: ObservableObject{
                     var tempDevice: [MyDevice] = []
                     for document in snapshot.documents{
                         let docData = document.data()
-                        
+
                         let deviceId: String = docData["myDeviceId"] as? String ?? ""
                         let deviceName: String = docData["deviceName"] as? String ?? ""
                         let deviceImage: String = docData["deviceImage"] as? String ?? ""
                         let deviceDescription: String = docData["deviceDescription"] as? String ?? ""
-                        
+
                         let myDevice: MyDevice = MyDevice(myDeviceId: deviceId , deviceName: deviceName, deviceImage: deviceImage, deviceDescription: deviceDescription)
                         tempDevice.append(myDevice)
                     }
