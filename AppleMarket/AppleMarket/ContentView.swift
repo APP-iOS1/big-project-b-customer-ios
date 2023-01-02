@@ -69,6 +69,6 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
             .environmentObject(UserInfoStore())
             .environmentObject(UserProductStore())
-        
+
     }
 }

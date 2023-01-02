@@ -31,9 +31,9 @@ struct MainMyProductView: View {
     var body: some View {
         
         VStack(alignment: .leading){
-            Text("기기별로 쇼핑하기")
-                .font(.title)
+            Text("내 기기에 맞는 액세서리 쇼핑하기")
                 .fontWeight(.bold)
+                .font(.system(size: 24))
             
             
         
@@ -112,6 +112,9 @@ struct MainMyProductView: View {
 
 struct MainMyProductView_Previews: PreviewProvider {
     static var previews: some View {
-        MainMyProductView()
+        NavigationStack{
+            MainMyProductView()
+                .environmentObject(UserProductStore())
+        }
     }
 }

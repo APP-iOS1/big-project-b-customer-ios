@@ -22,7 +22,7 @@ struct MainView: View {
 
                     
                     Text("제품별로 쇼핑하기")
-                        .font(.title)
+                        .font(.system(size: 24))
                         .fontWeight(.bold)
                         .frame(alignment: .leading)
                         .padding(.top, 50)
@@ -43,6 +43,8 @@ struct MainView_Previews: PreviewProvider {
         NavigationStack{
             MainView()
                 .environmentObject(UserProductStore())
+                .environmentObject(UserInfoStore())
+
         }
     }
 }
