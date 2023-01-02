@@ -26,7 +26,8 @@ struct AppleMarketApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(UserInfoStore())
+                .environmentObject(userInfoStore)
+                .environmentObject(UserProductStore())
         }
     }
 }

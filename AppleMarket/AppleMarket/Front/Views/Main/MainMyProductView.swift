@@ -26,11 +26,14 @@ struct MainMyProductView: View {
     
 //    let selectedMyProduct: MyProduct
     
+    @EnvironmentObject var userProductStore: UserProductStore
+    
     var body: some View {
+        
         VStack(alignment: .leading){
-            Text("기기별로 쇼핑하기")
-                .font(.title)
+            Text("내 기기에 맞는 액세서리 쇼핑하기")
                 .fontWeight(.bold)
+                .font(.system(size: 24))
             
             
         
@@ -59,23 +62,23 @@ struct MainMyProductView: View {
                     Spacer()
                         .frame(width: 50)
                     
-                    ForEach(myProducts){ product in
+                    ForEach(userProductStore.userProductStores){ product in
                         // 내 기기 이미지 사용 예정
                         
                         NavigationLink{
-                            MyProductDetailView(myProducts: MyProduct(id: product.id, imagePath: product.imagePath, productName: product.productName, category: product.category, details: product.details))
+                            MyProductDetailView(myProducts: product)
                         } label:{
                         ZStack{
                             RoundedRectangle(cornerRadius: 20)
-                                .frame(width: 240, height: 300)
+                                .frame(width: 230, height: 300)
                                 .foregroundColor(.white)
                             
                             VStack {
-                                AsyncImage(url: URL(string: product.imagePath)) { image in
+                                AsyncImage(url: URL(string: product.images[0] ?? "")) { image in
                                     image
                                         .resizable()
                                         .scaledToFit()
-                                        .frame(height: 180)
+                                        .frame(height: 160)
                                     
                                 } placeholder: {
                                     ProgressView()
@@ -102,13 +105,16 @@ struct MainMyProductView: View {
             //            }
         }
         .padding(.top, 50)
-        
+        .onAppear{userProductStore.fetchData()}
         
     }
 }
 
 struct MainMyProductView_Previews: PreviewProvider {
     static var previews: some View {
-        MainMyProductView()
+        NavigationStack{
+            MainMyProductView()
+                .environmentObject(UserProductStore())
+        }
     }
 }

@@ -14,6 +14,7 @@ final class UserInfoStore: ObservableObject{
     @Published var state: SignInState = .signedOut
     @Published var userInfo: UserInfo?
     @Published var cart: [Cart] = []
+    @Published var signUpState: Bool = false
     
     let database = Firestore.firestore()
     

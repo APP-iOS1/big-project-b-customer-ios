@@ -7,42 +7,79 @@
 
 import SwiftUI
 
-/// focus를 위한 열거형
-enum Field {
-    case email
-    case password
-}
-
-
 // MARK: - 로그인 뷰
 struct LoginView: View {
-   
+
+   // @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var userInfoStore: UserInfoStore
     @State var emailText: String = ""
     @State var passwordText: String = ""
-    
+    @State var signInProcessing: Bool = false
+    @Binding var isShowingLoginSheet: Bool
     var body: some View {
         
+       
+       
         NavigationStack {
             VStack(spacing: 15) {
-                
-                
-                Text("이메일로 로그인하세요")
-                    .font(.largeTitle)
-                    .lineSpacing(10)
-                
-                CustomTextFieldView(emailText: $emailText, passwordText: $passwordText)
-                
+                        
+                        
+                        Text("이메일로 로그인하세요")
+                            .font(.largeTitle)
+                            .lineSpacing(10)
+                        
+                        Group {
+                            
+                            CustomTextFieldView(emailText: $emailText, passwordText: $passwordText)
+                            
+                            //회원정보가 비어있으면
+                            if !userInfoStore.errorMessage.isEmpty {
+                                Text("회원 정보가 일치하지 않습니다.")
+                                    .foregroundColor(.red)
+                            }
+                            
+                            // 로그인 접속중에 signInProcessing = false 이거나 유저 정보가 비어있다면
+                            if signInProcessing && userInfoStore.errorMessage.isEmpty {
+                                ProgressView()
+                            }
+                        }
+                        
+                        
+                        Button {
+                            
+                            signInProcessing = true
+                            userInfoStore.emailAuthSignIn(email: emailText, password: passwordText)
+                                print("로그인 되었습니다.")
+                            isShowingLoginSheet.toggle()
+                        } label: {
+                                Text("로그인")
+                                    .padding()
+                                    .foregroundColor(.white)
+                                    .background(buttonBackColor)
+                                    .cornerRadius(10)
+                                    .padding(.bottom, 40)
+                        }
+                        .disabled(emailText.isEmpty || passwordText.isEmpty ? true : false)
 
-                IdAndPasswordFindView()
-            }
+                        IdAndPasswordFindView()
+                    }
             .padding()
         }
+        
+        
+    }
+    
+    var buttonBackColor: Color {
+        emailText.isEmpty || passwordText.isEmpty == true ? .gray : .red
     }
 }
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        NavigationStack {
+            LoginView(isShowingLoginSheet: .constant(true))
+                .environmentObject(UserInfoStore())
+        }
     }
 }
 
@@ -50,11 +87,9 @@ struct LoginView_Previews: PreviewProvider {
 
 // MARK: - 로그인 텍스트 필드 및 로그인 버튼
 struct CustomTextFieldView: View {
-    // 로그인 되면 전 화면으로 이동 
-    @Environment(\.dismiss) private var dismiss
+    
     @Binding var emailText: String
     @Binding var passwordText: String
-    @FocusState private var focusField: Field?
     
     var body: some View {
         VStack {
@@ -63,39 +98,14 @@ struct CustomTextFieldView: View {
                 .background(.thinMaterial)
                 .cornerRadius(10)
                 .textInputAutocapitalization(.never)
-                .focused($focusField, equals: .email)
             SecureField("비밀번호를 입력하세요", text: $passwordText)
                 .padding()
                 .background(.thinMaterial)
                 .cornerRadius(10)
                 .padding(.bottom, 30)
-                .focused($focusField, equals: .password)
-            
-            Button {
-                if emailText.isEmpty {
-                    focusField = .email
-                } else if passwordText.isEmpty {
-                    focusField = .password
-                } else {
-                    hideKeyboard()
-                    dismiss()
-                    print("로그인 되었습니다.")
-                }
-            } label: {
-                    Text("로그인")
-                        .padding()
-                        .foregroundColor(.white)
-                        .background(buttonBackColor)
-                        .cornerRadius(10)
-                        .padding(.bottom, 40)
-            }
-            .disabled(emailText.isEmpty || passwordText.isEmpty ? true : false)
+
             
         }
-    }
-    
-    var buttonBackColor: Color {
-        return emailText.isEmpty || passwordText.isEmpty == true ? .gray : .blue
     }
 }
 
@@ -104,26 +114,19 @@ struct CustomTextFieldView: View {
 struct IdAndPasswordFindView: View {
     var body: some View {
        
+        
             HStack {
-                Text("아이디가 없으십니까?")
-          
-                NavigationLink {
-                    SignUpView()
-                } label: {
-                    HStack {
-                        Text("지금 만드세요.")
-                        Image(systemName: "arrow.up.forward")
+                    Text("아이디가 없으십니까?")
+              
+                    NavigationLink {
+                        SignUpView()
+                    } label: {
+                        HStack {
+                            Text("지금 만드세요.")
+                            Image(systemName: "arrow.up.forward")
+                                
+                        }
                     }
-                }
-  
-            }
+        }
     }
-}
-
-
-// MARK: - 키보드 내리기
-extension View {
-  func hideKeyboard() {
-    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-  }
 }
