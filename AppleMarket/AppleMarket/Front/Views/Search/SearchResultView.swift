@@ -20,29 +20,6 @@ struct SearchResultView: View {
             VStack {
                 VStack {
                     
-//                    //MARK: 검색창 및 취소 버튼
-//                    HStack {
-//                        HStack {
-//                            Image(systemName: "magnifyingglass")
-//                            TextField("제품 및 매장 검색", text: $inputSearch)
-//                        }
-//                        .padding()
-//                        .frame(height: 36)
-//                        .background(Color(UIColor.systemGray5))
-//                        .cornerRadius(15)
-//                        .textInputAutocapitalization(.never)
-//                        .lineLimit(1)
-//
-//                        NavigationLink {
-//                            SearchView()
-//                        } label: {
-//                            Text("취소")
-//                                .foregroundColor(Color("MainColor"))
-//                        }
-//                        .navigationBarBackButtonHidden(true)
-//                    }
-//                    .padding(.horizontal, 20)
-                    
                     //MARK: 필터 버튼
                     HStack {
                         Text("필터: ")
@@ -119,7 +96,7 @@ struct SearchResultView: View {
                                 firstItemcell
                             }
                         }
-                        firstItemOrderInfoView
+                        //firstItemOrderInfoView
                         
                         //MARK: 추가 결과
                         HStack {
@@ -132,27 +109,35 @@ struct SearchResultView: View {
                         
                         Divider()
                         
-                        ForEach (0..<15) { _ in
-                            NavigationLink {
+                        ForEach (Array(viewModel.searchResults.enumerated()), id: \.offset) { index, item in
+                            if index > 0 {
+                                NavigationLink {
                                 ContentView()
                             } label: {
                                 HStack {
-                                    Image("sample_airpods")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 80, height: 80)
-                                        .padding(.horizontal, 50)
-                                    VStack {
-                                        Text("AirPods Pro")
+                                    AsyncImage(url: URL(string: item.thumbnailImage )) { img in
+                                        img
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 80, height: 80)
+                                            .padding(.horizontal, 50)
+                                    } placeholder: {
+                                        ProgressView()
+                                            .frame(width: 80, height: 80)
+                                    }
+
+                                    VStack(alignment: .leading) {
+                                        Text(item.productName)
                                             .bold()
-                                        Text("가격정보")
-                                        Text("출고, 배송 여부")
+                                        Text("가격정보 : \(item.price)")
+                                        Text(item.status == 1 ? "구매 가능" : "재고 없음")
                                     }
                                     .foregroundColor(.black)
                                     Spacer()
                                 }
                             }
-                            Divider()
+                                Divider()
+                            }
                         }
                     }
                 }
@@ -197,6 +182,7 @@ extension SearchResultView {
                     .aspectRatio(contentMode: .fit)
             } placeholder: {
                 ProgressView()
+                    .frame(width: 100, height: 110)
             }
 
             
@@ -223,23 +209,23 @@ extension SearchResultView {
         .padding(.horizontal, 20)
     }
     
-    
-    var firstItemOrderInfoView: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Text("오늘 주문 시 배송:")
-                Spacer()
-            }
-            Text("목 2022/12/29 - 무료 배송")
-                .foregroundColor(Color(UIColor.systemGray2))
-            
-            Text("지금 주문하기. 매장 내 픽업:")
-            Text("오늘, 위치: Apple 가로수길")
-                .foregroundColor(Color(UIColor.systemGray2))
-        }
-        .padding(.horizontal, 20)
-        .padding(.top, 20)
-    }
+//
+//    var firstItemOrderInfoView: some View {
+//        VStack(alignment: .leading) {
+//            HStack {
+//                Text("오늘 주문 시 배송:")
+//                Spacer()
+//            }
+//            Text("목 2022/12/29 - 무료 배송")
+//                .foregroundColor(Color(UIColor.systemGray2))
+//                .padding(.bottom, 12)
+//            Text("지금 주문하기. 매장 내 픽업:")
+//            Text("오늘, 위치: Apple 가로수길")
+//                .foregroundColor(Color(UIColor.systemGray2))
+//        }
+//        .padding(.horizontal, 20)
+//        .padding(.top, 20)
+//    }
 }
 
 

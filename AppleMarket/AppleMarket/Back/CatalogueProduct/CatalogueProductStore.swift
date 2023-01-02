@@ -15,7 +15,9 @@ class CatalogueProductStore: ObservableObject {
     let database: Firestore = Firestore.firestore()
     
     func fetchData() -> Void {
-            
+        
+        self.catalogueProductStores.removeAll()
+        
             database.collection("CatalogueProduct").getDocuments { snapshot, error in
                 
                 if let snapshot {
