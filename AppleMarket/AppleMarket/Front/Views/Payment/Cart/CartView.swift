@@ -12,10 +12,13 @@ struct CartView: View {
     @StateObject private var cartStore: CartStore = CartStore()
     
     var body: some View {
-        if userInfoStore.state == .signedIn {
-            CartSignInView()
-        } else {
-            CartSignOutView()
+        VStack {
+            if userInfoStore.state == .signedIn {
+                CartSignInView()
+                
+            } else {
+                CartSignOutView()
+            }
         }
     }
 }
