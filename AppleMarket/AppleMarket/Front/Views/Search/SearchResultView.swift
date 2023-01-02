@@ -10,7 +10,8 @@ import SwiftUI
 struct SearchResultView: View {
     
     @Environment(\.presentationMode) var presentationMode
-    @State var inputSearch: String = ""
+    @ObservedObject var viewModel: SearchViewModel
+    
     @State var showMyDeviceModal : Bool = false
     @State var showEtcModal: Bool = false
     
@@ -115,10 +116,10 @@ struct SearchResultView: View {
                                     .frame(width: 350, height: 250)
                                     .cornerRadius(15)
                                     .shadow(radius: 10)
-                                FirstItemCell()
+                                firstItemcell
                             }
                         }
-                        FirstItemOrderInfoView()
+                        firstItemOrderInfoView
                         
                         //MARK: 추가 결과
                         HStack {
@@ -157,7 +158,10 @@ struct SearchResultView: View {
                 }
                 Spacer()
             }
-//            .toolbar(.hidden)
+            .onAppear {
+                viewModel.sortByPrice()
+            }
+
         
     }
 }
@@ -171,17 +175,31 @@ func filterButton() -> some View {
 
 struct SearchResultView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchResultView()
+        SearchResultView(viewModel: SearchViewModel())
     }
 }
 
-struct FirstItemCell: View {
-    var body: some View {
+extension SearchResultView {
+    
+    var firstItemcell: some View {
         VStack {
-            Image("sample_airpods")
-                .resizable()
-                .frame(width: 100, height: 110)
-                .aspectRatio(contentMode: .fit)
+//            Image("sample_airpods")
+//                .resizable()
+//                .frame(width: 100, height: 110)
+//                .aspectRatio(contentMode: .fit)
+            
+            //MARK: 뷰모델의 검색결과가 빈 배열일 때 index out of range 오류를 해결하기 위한 조치
+            // 검색결과가 없을 때의 대응 필요함
+            AsyncImage(url: URL(string: viewModel.getFirstElement()?.images[0] ?? "" )) { Image in
+                Image
+                    .resizable()
+                    .frame(width: 100, height: 110)
+                    .aspectRatio(contentMode: .fit)
+            } placeholder: {
+                ProgressView()
+            }
+
+            
             HStack {
                 Text("New")
                     .foregroundColor(.orange)
@@ -189,14 +207,14 @@ struct FirstItemCell: View {
             }
             .padding(.leading, 20)
             HStack {
-                Text("AirPods Pro(2세대)")
+                Text(viewModel.getFirstElement()?.productName ?? "제품이름을 가져올 수 없습니다")
                     .foregroundColor(.black)
                     .bold()
                 Spacer()
             }
             .padding(.leading, 20)
             HStack {
-                Text("₩359,000")
+                Text("₩\(viewModel.getFirstElement()?.price ?? 0)")
                     .foregroundColor(.black)
                 Spacer()
             }
@@ -204,10 +222,9 @@ struct FirstItemCell: View {
         }
         .padding(.horizontal, 20)
     }
-}
-
-struct FirstItemOrderInfoView: View {
-    var body: some View {
+    
+    
+    var firstItemOrderInfoView: some View {
         VStack(alignment: .leading) {
             HStack {
                 Text("오늘 주문 시 배송:")
@@ -222,6 +239,8 @@ struct FirstItemOrderInfoView: View {
         }
         .padding(.horizontal, 20)
         .padding(.top, 20)
-        
     }
 }
+
+
+

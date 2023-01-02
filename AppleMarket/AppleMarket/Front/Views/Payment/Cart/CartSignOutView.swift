@@ -1,5 +1,5 @@
 //
-//  CartLoginView.swift
+//  CartSignInView.swift
 //  AppleMarket
 //
 //  Created by hyemi on 2022/12/27.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CartLoginView: View {
+struct CartSignOutView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 40) {
             Text("장바구니")
@@ -32,8 +32,8 @@ struct CartLoginView: View {
     }
 }
 
-struct CartLoginView_Previews: PreviewProvider {
+struct CartSignOutView_Previews: PreviewProvider {
     static var previews: some View {
-        CartLoginView()
+        CartSignOutView()
     }
 }
