@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct MyOrderDetailView: View {
+    @StateObject var orderStore: OrderStore = OrderStore()
+
+    var order: Order
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
@@ -17,7 +21,7 @@ struct MyOrderDetailView: View {
                     .padding(.bottom, 30)
                 Text("주문번호 : 12345678")
                     .font(.callout)
-                Text("주문 접수 : 2022년 9월 7일")
+                Text("\(order.orderDate)")
                     .font(.callout)
                 
                 // 제품정보
@@ -141,6 +145,6 @@ struct MyOrderDetailView: View {
 
 struct MyOrderDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        MyOrderDetailView()
+        MyOrderDetailView(order: Order(id: "", orderAddress: "", orderTotalPrice: 0, isDeposit: false, orderAt: Date(), detailOrderCount: 0, mainProductImage: "", mainProductName: ""))
     }
 }
