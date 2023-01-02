@@ -16,7 +16,7 @@ class CatalogueProductStore: ObservableObject {
     
     func fetchData() -> Void {
             
-            database.collection("CatalogueProduct").getDocuments { snapshot, error in
+            database.collection("UserProduct").getDocuments { snapshot, error in
                 
                 if let snapshot {
                     
