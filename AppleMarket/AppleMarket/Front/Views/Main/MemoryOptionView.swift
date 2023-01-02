@@ -11,6 +11,7 @@ struct MemoryOptionView: View {
     @State private var isChecking = [false, false, false, false]
     @Binding var memory: String
     @Binding var selectedProduct: CatalogueProduct
+
     
     var body: some View {
         VStack(alignment: .leading, spacing: 15) {
@@ -22,80 +23,85 @@ struct MemoryOptionView: View {
             .padding(.bottom, 10)
             
             
-            HStack(alignment: .bottom, spacing: 15) {
+            HStack(alignment: .bottom, spacing: 10) {
                 Button {
                     isChecking = [true, false, false, false]
-                    memory = "128GB"
+
+                    memory = selectedProduct.storage?[0] ?? ""
                 } label: {
                     
                     VStack(alignment: .center, spacing: 5) {
-                        Text("128GB")
+                        Text(selectedProduct.storage?[0] ?? "")
                         Text("₩")
                             .font(.caption)
                             .foregroundColor(.gray)
                         
                     }
                     .foregroundColor(.black)
-                    .frame(width:170 ,height: 70)
-                    .overlay(RoundedRectangle(cornerRadius: 15)
+                    .frame(width:172.5 ,height: 70)
+                    .overlay(RoundedRectangle(cornerRadius: 10)
                         .stroke(isChecking[0] ? Color("MainColor") : Color.gray, lineWidth: 1.5))
                 }
                 .disabled(isChecking[0])
                 
                 Button {
                     isChecking = [false, true, false, false]
-                    memory = "256GB"
+
+                    memory = selectedProduct.storage?[1] ?? ""
                 } label: {
                     
                     VStack(alignment: .center, spacing: 5) {
-                        Text("256GB")
+                        Text(selectedProduct.storage?[1] ?? "")
                         Text("₩")
                             .font(.caption)
                             .foregroundColor(.gray)
                         
                     }
                     .foregroundColor(.black)
-                    .frame(width:170 ,height: 70)
-                    .overlay(RoundedRectangle(cornerRadius: 15)
+                    .frame(width:172.5 ,height: 70)
+                    .overlay(RoundedRectangle(cornerRadius: 10)
                         .stroke(isChecking[1] ? Color("MainColor") : Color.gray, lineWidth: 1.5))
                 }
                 .disabled(isChecking[1]) //isChecking2가 true일때 비활성화
             }
             
-            HStack(alignment: .bottom, spacing: 15) {
+            HStack(alignment: .bottom, spacing: 10) {
                 Button {
                     isChecking = [false, false, true, false]
-                    memory = "512GB"
+                    memory = selectedProduct.storage?[2] ?? ""
                 } label: {
                     
                     VStack(alignment: .center, spacing: 5) {
-                        Text("512GB")
+                        Text(selectedProduct.storage?[2] ?? "")
                         Text("₩")
                             .font(.caption)
                             .foregroundColor(.gray)
                         
                     }
                     .foregroundColor(.black)
-                    .frame(width:170 ,height: 70)
-                    .overlay(RoundedRectangle(cornerRadius: 15)
+                    .frame(width:172.5 ,height: 70)
+                    .overlay(RoundedRectangle(cornerRadius: 10)
                         .stroke(isChecking[2] ? Color("MainColor") : Color.gray, lineWidth: 1.5))
                 }
                 .disabled(isChecking[2])
                 
                 Button {
                     isChecking = [false, false, false, true]
-                    memory = "1TB"
+                    memory = selectedProduct.storage?[3] ?? ""
+
                 } label: {
+                    
                     VStack(alignment: .center, spacing: 5) {
-                        Text("1TB")
-                        Text("₩)")
+
+                        Text(selectedProduct.storage?[3] ?? "")
+                        Text("₩")
                             .font(.caption)
                             .foregroundColor(.gray)
                         
                     }
                     .foregroundColor(.black)
-                    .frame(width:170 ,height: 70)
-                    .overlay(RoundedRectangle(cornerRadius: 15)
+                    .frame(width:172.5 ,height: 70)
+                    .overlay(RoundedRectangle(cornerRadius: 10)
                         .stroke(isChecking[3] ? Color("MainColor") : Color.gray, lineWidth: 1.5))
                 }
                 .disabled(isChecking[3])
