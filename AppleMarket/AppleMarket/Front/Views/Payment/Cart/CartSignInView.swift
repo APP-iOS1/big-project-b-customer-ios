@@ -13,14 +13,14 @@ struct CartSignInView: View {
     @State private var selectProducts: [Bool] = Array(repeating: false, count: 10) // 선택 상품 확인
     @State private var allSelect: Bool = false // 상품 전체선택 확인
     @State private var disabled: Bool = false // 결제 버튼 활성화
-    @State private var emptyCart: Bool = false
+    @State private var isEmptyCart: Bool = false
     @StateObject private var cartStore: CartStore = CartStore()
     @StateObject private var productStore: ProductStore = ProductStore()
+
     
     init() {
         UINavigationBar.setAnimationsEnabled(false)
     }
-    
     
     var body: some View {
         NavigationStack {
@@ -56,23 +56,21 @@ struct CartSignInView: View {
                         
                         Spacer()
                         
-                        NavigationLink(destination: EmptyCartView(), isActive: $emptyCart) {
-                            // 지우기
-                            Button(action: {
-                                for index in 0..<cartStore.cartStore.count {
-                                    if selectProducts[index] {
-                                        cartStore.removeCart(uid: userId, product: Cart(productId: cartStore.cartStore[index].productId, productName: cartStore.cartStore[index].productName, productCount: cartStore.cartStore[index].productCount, productPrice: cartStore.cartStore[index].productPrice, productImage: cartStore.cartStore[index].productImage))
-                                    }
-                                }
-                                selectProducts = Array(repeating: false, count: cartStore.cartStore.count)
-                                
-                                if cartStore.cartStore.isEmpty {
-                                    emptyCart = true
-                                }
-                            }) {
-                                Text("지우기")
-                                    .foregroundColor(Color("MainColor"))
+                        // 지우기
+                        Button(action: {
+//                            for index in 0..<cartStore.cartStore.count {
+//                                if selectProducts[index] {
+//                                    cartStore.removeCart(uid: userId, product: Cart(productId: cartStore.cartStore[index].productId, productName: cartStore.cartStore[index].productName, productCount: cartStore.cartStore[index].productCount, productPrice: cartStore.cartStore[index].productPrice, productImage: cartStore.cartStore[index].productImage))
+//                                }
+//                            }
+                            selectProducts = Array(repeating: false, count: cartStore.cartStore.count)
+                            
+                            if cartStore.cartStore.isEmpty {
+                                isEmptyCart.toggle()
                             }
+                        }) {
+                            Text(selectProducts.filter{$0}.count == 0 ? "" : "지우기")
+                                .foregroundColor(Color("MainColor"))
                         }
                     }
                     .foregroundColor(Color("MainColor"))
@@ -81,7 +79,7 @@ struct CartSignInView: View {
                     // 상품 리스트
                     ScrollView {
                         ForEach(0..<cartStore.cartStore.count, id: \.self) { index in
-                            HStack {
+                            HStack(spacing: 15) {
                                 // 체크 버튼
                                 Button(action: {
                                     selectProducts[index] = !selectProducts[index]
@@ -103,8 +101,14 @@ struct CartSignInView: View {
                                 }
                                 
                                 // 상품 이미지
-                                AsyncImage(url: URL(string: cartStore.cartStore[index].productImage), scale: 13)
-                                    .frame(width: 100, height: 100)
+                                AsyncImage(url: URL(string: cartStore.cartStore[index].productImage)) { image in
+                                    image
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                } placeholder: {
+                                    Color.gray
+                                }
+                                .frame(width: 80)
                                 
                                 VStack(alignment: .leading, spacing: 18) {
                                     // 상품명
@@ -112,7 +116,7 @@ struct CartSignInView: View {
                                         .fontWeight(.bold)
                                     
                                     // 상품 개수
-                                    HStack(spacing: 12) {
+                                    HStack(spacing: 10) {
                                         // - 버튼
                                         Button(action: {
                                             let price = cartStore.cartStore[index].productPrice / cartStore.cartStore[index].productCount
@@ -163,9 +167,9 @@ struct CartSignInView: View {
                                         // 상품 가격
                                         Text("₩\(cartStore.cartStore[index].productPrice)")
                                             .fontWeight(.semibold)
+                                            .frame(width: 110, alignment: .leading)
                                     }
                                 }
-                                Spacer()
                             }
                             .padding()
                             .padding(.vertical, 15)
@@ -185,8 +189,7 @@ struct CartSignInView: View {
                     .padding(.top, 10)
                     
                     // 결제
-                    Button(action: {
-                    }) {
+                    NavigationLink(destination: PaymentView()) {
                         ZStack {
                             RoundedRectangle(cornerRadius: 15)
                                 .fill(disabled ? .secondary : Color("MainColor"))
@@ -205,6 +208,9 @@ struct CartSignInView: View {
         }
         .onAppear {
             cartStore.fetchCart(uid: userId)
+        }
+        .navigationDestination(isPresented: $isEmptyCart) {
+            EmptyCartView()
         }
     }
     
