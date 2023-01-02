@@ -18,6 +18,8 @@ struct UserInfo: Codable, Hashable{
 }
 
 struct MyDevice: Codable, Hashable{
-    var productName: String  // 기기 이름
-    var productImage: String  // 기기 이미지 주소
+    var myDeviceId: String // 내 기기 아이디
+    var deviceName: String  // 기기 이름
+    var deviceImage: String  // 기기 이미지 주소
+    var deviceDescription: String // 기기 닉네임
 }

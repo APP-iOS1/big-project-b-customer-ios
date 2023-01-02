@@ -9,9 +9,8 @@ import SwiftUI
 
 struct MemoryOptionView: View {
     @State private var isChecking = [false, false, false, false]
-    @Binding var price: Int
     @Binding var memory: String
-    @Binding var memoryPrice: Int
+    @Binding var selectedProduct: CatalogueProduct
     
     var body: some View {
         VStack(alignment: .leading, spacing: 15) {
@@ -27,12 +26,11 @@ struct MemoryOptionView: View {
                 Button {
                     isChecking = [true, false, false, false]
                     memory = "128GB"
-                    price = memoryPrice
                 } label: {
                     
                     VStack(alignment: .center, spacing: 5) {
                         Text("128GB")
-                        Text("₩\(memoryPrice)")
+                        Text("₩")
                             .font(.caption)
                             .foregroundColor(.gray)
                         
@@ -47,13 +45,11 @@ struct MemoryOptionView: View {
                 Button {
                     isChecking = [false, true, false, false]
                     memory = "256GB"
-                    price = memoryPrice
-                    price += 150000
                 } label: {
                     
                     VStack(alignment: .center, spacing: 5) {
                         Text("256GB")
-                        Text("₩\(memoryPrice+150000)")
+                        Text("₩")
                             .font(.caption)
                             .foregroundColor(.gray)
                         
@@ -70,13 +66,11 @@ struct MemoryOptionView: View {
                 Button {
                     isChecking = [false, false, true, false]
                     memory = "512GB"
-                    price = memoryPrice
-                    price += 450000
                 } label: {
                     
                     VStack(alignment: .center, spacing: 5) {
                         Text("512GB")
-                        Text("₩\(memoryPrice+450000)")
+                        Text("₩")
                             .font(.caption)
                             .foregroundColor(.gray)
                         
@@ -91,13 +85,10 @@ struct MemoryOptionView: View {
                 Button {
                     isChecking = [false, false, false, true]
                     memory = "1TB"
-                    price = memoryPrice
-                    price += 750000
                 } label: {
-                    
                     VStack(alignment: .center, spacing: 5) {
                         Text("1TB")
-                        Text("₩\(memoryPrice+750000)")
+                        Text("₩)")
                             .font(.caption)
                             .foregroundColor(.gray)
                         

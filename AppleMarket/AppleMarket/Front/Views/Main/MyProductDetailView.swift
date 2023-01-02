@@ -32,11 +32,11 @@ struct MyProductDetailView: View {
         ScrollView{
             VStack(alignment: .leading){
                 
-                var tempImgPath: String = myProducts.thumbnailImage.isEmpty ? "" : (myProducts.thumbnailImage ?? "" )
+                let _: String = myProducts.thumbnailImage.isEmpty ? "" : (myProducts.thumbnailImage )
                 
                 HStack{
                     // 기기 사진
-                    AsyncImage(url: URL(string: tempImgPath)) { image in
+                    AsyncImage(url: URL(string: myProducts.thumbnailImage )) { image in
                         image
                             .resizable()
                             .scaledToFit()

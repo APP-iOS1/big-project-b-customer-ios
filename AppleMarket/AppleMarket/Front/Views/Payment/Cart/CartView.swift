@@ -7,27 +7,16 @@
 
 import SwiftUI
 
-
 struct CartView: View {
     @EnvironmentObject var userInfoStore: UserInfoStore
-    
     @StateObject private var cartStore: CartStore = CartStore()
     
     var body: some View {
-        VStack {
-            if userInfoStore.userInfo?.userId != "" {
-                if cartStore.cartStore.isEmpty {
-                    EmptyCartView()
-                } else {
-                    CartSignInView()
-                }
-            } else {
-                CartSignOutView()
-            }
+        if userInfoStore.state == .signedIn {
+            CartSignInView()
+        } else {
+            CartSignOutView()
         }
-//        .onAppear {
-//            cartStore.fetchCart(uid: userInfoStore.userInfo?.userId ?? "")
-//        }
     }
 }
 

@@ -10,6 +10,7 @@ import SwiftUI
 struct ColorOptionView: View {
     @State private var isChecking = [false, false, false, false]
     @Binding var color: String
+    @Binding var selectedProduct: CatalogueProduct
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {

@@ -13,19 +13,26 @@ struct DetailView: View {
         "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone-14-pro-finish-select-202209-6-1inch-silver_AV1?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1661969351381",
         "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone-14-pro-finish-select-202209-6-1inch-silver_AV2?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1660754259155"]
     @State var price: Int = 0
+    @State var memoryPrice: Int = 0
+    
     @State var model: String = "iPhone 14 Pro"
     @State var memory: String = "128GB"
     @State var color: String = "실버"
-    @State var memoryPrice: Int = 0
+    
+    @State private var selectedProduct: CatalogueProduct = CatalogueProduct(id: "1A20CDEF-F296-444B-903C-4CD5C3A4A471", productName: "iPhone 14 Pro", device: ["iPhone 14 Pro"], category: "iPhone", description: "IPhone 14 Pro 입니다.", price: 1550000, thumbnailImage: "", status: 1, descriptionImages: [
+        "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone-14-pro-finish-select-202209-6-1inch-silver?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1663703840488",
+        "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone-14-pro-finish-select-202209-6-1inch-silver_AV1?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1661969351381",
+        "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone-14-pro-finish-select-202209-6-1inch-silver_AV2?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1660754259155"])
+    
     
     var body: some View {
         ScrollView {
             VStack {
-                Text("iPhone14 Pro 구입하기")
+                Text("\(selectedProduct.productName) 구입하기")
                     .font(.headline)
                 TabView {
-                    ForEach(0..<imageArr.count, id: \.self) { i in
-                        AsyncImage(url: URL(string: imageArr[i])) { image in
+                    ForEach(0..<(selectedProduct.descriptionImages?.count ?? 0), id: \.self) { i in
+                        AsyncImage(url: URL(string: selectedProduct.descriptionImages?[i] ?? "")) { image in
                             image
                                 .resizable()
                                 .scaledToFit()
@@ -40,18 +47,16 @@ struct DetailView: View {
                 .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
                 .frame(height: 250)
                 
-                Text("₩1,550,000부터")
+                Text("₩\(selectedProduct.price)부터")
                 
                 Divider()
                     .padding(.vertical, 20)
                 
-                ModelOptionView(price: $price, model: $model, memoryPrice: $memoryPrice)
+                ModelOptionView(model: $model, selectedProduct: $selectedProduct)
                     .padding(.bottom, 35)
-                ColorOptionView(color: $color)
+                ColorOptionView(color: $color, selectedProduct: $selectedProduct)
                     .padding(.bottom, 35)
-                MemoryOptionView(price: $price, memory: $memory, memoryPrice: $memoryPrice)
-                    .padding(.bottom, 35)
-                AppleCareOptionView(price: $price)
+                MemoryOptionView( memory: $memory, selectedProduct: $selectedProduct)
                     .padding(.bottom, 35)
                 
                 HStack {
@@ -80,6 +85,7 @@ struct DetailView: View {
                 .frame(width: 355)
                 
                 DetailButtonView()
+                    .padding(.bottom, 20)
                 
             }
         } // ScrollView
