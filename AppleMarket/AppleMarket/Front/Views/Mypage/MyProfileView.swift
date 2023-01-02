@@ -18,7 +18,6 @@ struct MyProfileView: View {
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading, spacing: 0) {
-
                     List {
                         Section {
                             HStack {
@@ -34,11 +33,11 @@ struct MyProfileView: View {
                                 
                                 VStack(alignment:. leading, spacing: 3) {
                                     HStack(alignment: .center) {
-                                        Text("파베에서 이름 불러오기")
+                                        Text(userInfoStore.userInfo?.userName ?? "")
                                             .font(.title3)
                                     }
                                     
-                                    Text("파베에서 불러온 이메일")
+                                    Text(userInfoStore.userInfo?.userEmail ?? "")
                                         .font(.subheadline)
                                 }
                             }
@@ -82,6 +81,9 @@ struct MyProfileView: View {
                     .navigationBarTitle("계정")
                     .navigationBarTitleDisplayMode(.inline)
                     
+            }
+            .onAppear {
+//                userInfoStore.fetchUserInfo()
             }
         }
     }

@@ -10,12 +10,19 @@ import SwiftUI
 struct AddMyDeviceView: View {
     @EnvironmentObject var userInfoStore: UserInfoStore
     @StateObject var catalogueProductStore: CatalogueProductStore = CatalogueProductStore()
-    
     @Binding var isShowingSheet: Bool
-    @State private var selectedProduct: CatalogueProduct? = nil
-    @State private var deviceName: String = ""
+    @State private var selectedProductCategory: String = ""
+    @State private var deviceDescription: String = ""
     @State private var deviceImage: String = ""
     @State private var deviceType: String = ""
+    
+    let deviceCategory: [String] = ["iPhone", "iPad", "MacBook", "iMac", "Apple Watch", "AirPod"]
+    let deviceIconName: [String] = ["iphone", "ipad", "laptopcomputer", "desktopcomputer", "applewatch", "airpods.chargingcase"]
+    
+//    @State private var productCategory: [String] = []
+    
+    @State private var removeDuplicated: Set<String> = []
+    @State var array = [String]()
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -28,11 +35,14 @@ struct AddMyDeviceView: View {
                         .foregroundColor(.black)
                 }
                 
-            
-                
                 Spacer()
                 Button {
-                    userInfoStore.addMyDevice(myDevice: MyDevice(myDeviceId: UUID().uuidString, deviceName: "", deviceImage: "", deviceDescription: deviceName))
+                    let deviceId = UUID().uuidString
+                    userInfoStore.addMyDevice(myDevice: MyDevice(
+                        myDeviceId: deviceId,
+                        deviceName: "",
+                        deviceImage: "",
+                        deviceDescription: deviceDescription))
                     isShowingSheet.toggle()
                 } label: {
                     Text("등록하기")
@@ -42,52 +52,85 @@ struct AddMyDeviceView: View {
             }
             .padding(.top, 20)
             
+            // UserStore: UserInfo Device 확인용 코드
+            /*
             ForEach(userInfoStore.userInfo?.myDevices ?? [], id: \.self) { test in
                 Text(test.deviceDescription)
             }
+             */
             
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
-                    ForEach(catalogueProductStore.catalogueProductStores) { product in
-                        Button(product.category) {
+            ScrollView (.horizontal, showsIndicators: false) {
+                HStack(alignment: .bottom, spacing: 20) {
+                    ForEach(0 ..< deviceCategory.count, id: \.self) { index in
+                        Button {
+                            selectedProductCategory = deviceCategory[index]
                             
-                        }
-                    }
-                }
-            }
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
-                    ForEach(catalogueProductStore.catalogueProductStores) { product in
-                        ForEach(product.device, id: \.self) { deviceItem in
-                            Button(deviceItem) {
-                                print(deviceItem)
+                        } label: {
+                            VStack(alignment: .center, spacing: 5) {
+                                Image(systemName: deviceIconName[index])
+                                    .font(.largeTitle)
+                                Text(deviceCategory[index])
                             }
                         }
                     }
                 }
             }
             
-            HStack {
-                if let selectedProduct {
-//                    ForEach(selectedProduct.device, id: \.self) { product in
-//                        Button {
-//                            deviceType = ""
-//                            deviceType = selectedProduct.device + " " + (product ?? "")
-//                            print(deviceType)
-//                        } label: {
-//
-//                            Text(product ?? "")
-//                        }
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 15) {
+                    ForEach(catalogueProductStore.catalogueProductStores) { product in
+                        
+                        ForEach(product.model ?? [], id: \.self) { deviceModel in
+                            
+//                            let _ = removeDuplication(in: product.model ?? [])
+//                            let _ = print(removeDuplication(in: product.model ?? []))
+                            
+                           
+                            if deviceModel.contains(selectedProductCategory) {
+                                Button {
+                                    print(deviceModel)
+//                                    deviceImage = product.thumbnailImage
+//                                    deviceType = deviceModel
 
-                        //                        Button(product!) {
-                        //
-                        //                        }
-//                    }
+//                                    print("디바이스 이미지는 \(deviceImage), 디바이스 이름은 \(deviceType)" )
+//                                    print(product.model?.uniqued()!)
+                                } label: {
+//                                    Text("테스트")
+                                    Text(deviceModel)
+                                }
+                            }
+                        }
+                    }
                 }
             }
             
-            TextField("디바이스 이름을 입력해주세요.", text: $deviceName)
+   
+//            ScrollView(.horizontal, showsIndicators: false) {
+//                HStack(spacing: 15) {
+//                    ForEach(catalogueProductStore.catalogueProductStores) { product in
+//                        ForEach(product.model ?? [], id: \.self) { deviceModel in
+//                            let _ = { removeDuplicated.insert(deviceModel) }
+//                            let _ = print(removeDuplicated)
+////                            let _ = print(deviceModel)
+//                            if deviceModel.contains(selectedProductCategory) {
+//                                Button {
+////                                    deviceImage = product.thumbnailImage
+////                                    deviceType = deviceModel
+//
+////                                    print("디바이스 이미지는 \(deviceImage), 디바이스 이름은 \(deviceType)" )
+////                                    print(product.model?.uniqued()!)
+//                                } label: {
+////                                    Text("테스트")
+//                                    Text(deviceModel)
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+  
+            
+            TextField("디바이스 이름을 입력해주세요.", text: $deviceDescription)
                 .font(.title3)
             Spacer()
         }
@@ -95,8 +138,16 @@ struct AddMyDeviceView: View {
         .onAppear {
             catalogueProductStore.fetchData()
             userInfoStore.fetchMyDevice()
+    
         }
     }
+    
+    func removeDuplication(in array: [String]) -> [String]{
+        let set = Set(array)
+        let duplicationRemovedArray = Array(set)
+        return duplicationRemovedArray
+    }
+   
 }
 
 struct MyDeviceAddView_Previews: PreviewProvider {
