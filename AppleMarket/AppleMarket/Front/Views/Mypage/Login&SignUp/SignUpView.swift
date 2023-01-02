@@ -8,6 +8,11 @@
 import SwiftUI
 import FirebaseAuth
 
+
+
+func checkPasswordLogic(password: String, checkPassword: String) -> Bool {
+    return ((password.count >= 6 ) && (checkPassword.count >= 6)) && (password == checkPassword)
+}
 // MARK: - 회원가입 뷰
 struct SignUpView: View {
     
@@ -83,7 +88,7 @@ struct SignUpView: View {
                     userInfoStore.signUpState = false
                 }
         }
-  
+        
     }
 }
 
@@ -103,7 +108,17 @@ struct CustomSignUpTextFieldView: View {
     @Binding var emailText: String
     @Binding var passwordText: String
     @Binding var passwordAgainText: String
-
+    @FocusState private var focusField: Field?
+    
+    enum Field {
+    case nameText
+        case adressText
+        case emailText
+        case passwordText
+        case passwordAgainText
+    }
+    
+    
     var body: some View {
         VStack(spacing: 20) {
             
@@ -117,6 +132,10 @@ struct CustomSignUpTextFieldView: View {
                     .background(.thinMaterial)
                     .cornerRadius(10)
                 .textInputAutocapitalization(.never)
+                .focused($focusField, equals: .nameText)
+            }
+            .onSubmit {
+                focusField = .emailText
             }
       
             VStack(alignment: .leading) {
@@ -127,6 +146,10 @@ struct CustomSignUpTextFieldView: View {
                     .background(.thinMaterial)
                     .cornerRadius(10)
                 .textInputAutocapitalization(.never)
+                .focused($focusField, equals: .emailText)
+            }
+            .onSubmit {
+                focusField = .adressText
             }
             
             VStack(alignment: .leading) {
@@ -137,6 +160,10 @@ struct CustomSignUpTextFieldView: View {
                     .background(.thinMaterial)
                     .cornerRadius(10)
                 .textInputAutocapitalization(.never)
+                .focused($focusField, equals: .adressText)
+            }
+            .onSubmit {
+                focusField = .passwordText
             }
             
             VStack(alignment: .leading) {
@@ -146,8 +173,15 @@ struct CustomSignUpTextFieldView: View {
                     .padding()
                     .background(.thinMaterial)
                     .cornerRadius(10)
-               
-            }
+                    .focused($focusField, equals: .passwordText)
+               Text("비밀번호가 일치 합니다.")
+                    .font(.system(size: 15))
+                    .foregroundColor(checkPasswordLogic(password: passwordText, checkPassword: passwordAgainText) ? .green : .clear)
+                 
+                }
+                .onSubmit {
+                    focusField = .passwordAgainText
+                }
             
             VStack(alignment: .leading) {
                 Text("비밀번호 재확인")
@@ -156,9 +190,8 @@ struct CustomSignUpTextFieldView: View {
                     .background(.thinMaterial)
                     .border(.red, width: passwordAgainText != passwordText ? 1 : 0)
                     .cornerRadius(10)
-              
+                    .focused($focusField, equals: .passwordAgainText)
             }
-          
         }
     }
 }
