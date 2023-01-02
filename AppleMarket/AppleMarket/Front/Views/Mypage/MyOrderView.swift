@@ -10,13 +10,13 @@ import SwiftUI
 struct MyOrderView: View {
     @StateObject var orderStore: OrderStore = OrderStore()
     let userId: String = "mUzu710p6zgGOPk64s7D6DhMIq32"
-    
+
     var body: some View {
         NavigationStack {
             
             List {
                 ForEach(orderStore.orderList, id: \.id) { order in
-                    NavigationLink(destination: MyOrderDetailView()) {
+                    NavigationLink(destination: MyOrderDetailView(order: order)) {
                         OrderListCell(order: order)
                     }
                 }
