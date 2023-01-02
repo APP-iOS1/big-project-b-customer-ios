@@ -11,7 +11,6 @@ struct MainView: View {
     @EnvironmentObject var userProductStore: UserProductStore
     
     var body: some View {
-        let _ = print(userProductStore.userProductStores)
         NavigationStack{
             ScrollView{
                 LazyVStack(alignment: .leading){
@@ -33,12 +32,6 @@ struct MainView: View {
                 }
                 .padding()
                 .navigationBarTitle("쇼핑하기")
-                .toolbar { // <-
-                    NavigationLink(
-                        destination: MypageView()) {
-                            Label("Profile", systemImage: "person.crop.circle")
-                        }
-                }
             }
         }
         .onAppear{userProductStore.fetchData()}
@@ -49,6 +42,7 @@ struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack{
             MainView()
+                .environmentObject(UserProductStore())
         }
     }
 }
