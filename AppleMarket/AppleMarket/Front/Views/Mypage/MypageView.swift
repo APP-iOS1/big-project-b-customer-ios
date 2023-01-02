@@ -25,33 +25,34 @@ var myDeviceInform: [DeviceInform] = [
 ]
 
 struct MypageView: View {
-    @State private var isShowingSheet: Bool = false
     
+    @State private var isShowingLoginSheet: Bool = false
+    @StateObject var userInfoStore: UserInfoStore
     var body: some View {
-         NavigationStack {
-             ScrollView {
+        
+        
+            ScrollView {
                 VStack(alignment: .leading) {
                     HStack {
                         Text("마이페이지")
                             .font(.largeTitle)
                             .bold()
                         Spacer()
+                        // 로그인 버튼
                         Button {
-                            isShowingSheet.toggle()
+                            isShowingLoginSheet.toggle()
+                            print("로그인 시트 올라옴")
                         } label: {
-                            AsyncImage(url: URL(string: "https://mblogthumb-phinf.pstatic.net/MjAxNzEyMTFfMjA3/MDAxNTEyOTg0MTU3MzMz.wOvG_aS8a9vm44iNUmgby2-oG2u4aPAZ9lkOgyFqT7Ag.8qIDSv7H3yMjgKynzob12maeIvqeE1IrEtscN8MV0Uog.JPEG.jung02140214/IMG_2189.jpg?type=w800")) { image in
-                                image
-                                    .resizable()
-                                    .frame(width: 45, height: 45)
-                                    .aspectRatio(contentMode: .fit)
-                                    .cornerRadius(22)
-                            } placeholder: {
-                                ProgressView()
+                                Text(userInfoStore.state == .signedIn ? "내정보" : "로그인")
+                        }
+                        .sheet(isPresented: $isShowingLoginSheet) {
+                            if userInfoStore.state == .signedIn {
+                                    MyProfileView(isShowingLoginSheet: $isShowingLoginSheet, userInfoStore: userInfoStore)
+              
+                            } else {
+                                    LoginView(isShowingLoginSheet: $isShowingLoginSheet)
                             }
-                        }
-                        .sheet(isPresented: $isShowingSheet) {
-                            MyProfileView(isShowingSheet: $isShowingSheet)
-                        }
+                    }
                     }
                     .padding()
                     
@@ -59,18 +60,13 @@ struct MypageView: View {
                     
                     VStack(alignment: .leading, spacing: 15) {
                         Section {
-                            Text("최신 정보입니다. 미지님")
-                                .font(.title)
-                                .bold()
-                            Text("")
-                                .font(.largeTitle)
                             
                             Text("고객님을 위한 제안")
                                 .font(.headline)
                             
                             Divider()
                             NavigationLink {
-                                
+                                MyOrderView()
                             } label: {
                                 HStack {
                                     Image(systemName: "list.bullet")
@@ -84,6 +80,7 @@ struct MypageView: View {
                                         }
                                     
                                     VStack(alignment: .leading, spacing: 5) {
+                                      
                                         Text("주문 관련 실시간 정보를 받아보세요.")
                                             .foregroundColor(.black)
                                             .bold()
@@ -91,10 +88,7 @@ struct MypageView: View {
                                             .font(.subheadline)
                                             .foregroundColor(.gray)
                                     }
-                                    
                                     Spacer()
-                                    Image(systemName: "chevron.right")
-                                        .foregroundColor(.gray)
                                 }
                             }
                         }
@@ -139,7 +133,7 @@ struct MypageView: View {
                                                         .aspectRatio(contentMode: .fit)
                                                         .frame(width: 200, height: 150)
                                                 }
-                                               
+                                                
                                             } placeholder: {
                                                 ProgressView()
                                             }
@@ -165,13 +159,16 @@ struct MypageView: View {
                         }
                     }
                 }
-             }
-         }
+            }
+        
     }
 }
 
 struct MypageView_Previews: PreviewProvider {
     static var previews: some View {
-        MypageView()
+        NavigationStack {
+            MypageView(userInfoStore: UserInfoStore())
+                .environmentObject(UserInfoStore())
+        }
     }
 }
