@@ -190,7 +190,7 @@ extension SearchResultView {
             
             //MARK: 뷰모델의 검색결과가 빈 배열일 때 index out of range 오류를 해결하기 위한 조치
             // 검색결과가 없을 때의 대응 필요함
-            AsyncImage(url: URL(string: viewModel.getFirstElement()?.images[0] ?? "" )) { Image in
+            AsyncImage(url: URL(string: viewModel.getFirstElement()?.thumbnailImage ?? "")) { Image in
                 Image
                     .resizable()
                     .frame(width: 100, height: 110)
