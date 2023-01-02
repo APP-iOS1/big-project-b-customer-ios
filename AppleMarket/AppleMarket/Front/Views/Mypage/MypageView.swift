@@ -41,6 +41,7 @@ struct MypageView: View {
                         // 로그인 버튼
                         Button {
                             isShowingLoginSheet.toggle()
+                            print("로그인 시트 올라옴")
                         } label: {
                                 Text(userInfoStore.state == .signedIn ? "내정보" : "로그인")
                         }
