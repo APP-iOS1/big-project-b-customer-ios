@@ -79,13 +79,15 @@ struct SearchView: View {
         }
         .onChange(of: viewModel.searchInput) { input in
             viewModel.searchingState = .none
-
+            //print(viewModel.searchResults)
             viewModel.searchResults = caltalogueProductStore.catalogueProductStores.filter({ $0.productName.localizedCaseInsensitiveContains(input)})
                 
         }
         .onChange(of: viewModel.searchingState ){ state in
             if state == .none {
                 viewModel.clearResults()
+            } else {
+                print(viewModel.searchResults)
             }
         }
         .transaction { $0.animation = .default.speed(1.3) }
@@ -95,8 +97,8 @@ struct SearchView: View {
 
 
 
-//struct SearchView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SearchView()
-//    }
-//}
+struct SearchView_Previews: PreviewProvider {
+    static var previews: some View {
+        SearchView()
+    }
+}
