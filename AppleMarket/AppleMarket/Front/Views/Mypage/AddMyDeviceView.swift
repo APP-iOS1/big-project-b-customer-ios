@@ -22,6 +22,7 @@ struct AddMyDeviceView: View {
 //    @State private var productCategory: [String] = []
     
     @State private var removeDuplicated: Set<String> = []
+    @State var array = [String]()
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -38,7 +39,7 @@ struct AddMyDeviceView: View {
                 Button {
                     let deviceId = UUID().uuidString
                     userInfoStore.addMyDevice(myDevice: MyDevice(
-                        myDeviceId: UUID().uuidString,
+                        myDeviceId: deviceId,
                         deviceName: "",
                         deviceImage: "",
                         deviceDescription: deviceDescription))
@@ -78,15 +79,19 @@ struct AddMyDeviceView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 15) {
                     ForEach(catalogueProductStore.catalogueProductStores) { product in
+                        
                         ForEach(product.model ?? [], id: \.self) { deviceModel in
-                            let _ = { removeDuplicated.insert(deviceModel) }
-                            let _ = print(removeDuplicated)
-//                            let _ = print(deviceModel)
-                            if removeDuplicated.contains(selectedProductCategory) {
+                            
+//                            let _ = removeDuplication(in: product.model ?? [])
+//                            let _ = print(removeDuplication(in: product.model ?? []))
+                            
+                           
+                            if deviceModel.contains(selectedProductCategory) {
                                 Button {
+                                    print(deviceModel)
 //                                    deviceImage = product.thumbnailImage
 //                                    deviceType = deviceModel
-                                   
+
 //                                    print("디바이스 이미지는 \(deviceImage), 디바이스 이름은 \(deviceType)" )
 //                                    print(product.model?.uniqued()!)
                                 } label: {
@@ -99,6 +104,32 @@ struct AddMyDeviceView: View {
                 }
             }
             
+   
+//            ScrollView(.horizontal, showsIndicators: false) {
+//                HStack(spacing: 15) {
+//                    ForEach(catalogueProductStore.catalogueProductStores) { product in
+//                        ForEach(product.model ?? [], id: \.self) { deviceModel in
+//                            let _ = { removeDuplicated.insert(deviceModel) }
+//                            let _ = print(removeDuplicated)
+////                            let _ = print(deviceModel)
+//                            if deviceModel.contains(selectedProductCategory) {
+//                                Button {
+////                                    deviceImage = product.thumbnailImage
+////                                    deviceType = deviceModel
+//
+////                                    print("디바이스 이미지는 \(deviceImage), 디바이스 이름은 \(deviceType)" )
+////                                    print(product.model?.uniqued()!)
+//                                } label: {
+////                                    Text("테스트")
+//                                    Text(deviceModel)
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+  
+            
             TextField("디바이스 이름을 입력해주세요.", text: $deviceDescription)
                 .font(.title3)
             Spacer()
@@ -107,29 +138,16 @@ struct AddMyDeviceView: View {
         .onAppear {
             catalogueProductStore.fetchData()
             userInfoStore.fetchMyDevice()
-        }
-    }
-}
-
-extension Array where Element: Hashable {
-    func removingDuplicates() -> [Element] {
-        var addedDict = [Element: Bool]()
-        
-        return filter {
-            addedDict.updateValue(true, forKey: $0) == nil
+    
         }
     }
     
-    mutating func removeDuplicates() {
-        self = self.removingDuplicates()
+    func removeDuplication(in array: [String]) -> [String]{
+        let set = Set(array)
+        let duplicationRemovedArray = Array(set)
+        return duplicationRemovedArray
     }
-}
-
-extension Sequence where Element: Hashable {
-    func uniqued() -> [Element] {
-        var set = Set<Element>()
-        return filter { set.insert($0).inserted }
-    }
+   
 }
 
 struct MyDeviceAddView_Previews: PreviewProvider {

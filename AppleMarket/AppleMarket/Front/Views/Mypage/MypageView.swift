@@ -29,41 +29,14 @@ struct MypageView: View {
     @State private var isShowingLoginSheet: Bool = false
     @StateObject var userInfoStore: UserInfoStore
     var body: some View {
-        
-        
             ScrollView {
                 VStack(alignment: .leading) {
-                    HStack {
-                        Text("마이페이지")
-                            .font(.largeTitle)
-                            .bold()
-                        Spacer()
-                        // 로그인 버튼
-                        Button {
-                            isShowingLoginSheet.toggle()
-                            print("로그인 시트 올라옴")
-                        } label: {
-                                Text(userInfoStore.state == .signedIn ? "내정보" : "로그인")
-                        }
-                        .sheet(isPresented: $isShowingLoginSheet) {
-                            if userInfoStore.state == .signedIn {
-                                    MyProfileView(isShowingLoginSheet: $isShowingLoginSheet, userInfoStore: userInfoStore)
-              
-                            } else {
-                                    LoginView(isShowingLoginSheet: $isShowingLoginSheet)
-                            }
-                    }
-                    }
-                    .padding()
-                    
-                    Divider()
-                    
                     VStack(alignment: .leading, spacing: 15) {
                         Section {
-                            
+                            Text("")
                             Text("고객님을 위한 제안")
-                                .font(.headline)
-                            
+                                .font(.title3)
+                                .bold()
                             Divider()
                             NavigationLink {
                                 MyOrderView()
@@ -100,9 +73,10 @@ struct MypageView: View {
                         Section {
                             Text("")
                                 .font(.largeTitle)
+                            
                             HStack(alignment: .bottom) {
                                 Text("고객님의 기기")
-                                    .font(.title)
+                                    .font(.title3)
                                     .bold()
                                 Spacer()
                                 
@@ -155,6 +129,25 @@ struct MypageView: View {
                                         Spacer()
                                     }
                                 }
+                            }
+                        }
+                    }
+                }
+                .navigationTitle("마이페이지")
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button {
+                            isShowingLoginSheet.toggle()
+                            print("로그인 시트 올라옴")
+                        } label: {
+                            Text(userInfoStore.state == .signedIn ? "내정보" : "로그인")
+                        }
+                        .sheet(isPresented: $isShowingLoginSheet) {
+                            if userInfoStore.state == .signedIn {
+                                MyProfileView(isShowingLoginSheet: $isShowingLoginSheet, userInfoStore: userInfoStore)
+                                
+                            } else {
+                                LoginView(isShowingLoginSheet: $isShowingLoginSheet)
                             }
                         }
                     }
