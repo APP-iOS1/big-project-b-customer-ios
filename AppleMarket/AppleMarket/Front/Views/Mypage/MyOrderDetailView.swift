@@ -145,6 +145,6 @@ struct MyOrderDetailView: View {
 
 struct MyOrderDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        MyOrderDetailView(order: Order(id: "", orderAddress: "", orderTotalPrice: 0, isDeposit: false, orderAt: Date(), detailOrderCount: 0, mainProductImage: "", mainProductName: ""))
+        MyOrderDetailView(order: Order(id: "", orderName: "", orderPhone: "", orderAddress: "", orderTotalPrice: 0, isDeposit: false, orderAt: Date(), detailOrderCount: 0, mainProductImage: "", mainProductName: ""))
     }
 }

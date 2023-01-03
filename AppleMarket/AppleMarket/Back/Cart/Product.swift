@@ -11,13 +11,18 @@ struct Product: Hashable, Identifiable {
     var id: String
     var category: String
     var color: String
-    var createdAt: Date
-    var descroption: String
+    var description: String
     var device: String
     var image: [String]
     var price: Int
     var productName: String
-    var status: String
-    var storage: String
+    var status: Int    
+    var storage: Int
+    
+    var productCount: Int
+    
+    var totalPrice: Int {
+        productCount * price
+    }
 }
 

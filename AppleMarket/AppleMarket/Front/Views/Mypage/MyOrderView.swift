@@ -50,7 +50,7 @@ struct OrderListCell:View {
                     }
                     Divider()
                     HStack {
-                        AsyncImage(url: URL(string: "\(order.mainProductImage)")) { image in
+                        AsyncImage(url: URL(string: "\(order.mainProductImage ?? "")")) { image in
                             image
                                 .resizable()
                                 .scaledToFit()
@@ -60,7 +60,7 @@ struct OrderListCell:View {
                         }
                         
                         VStack(alignment: .leading) {
-                            Text("\(order.mainProductName)")
+                            Text("\(order.mainProductName ?? "")")
                             HStack {
                                 if order.otherProductCount != 0 {
                                     Text("외 \(order.otherProductCount)건")
