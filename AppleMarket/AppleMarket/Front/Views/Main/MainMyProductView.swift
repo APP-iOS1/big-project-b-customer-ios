@@ -65,7 +65,7 @@ struct MainMyProductView: View {
                     ForEach(caltalogueProductStore.catalogueProductStores){ product in
                         // 내 기기 이미지 사용 예정
                         
-                        var tempImgPath: String = product.thumbnailImage.isEmpty ? "" : (product.thumbnailImage ?? "" )
+                        let tempImgPath: String = product.thumbnailImage.isEmpty ? "" : (product.thumbnailImage )
                         
                         NavigationLink{
                             MyProductDetailView(myProducts: product)

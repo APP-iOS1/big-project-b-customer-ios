@@ -10,9 +10,6 @@ import SwiftUI
 struct DetailButtonView: View {
     var body: some View {
         VStack {
-            Divider()
-                .padding(.bottom, 20)
-            
             HStack {
                 Button {
                     

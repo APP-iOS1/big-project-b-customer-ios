@@ -16,10 +16,11 @@ struct MyOrderView: View {
             
             List {
                 ForEach(orderStore.orderList, id: \.id) { order in
-                    NavigationLink(destination: MyOrderDetailView(order: order)) {
+                    NavigationLink(destination: MyOrderDetailView(orderStore: orderStore, userId: userId, order: order)) {
                         OrderListCell(order: order)
                     }
                 }
+                                   
             }
             .navigationTitle("나의 주문")
             .listStyle(.plain)
@@ -45,8 +46,11 @@ struct OrderListCell:View {
                             .font(.title3)
                             .bold()
                         Spacer()
-                        Text("주문상세 >")
-                            .font(.callout)
+                        Text("주문상세")
+                            .font(.footnote)
+                        Image(systemName: "greaterthan")
+                            .padding(.leading, -5)
+                            .font(.footnote)
                     }
                     Divider()
                     HStack {

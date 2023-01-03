@@ -13,6 +13,8 @@ struct MyDeviceFilterView: View {
     //@Binding var showMyDeviceModal: Bool
     @Environment(\.dismiss) var dismiss
     @State var myDeviceList = ["iPhone 12", "iPad Pro", "MacBook Air"]
+    @EnvironmentObject var userInfoStore: UserInfoStore
+    
     var body: some View {
         
         NavigationView{
@@ -45,7 +47,7 @@ struct MyDeviceFilterView: View {
                     }
                     
                     // 내 기기에 등록된 개수만큼의 버튼
-                    ForEach (myDeviceList, id: \.self) { _ in
+                    ForEach (userInfoStore.userInfo?.myDevices ?? [], id: \.self) { device in
                         Button {
                             dismiss()
                             // 필터 동작 함수
@@ -57,7 +59,7 @@ struct MyDeviceFilterView: View {
                                 .overlay{
                                     RoundedRectangle(cornerRadius: 15)
                                         .strokeBorder(.gray, lineWidth: 1)
-                                    Text("내 기기 제품 명")
+                                    Text(device.deviceName)
                                         .foregroundColor(.black)
                                 }
                         }
@@ -76,6 +78,7 @@ struct MyDeviceFilterView: View {
                     dismiss()
                 })
             }
+           
         }
     }
     
