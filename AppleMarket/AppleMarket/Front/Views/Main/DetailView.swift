@@ -65,7 +65,7 @@ struct DetailView: View {
                 if selectedProduct.category == "iPhone" {
                     ModelOptionView(model: $model, selectedProduct: $selectedProduct,productArr: productArr)
                         .padding(.bottom, 35)
-                    ColorOptionView(color: $color, selectedProduct: $selectedProduct)
+                    DetailTestView(color: $color, selectedProduct: $selectedProduct)
                         .padding(.bottom, 50)
                     MemoryOptionView( memory: $memory, selectedProduct: $selectedProduct)
                         .padding(.bottom, 35)

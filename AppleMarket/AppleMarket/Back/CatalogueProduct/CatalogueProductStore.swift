@@ -18,7 +18,7 @@ class CatalogueProductStore: ObservableObject {
         print("fetchData 실행")
         self.catalogueProductStores.removeAll()
         
-            database.collection("CatalogueProduct").getDocuments { snapshot, error in
+        database.collection("CatalogueProduct").getDocuments { [self] snapshot, error in
                 
                 if let snapshot {
                     
@@ -49,6 +49,7 @@ class CatalogueProductStore: ObservableObject {
                         let catalogueProduct: CatalogueProduct = CatalogueProduct(id: id, productName: productName, device: device, category: category, description: description, price: price, thumbnailImage: thumbnailImage, status: status, descriptionImages: descriptionImages, model: model, color: color, storage: storage, netWork: netWork, processor: processor, memory: memory)
                         
                         self.catalogueProductStores.append(catalogueProduct)
+                        print("\(self.catalogueProductStores)")
                     }
                     
                 }

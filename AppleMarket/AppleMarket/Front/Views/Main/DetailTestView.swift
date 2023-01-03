@@ -8,45 +8,72 @@
 import SwiftUI
 
 struct DetailTestView: View {
-    @State var isChecking = [false, false]
-    @Binding var model: String
+    @State private var isChecking = [false, false, false, false]
+    @Binding var color: String
     @Binding var selectedProduct: CatalogueProduct
-    @State var productArr: [[Product]]
-    
-    
+    let columns = [
+        GridItem(.flexible(), spacing: 0),
+        GridItem(.flexible())
+    ]
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack {
-                Text("모델.")
+                Text("색상.")
                     .bold()
-                Text("당신에게 딱 맞는 모델은?")
+                Text("맘에 드는 색상을 선택하세요.")
             }
             .padding(.bottom, 10)
             
-            ForEach(0..<selectedProduct.model!.count) { idx in
-                Button {
-                    isChecking = [false, false]
-                    isChecking[idx] = true
-                    model = selectedProduct.model?[0] ?? ""
-                } label: {
-                    HStack {
-                        VStack(alignment: .leading, spacing: 5) {
-                            Text(selectedProduct.model?[0] ?? "")
+            
+            LazyVGrid(columns: columns, spacing: 10){
+                ForEach(0..<selectedProduct.color!.count, id: \.self) { index in
+                    Button {
+                        isChecking = [false, false, false, false]
+                        isChecking[index] = true
+                        color = selectedProduct.color?[index] ?? ""
+                    } label: {
+                        
+                        VStack(alignment: .center, spacing: 5) {
+                            Circle()
+                                .frame(width:25 ,height: 25)
+                                .foregroundColor(Color("\(selectedProduct.color?[index] ?? "")"))
+                                .shadow(radius: 1)
+                            Text(selectedProduct.color?[index] ?? "")
+                            
                         }
-                        Spacer()
-                        Text("₩\(selectedProduct.price)부터")
-                            .font(.caption)
-                            .foregroundColor(.gray)
+                        .foregroundColor(.black)
+                        .frame(width:172.5 ,height: 70)
+                        .overlay(RoundedRectangle(cornerRadius: 10)
+                            .stroke(isChecking[index] ? Color("MainColor") : Color.gray, lineWidth: 1.5))
                     }
-                    .foregroundColor(.black)
-                    .padding()
-                    .overlay(RoundedRectangle(cornerRadius: 10)
-                        .stroke(isChecking[0] ? Color("MainColor") : Color.gray, lineWidth: 1.5))
+                    .disabled(isChecking[index])
                 }
-                .disabled(isChecking[0])
             }
             
+            
+            
+            //            ForEach(0..<selectedProduct.color!.count) { idx in
+            //                Button {
+            //                    isChecking = [false, false, false, false]
+            //                    isChecking[idx] = true
+            //                    color = selectedProduct.color?[idx] ?? ""
+            //                } label: {
+            //                    HStack {
+            //                        Circle()
+            //                            .frame(width:25 ,height: 25)
+            //                            .foregroundColor(Color("\(selectedProduct.color?[idx] ?? "")"))
+            //                            .shadow(radius: 1)
+            //                            .padding(.trailing, 20)
+            //                        Text(selectedProduct.color?[idx] ?? "")
+            //                    }
+            //                    .foregroundColor(.black)
+            //                    .padding()
+            //                    .overlay(RoundedRectangle(cornerRadius: 10)
+            //                        .stroke(isChecking[idx] ? Color("MainColor") : Color.gray, lineWidth: 1.5))
+            //                }
+            //                .disabled(isChecking[idx])
+            //            }
         }
         .padding()
     }

@@ -57,7 +57,7 @@ struct AddMyDeviceView: View {
                         deviceName: deviceType,
                         deviceImage: deviceImage,
                         deviceDescription:
-                            (deviceDescription == "") ? "\(userInfoStore.userInfo!.userName)의 \(selectedProductCategory)" : "\(deviceDescription)"))
+                            (deviceDescription == "") ? "\(userInfoStore.userInfo!.userName)의 \(deviceType)" : "\(deviceDescription)"))
                     isShowingSheet.toggle()
                 } label: {
                     Text("등록하기")
@@ -124,7 +124,6 @@ struct AddMyDeviceView: View {
         .onAppear {
             catalogueProductStore.fetchData()
             userInfoStore.fetchUserInfo()
-            userInfoStore.fetchMyDevice()
         }
     }
 }

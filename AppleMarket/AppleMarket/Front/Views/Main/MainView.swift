@@ -23,6 +23,7 @@ struct MainView: View {
                             .frame(width: UIScreen.main.bounds.width - 32 , height: UIScreen.main.bounds.height * 0.15)
                     
 
+
                         MainMyProductView(isShowingSheet: $isShowingSheet, isShowingLoginSheet: $isShowingLoginSheet)
 
 
@@ -37,6 +38,7 @@ struct MainView: View {
                     if userInfostore.userInfo != nil {
                         userInfostore.fetchMyDevice()
                     }
+
                 }
     }
 }

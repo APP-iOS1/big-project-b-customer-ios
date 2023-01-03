@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		021408582963FD5A0051FF33 /* LoginMyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021408562963FD5A0051FF33 /* LoginMyPageView.swift */; };
+		021408592963FD5A0051FF33 /* NotLoginMyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021408572963FD5A0051FF33 /* NotLoginMyPageView.swift */; };
 		1A3AE9D12963C7440024DBB1 /* DetailTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3AE9D02963C7440024DBB1 /* DetailTestView.swift */; };
 		1A3AE9D32963E1400024DBB1 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3AE9D22963E1400024DBB1 /* DetailView.swift */; };
 		2C293046295AAA09003C77F8 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C293045295AAA09003C77F8 /* UserInfo.swift */; };
@@ -70,10 +72,12 @@
 		5B94B4372963A4EB00D35017 /* SnapScrollingHstack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B94B4362963A4EB00D35017 /* SnapScrollingHstack.swift */; };
 		8B4376FE295ABC4D002D4AAB /* OrderStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4376FD295ABC4D002D4AAB /* OrderStore.swift */; };
 		8B437700295ACB40002D4AAB /* OrderTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4376FF295ACB40002D4AAB /* OrderTestView.swift */; };
-		92DB6C55295F042500238CF1 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DB6C54295F042500238CF1 /* CartView.swift */; };
+		92A670042963DB1D00E9491D /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A670032963DB1D00E9491D /* CartView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		021408562963FD5A0051FF33 /* LoginMyPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginMyPageView.swift; sourceTree = "<group>"; };
+		021408572963FD5A0051FF33 /* NotLoginMyPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotLoginMyPageView.swift; sourceTree = "<group>"; };
 		1A3AE9D02963C7440024DBB1 /* DetailTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTestView.swift; sourceTree = "<group>"; };
 		1A3AE9D22963E1400024DBB1 /* DetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		2C293045295AAA09003C77F8 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
@@ -131,7 +135,7 @@
 		5B94B4362963A4EB00D35017 /* SnapScrollingHstack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapScrollingHstack.swift; sourceTree = "<group>"; };
 		8B4376FD295ABC4D002D4AAB /* OrderStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderStore.swift; sourceTree = "<group>"; };
 		8B4376FF295ACB40002D4AAB /* OrderTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderTestView.swift; sourceTree = "<group>"; };
-		92DB6C54295F042500238CF1 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
+		92A670032963DB1D00E9491D /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +157,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		021408512963E0430051FF33 /* MyMainPage */ = {
+			isa = PBXGroup;
+			children = (
+				2CEFEC61295C0FBB006DA0AA /* MypageView.swift */,
+				021408562963FD5A0051FF33 /* LoginMyPageView.swift */,
+				021408572963FD5A0051FF33 /* NotLoginMyPageView.swift */,
+			);
+			path = MyMainPage;
+			sourceTree = "<group>";
+		};
 		1A4A980429629D2B00FAAB56 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
@@ -260,9 +274,9 @@
 		2CEFEC48295C0FBB006DA0AA /* Payment */ = {
 			isa = PBXGroup;
 			children = (
+				2CEFEC4B295C0FBB006DA0AA /* PaymentView.swift */,
 				2CEFEC49295C0FBB006DA0AA /* ShippingView.swift */,
 				2CEFEC4A295C0FBB006DA0AA /* CheckOrderView.swift */,
-				2CEFEC4B295C0FBB006DA0AA /* PaymentView.swift */,
 				2CEFEC4C295C0FBB006DA0AA /* Cart */,
 			);
 			path = Payment;
@@ -274,7 +288,7 @@
 				2CEFEC4D295C0FBB006DA0AA /* EmptyCartView.swift */,
 				2CEFEC4E295C0FBB006DA0AA /* CartSignOutView.swift */,
 				2CEFEC4F295C0FBB006DA0AA /* CartSignInView.swift */,
-				92DB6C54295F042500238CF1 /* CartView.swift */,
+				92A670032963DB1D00E9491D /* CartView.swift */,
 			);
 			path = Cart;
 			sourceTree = "<group>";
@@ -294,11 +308,11 @@
 		2CEFEC56295C0FBB006DA0AA /* Mypage */ = {
 			isa = PBXGroup;
 			children = (
+				021408512963E0430051FF33 /* MyMainPage */,
 				2CEFEC5C295C0FBB006DA0AA /* MyOrderView.swift */,
 				2CEFEC57295C0FBB006DA0AA /* MyOrderDetailView.swift */,
 				2CEFEC58295C0FBB006DA0AA /* AddMyAddressView.swift */,
 				2CEFEC60295C0FBB006DA0AA /* MyDeviceListView.swift */,
-				2CEFEC61295C0FBB006DA0AA /* MypageView.swift */,
 				2CEFEC59295C0FBB006DA0AA /* AddMyDeviceView.swift */,
 				2CEFEC5A295C0FBB006DA0AA /* MyAddressListView.swift */,
 				2CEFEC5B295C0FBB006DA0AA /* MyProfileView.swift */,
@@ -450,7 +464,7 @@
 				5B94B4372963A4EB00D35017 /* SnapScrollingHstack.swift in Sources */,
 				2CEFEC77295C0FBC006DA0AA /* CartSignInView.swift in Sources */,
 				2CEFEC9C295C12F7006DA0AA /* CartTest.swift in Sources */,
-				92DB6C55295F042500238CF1 /* CartView.swift in Sources */,
+				92A670042963DB1D00E9491D /* CartView.swift in Sources */,
 				2C7A8C6D295A8298000D55C5 /* ContentView.swift in Sources */,
 				2CEFEC74295C0FBC006DA0AA /* PaymentView.swift in Sources */,
 				2CEFEC9B295C12F7006DA0AA /* ProductStore.swift in Sources */,
@@ -486,8 +500,10 @@
 				2CEFEC8E295C0FBC006DA0AA /* AppleCareOptionView.swift in Sources */,
 				2CEFEC42295ABA3E006DA0AA /* Order.swift in Sources */,
 				2CEFEC83295C0FBC006DA0AA /* LoginView.swift in Sources */,
+				021408592963FD5A0051FF33 /* NotLoginMyPageView.swift in Sources */,
 				2CEFEC72295C0FBC006DA0AA /* ShippingView.swift in Sources */,
 				2CEFEC7F295C0FBC006DA0AA /* AddMyDeviceView.swift in Sources */,
+				021408582963FD5A0051FF33 /* LoginMyPageView.swift in Sources */,
 				2CEFEC84295C0FBC006DA0AA /* SignUpView.swift in Sources */,
 				2CEFEC7C295C0FBC006DA0AA /* MyDeviceFilterView.swift in Sources */,
 				2CEFEC90295C0FBC006DA0AA /* MainView.swift in Sources */,

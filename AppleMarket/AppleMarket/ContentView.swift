@@ -11,9 +11,10 @@ struct ContentView: View {
     
     @State private var tabSelection: Int = 1
     @EnvironmentObject var userInfoStore: UserInfoStore
+    @StateObject private var cartStore: CartStore = CartStore()
     @State private var isShowingSheet: Bool = false
-    var body: some View {
     
+    var body: some View {
             TabView(selection: $tabSelection) {
                 NavigationStack {
                     MainView()
@@ -34,7 +35,11 @@ struct ContentView: View {
                     .tag(2)
                 
                 NavigationStack {
-                    CartView()
+                    if userInfoStore.state == .signedIn {
+                        CartSignInView()
+                    } else {
+                        CartSignOutView()
+                    }
                 }
                     .tabItem {
                         Image(systemName: "bag")
@@ -43,7 +48,7 @@ struct ContentView: View {
                     .tag(3)
                 
                 NavigationStack {
-                    MypageView(userInfoStore: userInfoStore)
+                    MypageView()
                 }
                     .tabItem {
                         Image(systemName: "person.circle")
@@ -59,15 +64,7 @@ struct ContentView: View {
                         }
                     }
             }
-            
-            .onAppear {
-                // 이전 로그인 기록이 있다면 자동 로그인
-                if let email = UserDefaults.standard.string(forKey: UserDefaults.Keys.email.rawValue) {
-                    if let password = UserDefaults.standard.string(forKey: UserDefaults.Keys.password.rawValue) {
-                        userInfoStore.emailAuthSignIn(email: email, password: password)
-                    }
-                }
-            }
+
     }
 }
 

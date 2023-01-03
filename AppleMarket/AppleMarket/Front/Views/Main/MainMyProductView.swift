@@ -43,13 +43,20 @@ struct MainMyProductView: View {
                 Button {
                     isShowingSheet.toggle()
                 } label: {
-                    VStack(alignment: .center){
-                        Image(systemName: "plus.square.dashed")
-                            .font(.system(size: 200))
-                            .frame(width: 200, height: 200)
-                        Text("등록된 기기가 없습니다.")
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 20)
+                            .frame(height: 250)
+                            .foregroundColor(.white)
+                        
+                        VStack(alignment: .center){
+                            Image(systemName: "plus.square.dashed")
+                                .font(.system(size: 100))
+                                .padding(.bottom, 15)
+                            Text("등록된 기기가 없습니다.")
+                        }
+                        .foregroundColor(.gray)
                     }
-                    .foregroundColor(.gray)
+                    
                 }
                 .sheet(isPresented: $isShowingSheet) {
                     AddMyDeviceView(isShowingSheet: $isShowingSheet)
@@ -59,13 +66,19 @@ struct MainMyProductView: View {
                 NavigationLink {
                     LoginView(isShowingLoginSheet: $isShowingLoginSheet)
                 } label: {
-                    VStack(alignment: .center){
-                        Image(systemName: "plus.square.dashed")
-                            .font(.system(size: 200))
-                            .frame(width: 200, height: 200)
-                        Text("등록된 기기가 없습니다.")
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 20)
+                            .frame(height: 250)
+                            .foregroundColor(.white)
+                        
+                        VStack(alignment: .center){
+                            Image(systemName: "plus.square.dashed")
+                                .font(.system(size: 100))
+                                .padding(.bottom, 15)
+                            Text("등록된 기기가 없습니다.")
+                        }
+                        .foregroundColor(.gray)
                     }
-                    .foregroundColor(.gray)
                 }
                 
             }
@@ -80,21 +93,32 @@ struct MainMyProductView: View {
                         
                         ForEach(userInfoStore.userInfo?.myDevices ?? [], id: \.self) { product in
                             NavigationLink {
-                                MyProductDetailView(myProducts: CatalogueProduct(id: "", productName: "", device: [], category: "", description: "", price: 0, thumbnailImage: "", status: 0, descriptionImages: [], model: [], color: [], storage: [], recommendedProduct: [], netWork: [], processor: [], memory: []))
+                                MyProductDetailView(myProducts: CatalogueProduct(id: "", productName: product.deviceName, device: [], category: "", description: "", price: 0, thumbnailImage: "", status: 0, descriptionImages: [product.deviceImage], model: [], color: [], storage: [], recommendedProduct: [], netWork: [], processor: [], memory: []))
                             } label: {
                                 ZStack{
                                     RoundedRectangle(cornerRadius: 20)
-                                        .frame(width: 230, height: 300)
+                                        .frame(height: 250)
                                         .foregroundColor(.white)
-                                    
-                                    Text(product.deviceDescription)
-                                        .fontWeight(.semibold)
-                                        .padding(.bottom, 1)
-                                    
-                                    Text(product.deviceImage)
-                                    Text(product.deviceName)
+                                    VStack {
+                                 
+                                        // 기기 사진
+                                        AsyncImage(url: URL(string: product.deviceImage )) { image in
+                                            image
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: 230, height: 300)
+                                        } placeholder: {
+                                            ProgressView()
+                                        }
+                                        Text(product.deviceDescription)
+                                            .fontWeight(.semibold)
+                                            .padding(.bottom, 1)
+                                        Text(product.deviceName)
+                                    }
+                                   
                                 }
                                 .foregroundColor(.black)
+                                
                             }
 
                            

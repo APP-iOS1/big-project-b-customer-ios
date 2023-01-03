@@ -30,6 +30,7 @@ struct MainProductDetailView: View {
             let height: CGFloat = geo.size.height
             let itemWidth: CGFloat = width * 0.8
             let itemHeight: CGFloat = height * 0.75
+
         
             //            if categoryProducts.isEmpty || featuredProducts.isEmpty {
             //                Text("판매중인 상품이 없습니다.")
@@ -74,6 +75,7 @@ struct MainProductDetailView: View {
                                                         Spacer()
                                                         
                                                         Button {
+
                                                             
                                                         } label: {
                                                             Text("구입하기")
@@ -84,11 +86,13 @@ struct MainProductDetailView: View {
                                                         
                                                     }
                                                     
+
                                                 }
                                                 
                                                 
                                             }
                                             .frame(width: itemWidth * 0.9, height: itemHeight * 0.9)
+
                                         }
                                 }
                                 
@@ -109,6 +113,7 @@ struct MainProductDetailView: View {
                     .snapScrolling(itemCount: featuredProducts.count , itemWidth: itemWidth, spacing: 20)
                     Spacer()
                         .frame(height: itemHeight * 0.05)
+
                 }
                 .scrollDisabled(true)
                 
@@ -144,6 +149,7 @@ struct MainProductDetailView: View {
                             Spacer()
                             Text("₩\(product.price)부터")
                                 .foregroundColor(Color("MainColor"))
+
                         }
                         .padding(.vertical, 32)
                         
