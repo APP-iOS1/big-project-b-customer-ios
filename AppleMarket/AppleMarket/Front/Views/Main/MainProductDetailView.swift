@@ -35,75 +35,103 @@ struct MainProductDetailView: View {
     ]
     
     
-    let selectedProduct: Products
+    
     
     var body: some View {
         GeometryReader { geo in
             let width = geo.size.width
             let height = geo.size.height
+            let itemWidth = width * 0.8
+            let itemHeight = height * 0.65
             
             ScrollView {
                 ScrollView(.horizontal) {
                     Spacer()
-                    HStack {
-                        Spacer()
-                            .frame(width: width * 0.05)
+                        .frame(height: itemHeight * 0.05)
+                    HStack(spacing: 20) {
                         ForEach(promotionProducts) { product in
                             AsyncImage(url: URL(string: product.imagePath)) { Image in
                                 ZStack{
                                     Image
                                         .resizable()
-                                        .scaledToFill()
-                                        .frame(width: width * 0.7, height: height * 0.7)
-                                        .padding(.horizontal, 30)
-                                        .clipShape(RoundedRectangle(cornerRadius: 30))
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: itemWidth, height: itemHeight)
+                                        .clipped()
+                                        .cornerRadius(30)
                                         .shadow(radius: 10)
-                                        .padding(.trailing, 16)
+                                        .overlay{
+                                            RoundedRectangle(cornerRadius: 30)
+                                                .fill(LinearGradient(colors: [.black.opacity(0.15), .clear], startPoint: UnitPoint(x:0.5, y: 0), endPoint: UnitPoint(x:0.5, y: 0.5)))
+                                        }
+                                        .overlay {
+                                            HStack {
+                                                VStack(alignment: .leading) {
+                                                    Text("New")
+                                                        .foregroundColor(.orange)
+                                                    Text(product.productName)
+                                                        .foregroundColor(.white)
+                                                        .font(.title)
+                                                        .fontWeight(.semibold)
+                                                    Text(product.description ?? "")
+                                                        .foregroundColor(.white)
+                                                        .font(.caption)
+                                                    Spacer()
+                                                    
+                                                }
+                                                Spacer()
+                                            }
+                                            .frame(width: itemWidth * 0.9, height: itemHeight * 0.9)
+                                            
+                                        }
                                     
-                                    VStack(alignment: .leading) {
-                                        Text("New")
-                                            .foregroundColor(.white)
-                                        Text(product.productName)
-                                            .foregroundColor(.white)
-                                            .font(.title)
-                                            .fontWeight(.semibold)
-                                        Text(product.description ?? "")
-                                            .foregroundColor(.white)
-                                        Spacer()
-                            
-                                    }
-                                    .frame(maxWidth: width * 0.8, alignment: .leading)
-//                                    .background(.yellow)
+                                    
+                                    //
                                 }
-                                        
-                                           
+                                
+                                
                             } placeholder: {
-                                ProgressView()
+                                Rectangle()
+                                    .stroke(lineWidth: 0.1)
+                                    .frame(width: itemWidth, height: itemHeight)
+                                    .cornerRadius(30)
+                                    .overlay {
+                                        ProgressView()
+                                    }
+                                
+                                    
                             }
                         }
                     }
+                    .snapScrolling(itemCount: promotionProducts.count , itemWidth: itemWidth, spacing: 20)
                     Spacer()
+                        .frame(height: itemHeight * 0.05)
                 }
-                .frame(width: width, height: height * 0.8)
+                .scrollDisabled(true)
                 
                 Spacer()
+                    .frame(height: itemHeight * 0.05)
                 
                 Divider()
                 
+                Spacer()
+                    .frame(height: itemHeight * 0.1)
+   
                 LazyVStack {
                     ForEach(products) { product in
                         VStack {
                             AsyncImage(url: URL(string: product.imagePath)) { image in
                                 image
                                     .resizable()
-                                    .scaledToFit()
-                                    .frame(height:135)
+                                    .scaledToFill()
+                                    .frame(width: 100)
+                                    .clipped()
                                     
                             } placeholder: {
                                 ProgressView()
+                                    .frame(width: 100, height: 135)
                             }
                             Spacer()
-                                .frame(height: 40)
+                                .frame(height: 25)
                             Text(product.productName)
                                 .font(.headline)
                             Spacer()
@@ -117,12 +145,13 @@ struct MainProductDetailView: View {
                     
                 }
             }
+            
         }
     }
 }
 
-//struct MainProductDetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        MainProductDetailView(selectedProduct: MainProduct.iPad)
-//    }
-//}
+struct MainProductDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        MainProductDetailView()
+    }
+}

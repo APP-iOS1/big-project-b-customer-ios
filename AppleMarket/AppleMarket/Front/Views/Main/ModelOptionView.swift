@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct ModelOptionView: View {
-    @State var isChecking1: Bool = false
-    @State var isChecking2: Bool = false
-    @Binding var price: Int
+    @State var isChecking = [false, false]
     @Binding var model: String
-    @Binding var memoryPrice: Int
+    @Binding var selectedProduct: CatalogueProduct
+    
+
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
+        VStack(alignment: .leading, spacing: 10) {
             HStack {
                 Text("모델.")
                     .bold()
@@ -24,40 +24,35 @@ struct ModelOptionView: View {
             .padding(.bottom, 10)
             
             Button {
-                isChecking1 = true
-                isChecking2 = false
-                price = 1550000
-                memoryPrice = 1550000
-                model = "iPhone 14 Pro"
+                isChecking = [true, false]
+                model = selectedProduct.model?[0] ?? ""
             } label: {
                 HStack {
                     VStack(alignment: .leading, spacing: 5) {
-                        Text("iPhone 14 Pro")
+                        Text(selectedProduct.model?[0] ?? "")
                         Text("15.5cm 디스플레이")
                             .font(.caption2)
                             .foregroundColor(.gray)
                     }
                     Spacer()
-                    Text("₩1,550,000부터")
+                    Text("₩\(selectedProduct.price)부터")
                         .font(.caption)
                         .foregroundColor(.gray)
                 }
                 .foregroundColor(.black)
                 .padding()
-                .overlay(RoundedRectangle(cornerRadius: 15)
-                    .stroke(isChecking1 ? Color("MainColor") : Color.gray, lineWidth: 1.5))
+                .overlay(RoundedRectangle(cornerRadius: 10)
+                    .stroke(isChecking[0] ? Color("MainColor") : Color.gray, lineWidth: 1.5))
             }
+            .disabled(isChecking[0])
 
             Button {
-                isChecking1 = false
-                isChecking2 = true
-                price = 1750000
-                memoryPrice = 1750000
-                model = "iPhone 14 Pro Max"
+                isChecking = [false, true]
+                model = selectedProduct.model?[1] ?? ""
             } label: {
                 HStack {
                     VStack(alignment: .leading, spacing: 5) {
-                        Text("iPhone 14 Pro Max")
+                        Text(selectedProduct.model?[1] ?? "")
                         Text("17.0cm 디스플레이")
                             .font(.caption2)
                             .foregroundColor(.gray)
@@ -69,17 +64,18 @@ struct ModelOptionView: View {
                 }
                 .foregroundColor(.black)
                 .padding()
-                .overlay(RoundedRectangle(cornerRadius: 15)
-                    .stroke(isChecking2 ? Color("MainColor") : Color.gray, lineWidth: 1.5))
+                .overlay(RoundedRectangle(cornerRadius: 10)
+                    .stroke(isChecking[1] ? Color("MainColor") : Color.gray, lineWidth: 1.5))
             }
+            .disabled(isChecking[1])
 
         }
         .padding()
     }
 }
 
-//struct ModelOptionView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ModelOptionView()
-//    }
-//}
+struct ModelOptionView_Previews: PreviewProvider {
+    static var previews: some View {
+        DetailView()
+    }
+}
