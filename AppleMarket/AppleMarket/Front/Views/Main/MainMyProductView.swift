@@ -45,13 +45,13 @@ struct MainMyProductView: View {
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 20)
-                            .frame(height: 300)
+                            .frame(height: 250)
                             .foregroundColor(.white)
                         
                         VStack(alignment: .center){
                             Image(systemName: "plus.square.dashed")
-                                .font(.system(size: 200))
-                                .frame(width: 200, height: 200)
+                                .font(.system(size: 100))
+                                .padding(.bottom, 15)
                             Text("등록된 기기가 없습니다.")
                         }
                         .foregroundColor(.gray)
@@ -68,13 +68,13 @@ struct MainMyProductView: View {
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 20)
-                            .frame(height: 300)
+                            .frame(height: 250)
                             .foregroundColor(.white)
                         
                         VStack(alignment: .center){
                             Image(systemName: "plus.square.dashed")
-                                .font(.system(size: 200))
-                                .frame(width: 200, height: 200)
+                                .font(.system(size: 100))
+                                .padding(.bottom, 15)
                             Text("등록된 기기가 없습니다.")
                         }
                         .foregroundColor(.gray)
@@ -93,11 +93,11 @@ struct MainMyProductView: View {
                         
                         ForEach(userInfoStore.userInfo?.myDevices ?? [], id: \.self) { product in
                             NavigationLink {
-                                MyProductDetailView(myProducts: CatalogueProduct(id: "", productName: product.deviceName, device: [], category: "", description: "", price: 0, thumbnailImage: "", status: 0, descriptionImages: [], model: [], color: [], storage: [], recommendedProduct: [], netWork: [], processor: [], memory: []))
+                                MyProductDetailView(myProducts: CatalogueProduct(id: "", productName: product.deviceName, device: [], category: "", description: "", price: 0, thumbnailImage: "", status: 0, descriptionImages: [product.deviceImage], model: [], color: [], storage: [], recommendedProduct: [], netWork: [], processor: [], memory: []))
                             } label: {
                                 ZStack{
                                     RoundedRectangle(cornerRadius: 20)
-                                        .frame(width: 230, height: 300)
+                                        .frame(height: 250)
                                         .foregroundColor(.white)
                                     VStack {
                                  
