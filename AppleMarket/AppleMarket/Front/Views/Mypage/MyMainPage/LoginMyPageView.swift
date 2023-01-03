@@ -100,9 +100,6 @@ struct LoginMyPageView: View {
                     }
                 }
             }
-            .onAppear {
-                userInfoStore.fetchUserInfo()
-            }
             .navigationTitle("마이페이지")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {

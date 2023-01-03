@@ -65,7 +65,11 @@ struct ContentView: View {
                                 userInfoStore.emailAuthSignIn(email: email, password: password)
                             }
                         }
-                        userInfoStore.fetchUserInfo()
+                        
+                        if userInfoStore.state == .signedIn {
+                            userInfoStore.fetchUserInfo()
+                        }
+                        
                         productStore.fetchProduct()
                         catalogueProductStore.fetchData()
                         if userInfoStore.userInfo != nil {
