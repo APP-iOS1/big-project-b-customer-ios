@@ -9,38 +9,39 @@ import SwiftUI
 
 struct MyDeviceListView: View {
     @State private var isShowingSheet: Bool = false
+    @EnvironmentObject var userInfoStore: UserInfoStore
     
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading) {
-                Text("기기 목록")
-                    .font(.title2)
-                    .bold()
-                Spacer()
-                
+//                Text("기기 목록")
+//                    .font(.title2)
+//                    .bold()
+//                Spacer()
+               
                 List {
                     Section {
-                        ForEach(myDeviceInform, id: \.self) { device in
-                            AsyncImage(url: URL(string: device.imageName)) { image in
-                                HStack(alignment: .center) {
+                        ForEach(userInfoStore.userInfo?.myDevices ?? [], id: \.self) { myDevice in
+                            HStack {
+                                AsyncImage(url: URL(string: myDevice.deviceImage)) { image in
                                     image
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
-                                        .frame(width: 60)
-                                    
-                                    VStack(alignment: .leading, spacing: 3) {
-                                        Text(device.deviceName)
-                                            .font(.headline)
-                                        Text(device.deviceModelName)
-                                            .font(.subheadline)
-                                    }
+                                        .frame(width: 100)
+                                } placeholder: {
+                                    Color.gray
                                 }
-                            } placeholder: {
-                                ProgressView()
+
+                                Text(myDevice.deviceDescription)
+                              
                             }
+                            Divider()
+//                                .padding(5)
                         }
-                        .frame(height: 55)
+//                        .frame(height: 55)
+                       
                     }
+                    .listRowSeparator(.hidden)
                     
                     Button {
                         isShowingSheet.toggle()
@@ -58,9 +59,13 @@ struct MyDeviceListView: View {
                             .presentationDetents([.medium,.large])
                     }
                 }
+                
             }
-            .padding()
-            .background(Color("myPageBGColor"))
+            .navigationBarTitle("내 기기")
+            .background(Color("MyPageBGColor"))
+            .onAppear {
+                userInfoStore.fetchUserInfo()
+            }
         }
         
     }

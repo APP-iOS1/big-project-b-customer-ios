@@ -44,7 +44,7 @@ struct MyAddressListView: View {
                 }
             }
             .padding()
-            .background(Color("myPageBGColor"))
+            .background(Color("MyPageBGColor"))
         }
         
     }
