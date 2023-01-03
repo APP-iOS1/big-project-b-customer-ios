@@ -41,68 +41,68 @@ struct MainProductDetailView: View {
                             .frame(height: itemHeight * 0.05)
                         HStack(spacing: 20) {
                             ForEach(featuredProducts) { product in
-                                    AsyncImage(url: URL(string: product.thumbnailImage)) { Image in
-                                        ZStack{
-                                            Image
-                                                .resizable()
-                                                .aspectRatio(contentMode: .fill)
-                                                .frame(width: itemWidth, height: itemHeight)
-                                                .clipped()
-                                                .cornerRadius(30)
-                                                .shadow(radius: 10)
-                                                .overlay{
-                                                    RoundedRectangle(cornerRadius: 30)
-                                                        .fill(LinearGradient(colors: [.black.opacity(0.3), .clear], startPoint: UnitPoint(x:0.5, y: 0), endPoint: UnitPoint(x:0.5, y: 0.5)))
-                                                }
-                                                .overlay {
-                                                    HStack {
-                                                        VStack(alignment: .leading) {
-                                                            Text("New")
-                                                                .foregroundColor(.orange)
-                                                            Text(product.productName)
-                                                                .foregroundColor(.white)
-                                                                .font(.title)
-                                                                .fontWeight(.semibold)
-                                                            Text(product.description)
-                                                                .foregroundColor(.white)
+                                AsyncImage(url: URL(string: product.thumbnailImage)) { Image in
+                                    ZStack{
+                                        Image
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(width: itemWidth, height: itemHeight)
+                                            .clipped()
+                                            .cornerRadius(30)
+                                            .shadow(radius: 10)
+                                            .overlay{
+                                                RoundedRectangle(cornerRadius: 30)
+                                                    .fill(LinearGradient(colors: [.black.opacity(0.3), .clear], startPoint: UnitPoint(x:0.5, y: 0), endPoint: UnitPoint(x:0.5, y: 0.5)))
+                                            }
+                                            .overlay {
+                                                HStack {
+                                                    VStack(alignment: .leading) {
+                                                        Text("New")
+                                                            .foregroundColor(.orange)
+                                                        Text(product.productName)
+                                                            .foregroundColor(.white)
+                                                            .font(.title)
+                                                            .fontWeight(.semibold)
+                                                        Text(product.description)
+                                                            .foregroundColor(.white)
+                                                            .font(.caption)
+                                                        Spacer()
+                                                        HStack {
+                                                            Text("₩\(product.price)부터")
                                                                 .font(.caption)
+                                                            
                                                             Spacer()
-                                                            HStack {
-                                                                Text("₩\(product.price)부터")
+                                                            
+                                                            Button {
+                                                                
+                                                            } label: {
+                                                                Text("구입하기")
                                                                     .font(.caption)
-                                                                
-                                                                Spacer()
-                                                                
-                                                                Button {
-                                                                    
-                                                                } label: {
-                                                                    Text("구입하기")
-                                                                        .font(.caption)
-                                                                }
-                                                                .buttonStyle(.bordered)
-                                                                
-
                                                             }
+                                                            .buttonStyle(.bordered)
+                                                            
                                                             
                                                         }
                                                         
-                                                      
                                                     }
-                                                    .frame(width: itemWidth * 0.9, height: itemHeight * 0.9)
+                                                    
+                                                    
                                                 }
-                                        }
-                                        
-                                        
-                                    } placeholder: {
-                                        Rectangle()
-                                            .stroke(lineWidth: 0.1)
-                                            .frame(width: itemWidth, height: itemHeight)
-                                            .cornerRadius(30)
-                                            .overlay {
-                                                ProgressView()
+                                                .frame(width: itemWidth * 0.9, height: itemHeight * 0.9)
                                             }
                                     }
                                     
+                                    
+                                } placeholder: {
+                                    Rectangle()
+                                        .stroke(lineWidth: 0.1)
+                                        .frame(width: itemWidth, height: itemHeight)
+                                        .cornerRadius(30)
+                                        .overlay {
+                                            ProgressView()
+                                        }
+                                }
+                                
                                 
                             }
                         }
@@ -119,7 +119,7 @@ struct MainProductDetailView: View {
                     
                     Spacer()
                         .frame(height: itemHeight * 0.1)
-       
+                    
                     LazyVStack {
                         ForEach(categoryProducts) { product in
                             let imageWidth: CGFloat = width / 2.5
@@ -132,7 +132,7 @@ struct MainProductDetailView: View {
                                         .frame(width: imageWidth, height: imageHeight )
                                         .clipped()
                                         .cornerRadius(10)
-                                        
+                                    
                                 } placeholder: {
                                     ProgressView()
                                         .frame(width: imageWidth, height: imageHeight)
@@ -147,7 +147,7 @@ struct MainProductDetailView: View {
                             }
                             .padding(.vertical, 32)
                             
-                           
+                            
                         }
                         
                     }

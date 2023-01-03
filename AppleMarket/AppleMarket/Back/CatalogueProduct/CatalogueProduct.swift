@@ -1,7 +1,7 @@
 import Foundation
 
 // 기기, 단말기, 액세사리를 칭하는 모든 상품 타입
-struct CatalogueProduct: Identifiable, Codable {
+struct CatalogueProduct: Identifiable, Codable, Hashable {
     
     // MARK: 공통 프로퍼티
     var id: String

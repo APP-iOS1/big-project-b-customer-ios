@@ -23,12 +23,12 @@ struct AppleMarketApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject var userInfoStore: UserInfoStore = UserInfoStore()
     @StateObject var productStore: ProductStore = ProductStore()
-    
+    @StateObject var catalogueProductStore: CatalogueProductStore = CatalogueProductStore()
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(userInfoStore)
-                .environmentObject(CatalogueProductStore())
+                .environmentObject(catalogueProductStore)
                 .environmentObject(productStore)
         }
     }

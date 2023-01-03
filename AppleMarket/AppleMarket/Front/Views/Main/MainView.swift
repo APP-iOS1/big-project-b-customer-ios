@@ -23,7 +23,7 @@ struct MainView: View {
                     
 
                     MainMyProductView(isShowingSheet: $isShowingSheet, isShowingLoginSheet: $isShowingLoginSheet)
-
+                       
                     
                     Text("제품별로 쇼핑하기")
                         .font(.system(size: 24))

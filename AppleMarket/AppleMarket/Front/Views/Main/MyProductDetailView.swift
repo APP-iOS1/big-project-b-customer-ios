@@ -23,28 +23,28 @@ struct MyProductDetailView: View {
 //    let selectedProduct_2: Product
     @EnvironmentObject var userInstore: UserInfoStore
     var myProducts: CatalogueProduct
-    
+    @EnvironmentObject var catalogueProductStore: CatalogueProductStore
     // device로 분류
     // 악세서리는 리스트 내 이름으로 분류
-    
     var body: some View {
          
         ScrollView{
             VStack(alignment: .leading){
                 
-                let _: String = myProducts.thumbnailImage.isEmpty ? "" : (myProducts.thumbnailImage )
-                
+//                let _: String = myProducts.thumbnailImage.isEmpty ? "" : (myProducts.thumbnailImage )
+              
                 ForEach(userInstore.userInfo?.myDevices ?? [] ,id:\.self) { product in
                     HStack{
 //                        // 기기 사진
-//                        AsyncImage(url: URL(string: myProducts.thumbnailImage )) { image in
-//                            image
-//                                .resizable()
-//                                .scaledToFit()
-//                                .frame(width: 100, height: 100)
-//                        } placeholder: {
-//                            ProgressView()
-//                        }
+                        AsyncImage(url: URL(string: product.deviceImage )) { image in
+                            image
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 100, height: 100)
+                                .foregroundColor(Color.clear)
+                        } placeholder: {
+                            ProgressView()
+                        }
                         
                         VStack(alignment: .leading){
                             // "사용자" 의 "기기명"
@@ -65,16 +65,12 @@ struct MyProductDetailView: View {
                             .font(.system(size: 24))
                             .fontWeight(.bold)
                             .padding(.top, 30)
-                        
-                        // 필터 사용해서 사진 보여주기
-                        
-                        
                     }
                 }
           
                 TabView{
-
-                        ForEach(products_2){ product in
+                    ForEach(catalogueProductStore.catalogueProductStores, id:\.self){ product in
+                        let _ = print("catalogueProductStore : ", catalogueProductStore.catalogueProductStores)
                             NavigationLink{
                                 DetailView()
                             } label:{
@@ -85,28 +81,29 @@ struct MyProductDetailView: View {
                                     .foregroundColor(.white)
                                     .shadow(radius: 10)
                                     .frame(width: 350, height: 450)
-                                
+
                                 VStack {
-                                    AsyncImage(url: URL(string: product.imagePath)) { image in
+                                    Text(product.productName)
+                                    AsyncImage(url: URL(string: product.thumbnailImage)) { image in
                                         image
                                             .resizable()
                                             .scaledToFit()
                                             .frame(height: 180)
-                                        
+
                                     } placeholder: {
                                         ProgressView()
                                     }
                                     Spacer()
                                         .frame(height: 50)
-                                    
+
                                     Text(product.productName)
                                         .padding(.bottom, 1)
-                                    
-                                    Text("₩\(product.prices)")
+
+                                    Text("₩\(product.price)")
                                 }
-                                
+
                             }
-                            .foregroundColor(.black)
+                            .foregroundColor(.yellow)
                         }
                         }
 
@@ -126,6 +123,7 @@ struct MyProductDetailView: View {
                         } label: {
                             Image(systemName: "\(menuImageArray[index])")
                             Text("\(menuArray[index])")
+                           
                         }
                     }
                 }
@@ -139,8 +137,8 @@ struct MyProductDetailView: View {
             // \(myProducts.productName)용
             .navigationBarTitle("\(myProducts.productName)용")
             .navigationBarTitleDisplayMode(.inline)
-
         }
+        
     }
 }
 
@@ -149,3 +147,22 @@ struct MyProductDetailView_Previews: PreviewProvider {
         MyProductDetailView(myProducts: CatalogueProduct(id: "", productName: "", device: [], category: "", description: "", price: 0, thumbnailImage: "", status: 0))
     }
 }
+
+//extension MyProductDetailView {
+//    func getProduct() {
+//        var filtered: [CatalogueProduct]
+//        print("catalogueProductStore: \(catalogueProductStore.catalogueProductStores)")
+//
+//            filtered = catalogueProductStore.catalogueProductStores.filter ({
+//                $0.model?.contains(myProducts.productName) ?? true
+//            })
+//
+//        print("productName : \(myProducts.productName)")
+//        print("\(filtered)")
+//        print("\(myProducts.productName)")
+//        print("2번째: \(catalogueProductStore.catalogueProductStores)")
+//
+//        self.featuredProducts = Array(filtered)
+//        print("filtered: \(featuredProducts)")
+//    }
+//}
