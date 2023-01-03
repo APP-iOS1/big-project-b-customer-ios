@@ -21,15 +21,8 @@ struct MyProfileView: View {
                 List {
                     Section {
                         HStack {
-                            AsyncImage(url: URL(string: "https://mblogthumb-phinf.pstatic.net/MjAxNzEyMTFfMjA3/MDAxNTEyOTg0MTU3MzMz.wOvG_aS8a9vm44iNUmgby2-oG2u4aPAZ9lkOgyFqT7Ag.8qIDSv7H3yMjgKynzob12maeIvqeE1IrEtscN8MV0Uog.JPEG.jung02140214/IMG_2189.jpg?type=w800")) { image in
-                                image
-                                    .resizable()
-                                    .frame(width: 45, height: 45)
-                                    .aspectRatio(contentMode: .fit)
-                                    .cornerRadius(22)
-                            } placeholder: {
-                                ProgressView()
-                            }
+                           Image(systemName: "person.circle")
+                                .font(.title3)
                             
                             VStack(alignment:. leading, spacing: 3) {
                                 HStack(alignment: .center) {
@@ -50,13 +43,14 @@ struct MyProfileView: View {
                             } label: {
                                 Text(title)
                             }
-                        } else {
-                            NavigationLink {
-                                MyAddressListView()
-                            } label: {
-                                Text(title)
-                            }
-                        }
+                        }                        
+//                        else {
+//                            NavigationLink {
+//                                MyAddressListView()
+//                            } label: {
+//                                Text(title)
+//                            }
+//                        }
                     }
                     Section {
                         Button {
@@ -91,7 +85,6 @@ struct MyProfileView: View {
 
 struct MyProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        
         NavigationStack {
             MyProfileView(isShowingLoginSheet: .constant(true), userInfoStore: UserInfoStore())
         }

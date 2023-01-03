@@ -52,7 +52,7 @@ struct ContentView: View {
                     }
                 
                 NavigationStack {
-                    MypageView(userInfoStore: userInfoStore)
+                    MypageView()
                 }
                     .tabItem {
                         Image(systemName: "person.circle")
@@ -68,9 +68,6 @@ struct ContentView: View {
                         }
                     }
             }
-        
-        
-        
     }
 }
 

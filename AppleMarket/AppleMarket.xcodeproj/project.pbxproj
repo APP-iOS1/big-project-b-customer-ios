@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		021408582963FD5A0051FF33 /* LoginMyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021408562963FD5A0051FF33 /* LoginMyPageView.swift */; };
+		021408592963FD5A0051FF33 /* NotLoginMyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021408572963FD5A0051FF33 /* NotLoginMyPageView.swift */; };
 		2C293046295AAA09003C77F8 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C293045295AAA09003C77F8 /* UserInfo.swift */; };
 		2C293048295AAC36003C77F8 /* UserInfoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C293047295AAC36003C77F8 /* UserInfoStore.swift */; };
 		2C7A8C6B295A8298000D55C5 /* AppleMarketApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7A8C6A295A8298000D55C5 /* AppleMarketApp.swift */; };
@@ -73,6 +75,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		021408562963FD5A0051FF33 /* LoginMyPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginMyPageView.swift; sourceTree = "<group>"; };
+		021408572963FD5A0051FF33 /* NotLoginMyPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotLoginMyPageView.swift; sourceTree = "<group>"; };
 		2C293045295AAA09003C77F8 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		2C293047295AAC36003C77F8 /* UserInfoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoStore.swift; sourceTree = "<group>"; };
 		2C7A8C67295A8298000D55C5 /* AppleMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppleMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -151,6 +155,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		021408512963E0430051FF33 /* MyMainPage */ = {
+			isa = PBXGroup;
+			children = (
+				2CEFEC61295C0FBB006DA0AA /* MypageView.swift */,
+				021408562963FD5A0051FF33 /* LoginMyPageView.swift */,
+				021408572963FD5A0051FF33 /* NotLoginMyPageView.swift */,
+			);
+			path = MyMainPage;
+			sourceTree = "<group>";
+		};
 		1A4A980429629D2B00FAAB56 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
@@ -291,11 +305,11 @@
 		2CEFEC56295C0FBB006DA0AA /* Mypage */ = {
 			isa = PBXGroup;
 			children = (
+				021408512963E0430051FF33 /* MyMainPage */,
 				2CEFEC5C295C0FBB006DA0AA /* MyOrderView.swift */,
 				2CEFEC57295C0FBB006DA0AA /* MyOrderDetailView.swift */,
 				2CEFEC58295C0FBB006DA0AA /* AddMyAddressView.swift */,
 				2CEFEC60295C0FBB006DA0AA /* MyDeviceListView.swift */,
-				2CEFEC61295C0FBB006DA0AA /* MypageView.swift */,
 				2CEFEC59295C0FBB006DA0AA /* AddMyDeviceView.swift */,
 				2CEFEC5A295C0FBB006DA0AA /* MyAddressListView.swift */,
 				2CEFEC5B295C0FBB006DA0AA /* MyProfileView.swift */,
@@ -482,9 +496,11 @@
 				2CEFEC8E295C0FBC006DA0AA /* AppleCareOptionView.swift in Sources */,
 				2CEFEC42295ABA3E006DA0AA /* Order.swift in Sources */,
 				2CEFEC83295C0FBC006DA0AA /* LoginView.swift in Sources */,
+				021408592963FD5A0051FF33 /* NotLoginMyPageView.swift in Sources */,
 				2CEFEC72295C0FBC006DA0AA /* ShippingView.swift in Sources */,
 				2CEFEC88295C0FBC006DA0AA /* DetailView.swift in Sources */,
 				2CEFEC7F295C0FBC006DA0AA /* AddMyDeviceView.swift in Sources */,
+				021408582963FD5A0051FF33 /* LoginMyPageView.swift in Sources */,
 				2CEFEC84295C0FBC006DA0AA /* SignUpView.swift in Sources */,
 				2CEFEC7C295C0FBC006DA0AA /* MyDeviceFilterView.swift in Sources */,
 				2CEFEC90295C0FBC006DA0AA /* MainView.swift in Sources */,
