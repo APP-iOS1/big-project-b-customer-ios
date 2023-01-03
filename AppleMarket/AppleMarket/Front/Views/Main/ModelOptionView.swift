@@ -11,9 +11,11 @@ struct ModelOptionView: View {
     @State var isChecking = [false, false]
     @Binding var model: String
     @Binding var selectedProduct: CatalogueProduct
-    @State var productArr: [[Product]]
+    @Binding var productArr: [[Product]]
     
-
+    var devicePrice: Int = 0 {
+       didSet { productArr[1][0].price }
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -53,7 +55,7 @@ struct ModelOptionView: View {
                         Text(selectedProduct.model?[1] ?? "")
                     }
                     Spacer()
-                    Text("₩1,750,000부터")
+                    Text("₩\(devicePrice)부터")
                         .font(.caption)
                         .foregroundColor(.gray)
                 }
