@@ -164,7 +164,14 @@ struct MainProductDetailView: View {
 
 extension MainProductDetailView {
     func getCategoryProducts()  {
-        let filtered = catalogueProductStore.catalogueProductStores.filter({$0.category == self.category})
+        var filtered : [CatalogueProduct]
+        
+        if category == "" {
+            filtered = catalogueProductStore.catalogueProductStores
+        } else {
+            filtered = catalogueProductStore.catalogueProductStores.filter({$0.category == self.category})
+        }
+        
         let filterdCount: Int = filtered.count
         let oneThird: Int = Int(filterdCount/3)
         
