@@ -17,141 +17,166 @@ struct MainProduct: Identifiable, Hashable{
     
 }
 
+
 struct MainProductDetailView: View {
-    
-    
-    
-    let products: [MainProduct] = [
-        MainProduct(id: 0, imagePath: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/ipad-pro-13-select-wifi-spacegray-202210?wid=940&hei=1112&fmt=p-jpg&qlt=95&.v=1664411207212", productName: "iPad Pro", prices: "1,249,000"),
-        MainProduct(id: 1, imagePath: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/refurb-ipad-air-wifi-gold-2021?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1644268571040", productName: "iPad Air", prices: "1,249,000"),
-        MainProduct(id: 2, imagePath: "https://m.media-amazon.com/images/I/31reJbshTLL._AC_SY1000_.jpg", productName: "iPad(10세대)", prices: "1,249,000"),
-        MainProduct(id: 3, imagePath: "https://m.media-amazon.com/images/I/31jtlnmtOhL._AC_SY1000_.jpg", productName: "iPad(9세대)", prices: "1,249,000"),
-        MainProduct(id: 4, imagePath: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/ipad-mini-select-wifi-pink-202109_FMT_WHH?wid=940&hei=1112&fmt=png-alpha&.v=1629840647000", productName: "iPad mini", prices: "1,249,000"),
-    ]
-    
-    let promotionProducts: [MainProduct] = [
-        MainProduct(id: 0, imagePath: "https://www.apple.com/newsroom/images/product/ipad/standard/apple_ipad-pro-spring21_hero_04202021_big.jpg.large.jpg", productName: "iPad Pro", description: "최첨단 기술이 구현하는 궁극의 iPad 경험. 역대 가장 프로다운 iPad를 만나다. " ,prices: "1,249,000"),
-        MainProduct(id: 1, imagePath: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/ipad-finish-unselect-gallery-2-202207_FMT_WHH?wid=1280&hei=720&fmt=p-jpg&qlt=95&.v=1654902551786", productName: "iPad(10세대)", prices: "1,249,000"),
-    ]
-    
-    
-    
+    @EnvironmentObject var catalogueProductStore: CatalogueProductStore
+    @State private var featuredProducts: [CatalogueProduct] = []
+    @State private var categoryProducts: [CatalogueProduct] = []
+    let category: String
     
     var body: some View {
         GeometryReader { geo in
-            let width = geo.size.width
-            let height = geo.size.height
-            let itemWidth = width * 0.8
-            let itemHeight = height * 0.65
+            let width: CGFloat = geo.size.width
+            let height: CGFloat = geo.size.height
+            let itemWidth: CGFloat = width * 0.8
+            let itemHeight: CGFloat = height * 0.75
             
-            ScrollView {
-                ScrollView(.horizontal) {
-                    Spacer()
-                        .frame(height: itemHeight * 0.05)
-                    HStack(spacing: 20) {
-                        ForEach(promotionProducts) { product in
-                            AsyncImage(url: URL(string: product.imagePath)) { Image in
-                                ZStack{
-                                    Image
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                        .frame(width: itemWidth, height: itemHeight)
-                                        .clipped()
-                                        .cornerRadius(30)
-                                        .shadow(radius: 10)
-                                        .overlay{
-                                            RoundedRectangle(cornerRadius: 30)
-                                                .fill(LinearGradient(colors: [.black.opacity(0.15), .clear], startPoint: UnitPoint(x:0.5, y: 0), endPoint: UnitPoint(x:0.5, y: 0.5)))
-                                        }
-                                        .overlay {
-                                            HStack {
-                                                VStack(alignment: .leading) {
-                                                    Text("New")
-                                                        .foregroundColor(.orange)
-                                                    Text(product.productName)
-                                                        .foregroundColor(.white)
-                                                        .font(.title)
-                                                        .fontWeight(.semibold)
-                                                    Text(product.description ?? "")
-                                                        .foregroundColor(.white)
-                                                        .font(.caption)
-                                                    Spacer()
-                                                    
+            if categoryProducts.isEmpty || featuredProducts.isEmpty {
+                Text("판매중인 상품이 없습니다.")
+                    .frame(width: width, height: height)
+            } else {
+                ScrollView {
+                    ScrollView(.horizontal) {
+                        Spacer()
+                            .frame(height: itemHeight * 0.05)
+                        HStack(spacing: 20) {
+                            ForEach(featuredProducts) { product in
+                                    AsyncImage(url: URL(string: product.thumbnailImage)) { Image in
+                                        ZStack{
+                                            Image
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fill)
+                                                .frame(width: itemWidth, height: itemHeight)
+                                                .clipped()
+                                                .cornerRadius(30)
+                                                .shadow(radius: 10)
+                                                .overlay{
+                                                    RoundedRectangle(cornerRadius: 30)
+                                                        .fill(LinearGradient(colors: [.black.opacity(0.3), .clear], startPoint: UnitPoint(x:0.5, y: 0), endPoint: UnitPoint(x:0.5, y: 0.5)))
                                                 }
-                                                Spacer()
-                                            }
-                                            .frame(width: itemWidth * 0.9, height: itemHeight * 0.9)
-                                            
+                                                .overlay {
+                                                    HStack {
+                                                        VStack(alignment: .leading) {
+                                                            Text("New")
+                                                                .foregroundColor(.orange)
+                                                            Text(product.productName)
+                                                                .foregroundColor(.white)
+                                                                .font(.title)
+                                                                .fontWeight(.semibold)
+                                                            Text(product.description)
+                                                                .foregroundColor(.white)
+                                                                .font(.caption)
+                                                            Spacer()
+                                                            HStack {
+                                                                Text("₩\(product.price)부터")
+                                                                    .font(.caption)
+                                                                
+                                                                Spacer()
+                                                                
+                                                                Button {
+                                                                    
+                                                                } label: {
+                                                                    Text("구입하기")
+                                                                        .font(.caption)
+                                                                }
+                                                                .buttonStyle(.bordered)
+                                                                
+
+                                                            }
+                                                            
+                                                        }
+                                                        
+                                                      
+                                                    }
+                                                    .frame(width: itemWidth * 0.9, height: itemHeight * 0.9)
+                                                }
                                         }
-                                    
-                                    
-                                    //
-                                }
-                                
-                                
-                            } placeholder: {
-                                Rectangle()
-                                    .stroke(lineWidth: 0.1)
-                                    .frame(width: itemWidth, height: itemHeight)
-                                    .cornerRadius(30)
-                                    .overlay {
-                                        ProgressView()
+                                        
+                                        
+                                    } placeholder: {
+                                        Rectangle()
+                                            .stroke(lineWidth: 0.1)
+                                            .frame(width: itemWidth, height: itemHeight)
+                                            .cornerRadius(30)
+                                            .overlay {
+                                                ProgressView()
+                                            }
                                     }
-                                
                                     
+                                
                             }
                         }
+                        .snapScrolling(itemCount: featuredProducts.count , itemWidth: itemWidth, spacing: 20)
+                        Spacer()
+                            .frame(height: itemHeight * 0.05)
                     }
-                    .snapScrolling(itemCount: promotionProducts.count , itemWidth: itemWidth, spacing: 20)
+                    .scrollDisabled(true)
+                    
                     Spacer()
                         .frame(height: itemHeight * 0.05)
-                }
-                .scrollDisabled(true)
-                
-                Spacer()
-                    .frame(height: itemHeight * 0.05)
-                
-                Divider()
-                
-                Spacer()
-                    .frame(height: itemHeight * 0.1)
-   
-                LazyVStack {
-                    ForEach(products) { product in
-                        VStack {
-                            AsyncImage(url: URL(string: product.imagePath)) { image in
-                                image
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: 100)
-                                    .clipped()
-                                    
-                            } placeholder: {
-                                ProgressView()
-                                    .frame(width: 100, height: 135)
-                            }
-                            Spacer()
-                                .frame(height: 25)
-                            Text(product.productName)
-                                .font(.headline)
-                            Spacer()
-                            Text("₩\(product.prices)부터")
-                                .foregroundColor(Color("MainColor"))
-                        }
-                        .padding(.vertical, 32)
-                        
-                       
-                    }
                     
+                    Divider()
+                    
+                    Spacer()
+                        .frame(height: itemHeight * 0.1)
+       
+                    LazyVStack {
+                        ForEach(categoryProducts) { product in
+                            let imageWidth: CGFloat = width / 2.5
+                            let imageHeight: CGFloat = height / 6
+                            VStack {
+                                AsyncImage(url: URL(string: product.thumbnailImage)) { image in
+                                    image
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: imageWidth, height: imageHeight )
+                                        .clipped()
+                                        .cornerRadius(10)
+                                        
+                                } placeholder: {
+                                    ProgressView()
+                                        .frame(width: imageWidth, height: imageHeight)
+                                }
+                                Spacer()
+                                    .frame(height: 25)
+                                Text(product.productName)
+                                    .font(.headline)
+                                Spacer()
+                                Text("₩\(product.price)부터")
+                                    .foregroundColor(Color("MainColor"))
+                            }
+                            .padding(.vertical, 32)
+                            
+                           
+                        }
+                        
+                    }
                 }
             }
             
+            
         }
+        .onAppear {
+            getCategoryProducts()
+        }
+    }
+}
+
+extension MainProductDetailView {
+    func getCategoryProducts()  {
+        let filtered = catalogueProductStore.catalogueProductStores.filter({$0.category == self.category})
+        let filterdCount: Int = filtered.count
+        let oneThird: Int = Int(filterdCount/3)
+        
+        self.featuredProducts = Array(filtered[0..<oneThird])
+        self.categoryProducts = Array(filtered[oneThird..<filterdCount])
+        
+        
     }
 }
 
 struct MainProductDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        MainProductDetailView()
+        MainProductDetailView(category: "iPad")
     }
 }

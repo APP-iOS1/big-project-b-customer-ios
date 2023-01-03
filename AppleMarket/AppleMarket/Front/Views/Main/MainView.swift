@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+
+
 struct MainView: View {
     @EnvironmentObject var caltalogueProductStore: CatalogueProductStore
     

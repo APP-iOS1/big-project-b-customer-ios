@@ -62,8 +62,9 @@ struct MainProductView: View {
                     LazyVGrid(columns: columns) {
                         ForEach(Products.allCases) { (product: Products) in
                             NavigationLink {
-                                MainProductDetailView()
+                                MainProductDetailView(category: product.rawValue)
                                     .navigationTitle(product.rawValue)
+                                    .navigationBarTitleDisplayMode(.inline)
                             } label: {
                                 RoundedRectangle(cornerRadius: 20)
                                     .frame(width: 165, height: 220)
