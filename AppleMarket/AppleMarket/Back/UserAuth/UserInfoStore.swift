@@ -13,6 +13,7 @@ import FirebaseFirestore
 final class UserInfoStore: ObservableObject{
     @Published var state: SignInState = .signedOut
     @Published var userInfo: UserInfo?
+    @Published var myDevices: [MyDevice] = []
     @Published var cart: [Cart] = []
     @Published var signUpState: Bool = false
     
@@ -119,39 +120,15 @@ final class UserInfoStore: ObservableObject{
     
     // MARK: 유저 기본 정보 패치
     func fetchUserInfo(){
-        print("fetchUserData start")
-        
-        database.collection("ConsumerAccount")
-            .getDocuments{(snapshot, error) in
-                if let snapshot{
-                    for document in snapshot.documents{
-                        if self.userInfo?.userId == document.documentID{
-                            let docData = document.data()
-                            self.userInfo?.userName = docData["userName"] as! String
-                            self.userInfo?.address = docData["address"] as! String
-                            self.userInfo?.phoneNumber = docData["phoneNumber"] as! String
-                            //self.userInfo?.recentProduct = docData["recentProduct"] as! [String]
-                        }
-                    }
-                }
-            }
-        
-        database.collection("ConsumerAccount").document(userInfo?.userId ?? "").collection("MyDevice")
-            .getDocuments{snapshot, error in
-                if let snapshot{
-                    var tempDevice: [MyDevice] = []
-                    for document in snapshot.documents{
-                        let docData = document.data()
-
-                        let deviceId: String = docData["myDeviceId"] as? String ?? ""
-                        let deviceName: String = docData["deviceName"] as? String ?? ""
-                        let deviceImage: String = docData["deviceImage"] as? String ?? ""
-                        let deviceDescription: String = docData["deviceDescription"] as? String ?? ""
-
-                        let myDevice: MyDevice = MyDevice(myDeviceId: deviceId , deviceName: deviceName, deviceImage: deviceImage, deviceDescription: deviceDescription)
-                        tempDevice.append(myDevice)
-                    }
-                    self.userInfo?.myDevices = tempDevice
+        database.collection("ConsumerAccount").document(userInfo?.userId ?? "")
+            .getDocument{(document, error) in
+                if let document {
+                    let docData = document.data()
+                    self.userInfo?.userName = docData?["userName"] as! String
+                    self.userInfo?.address = docData?["address"] as! String
+                    self.userInfo?.phoneNumber = docData?["phoneNumber"] as! String
+                    //self.userInfo?.recentProduct = docData["recentProduct"] as! [String]
+                    self.fetchMyDevice()
                 }
             }
     }
@@ -163,7 +140,6 @@ final class UserInfoStore: ObservableObject{
                     var tempDevice: [MyDevice] = []
                     for document in snapshot.documents{
                         let docData = document.data()
-                        
                         let deviceId: String = docData["myDeviceId"] as? String ?? ""
                         let deviceName: String = docData["deviceName"] as? String ?? ""
                         let deviceImage: String = docData["deviceImage"] as? String ?? ""
@@ -173,13 +149,12 @@ final class UserInfoStore: ObservableObject{
                         tempDevice.append(myDevice)
                     }
                     self.userInfo?.myDevices = tempDevice
+                    self.myDevices = tempDevice
                 }
             }
     }
     
-    
     func addMyDevice(myDevice: MyDevice){
-        print("Add My Device")
         database.collection("ConsumerAccount").document(userInfo?.userId ?? "").collection("MyDevice").document(myDevice.myDeviceId)
             .setData([
                 "myDeviceId": myDevice.myDeviceId,
@@ -187,17 +162,38 @@ final class UserInfoStore: ObservableObject{
                 "deviceImage": myDevice.deviceImage,
                 "deviceDescription": myDevice.deviceDescription
             ])
-        
         fetchMyDevice()
     }
     
-    func removeMyDevice(myDevice: MyDevice){
-        database.collection("ConsumerAccount").document(userInfo?.userId ?? "").collection("MyDevice").document(myDevice.myDeviceId)
+    func removeMyDevice(myDeviceId: String){
+        database.collection("ConsumerAccount").document(userInfo?.userId ?? "").collection("MyDevice").document(myDeviceId)
             .delete()
-        
         fetchMyDevice()
-        
     }
+    
+    // MARK: 유저 장바구니 패치
+    
+    //    func fetchUserCart(){
+    //        database.collection("ConsumerAccount").document(self.userInfo?.userId ?? "").collection("Cart")
+    //            .getDocuments{snapshot, error in
+    //                if let snapshot{
+    //                    var tempCart: [Cart] = []
+    //                    for document in snapshot.documents{
+    //                        let docData = document.data()
+    //
+    //                        let productId: String = docData["productId"] as? String ?? ""
+    //                        let productName: String = docData["productName"] as? String ?? ""
+    //                        let productPrice: Int = docData["productPrice"] as? Int ?? 1000
+    //                        let productCount: Int = docData["productCount"] as? Int ?? 1
+    //
+    //                        let cart: Cart = Cart(productId: productId, productName: productName, productCount: productCount, productPrice: productPrice)
+    //
+    //                        tempCart.append(cart)
+    //                    }
+    //                    self.cart = tempCart
+    //                }
+    //            }
+    //    }
 }
 
 

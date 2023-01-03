@@ -33,15 +33,13 @@ struct MyDeviceListView: View {
                                 }
 
                                 Text(myDevice.deviceDescription)
-                              
                             }
-                            Divider()
-//                                .padding(5)
+                            .alignmentGuide(.listRowSeparatorLeading) { viewDimensions in
+                                return 0
+                            }
                         }
-//                        .frame(height: 55)
-                       
+                        .onDelete(perform: delete)
                     }
-                    .listRowSeparator(.hidden)
                     
                     Button {
                         isShowingSheet.toggle()
@@ -59,6 +57,7 @@ struct MyDeviceListView: View {
                             .presentationDetents([.medium,.large])
                     }
                 }
+                .listStyle(InsetGroupedListStyle())
                 
             }
             .navigationBarTitle("내 기기")
@@ -67,7 +66,11 @@ struct MyDeviceListView: View {
                 userInfoStore.fetchUserInfo()
             }
         }
-        
+    }
+    
+    func delete(at offsets: IndexSet) {
+        guard let offsets = offsets.first else { return }
+        userInfoStore.removeMyDevice(myDeviceId: userInfoStore.userInfo?.myDevices[offsets].myDeviceId ?? "")
     }
 }
 
