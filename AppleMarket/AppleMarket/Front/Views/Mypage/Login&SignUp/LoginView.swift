@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - 로그인 뷰
 struct LoginView: View {
 
-   // @Environment(\.dismiss) private var dismiss
+    @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var userInfoStore: UserInfoStore
     @State var emailText: String = ""
     @State var passwordText: String = ""
@@ -51,6 +51,7 @@ struct LoginView: View {
                             userInfoStore.emailAuthSignIn(email: emailText, password: passwordText)
                                 print("로그인 되었습니다.")
                             isShowingLoginSheet.toggle()
+                            dismiss()
                         } label: {
                                 Text("로그인")
                                     .padding()

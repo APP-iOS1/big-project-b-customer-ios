@@ -63,6 +63,7 @@ final class UserInfoStore: ObservableObject{
                 // 기기 core저장소에 password 키에 password 값을 저장
                 UserDefaults.standard.set(password, forKey: UserDefaults.Keys.password.rawValue)
                 self.state = .signedIn
+                self.fetchUserInfo()
             }
         }
     }
@@ -197,32 +198,6 @@ final class UserInfoStore: ObservableObject{
         fetchMyDevice()
         
     }
-    
-    // MARK: 유저 장바구니 패치
-
-//    func fetchUserCart(){
-//        database.collection("ConsumerAccount").document(self.userInfo?.userId ?? "").collection("Cart")
-//            .getDocuments{snapshot, error in
-//                if let snapshot{
-//                    var tempCart: [Cart] = []
-//                    for document in snapshot.documents{
-//                        let docData = document.data()
-//                        
-//                        let productId: String = docData["productId"] as? String ?? ""
-//                        let productName: String = docData["productName"] as? String ?? ""
-//                        let productPrice: Int = docData["productPrice"] as? Int ?? 1000
-//                        let productCount: Int = docData["productCount"] as? Int ?? 1
-//                        
-//                        let cart: Cart = Cart(productId: productId, productName: productName, productCount: productCount, productPrice: productPrice)
-//                        
-//                        tempCart.append(cart)
-//                    }
-//                    self.cart = tempCart
-//                }
-//            }
-//    }
-
-    
 }
 
 
