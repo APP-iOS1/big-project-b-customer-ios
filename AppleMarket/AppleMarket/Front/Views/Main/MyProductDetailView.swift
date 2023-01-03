@@ -53,18 +53,23 @@ struct MyProductDetailView: View {
                                 .fontWeight(.bold)
                                 .padding(.bottom, 1)
                             // "기기 종류" + "사양"
-                            Text(product.deviceDescription)
+                            Text(product.deviceName)
                         }
                         .frame(alignment: .leading)
                         .padding()
                     }
                     
                     // "기기 종류" 용 추천
-                    Text("\(product.deviceDescription) 액세서리 추천")
-                        .font(.system(size: 24))
-                        .fontWeight(.bold)
-                        .padding(.top, 30)
-                    
+                    VStack {
+                        Text("\(product.deviceName) 액세서리 추천")
+                            .font(.system(size: 24))
+                            .fontWeight(.bold)
+                            .padding(.top, 30)
+                        
+                        // 필터 사용해서 사진 보여주기
+                        
+                        
+                    }
                 }
           
                 TabView{
@@ -129,7 +134,6 @@ struct MyProductDetailView: View {
                 .listStyle(.inset)
                 .frame(height: 400)
                 // \(myProducts.productName)용
-                .navigationBarTitle("\(myProducts.productName)용")
             }
             .padding()
             // \(myProducts.productName)용
