@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct PaymentView: View {
+    @StateObject var orderStore: OrderStore = OrderStore()
+    
+    let carts: [CartProduct]
+    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -15,17 +19,19 @@ struct PaymentView: View {
                     Text("재고가 있으며, 배송이 가능합니다.")
                         .font(.title)
                         .bold()
-                    HStack {
-                        AsyncImage(url: URL(string: "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/airpods-max-select-silver-202011?wid=470&hei=556&fmt=png-alpha&.v=1604021221000")) { image in
-                            image
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 60, height: 60)
-                        } placeholder: {
-                            ProgressView()
+                    List(orderStore.products) { product in
+                        HStack {
+                            AsyncImage(url: URL(string: product.image.first ?? "")) { image in
+                                image
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 60, height: 60)
+                            } placeholder: {
+                                ProgressView()
+                            }
+                            Text("\(product.id)")
+                                .padding(.leading, 10)
                         }
-                        Text("AirPods Max - 실버")
-                            .padding(.leading, 10)
                     }
                     .padding(.bottom, 30)
                     VStack(alignment: .leading) {
@@ -64,7 +70,9 @@ struct PaymentView: View {
                         .padding(.bottom, 30)
                     Button(action: {
                     }) {
+
                         NavigationLink(destination: ShippingView(orderStore: OrderStore())) {
+
                             Text("배송 정보 입력하기")
                                 .font(.headline)
                                 .fontWeight(.bold)
@@ -81,6 +89,9 @@ struct PaymentView: View {
                 .padding(.leading, 22)
             }
         }
+        .onAppear {
+            orderStore.searchProductInfo(carts: carts)
+        }
         
     }
 }
@@ -88,7 +99,13 @@ struct PaymentView: View {
 struct PaymentView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            PaymentView()
+            PaymentView(carts: [CartProduct(id: "",
+                                         productName: "",
+                                         device: [""],
+                                         category: "",
+                                         storage: "",
+                                         color: "",
+                                         productCount: 1)])
         }
     }
 }
