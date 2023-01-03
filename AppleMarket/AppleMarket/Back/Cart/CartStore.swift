@@ -21,13 +21,26 @@ class CartStore: ObservableObject {
                 var tempCart: [Cart] = []
                 for document in snapshot.documents {
                     let docData = document.data()
-                    let productId: String = docData["productId"] as? String ?? ""
-                    let productName: String = docData["productName"] as? String ?? ""
-                    let productCount: Int = docData["productCount"] as? Int ?? 0
-                    let productPrice: Int = docData["productPrice"] as? Int ?? 0
-                    let productImage: String = docData["productImage"] as? String ?? ""
                     
-                    let products: Cart = Cart(productId: productId, productName: productName, productCount: productCount, productPrice: productPrice, productImage: productImage)
+                    let id: String = docData["id"] as? String ?? ""
+                    let productName: String = docData["productName"] as? String ?? ""
+                    let device: [String] = docData["device"] as? [String] ?? [""]
+                    let image: String = docData["images"] as? String ?? ""
+                    let category: String = docData["category"] as? String ?? ""
+                    let storage: String = docData["storage"] as? String ?? ""
+                    let color: String = docData["color"] as? String ?? ""
+                    let productCount: Int = docData["productCount"] as? Int ?? 0
+                    let price: Int = docData["price"] as? Int ?? 0
+                    
+                    let products: Cart = Cart(id: id,
+                                              productName: productName,
+                                              device: device,
+                                              category: category,
+                                              storage: storage,
+                                              color: color,
+                                              productCount: productCount,
+                                              image: image,
+                                              price: price)
                     
                     tempCart.append(products)
                 }
@@ -45,7 +58,7 @@ class CartStore: ObservableObject {
                 "category": product.category,
                 "description": product.description,
                 "price": product.price,
-                "images": product.thumbnailImage,
+                "image": product.thumbnailImage,
                 "storage": product.storage,
                 "color": product.color,
                 "status": product.status,
@@ -58,19 +71,23 @@ class CartStore: ObservableObject {
     }
 
     func updateCart(uid: String, product: Cart, productCount: Int){
-        database.document(uid).collection("Cart").document(product.productId)
+        database.document(uid).collection("Cart").document(product.id)
             .setData([
-                "productId": product.productId,
+                "id": product.id,
                 "productName": product.productName,
-                "productCount": productCount,
-                "productPrice": product.productPrice,
-                "productImage": product.productImage
+                "device": product.device,
+                "category": product.category,
+                "price": product.price,
+                "image": product.image,
+                "storage": product.storage,
+                "color": product.color,
+                "productCount": productCount
             ])
         fetchCart(uid: uid)
     }
     
     func removeCart(uid: String, product: Cart){
-        database.document(uid).collection("Cart").document(product.productId)
+        database.document(uid).collection("Cart").document(product.id)
             .delete()
         fetchCart(uid: uid)
     }
