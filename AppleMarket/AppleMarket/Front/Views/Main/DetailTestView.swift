@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct DetailTestView: View {
-    @State private var isChecking = [false, false, false, false]
     @Binding var color: String
     @Binding var selectedProduct: CatalogueProduct
+    @State private var isChecking = [false, false, false ,false, false, false, false]
     let columns = [
         GridItem(.flexible(), spacing: 0),
         GridItem(.flexible())
@@ -25,11 +25,10 @@ struct DetailTestView: View {
             }
             .padding(.bottom, 10)
             
-            
             LazyVGrid(columns: columns, spacing: 10){
                 ForEach(0..<selectedProduct.color!.count, id: \.self) { index in
                     Button {
-                        isChecking = [false, false, false, false]
+                        isCheckingAllFalse()
                         isChecking[index] = true
                         color = selectedProduct.color?[index] ?? ""
                     } label: {
@@ -76,6 +75,18 @@ struct DetailTestView: View {
             //            }
         }
         .padding()
+    }
+    
+    func isCheckingAllFalse() {
+        for i in 0..<selectedProduct.color!.count {
+            isChecking.insert(false, at: i)
+        }
+    }
+    
+    func isCheckingInputFalse() {
+        for _ in 0..<selectedProduct.color!.count {
+            isChecking.append(false)
+        }
     }
 }
 
