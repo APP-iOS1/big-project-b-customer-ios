@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CartSignInView: View {
     @EnvironmentObject var userInfoStore: UserInfoStore
-    @StateObject private var cartStore: CartStore = CartStore()
+    @EnvironmentObject var cartStore: CartStore
     
     var body: some View {
         NavigationStack {
@@ -30,5 +30,6 @@ struct CartSignInView: View {
 struct CartSignInView_Previews: PreviewProvider {
     static var previews: some View {
         CartSignInView()
+            .environmentObject(CartStore())
     }
 }

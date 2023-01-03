@@ -20,7 +20,7 @@ struct MyOrderDetailView: View {
                     .font(.title)
                     .fontWeight(.bold)
                     .padding(.bottom, 30)
-                Text("주문번호 : \(order.id)")
+                Text("주문번호 : \(order.id ?? "")")
                     .font(.callout)
                 Text("주문접수 : \(order.orderDate)")
                     .font(.callout)
@@ -46,7 +46,7 @@ struct MyOrderDetailView: View {
                             .font(.title3)
                             .padding(.bottom, 10)
                             .fontWeight(.bold)
-                        Text("\(order.id)")
+                        Text("\(order.id ?? "")")
                         Text("010-1234-5678")
                         Text("\(order.orderAddress)")
                             .padding(.bottom, 30)
@@ -70,7 +70,7 @@ struct MyOrderDetailView: View {
                             HStack {
                                 Text("소계")
                                 Spacer()
-                                Text("₩ \(order.orderTotalPrice)")
+                                Text("₩ \(order.orderTotalPrice ?? 0)")
                             }
                             .padding(.bottom, 5)
                             HStack {
@@ -87,7 +87,7 @@ struct MyOrderDetailView: View {
                                     .padding(.bottom, 10)
                                     .fontWeight(.bold)
                                 Spacer()
-                                Text("₩ \(order.orderTotalPrice)")
+                                Text("₩ \(order.orderTotalPrice ?? 0)")
                                     .font(.title3)
                                     .padding(.bottom, 10)
                                     .fontWeight(.bold)

@@ -24,6 +24,8 @@ struct AppleMarketApp: App {
     @StateObject var userInfoStore: UserInfoStore = UserInfoStore()
     @StateObject var productStore: ProductStore = ProductStore()
     @StateObject var catalogueProductStore: CatalogueProductStore = CatalogueProductStore()
+    @StateObject var cartStore: CartStore = CartStore()
+    @StateObject var orderStore: OrderStore = OrderStore()
     
     var body: some Scene {
         WindowGroup {
@@ -31,6 +33,8 @@ struct AppleMarketApp: App {
                 .environmentObject(userInfoStore)
                 .environmentObject(catalogueProductStore)
                 .environmentObject(productStore)
+                .environmentObject(cartStore)
+                .environmentObject(orderStore)
         }
     }
 }

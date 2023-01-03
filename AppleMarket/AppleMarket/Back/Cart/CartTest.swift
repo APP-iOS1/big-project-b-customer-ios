@@ -9,8 +9,8 @@ import SwiftUI
 
 struct CartTest: View {
     
-    @StateObject private var productStore = ProductStore()
-    @StateObject private var cartStore = CartStore()
+    @EnvironmentObject private var productStore: ProductStore
+    @EnvironmentObject private var cartStore: CartStore
     var uid: String = "mUzu710p6zgGOPk64s7D6DhMIq32"
     
     var body: some View {
@@ -49,5 +49,7 @@ struct CartTest: View {
 struct CartTest_Previews: PreviewProvider {
     static var previews: some View {
         CartTest()
+            .environmentObject(CartStore())
+            .environmentObject(ProductStore())
     }
 }

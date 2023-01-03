@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MyOrderView: View {
-    @StateObject var orderStore: OrderStore = OrderStore()
+    @EnvironmentObject var orderStore: OrderStore
     let userId: String = "mUzu710p6zgGOPk64s7D6DhMIq32"
 
     var body: some View {
@@ -95,5 +95,6 @@ struct OrderListCell:View {
 struct MyOrderView_Previews: PreviewProvider {
     static var previews: some View {
         MyOrderView()
+            .environmentObject(OrderStore())
     }
 }

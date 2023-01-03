@@ -70,7 +70,7 @@ struct NotLoginMyPageView: View {
                     }
                     .sheet(isPresented: $isShowingLoginSheet) {
                         if userInfoStore.state == .signedIn {
-                            MyProfileView(isShowingLoginSheet: $isShowingLoginSheet, userInfoStore: userInfoStore)
+                            MyProfileView(isShowingLoginSheet: $isShowingLoginSheet, userInfoStore: _userInfoStore)
                             
                         } else {
                             LoginView(isShowingLoginSheet: $isShowingLoginSheet)

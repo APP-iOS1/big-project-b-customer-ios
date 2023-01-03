@@ -13,8 +13,8 @@ struct CartView: View {
     @State private var disabled: Bool = false // 결제 버튼 활성화
     @State private var isEmptyCart: Bool = false
     @EnvironmentObject var userInfoStore: UserInfoStore
-    @StateObject private var cartStore: CartStore = CartStore()
-    @StateObject private var productStore: ProductStore = ProductStore()
+    @EnvironmentObject var cartStore: CartStore
+    @EnvironmentObject var productStore: ProductStore
     var cartCount: Int
     
     var body: some View {
@@ -189,7 +189,7 @@ struct CartView: View {
                     .padding(.top, 10)
                     
                     // 결제
-                    NavigationLink(destination: PaymentView()) {
+                    NavigationLink(destination: PaymentView(carts: [])) {
                         ZStack {
                             RoundedRectangle(cornerRadius: 15)
                                 .fill(disabled ? .secondary : Color("MainColor"))
@@ -228,5 +228,7 @@ struct CartView: View {
 struct CartView_Previews: PreviewProvider {
     static var previews: some View {
         CartView(cartCount: 0)
+            .environmentObject(CartStore())
+            .environmentObject(ProductStore())
     }
 }

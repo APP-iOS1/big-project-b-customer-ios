@@ -10,9 +10,12 @@ import SwiftUI
 struct ContentView: View {
     
     @State private var tabSelection: Int = 1
-    @EnvironmentObject var userInfoStore: UserInfoStore
-    @StateObject private var cartStore: CartStore = CartStore()
     @State private var isShowingSheet: Bool = false
+    @EnvironmentObject var userInfoStore: UserInfoStore
+    @EnvironmentObject var cartStore: CartStore
+    @EnvironmentObject var orderStore: OrderStore
+    @EnvironmentObject var catalogueProductStore: CatalogueProductStore
+    @EnvironmentObject var productStore: ProductStore
     
     var body: some View {
             TabView(selection: $tabSelection) {
@@ -62,6 +65,19 @@ struct ContentView: View {
                                 userInfoStore.emailAuthSignIn(email: email, password: password)
                             }
                         }
+                        userInfoStore.fetchUserInfo()
+                        productStore.fetchProduct()
+                        catalogueProductStore.fetchData()
+                        if userInfoStore.userInfo != nil {
+                            cartStore.fetchCart(uid: userInfoStore.userInfo?.userId ?? "")
+                            orderStore.fetchOrderList(userId: userInfoStore.userInfo?.userId ?? "" )
+                        }
+                    }
+                    .onChange(of: userInfoStore.userInfo) { newValue in
+                        if userInfoStore.userInfo != nil {
+                            cartStore.fetchCart(uid: userInfoStore.userInfo?.userId ?? "")
+                            orderStore.fetchOrderList(userId: userInfoStore.userInfo?.userId ?? "" )
+                        }
                     }
             }
 
@@ -73,5 +89,6 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
             .environmentObject(UserInfoStore())
             .environmentObject(CatalogueProductStore())
+            .environmentObject(CartStore())
     }
 }

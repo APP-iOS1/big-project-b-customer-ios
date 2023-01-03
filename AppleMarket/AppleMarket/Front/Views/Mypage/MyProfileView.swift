@@ -12,7 +12,7 @@ struct MyProfileView: View {
     @Binding var isShowingLoginSheet: Bool
     @State private var showingAlertProfile = false
     @State private var isEditName: Bool = false
-    @StateObject var userInfoStore: UserInfoStore
+    @EnvironmentObject var userInfoStore: UserInfoStore
     @State private var action: Int = 0
     
     var body: some View {
@@ -86,7 +86,8 @@ struct MyProfileView: View {
 struct MyProfileView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            MyProfileView(isShowingLoginSheet: .constant(true), userInfoStore: UserInfoStore())
+            MyProfileView(isShowingLoginSheet: .constant(true))
+                .environmentObject(UserInfoStore())
         }
         
     }

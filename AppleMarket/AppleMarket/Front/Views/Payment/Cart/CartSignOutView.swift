@@ -33,7 +33,7 @@ struct CartSignOutView: View {
             }
             .sheet(isPresented: $isShowingLoginSheet) {
                 if userInfoStore.state == .signedIn {
-                    MyProfileView(isShowingLoginSheet: $isShowingLoginSheet, userInfoStore: userInfoStore)
+                    MyProfileView(isShowingLoginSheet: $isShowingLoginSheet)
                 } else {
                     LoginView(isShowingLoginSheet: $isShowingLoginSheet)
                 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct OrderTestView: View {
-    @StateObject var orderStore: OrderStore = OrderStore()
+    @EnvironmentObject var orderStore: OrderStore
     
     // MARK: - test용 data
     let products: [Product] = [Product(id: "testID",
@@ -109,5 +109,6 @@ struct OrderDetailTestView: View {
 struct OrderTestView_Previews: PreviewProvider {
     static var previews: some View {
         OrderTestView()
+            .environmentObject(OrderStore())
     }
 }

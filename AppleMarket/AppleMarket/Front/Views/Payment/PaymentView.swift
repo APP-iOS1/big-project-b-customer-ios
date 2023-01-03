@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PaymentView: View {
-    @StateObject var orderStore: OrderStore = OrderStore()
+    @EnvironmentObject var orderStore: OrderStore
     
     let carts: [CartProduct]
     
