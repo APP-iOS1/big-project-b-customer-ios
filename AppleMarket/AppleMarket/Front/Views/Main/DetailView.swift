@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct DetailView: View {
+    @EnvironmentObject var productStore: ProductStore
     
     @State var price: Int = 0
     @State var memoryPrice: Int = 0
@@ -15,10 +16,11 @@ struct DetailView: View {
     @State var model: String = "iPhone 14 Pro"
     @State var memory: String = "128GB"
     @State var color: String = "실버"
+    @State var productArr: [[Product]] = [] // 뷰에 모델 종류 보여지는 순서대로 모델에 해당되는 Product 요소들이 배열로 들어감
     
     
     @State private var selectedProduct: CatalogueProduct =
-    CatalogueProduct(id: "1A20CDEF-F296-444B-903C-4CD5C3A4A471", productName: "iPhone 14 Pro", device: ["iPhone 14 Pro"], category: "iPhone", description: "IPhone 14 Pro 입니다.", price: 1550000, thumbnailImage: "", status: 1, descriptionImages: [
+    CatalogueProduct(id: "iPhone 14 Pro", productName: "iPhone 14 Pro", device: ["iPhone 14 Pro"], category: "iPhone", description: "IPhone 14 Pro 입니다.", price: 1550000, thumbnailImage: "", status: 1, descriptionImages: [
         "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone-14-pro-finish-select-202209-6-1inch-silver?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1663703840488",
         "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone-14-pro-finish-select-202209-6-1inch-silver_AV1?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1661969351381",
         "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone-14-pro-finish-select-202209-6-1inch-silver_AV2?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1660754259155"], model: ["iPhone 14 Pro", "iPhone 14 Pro Max"], color: ["딥 퍼플", "골드", "실버", "스페이스 블랙"], storage: ["128GB", "256GB", "512GB", "1TB"])
@@ -29,6 +31,10 @@ struct DetailView: View {
     var body: some View {
         ScrollView {
             VStack {
+                if !productStore.productStore.isEmpty {
+//                    let _ = searchProduct(catalogueProduct: selectedProduct)
+//                    let _ = print("productArr : \(productArr)")
+                }
                 
                 TabView {
                     ForEach(0..<(selectedProduct.descriptionImages?.count ?? 0), id: \.self) { i in
@@ -57,14 +63,14 @@ struct DetailView: View {
                 
                 
                 if selectedProduct.category == "iPhone" {
-                    ModelOptionView(model: $model, selectedProduct: $selectedProduct)
+                    ModelOptionView(model: $model, selectedProduct: $selectedProduct,productArr: productArr)
                         .padding(.bottom, 35)
-                    ColorOptionView(color: $color, selectedProduct: $selectedProduct)
+                    DetailTestView(color: $color, selectedProduct: $selectedProduct)
                         .padding(.bottom, 50)
                     MemoryOptionView( memory: $memory, selectedProduct: $selectedProduct)
                         .padding(.bottom, 35)
                 } else if selectedProduct.category == "iPad" {
-                    ModelOptionView(model: $model, selectedProduct: $selectedProduct)
+                    ModelOptionView(model: $model, selectedProduct: $selectedProduct, productArr: productArr)
                         .padding(.bottom, 35)
                     ColorOptionView(color: $color, selectedProduct: $selectedProduct)
                         .padding(.bottom, 50)
@@ -106,12 +112,60 @@ struct DetailView: View {
                     .padding(.vertical, 20)
                 
             }
+            .onChange(of: productStore.productStore, perform: { newValue in
+                searchProduct(catalogueProduct: selectedProduct)
+                print("productArr: ", productArr)
+            })
+//            {
+                        //                print("Onappear")
+            //                if !productStore.productStore.isEmpty{
+            //                   searchProduct(catalogueProduct: selectedProduct)
+            //                  print("productArr : \(productArr)")
+            //
+            //                }
+            //            }
         } // ScrollView
+        .task {
+             productStore.fetchProduct()
+            print(productStore.productStore)
+        }
     } //body
+    
+    func searchProduct(catalogueProduct: CatalogueProduct) {
+        var tempProduct: [Product] = []
+        print("searchProduct")
+        for model in catalogueProduct.model!{
+            for product in productStore.productStore{
+                print("searchProduct Store,:", product.productName)
+                print("model: ", model)
+                if model == product.productName{
+                    tempProduct.append(product)
+                    print("match product,", tempProduct)
+                }
+            }
+            tempProduct = tempProduct.sorted(by: {$0.price < $1.price})
+            productArr.append(tempProduct)
+        }
+    }
 }
+    // productArr[0][0], productARr[1][0]
+//    for storage in selectedProduct.storage{
+//        productArr[1][0].contains(storage)
+//    }
+    
+  //  productArr[index] = sortProductArr(productArr[index])
 
+//    배열 정렬 함수
+//    func sortProductArr(productArr: [Product]) -> [Product]{
+//        var newProductArr = productArr.sorted(by: {$0.price < $1.price})
+//
+//        return newProductArr
+//    }
+    
+    
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
         DetailView()
+            .environmentObject(ProductStore())
     }
 }

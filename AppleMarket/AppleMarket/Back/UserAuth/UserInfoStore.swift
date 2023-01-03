@@ -64,6 +64,7 @@ final class UserInfoStore: ObservableObject{
                 // 기기 core저장소에 password 키에 password 값을 저장
                 UserDefaults.standard.set(password, forKey: UserDefaults.Keys.password.rawValue)
                 self.state = .signedIn
+                self.fetchUserInfo()
             }
         }
     }
@@ -193,8 +194,6 @@ final class UserInfoStore: ObservableObject{
     //                }
     //            }
     //    }
-    
-    
 }
 
 
