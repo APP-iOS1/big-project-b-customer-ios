@@ -15,14 +15,14 @@ struct MainPromotionView: View {
     
     let promotions: [Promotion] = [
         Promotion(imagePath: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/og-holiday-2022?wid=1200&hei=630&fmt=jpeg&qlt=95&.v=1664549930560", title: "연말연시 최고의 선물"),
-        Promotion(imagePath: "https://www.apple.com/newsroom/images/product/iphone/standard/holidays/Apple_Retail-Holiday_The-Grove_11092021_big.jpg.large.jpg", title: "")
+        Promotion(imagePath: "https://www.apple.com/newsroom/images/product/iphone/standard/holidays/Apple_Retail-Holiday_The-Grove_11092021_big.jpg.large.jpg", title: "이제 애플 매장에서 직접 수령하세요")
     ]
     
     
     
     var body: some View {
         GeometryReader { geo in
-            let width: CGFloat = geo.size.width
+            let width: CGFloat = geo.size.width * 0.95
             let height: CGFloat = geo.size.height
             
             VStack(alignment: .leading){
@@ -48,6 +48,10 @@ struct MainPromotionView: View {
                                     .frame(width: width, height: height)
                                     .clipped()
                                     .cornerRadius(10)
+                                    .overlay {
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .fill(LinearGradient(colors: [.clear, .black.opacity(0.3)], startPoint: UnitPoint(x:0.5, y: 0), endPoint: UnitPoint(x:0.5, y: 1)))
+                                    }
                                     .overlay {
                                         VStack {
                                             Spacer()
