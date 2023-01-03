@@ -58,27 +58,27 @@ struct ContentView: View {
                         Text("마이페이지")
                     }
                     .tag(4)
-                    .onAppear {
-                        // 이전 로그인 기록이 있다면 자동 로그인
-                        if let email = UserDefaults.standard.string(forKey: UserDefaults.Keys.email.rawValue) {
-                            if let password = UserDefaults.standard.string(forKey: UserDefaults.Keys.password.rawValue) {
-                                userInfoStore.emailAuthSignIn(email: email, password: password)
-                            }
-                        }
-                        userInfoStore.fetchUserInfo()
-                        productStore.fetchProduct()
-                        catalogueProductStore.fetchData()
-                        if userInfoStore.userInfo != nil {
-                            cartStore.fetchCart(uid: userInfoStore.userInfo?.userId ?? "")
-                            orderStore.fetchOrderList(userId: userInfoStore.userInfo?.userId ?? "" )
-                        }
+                    
+            }
+            .onAppear {
+                // 이전 로그인 기록이 있다면 자동 로그인
+                if let email = UserDefaults.standard.string(forKey: UserDefaults.Keys.email.rawValue) {
+                    if let password = UserDefaults.standard.string(forKey: UserDefaults.Keys.password.rawValue) {
+                        userInfoStore.emailAuthSignIn(email: email, password: password)
                     }
-                    .onChange(of: userInfoStore.userInfo) { newValue in
-                        if userInfoStore.userInfo != nil {
-                            cartStore.fetchCart(uid: userInfoStore.userInfo?.userId ?? "")
-                            orderStore.fetchOrderList(userId: userInfoStore.userInfo?.userId ?? "" )
-                        }
-                    }
+                }
+                productStore.fetchProduct()
+                catalogueProductStore.fetchData()
+                if userInfoStore.userInfo != nil {
+                    cartStore.fetchCart(uid: userInfoStore.userInfo?.userId ?? "")
+                    orderStore.fetchOrderList(userId: userInfoStore.userInfo?.userId ?? "" )
+                }
+            }
+            .onChange(of: userInfoStore.userInfo) { newValue in
+                if userInfoStore.userInfo != nil {
+                    cartStore.fetchCart(uid: userInfoStore.userInfo?.userId ?? "")
+                    orderStore.fetchOrderList(userId: userInfoStore.userInfo?.userId ?? "" )
+                }
             }
 
     }
