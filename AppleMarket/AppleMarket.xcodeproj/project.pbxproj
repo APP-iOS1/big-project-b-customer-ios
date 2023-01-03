@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A3AE9D12963C7440024DBB1 /* DetailTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3AE9D02963C7440024DBB1 /* DetailTestView.swift */; };
+		1A3AE9D32963E1400024DBB1 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3AE9D22963E1400024DBB1 /* DetailView.swift */; };
 		2C293046295AAA09003C77F8 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C293045295AAA09003C77F8 /* UserInfo.swift */; };
 		2C293048295AAC36003C77F8 /* UserInfoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C293047295AAC36003C77F8 /* UserInfoStore.swift */; };
 		2C7A8C6B295A8298000D55C5 /* AppleMarketApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7A8C6A295A8298000D55C5 /* AppleMarketApp.swift */; };
@@ -46,7 +48,6 @@
 		2CEFEC85295C0FBC006DA0AA /* MyDeviceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEFEC60295C0FBB006DA0AA /* MyDeviceListView.swift */; };
 		2CEFEC86295C0FBC006DA0AA /* MypageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEFEC61295C0FBB006DA0AA /* MypageView.swift */; };
 		2CEFEC87295C0FBC006DA0AA /* MainProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEFEC63295C0FBB006DA0AA /* MainProductView.swift */; };
-		2CEFEC88295C0FBC006DA0AA /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEFEC64295C0FBB006DA0AA /* DetailView.swift */; };
 		2CEFEC89295C0FBC006DA0AA /* MainProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEFEC65295C0FBB006DA0AA /* MainProductDetailView.swift */; };
 		2CEFEC8A295C0FBC006DA0AA /* MainPromotionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEFEC66295C0FBB006DA0AA /* MainPromotionView.swift */; };
 		2CEFEC8B295C0FBC006DA0AA /* MainMyProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEFEC67295C0FBB006DA0AA /* MainMyProductView.swift */; };
@@ -73,6 +74,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A3AE9D02963C7440024DBB1 /* DetailTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTestView.swift; sourceTree = "<group>"; };
+		1A3AE9D22963E1400024DBB1 /* DetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		2C293045295AAA09003C77F8 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		2C293047295AAC36003C77F8 /* UserInfoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoStore.swift; sourceTree = "<group>"; };
 		2C7A8C67295A8298000D55C5 /* AppleMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppleMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -106,7 +109,6 @@
 		2CEFEC60295C0FBB006DA0AA /* MyDeviceListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDeviceListView.swift; sourceTree = "<group>"; };
 		2CEFEC61295C0FBB006DA0AA /* MypageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MypageView.swift; sourceTree = "<group>"; };
 		2CEFEC63295C0FBB006DA0AA /* MainProductView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainProductView.swift; sourceTree = "<group>"; };
-		2CEFEC64295C0FBB006DA0AA /* DetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		2CEFEC65295C0FBB006DA0AA /* MainProductDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainProductDetailView.swift; sourceTree = "<group>"; };
 		2CEFEC66295C0FBB006DA0AA /* MainPromotionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPromotionView.swift; sourceTree = "<group>"; };
 		2CEFEC67295C0FBB006DA0AA /* MainMyProductView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMyProductView.swift; sourceTree = "<group>"; };
@@ -157,7 +159,8 @@
 				2CEFEC6A295C0FBB006DA0AA /* AppleCareOptionView.swift */,
 				2CEFEC69295C0FBB006DA0AA /* ColorOptionView.swift */,
 				2CEFEC6F295C0FBB006DA0AA /* DetailButtonView.swift */,
-				2CEFEC64295C0FBB006DA0AA /* DetailView.swift */,
+				1A3AE9D22963E1400024DBB1 /* DetailView.swift */,
+				1A3AE9D02963C7440024DBB1 /* DetailTestView.swift */,
 				2CEFEC6E295C0FBB006DA0AA /* MemoryOptionView.swift */,
 				2CEFEC6D295C0FBB006DA0AA /* ModelOptionView.swift */,
 			);
@@ -451,6 +454,7 @@
 				2C7A8C6D295A8298000D55C5 /* ContentView.swift in Sources */,
 				2CEFEC74295C0FBC006DA0AA /* PaymentView.swift in Sources */,
 				2CEFEC9B295C12F7006DA0AA /* ProductStore.swift in Sources */,
+				1A3AE9D12963C7440024DBB1 /* DetailTestView.swift in Sources */,
 				2CEFEC79295C0FBC006DA0AA /* SearchProcessView.swift in Sources */,
 				2CEFEC85295C0FBC006DA0AA /* MyDeviceListView.swift in Sources */,
 				2CEFEC99295C12F7006DA0AA /* Product.swift in Sources */,
@@ -483,7 +487,6 @@
 				2CEFEC42295ABA3E006DA0AA /* Order.swift in Sources */,
 				2CEFEC83295C0FBC006DA0AA /* LoginView.swift in Sources */,
 				2CEFEC72295C0FBC006DA0AA /* ShippingView.swift in Sources */,
-				2CEFEC88295C0FBC006DA0AA /* DetailView.swift in Sources */,
 				2CEFEC7F295C0FBC006DA0AA /* AddMyDeviceView.swift in Sources */,
 				2CEFEC84295C0FBC006DA0AA /* SignUpView.swift in Sources */,
 				2CEFEC7C295C0FBC006DA0AA /* MyDeviceFilterView.swift in Sources */,
@@ -494,6 +497,7 @@
 				8B437700295ACB40002D4AAB /* OrderTestView.swift in Sources */,
 				2CEFEC8F295C0FBC006DA0AA /* MyProductResultView.swift in Sources */,
 				2CEFEC82295C0FBC006DA0AA /* MyOrderView.swift in Sources */,
+				1A3AE9D32963E1400024DBB1 /* DetailView.swift in Sources */,
 				2CEFECA2295C130B006DA0AA /* CatalogueProductTestView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
