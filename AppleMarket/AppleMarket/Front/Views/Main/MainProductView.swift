@@ -52,12 +52,14 @@ struct MainProductView: View {
             
                 VStack(alignment: .center){
                     
-                    // 신제품
-//                    RoundedRectangle(cornerRadius: 20)
-//                        .frame(width: 360, height: 220)
-//                        .foregroundColor(.white)
-//                        .shadow(radius: 5)
-//                        .frame(width: 165, height: 240)
+                    HStack {
+                        Text("제품별로 쇼핑하기")
+                            .font(.system(size: 24))
+                            .fontWeight(.bold)
+                            .frame(alignment: .leading)
+                        .padding(.top, 50)
+                        Spacer()
+                    }
                     
                     NavigationLink {
                         MainProductDetailView(category: "")

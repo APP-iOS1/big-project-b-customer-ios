@@ -24,6 +24,7 @@ struct AppleMarketApp: App {
     @StateObject var userInfoStore: UserInfoStore = UserInfoStore()
     @StateObject var productStore: ProductStore = ProductStore()
     @StateObject var catalogueProductStore: CatalogueProductStore = CatalogueProductStore()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()

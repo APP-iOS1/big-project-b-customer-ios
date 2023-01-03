@@ -15,7 +15,7 @@ class CatalogueProductStore: ObservableObject {
     let database: Firestore = Firestore.firestore()
     
     func fetchData() -> Void {
-        
+        print("fetchData 실행")
         self.catalogueProductStores.removeAll()
         
         database.collection("CatalogueProduct").getDocuments { [self] snapshot, error in
@@ -51,8 +51,11 @@ class CatalogueProductStore: ObservableObject {
                         self.catalogueProductStores.append(catalogueProduct)
                         print("\(self.catalogueProductStores)")
                     }
+                    
                 }
+                
             }
+        
         }
         
         func addCatalogueProduct(catalogueProduct: CatalogueProduct){

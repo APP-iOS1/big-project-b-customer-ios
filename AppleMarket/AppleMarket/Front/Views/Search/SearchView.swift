@@ -44,7 +44,7 @@ final class SearchViewModel: ObservableObject {
 
 struct SearchView: View {
     @Environment(\.isSearching) var isSearching
-    @EnvironmentObject var caltalogueProductStore: CatalogueProductStore
+    @EnvironmentObject var catalogueProductStore: CatalogueProductStore
     @ObservedObject var viewModel: SearchViewModel = SearchViewModel()
     
     var body: some View {
@@ -75,12 +75,12 @@ struct SearchView: View {
             viewModel.updateRecentResults()
         }
         .onAppear {
-            caltalogueProductStore.fetchData()
+            catalogueProductStore.fetchData()
         }
         .onChange(of: viewModel.searchInput) { input in
             viewModel.searchingState = .none
             //print(viewModel.searchResults)
-            viewModel.searchResults = caltalogueProductStore.catalogueProductStores.filter({ $0.productName.localizedCaseInsensitiveContains(input)})
+            viewModel.searchResults = catalogueProductStore.catalogueProductStores.filter({ $0.productName.localizedCaseInsensitiveContains(input)})
                 
         }
         .onChange(of: viewModel.searchingState ){ state in

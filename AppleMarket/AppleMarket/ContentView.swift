@@ -10,7 +10,6 @@ import SwiftUI
 struct ContentView: View {
     
     @State private var tabSelection: Int = 1
-    @StateObject private var caltalogueProductStore = CatalogueProductStore()
     @EnvironmentObject var userInfoStore: UserInfoStore
     @StateObject private var cartStore: CartStore = CartStore()
     @State private var isShowingSheet: Bool = false
@@ -65,6 +64,7 @@ struct ContentView: View {
                         }
                     }
             }
+
     }
 }
 
