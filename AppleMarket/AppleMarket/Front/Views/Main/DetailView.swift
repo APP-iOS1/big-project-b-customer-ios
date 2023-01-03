@@ -14,10 +14,9 @@ struct DetailView: View {
     @State var memoryPrice: Int = 0
     
     @State var model: String = "iPhone 14 Pro"
-    @State var memory: String = "128GB"
-    @State var color: String = "실버"
+    @State var memory: String = "256GB"
+    @State var color: String = "딥 퍼플"
     @State var productArr: [[Product]] = [] // 뷰에 모델 종류 보여지는 순서대로 모델에 해당되는 Product 요소들이 배열로 들어감
-    
     
     @State private var selectedProduct: CatalogueProduct =
     CatalogueProduct(id: "iPhone 14 Pro", productName: "iPhone 14 Pro", device: ["iPhone 14 Pro"], category: "iPhone", description: "IPhone 14 Pro 입니다.", price: 1550000, thumbnailImage: "", status: 1, descriptionImages: [
@@ -33,7 +32,7 @@ struct DetailView: View {
             VStack {
                 if !productStore.productStore.isEmpty {
 //                    let _ = searchProduct(catalogueProduct: selectedProduct)
-//                    let _ = print("productArr : \(productArr)")
+//                    let _ = print("productArr : \(productArr[0][0])")
                 }
                 
                 TabView {
@@ -116,14 +115,8 @@ struct DetailView: View {
                 searchProduct(catalogueProduct: selectedProduct)
                 print("productArr: ", productArr)
             })
-//            {
-                        //                print("Onappear")
-            //                if !productStore.productStore.isEmpty{
-            //                   searchProduct(catalogueProduct: selectedProduct)
-            //                  print("productArr : \(productArr)")
-            //
-            //                }
-            //            }
+
+            
         } // ScrollView
         .task {
              productStore.fetchProduct()
@@ -133,14 +126,12 @@ struct DetailView: View {
     
     func searchProduct(catalogueProduct: CatalogueProduct) {
         var tempProduct: [Product] = []
-        print("searchProduct")
+        
         for model in catalogueProduct.model!{
-            for product in productStore.productStore{
-                print("searchProduct Store,:", product.productName)
-                print("model: ", model)
+            tempProduct = []
+            for product in productStore.productStore {
                 if model == product.productName{
                     tempProduct.append(product)
-                    print("match product,", tempProduct)
                 }
             }
             tempProduct = tempProduct.sorted(by: {$0.price < $1.price})

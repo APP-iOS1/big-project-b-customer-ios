@@ -67,6 +67,7 @@ struct ModelOptionView: View {
         }
         .padding()
     }
+
 }
 
 struct ModelOptionView_Previews: PreviewProvider {
