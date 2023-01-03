@@ -274,9 +274,9 @@
 		2CEFEC48295C0FBB006DA0AA /* Payment */ = {
 			isa = PBXGroup;
 			children = (
+				2CEFEC4B295C0FBB006DA0AA /* PaymentView.swift */,
 				2CEFEC49295C0FBB006DA0AA /* ShippingView.swift */,
 				2CEFEC4A295C0FBB006DA0AA /* CheckOrderView.swift */,
-				2CEFEC4B295C0FBB006DA0AA /* PaymentView.swift */,
 				2CEFEC4C295C0FBB006DA0AA /* Cart */,
 			);
 			path = Payment;

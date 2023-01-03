@@ -9,11 +9,15 @@ import SwiftUI
 
 struct CheckOrderView: View {
     @State var isCheck = false
+    // @StateObject var orderStore: OrderStore = OrderStore()
+    // @EnvironmentObject var userStore = UserInfoStore()
+    @ObservedObject var orderStore = OrderStore()
+    
+    var address: String
     
     var body: some View {
         NavigationView {
             ScrollView {
-                
                 VStack(alignment: .leading) {
                     Text("주문하시겠습니까? 입력하신 사항이 모두 정확한지 확인해주십시오.")
                         .font(.title)
@@ -56,12 +60,12 @@ struct CheckOrderView: View {
                                 .font(.title3)
                                 .padding(.bottom, 10)
                                 .fontWeight(.bold)
+                            // 바꿔야할부분
                             Text("김멋사")
                             Text("010-1234-5678")
-                            Text("서울 종로구 세종대로 167")
-                            Text("1701호 멋쟁이사자처럼")
+                            Text("\(address)")
                                 .padding(.bottom, 30)
-                        }
+                        } //
                         .padding(.bottom, -1)
                         
                         Divider()
@@ -100,7 +104,6 @@ struct CheckOrderView: View {
                                 Text("개인정보 취급방침에 따라 개인정보를 수집 및 사용하고, 제 3자에 제공 및 처리한다는 점에 동의합니다. (필수)")
                             }
                             .font(.callout)
-                            
                         }
                         .frame(height: 70)
                         .padding(.bottom, 20)
@@ -115,6 +118,7 @@ struct CheckOrderView: View {
                                 .font(.title3)
                                 .padding(.bottom, 10)
                                 .fontWeight(.bold)
+                            // 바꿔야할부분
                             HStack {
                                 Text("소계")
                                 Spacer()
@@ -136,28 +140,29 @@ struct CheckOrderView: View {
                                 Text("₩ 750,000")
                                     .font(.title3)
                                     .padding(.bottom, 10)
-                                    .fontWeight(.bold)
+                                    .fontWeight(.bold) //
                             }
                             .padding(.vertical, 20)
                         }
-                        
                     }
-                    
                     
                     // 결제버튼
                     
                     Button(action: {
                         print("결제완료 및 화면전환")
+                        
                     }) {
-                        Text("결제하기")
-                            .font(.headline)
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
-                            .frame(width: 310, height: 20)
-                            .padding(20)
+                        NavigationLink(destination: MyOrderView()) {
+                            Text("결제하기")
+                                .font(.headline)
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                                .frame(width: 310, height: 20)
+                                .padding(20)
+                        }
+                        .background(Color("MainColor"))
+                        .cornerRadius(15)
                     }
-                    .background(Color("MainColor"))
-                    .cornerRadius(15)
                 }
                 .padding(25)
             }
@@ -167,6 +172,6 @@ struct CheckOrderView: View {
 
 struct CheckOrderView_Previews: PreviewProvider {
     static var previews: some View {
-        CheckOrderView()
+        CheckOrderView(address: "")
     }
 }
