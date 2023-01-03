@@ -21,7 +21,7 @@ struct MyProductDetailView: View {
     var menuImageArray: [String] = ["airtag.fill", "magsafe.batterypack.fill", "figure.run", "battery.100.bolt", "camera.fill", "cable.connector", "signature", "iphone"]
     
 //    let selectedProduct_2: Product
-    
+    @EnvironmentObject var userInstore: UserInfoStore
     var myProducts: CatalogueProduct
     
     // device로 분류
@@ -34,38 +34,39 @@ struct MyProductDetailView: View {
                 
                 let _: String = myProducts.thumbnailImage.isEmpty ? "" : (myProducts.thumbnailImage )
                 
-                HStack{
-                    // 기기 사진
-                    AsyncImage(url: URL(string: myProducts.thumbnailImage )) { image in
-                        image
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 100, height: 100)
-                    } placeholder: {
-                        ProgressView()
+                ForEach(userInstore.userInfo?.myDevices ?? [] ,id:\.self) { product in
+                    HStack{
+//                        // 기기 사진
+//                        AsyncImage(url: URL(string: myProducts.thumbnailImage )) { image in
+//                            image
+//                                .resizable()
+//                                .scaledToFit()
+//                                .frame(width: 100, height: 100)
+//                        } placeholder: {
+//                            ProgressView()
+//                        }
+                        
+                        VStack(alignment: .leading){
+                            // "사용자" 의 "기기명"
+                            Text(userInstore.userInfo?.userName ?? "")
+                                .font(.system(size: 17))
+                                .fontWeight(.bold)
+                                .padding(.bottom, 1)
+                            // "기기 종류" + "사양"
+                            Text(product.deviceDescription)
+                        }
+                        .frame(alignment: .leading)
+                        .padding()
                     }
                     
-                    VStack(alignment: .leading){
-                        // "사용자" 의 "기기명"
-                        Text("김영서의 \(myProducts.category)")
-                            .font(.system(size: 17))
-                            .fontWeight(.bold)
-                            .padding(.bottom, 1)
-                        // "기기 종류" + "사양"
-                            Text("\(myProducts.productName)")
-                                .font(.system(size: 14))
-                        
-                    }
-                    .frame(alignment: .leading)
-                    .padding()
+                    // "기기 종류" 용 추천
+                    Text("\(product.deviceDescription) 액세서리 추천")
+                        .font(.system(size: 24))
+                        .fontWeight(.bold)
+                        .padding(.top, 30)
+                    
                 }
-                
-                // "기기 종류" 용 추천
-                Text("\(myProducts.productName) 액세서리 추천")
-                    .font(.system(size: 24))
-                    .fontWeight(.bold)
-                    .padding(.top, 30)
-                
+          
                 TabView{
 
                         ForEach(products_2){ product in

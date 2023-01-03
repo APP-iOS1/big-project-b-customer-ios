@@ -42,14 +42,6 @@ struct ContentView: View {
                         Text("장바구니")
                     }
                     .tag(3)
-                    .onAppear {
-                        // 이전 로그인 기록이 있다면 자동 로그인
-                        if let email = UserDefaults.standard.string(forKey: UserDefaults.Keys.email.rawValue) {
-                            if let password = UserDefaults.standard.string(forKey: UserDefaults.Keys.password.rawValue) {
-                                userInfoStore.emailAuthSignIn(email: email, password: password)
-                            }
-                        }
-                    }
                 
                 NavigationStack {
                     MypageView(userInfoStore: userInfoStore)
@@ -68,9 +60,14 @@ struct ContentView: View {
                         }
                     }
             }
-        
-        
-        
+            .onAppear {
+                // 이전 로그인 기록이 있다면 자동 로그인
+                if let email = UserDefaults.standard.string(forKey: UserDefaults.Keys.email.rawValue) {
+                    if let password = UserDefaults.standard.string(forKey: UserDefaults.Keys.password.rawValue) {
+                        userInfoStore.emailAuthSignIn(email: email, password: password)
+                    }
+                }
+            }
     }
 }
 

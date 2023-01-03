@@ -9,7 +9,9 @@ import SwiftUI
 
 struct MainView: View {
     @EnvironmentObject var caltalogueProductStore: CatalogueProductStore
-    
+    @EnvironmentObject var userInfostore: UserInfoStore
+    @State private var isShowingSheet: Bool = false
+    @State private var isShowingLoginSheet: Bool = false
     var body: some View {
         NavigationStack{
             ScrollView{
@@ -18,7 +20,7 @@ struct MainView: View {
                     MainPromotionView()
                     
 
-                    MainMyProductView()
+                    MainMyProductView(isShowingSheet: $isShowingSheet, isShowingLoginSheet: $isShowingLoginSheet)
 
                     
                     Text("제품별로 쇼핑하기")
@@ -34,7 +36,12 @@ struct MainView: View {
                 .navigationBarTitle("쇼핑하기")
             }
         }
-        .onAppear{caltalogueProductStore.fetchData()}
+        .onAppear{
+            caltalogueProductStore.fetchData()
+            if userInfostore.userInfo != nil {
+                userInfostore.fetchMyDevice()
+            }
+        }
     }
 }
 
