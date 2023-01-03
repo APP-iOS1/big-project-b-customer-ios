@@ -26,7 +26,7 @@ struct MainMyProductView: View {
     
     //    let selectedMyProduct: MyProduct
     @EnvironmentObject var userInfoStore: UserInfoStore
-    @EnvironmentObject var caltalogueProductStore: CatalogueProductStore
+    @EnvironmentObject var catalogueProductStore: CatalogueProductStore
     @Binding var isShowingSheet: Bool
     @Binding var isShowingLoginSheet: Bool
     
@@ -105,7 +105,7 @@ struct MainMyProductView: View {
         }
         .padding(.top, 50)
         .onAppear{
-            caltalogueProductStore.fetchData()
+//            catalogueProductStore.fetchData()
         }
     }
 }

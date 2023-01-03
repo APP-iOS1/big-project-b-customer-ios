@@ -19,7 +19,7 @@ struct DeviceInform: Hashable {
 
 struct AddMyDeviceView: View {
     @EnvironmentObject var userInfoStore: UserInfoStore
-    @StateObject var catalogueProductStore: CatalogueProductStore = CatalogueProductStore()
+    @EnvironmentObject var catalogueProductStore: CatalogueProductStore
     @Binding var isShowingSheet: Bool
     @State private var selectedProductCategory: String = ""
     @State private var deviceDescription: String = ""

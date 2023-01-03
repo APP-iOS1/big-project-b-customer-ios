@@ -10,7 +10,6 @@ import SwiftUI
 struct ContentView: View {
     
     @State private var tabSelection: Int = 1
-    @StateObject private var caltalogueProductStore = CatalogueProductStore()
     @EnvironmentObject var userInfoStore: UserInfoStore
     @State private var isShowingSheet: Bool = false
     var body: some View {
@@ -60,6 +59,7 @@ struct ContentView: View {
                         }
                     }
             }
+            
             .onAppear {
                 // 이전 로그인 기록이 있다면 자동 로그인
                 if let email = UserDefaults.standard.string(forKey: UserDefaults.Keys.email.rawValue) {

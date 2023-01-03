@@ -23,6 +23,7 @@ struct AppleMarketApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject var userInfoStore: UserInfoStore = UserInfoStore()
     @StateObject var productStore: ProductStore = ProductStore()
+    @StateObject private var caltalogueProductStore = CatalogueProductStore()
     
     var body: some Scene {
         WindowGroup {
