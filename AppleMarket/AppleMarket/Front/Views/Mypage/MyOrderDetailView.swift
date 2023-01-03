@@ -107,6 +107,7 @@ struct MyOrderDetailView: View {
 }
 
 
+
 struct OrderListCell2: View {
     
     var detailOrder: DetailOrder
@@ -137,6 +138,7 @@ struct OrderListCell2: View {
             Spacer()
         }
         .padding(.bottom, 10)
+
     }
 }
 
