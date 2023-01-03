@@ -18,72 +18,66 @@ struct MyProfileView: View {
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading, spacing: 0) {
-                    List {
-                        Section {
-                            HStack {
-                                AsyncImage(url: URL(string: "https://mblogthumb-phinf.pstatic.net/MjAxNzEyMTFfMjA3/MDAxNTEyOTg0MTU3MzMz.wOvG_aS8a9vm44iNUmgby2-oG2u4aPAZ9lkOgyFqT7Ag.8qIDSv7H3yMjgKynzob12maeIvqeE1IrEtscN8MV0Uog.JPEG.jung02140214/IMG_2189.jpg?type=w800")) { image in
-                                    image
-                                        .resizable()
-                                        .frame(width: 45, height: 45)
-                                        .aspectRatio(contentMode: .fit)
-                                        .cornerRadius(22)
-                                } placeholder: {
-                                    ProgressView()
+                List {
+                    Section {
+                        HStack {
+                           Image(systemName: "person.circle")
+                                .font(.title3)
+                            
+                            VStack(alignment:. leading, spacing: 3) {
+                                HStack(alignment: .center) {
+                                    Text(userInfoStore.userInfo?.userName ?? "")
+                                        .font(.title3)
                                 }
                                 
-                                VStack(alignment:. leading, spacing: 3) {
-                                    HStack(alignment: .center) {
-                                        Text(userInfoStore.userInfo?.userName ?? "")
-                                            .font(.title3)
-                                    }
-                                    
-                                    Text(userInfoStore.userInfo?.userEmail ?? "")
-                                        .font(.subheadline)
-                                }
+                                Text(userInfoStore.userInfo?.userEmail ?? "")
+                                    .font(.subheadline)
                             }
-                        }
-                        .frame(height: 55)
-                        ForEach(listTitle, id: \.self) { title in
-                            if title == "내 기기 추가" {
-                                NavigationLink {
-                                    MyDeviceListView()
-                                } label: {
-                                    Text(title)
-                                }
-                            } else {
-                                NavigationLink {
-                                    MyAddressListView()
-                                } label: {
-                                    Text(title)
-                                }
-                            }
-                        }
-                        Section {
-                            Button {
-                              showingAlertProfile = true
-                            } label: {
-                                Text("로그아웃")
-                                    .alert(" ", isPresented: $showingAlertProfile) {
-                                        Button("Cancel", role: .cancel) {
-                                            
-                                        }
-                                        
-                                        Button("Yes", role: .destructive) {
-                                            userInfoStore.emailAuthSignOut()
-                                            isShowingLoginSheet.toggle()
-                                        }
-                                    } message: {
-                                        Text("로그아웃 하시겠습니까?")
-                                    }
-                        }
                         }
                     }
-                    .navigationBarTitle("계정")
-                    .navigationBarTitleDisplayMode(.inline)
-                    
+                    .frame(height: 55)
+                    ForEach(listTitle, id: \.self) { title in
+                        if title == "내 기기 추가" {
+                            NavigationLink {
+                                MyDeviceListView()
+                            } label: {
+                                Text(title)
+                            }
+                        }                        
+//                        else {
+//                            NavigationLink {
+//                                MyAddressListView()
+//                            } label: {
+//                                Text(title)
+//                            }
+//                        }
+                    }
+                    Section {
+                        Button {
+                            showingAlertProfile = true
+                        } label: {
+                            Text("로그아웃")
+                                .alert(" ", isPresented: $showingAlertProfile) {
+                                    Button("Cancel", role: .cancel) {
+                                        
+                                    }
+                                    
+                                    Button("Yes", role: .destructive) {
+                                        userInfoStore.emailAuthSignOut()
+                                        isShowingLoginSheet.toggle()
+                                    }
+                                } message: {
+                                    Text("로그아웃 하시겠습니까?")
+                                }
+                        }
+                    }
+                }
+                .navigationBarTitle("계정")
+                .navigationBarTitleDisplayMode(.inline)
+                
             }
             .onAppear {
-//                userInfoStore.fetchUserInfo()
+                userInfoStore.fetchUserInfo()
             }
         }
     }
@@ -91,10 +85,9 @@ struct MyProfileView: View {
 
 struct MyProfileView_Previews: PreviewProvider {
     static var previews: some View {
-
         NavigationStack {
             MyProfileView(isShowingLoginSheet: .constant(true), userInfoStore: UserInfoStore())
         }
-
+        
     }
 }

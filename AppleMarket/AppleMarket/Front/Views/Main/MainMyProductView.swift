@@ -24,9 +24,11 @@ var myProducts: [MyProduct] = [
 
 struct MainMyProductView: View {
     
-//    let selectedMyProduct: MyProduct
-    
-    @EnvironmentObject var caltalogueProductStore: CatalogueProductStore
+    //    let selectedMyProduct: MyProduct
+    @EnvironmentObject var userInfoStore: UserInfoStore
+    @EnvironmentObject var catalogueProductStore: CatalogueProductStore
+    @Binding var isShowingSheet: Bool
+    @Binding var isShowingLoginSheet: Bool
     
     var body: some View {
         
@@ -35,87 +37,106 @@ struct MainMyProductView: View {
                 .fontWeight(.bold)
                 .font(.system(size: 24))
             
-            
-        
-            // 내 기기
-            
-//            // 등록된 기기가 없을 때            if{
-//
-//            NavigationLink(
- 
-            // destination 임의로 지정
-//                destination: MypageView()){
-//                    VStack(alignment: .center){
-//                        Image(systemName: "plus.square.dashed")
-//                            .frame(width: 200, height: 200)
-//                        Text("등록된 기기가 없습니다.")
-//                    }
-//                    .foregroundColor(.gray)
-//                }
-//
-//            //            }
-            
-            // 등록된 기기가 있을 때           else{
-            ScrollView(.horizontal){
-                HStack(alignment: .center){
-                    
-                    Spacer()
-                        .frame(width: 50)
-                    
-                    ForEach(caltalogueProductStore.catalogueProductStores){ product in
-                        // 내 기기 이미지 사용 예정
+            // 등록된 기기가 없을 때
+            if ((userInfoStore.userInfo?.myDevices.isEmpty) == true) && userInfoStore.state == .signedIn {
+                
+                Button {
+                    isShowingSheet.toggle()
+                } label: {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 20)
+                            .frame(height: 250)
+                            .foregroundColor(.white)
                         
-                        let tempImgPath: String = product.thumbnailImage.isEmpty ? "" : (product.thumbnailImage )
+                        VStack(alignment: .center){
+                            Image(systemName: "plus.square.dashed")
+                                .font(.system(size: 100))
+                                .padding(.bottom, 15)
+                            Text("등록된 기기가 없습니다.")
+                        }
+                        .foregroundColor(.gray)
+                    }
+                    
+                }
+                .sheet(isPresented: $isShowingSheet) {
+                    AddMyDeviceView(isShowingSheet: $isShowingSheet)
+                        .presentationDetents([.medium])
+                }
+            } else if userInfoStore.state == .signedOut {
+                NavigationLink {
+                    LoginView(isShowingLoginSheet: $isShowingLoginSheet)
+                } label: {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 20)
+                            .frame(height: 250)
+                            .foregroundColor(.white)
                         
-                        NavigationLink{
-                            MyProductDetailView(myProducts: product)
-                        } label:{
-                        ZStack{
-                            RoundedRectangle(cornerRadius: 20)
-                                .frame(width: 230, height: 300)
-                                .foregroundColor(.white)
-                            
-                            VStack {
-                                AsyncImage(url: URL(string: tempImgPath)) { image in
-                                    image
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(height: 160)
-                                    
-                                } placeholder: {
-                                    ProgressView()
+                        VStack(alignment: .center){
+                            Image(systemName: "plus.square.dashed")
+                                .font(.system(size: 100))
+                                .padding(.bottom, 15)
+                            Text("등록된 기기가 없습니다.")
+                        }
+                        .foregroundColor(.gray)
+                    }
+                }
+                
+            }
+            
+            //등록된 기기가 있을 때
+            else {
+                ScrollView(.horizontal){
+                    HStack(alignment: .center){
+                        
+                        Spacer()
+                            .frame(width: 50)
+                        
+                        ForEach(userInfoStore.userInfo?.myDevices ?? [], id: \.self) { product in
+                            NavigationLink {
+                                MyProductDetailView(myProducts: CatalogueProduct(id: "", productName: product.deviceName, device: [], category: "", description: "", price: 0, thumbnailImage: "", status: 0, descriptionImages: [product.deviceImage], model: [], color: [], storage: [], recommendedProduct: [], netWork: [], processor: [], memory: []))
+                            } label: {
+                                ZStack{
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .frame(height: 250)
+                                        .foregroundColor(.white)
+                                    VStack {
+                                 
+                                        // 기기 사진
+                                        AsyncImage(url: URL(string: product.deviceImage )) { image in
+                                            image
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: 230, height: 300)
+                                        } placeholder: {
+                                            ProgressView()
+                                        }
+                                        Text(product.deviceDescription)
+                                            .fontWeight(.semibold)
+                                            .padding(.bottom, 1)
+                                        Text(product.deviceName)
+                                    }
+                                   
                                 }
-                                Spacer()
-                                    .frame(height: 20)
-                                // username의 \(product.category)
-                                Text("김영서의 \(product.category)")
-                                    .fontWeight(.semibold)
-                                    .padding(.bottom, 1)
-                                
-                                Text(product.productName)
-
+                                .foregroundColor(.black)
                                 
                             }
-                            
+
+                           
                         }
-                        .foregroundColor(.black)
-                    }
                     }
                 }
             }
-            
-            //            }
         }
         .padding(.top, 50)
-        .onAppear{caltalogueProductStore.fetchData()}
-        
+        .onAppear{
+//            catalogueProductStore.fetchData()
+        }
     }
 }
-
 struct MainMyProductView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack{
-            MainMyProductView()
+            MainMyProductView(isShowingSheet: .constant(true), isShowingLoginSheet: .constant(true))
                 .environmentObject(CatalogueProductStore())
         }
     }

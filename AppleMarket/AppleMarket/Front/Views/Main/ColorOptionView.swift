@@ -114,5 +114,6 @@ struct ColorOptionView: View {
 struct ColorOptionView_Previews: PreviewProvider {
     static var previews: some View {
         DetailView()
+            .environmentObject(ProductStore())
     }
 }

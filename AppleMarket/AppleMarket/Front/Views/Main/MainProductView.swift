@@ -52,18 +52,58 @@ struct MainProductView: View {
             
                 VStack(alignment: .center){
                     
-                    // 신제품
-                    RoundedRectangle(cornerRadius: 20)
-                        .frame(width: 360, height: 220)
-                        .foregroundColor(.white)
-                        .shadow(radius: 5)
-                        .frame(width: 165, height: 240)
+                    HStack {
+                        Text("제품별로 쇼핑하기")
+                            .font(.system(size: 24))
+                            .fontWeight(.bold)
+                            .frame(alignment: .leading)
+                        .padding(.top, 50)
+                        Spacer()
+                    }
+                    
+                    NavigationLink {
+                        MainProductDetailView(category: "")
+                            .navigationTitle("신제품")
+                            .navigationBarTitleDisplayMode(.inline)
+                    } label: {
+                        RoundedRectangle(cornerRadius: 20)
+                            .frame(width: 360, height: 220)
+                            .foregroundColor(.white)
+                            .shadow(radius: 5)
+                            .overlay{
+                                VStack {
+                                    HStack{
+                                        Text("신제품")
+                                            .foregroundColor(.black)
+                                            .font(.headline)
+                                            .padding(.horizontal, 16)
+                                            .padding(.top, 24)
+                                        Spacer()
+                                    }
+                                    .frame(width: 360)
+                                    .padding(.bottom, 32)
+                                
+                                    
+                                    AsyncImage(url: URL(string: tempImgPaths.randomElement()!)) { image in
+                                        image
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 160)
+                                    } placeholder: {
+                                        ProgressView()
+                                }
+                                    Spacer()
+                                }
+
+                            }
+                    }
                     
                     LazyVGrid(columns: columns) {
                         ForEach(Products.allCases) { (product: Products) in
                             NavigationLink {
-                                MainProductDetailView()
+                                MainProductDetailView(category: product.rawValue)
                                     .navigationTitle(product.rawValue)
+                                    .navigationBarTitleDisplayMode(.inline)
                             } label: {
                                 RoundedRectangle(cornerRadius: 20)
                                     .frame(width: 165, height: 220)

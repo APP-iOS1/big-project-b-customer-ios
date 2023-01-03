@@ -115,5 +115,6 @@ struct MemoryOptionView: View {
 struct MemoryOptionView_Previews: PreviewProvider {
     static var previews: some View {
         DetailView()
+            .environmentObject(ProductStore())
     }
 }

@@ -39,12 +39,12 @@ struct MyAddressListView: View {
                     }
                     .frame(height: 40)
                     .fullScreenCover(isPresented: $isShowingSheet, content: {
-                        AddMyAddressView(isShowingSheet: $isShowingSheet)
+                        AddMyAddressView(isShowingSheet: $isShowingSheet, receiverName: "", contactNumber: "", address1: "", address2: "", address3: "", address4: "")
                     })
                 }
             }
             .padding()
-            .background(Color("myPageBGColor"))
+            .background(Color("MyPageBGColor"))
         }
         
     }

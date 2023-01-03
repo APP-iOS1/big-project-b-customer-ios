@@ -9,37 +9,36 @@ import SwiftUI
 
 struct MyDeviceListView: View {
     @State private var isShowingSheet: Bool = false
+    @EnvironmentObject var userInfoStore: UserInfoStore
     
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading) {
-                Text("기기 목록")
-                    .font(.title2)
-                    .bold()
-                Spacer()
-                
+//                Text("기기 목록")
+//                    .font(.title2)
+//                    .bold()
+//                Spacer()
+               
                 List {
                     Section {
-                        ForEach(myDeviceInform, id: \.self) { device in
-                            AsyncImage(url: URL(string: device.imageName)) { image in
-                                HStack(alignment: .center) {
+                        ForEach(userInfoStore.userInfo?.myDevices ?? [], id: \.self) { myDevice in
+                            HStack {
+                                AsyncImage(url: URL(string: myDevice.deviceImage)) { image in
                                     image
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
-                                        .frame(width: 60)
-                                    
-                                    VStack(alignment: .leading, spacing: 3) {
-                                        Text(device.deviceName)
-                                            .font(.headline)
-                                        Text(device.deviceModelName)
-                                            .font(.subheadline)
-                                    }
+                                        .frame(width: 100)
+                                } placeholder: {
+                                    Color.gray
                                 }
-                            } placeholder: {
-                                ProgressView()
+
+                                Text(myDevice.deviceDescription)
+                            }
+                            .alignmentGuide(.listRowSeparatorLeading) { viewDimensions in
+                                return 0
                             }
                         }
-                        .frame(height: 55)
+                        .onDelete(perform: delete)
                     }
                     
                     Button {
@@ -58,11 +57,20 @@ struct MyDeviceListView: View {
                             .presentationDetents([.medium,.large])
                     }
                 }
+                .listStyle(InsetGroupedListStyle())
+                
             }
-            .padding()
-            .background(Color("myPageBGColor"))
+            .navigationBarTitle("내 기기")
+            .background(Color("MyPageBGColor"))
+            .onAppear {
+                userInfoStore.fetchUserInfo()
+            }
         }
-        
+    }
+    
+    func delete(at offsets: IndexSet) {
+        guard let offsets = offsets.first else { return }
+        userInfoStore.removeMyDevice(myDeviceId: userInfoStore.userInfo?.myDevices[offsets].myDeviceId ?? "")
     }
 }
 

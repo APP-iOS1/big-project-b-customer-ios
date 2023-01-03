@@ -11,6 +11,7 @@ struct ModelOptionView: View {
     @State var isChecking = [false, false]
     @Binding var model: String
     @Binding var selectedProduct: CatalogueProduct
+    @State var productArr: [[Product]]
     
 
     
@@ -30,9 +31,6 @@ struct ModelOptionView: View {
                 HStack {
                     VStack(alignment: .leading, spacing: 5) {
                         Text(selectedProduct.model?[0] ?? "")
-                        Text("15.5cm 디스플레이")
-                            .font(.caption2)
-                            .foregroundColor(.gray)
                     }
                     Spacer()
                     Text("₩\(selectedProduct.price)부터")
@@ -53,9 +51,6 @@ struct ModelOptionView: View {
                 HStack {
                     VStack(alignment: .leading, spacing: 5) {
                         Text(selectedProduct.model?[1] ?? "")
-                        Text("17.0cm 디스플레이")
-                            .font(.caption2)
-                            .foregroundColor(.gray)
                     }
                     Spacer()
                     Text("₩1,750,000부터")
@@ -77,5 +72,6 @@ struct ModelOptionView: View {
 struct ModelOptionView_Previews: PreviewProvider {
     static var previews: some View {
         DetailView()
+            .environmentObject(ProductStore())
     }
 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MyOrderDetailView: View {
     @ObservedObject var orderStore: OrderStore
-
+    
     let userId: String
     var order: Order
     
@@ -27,7 +27,7 @@ struct MyOrderDetailView: View {
                 
                 List {
                     ForEach(orderStore.detailOrderList, id: \.id) { detailOrder in
-                            OrderListCell2(detailOrder: detailOrder)
+                        OrderListCell2(detailOrder: detailOrder)
                     }
                 }
                 .navigationTitle("주문 상세 정보")
@@ -35,9 +35,6 @@ struct MyOrderDetailView: View {
                 .onAppear {
                     orderStore.fetchDetailOrderList(userId: userId, order: order)
                 }
-                
-
-                
                 
                 Divider()
                     .padding(.vertical, 10)
@@ -97,7 +94,6 @@ struct MyOrderDetailView: View {
                             }
                             .padding(.vertical, 10)
                         }
-                        
                     }
                 }
             }

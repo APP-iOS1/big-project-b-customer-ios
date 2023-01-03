@@ -70,8 +70,9 @@ struct PaymentView: View {
                         .padding(.bottom, 30)
                     Button(action: {
                     }) {
-//                        NavigationLink(destination: ShippingView(orderStore: orderStore)) {
-                        NavigationLink(destination: ShippingView()) {
+
+                        NavigationLink(destination: ShippingView(orderStore: OrderStore())) {
+
                             Text("배송 정보 입력하기")
                                 .font(.headline)
                                 .fontWeight(.bold)
