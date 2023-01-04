@@ -73,17 +73,17 @@ struct AddMyDeviceView: View {
                     ForEach(0 ..< categoryDevice.count, id: \.self) { index in
                         Button {
                             selectedProductCategory = categoryDevice[index].deviceCategory
-                            for product in catalogueProductStore.catalogueProductStores{
-                                if let modelArr = product.model{
-                                    for deviceModel in modelArr{
-                                        if !removeDuplicated.contains(deviceModel){
-                                            removeDuplicated.append(deviceModel)
-                                            notDuplicatedDeviceInform.append(DeviceInform(deviceImageName: product.thumbnailImage, deviceType: deviceModel))
-                                            deviceImage = product.thumbnailImage
-                                        }
-                                    }
-                                }
-                            }
+//                            for product in catalogueProductStore.catalogueProductStores{
+//                                if let modelArr = product.model{
+//                                    for deviceModel in modelArr{
+//                                        if !removeDuplicated.contains(deviceModel){
+//                                            removeDuplicated.append(deviceModel)
+//                                            notDuplicatedDeviceInform.append(DeviceInform(deviceImageName: product.thumbnailImage, deviceType: deviceModel))
+//                                            deviceImage = product.thumbnailImage
+//                                        }
+//                                    }
+//                                }
+//                            }
                         } label: {
                             VStack(alignment: .center, spacing: 5) {
                                 Image(systemName: categoryDevice[index].deviceIconName)
@@ -98,22 +98,43 @@ struct AddMyDeviceView: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 15) {
-                    ForEach(0 ..< notDuplicatedDeviceInform.count, id: \.self) { index in
-                        if notDuplicatedDeviceInform[index].deviceType.contains(selectedProductCategory) {
-                            Button {
-                                deviceImage = notDuplicatedDeviceInform[index].deviceImageName
-                                deviceType = notDuplicatedDeviceInform[index].deviceType
-                                categoryIndex = index
-                                print("디바이스 이미지는 \(deviceImage), 디바이스 이름은 \(deviceType)")
-                                print("\(deviceDescription)의 \(selectedProductCategory)")
-                            } label: {
-                                Text(notDuplicatedDeviceInform[index].deviceType)
+                    
+                    ForEach(0 ..< catalogueProductStore.catalogueProductStores.count, id: \.self) {
+                        index in
+                        ForEach(catalogueProductStore.catalogueProductStores[index].model ?? [], id: \.self) { model in
+                            if catalogueProductStore.catalogueProductStores[index].category.contains(selectedProductCategory) {
+                                Button {
+                                    deviceImage = catalogueProductStore.catalogueProductStores[index].thumbnailImage
+                                    deviceType = catalogueProductStore.catalogueProductStores[index].category
+                                    categoryIndex = index
+                                    print("디바이스 이미지는 \(deviceImage), 디바이스 이름은 \(deviceType)")
+                                    print("\(deviceDescription)의 \(selectedProductCategory)")
+                                } label: {
+                                    Text(model)
+                                }
+                                .padding(10)
+                                .border((categoryIndex == index) ? Color.blue : Color.black, width: 1)
                             }
-                            .padding(10)
-                            .border((categoryIndex == index) ? Color.blue : Color.black, width: 1)
                         }
                         
+                       
                     }
+                    //                    ForEach(0 ..< notDuplicatedDeviceInform.count, id: \.self) { index in
+//                        if notDuplicatedDeviceInform[index].deviceType.contains(selectedProductCategory) {
+//                            Button {
+//                                deviceImage = notDuplicatedDeviceInform[index].deviceImageName
+//                                deviceType = notDuplicatedDeviceInform[index].deviceType
+//                                categoryIndex = index
+//                                print("디바이스 이미지는 \(deviceImage), 디바이스 이름은 \(deviceType)")
+//                                print("\(deviceDescription)의 \(selectedProductCategory)")
+//                            } label: {
+//                                Text(notDuplicatedDeviceInform[index].deviceType)
+//                            }
+//                            .padding(10)
+//                            .border((categoryIndex == index) ? Color.blue : Color.black, width: 1)
+//                        }
+//
+//                    }
                 }
             }
             .padding(.top, 10)
