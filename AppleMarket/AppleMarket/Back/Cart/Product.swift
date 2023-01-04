@@ -17,7 +17,7 @@ struct Product: Hashable, Identifiable {
     var price: Int
     var productName: String
     var status: Int    
-    var storage: Int
+    var storage: String
     
     var productCount: Int
     

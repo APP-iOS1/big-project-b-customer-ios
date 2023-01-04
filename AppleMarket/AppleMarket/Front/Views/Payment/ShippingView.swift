@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ShippingView: View {
-    @ObservedObject var orderStore: OrderStore
+    @EnvironmentObject var orderStore: OrderStore
     
     @State private var addressText: String = ""
     @State private var receiverName: String = ""
@@ -21,7 +21,7 @@ struct ShippingView: View {
     
     var body: some View {
         NavigationView {
-        ScrollView {
+            ScrollView {
                 VStack(alignment: .leading) {
                     Text("배송 및 결제 정보")
                         .font(.title)
@@ -74,7 +74,9 @@ struct ShippingView: View {
                     Divider()
                         .padding(.bottom, 30)
                     
-                    NavigationLink(destination: CheckOrderView(address: addressText)) {
+                    NavigationLink(destination: CheckOrderView(orderName: receiverName,
+                                                               orderPhone: contactNumber,
+                                                               orderAddress: addressText)) {
                         Text("결제 페이지로 이동")
                             .font(.headline)
                             .fontWeight(.bold)
@@ -85,8 +87,8 @@ struct ShippingView: View {
                     .background(.blue)
                     .cornerRadius(15)
                     .simultaneousGesture(TapGesture().onEnded({
-                                            addressText = address1 + " " + address2 + " "  + address3 + " " + address4
-                                        }))
+                        addressText = address1 + " " + address2 + " "  + address3 + " " + address4
+                    }))
                 }
                 .padding(25)
             }
@@ -168,10 +170,10 @@ struct ShippingInformation: View {
     }
 }
 
-struct ShippingView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            ShippingView(orderStore: OrderStore())
-        }
-    }
-}
+//struct ShippingView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NavigationStack {
+//            ShippingView(orderStore: OrderStore(), order: Order(orderName: "", orderPhone: "", orderAddress: ""))
+//        }
+//    }
+//}

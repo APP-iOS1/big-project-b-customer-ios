@@ -33,6 +33,7 @@ class ProductStore: ObservableObject {
         do {
             let snapshot = try await database.getDocuments()
             
+
             for document in snapshot.documents {
                 let docData = document.data()
                 let id: String = document.documentID
@@ -49,6 +50,7 @@ class ProductStore: ObservableObject {
                 let products: Product = Product(id: id, category: category, color: color, description: description, device: device, image: image, price: price, productName: productName, status: status, storage: storage, productCount: 1)
                 
                 self.productStore.append(products)
+
             }
         } catch {
             fatalError()
