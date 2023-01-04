@@ -61,42 +61,7 @@ struct MainProductView: View {
                         Spacer()
                     }
                     
-                    NavigationLink {
-                        MainProductDetailView(category: "")
-                            .navigationTitle("신제품")
-                            .navigationBarTitleDisplayMode(.inline)
-                    } label: {
-                        RoundedRectangle(cornerRadius: 20)
-                            .frame(width: 360, height: 220)
-                            .foregroundColor(.white)
-                            .shadow(radius: 5)
-                            .overlay{
-                                VStack {
-                                    HStack{
-                                        Text("신제품")
-                                            .foregroundColor(.black)
-                                            .font(.headline)
-                                            .padding(.horizontal, 16)
-                                            .padding(.top, 24)
-                                        Spacer()
-                                    }
-                                    .frame(width: 360)
-                                    .padding(.bottom, 32)
-                                
-                                    
-                                    AsyncImage(url: URL(string: tempImgPaths.randomElement()!)) { image in
-                                        image
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(width: 160)
-                                    } placeholder: {
-                                        ProgressView()
-                                }
-                                    Spacer()
-                                }
-
-                            }
-                    }
+                    firstItemCell
                     
                     LazyVGrid(columns: columns) {
                         ForEach(Products.allCases) { (product: Products) in
@@ -148,6 +113,50 @@ struct MainProductView: View {
        
     
 }
+
+extension MainProductView {
+    var firstItemCell : some View {
+        NavigationLink {
+            MainProductDetailView(category: "")
+                .navigationTitle("신제품")
+                .navigationBarTitleDisplayMode(.inline)
+        } label: {
+            RoundedRectangle(cornerRadius: 20)
+                .frame(width: 360, height: 180)
+                .foregroundColor(.white)
+                .shadow(radius: 5)
+                .overlay{
+                    VStack {
+                        HStack{
+                            Text("신제품")
+                                .foregroundColor(.black)
+                                .font(.headline)
+                                .padding(.horizontal, 16)
+                                .padding(.top, 24)
+                            Spacer()
+                        }
+                        .frame(width: 360)
+                        
+                    
+                        
+                        AsyncImage(url: URL(string: tempImgPaths.randomElement()!)) { image in
+                            image
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 160)
+                        } placeholder: {
+                            ProgressView()
+                        }
+                        .offset(y: -30)
+                        
+                        Spacer()
+                    }
+
+                }
+        }
+    }
+}
+
 
 struct MainProductView_Previews: PreviewProvider {
     static var previews: some View {

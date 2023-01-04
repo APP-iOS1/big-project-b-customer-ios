@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct ModelOptionView: View {
-    @EnvironmentObject var productStore: ProductStore
+
+    @ObservedObject var detailViewModel: DetailViewModel
     
-    @State var isChecking = [false, false]
-    @Binding var model: String
+    @State var isChecking: [Bool] = []
     @Binding var selectedProduct: CatalogueProduct
     var productDic: [String : [Product]]
 
@@ -25,72 +25,60 @@ struct ModelOptionView: View {
             }
             .padding(.bottom, 10)
             
-            Button {
-                isChecking = [true, false]
-                model = selectedProduct.model?[0] ?? ""
-            } label: {
-                HStack {
-                    VStack(alignment: .leading, spacing: 5) {
-                        Text(selectedProduct.model?[0] ?? "")
-                    }
-                    Spacer()
-                    Text("₩\(selectedProduct.price)부터")
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                }
-                .foregroundColor(.black)
-                .padding()
-                .overlay(RoundedRectangle(cornerRadius: 10)
-                    .stroke(isChecking[0] ? Color("MainColor") : Color.gray, lineWidth: 1.5))
-            }
-            .disabled(isChecking[0])
-
-            Button {
-                isChecking = [false, true]
-                model = selectedProduct.model?[1] ?? ""
-            } label: {
-                HStack {
-                    VStack(alignment: .leading, spacing: 5) {
-                        Text(selectedProduct.model?[1] ?? "")
-                    }
-                    Spacer()
-//                    Button{
-//                        print(productDic[model]!.sorted(by: {$0.price < $1.price})[0].price)
-//                    } label: {
-//                        Text("test")
-//                    }
-//                    Text("₩\(productStore.productDic[model]!.sorted(by: {$0.price < $1.price})[0].price)부터")
-//                        .font(.caption)
-//                        .foregroundColor(.gray)
-                    if productDic.isEmpty {
-                        Text("₩0000부터")
-                            .font(.caption)
-                            .foregroundColor(.gray)
-                    } else {
-                        if let products = productDic[model] {
-                            let price = products.sorted{ $0.price < $1.price }.first
-                            
-                            Text("₩\(price?.price ?? 00)부터")
+            if !isChecking.isEmpty {
+                ForEach(0..<selectedProduct.model!.count, id: \.self) { index in
+                    Button {
+                        isCheckingAllFalse()
+                        isChecking[index] = true
+                        detailViewModel.model = selectedProduct.model?[index] ?? ""
+                    } label: {
+                        HStack {
+                            VStack(alignment: .leading, spacing: 5) {
+                                Text(selectedProduct.model?[index] ?? "")
+                            }
+                            Spacer()
+                            if productDic.isEmpty {
+                              Text("₩0000부터")
                                 .font(.caption)
                                 .foregroundColor(.gray)
+                            } else {
+                                if let products = productDic[model] {
+                                let price = products.sorted{ $0.price < $1.price }.first
+                            
+                                Text("₩\(price?.price ?? 00)부터")
+                                    .font(.caption)
+                                    .foregroundColor(.gray)
+                              }
+                            }
+                               
                         }
+                        .foregroundColor(.black)
+                        .padding()
+                        .overlay(RoundedRectangle(cornerRadius: 10)
+                            .stroke(isChecking[index] ? Color("MainColor") : Color.gray, lineWidth: 1.5))
                     }
+                    .disabled(isChecking[index])
                 }
-                .foregroundColor(.black)
-                .padding()
-                .overlay(RoundedRectangle(cornerRadius: 10)
-                    .stroke(isChecking[1] ? Color("MainColor") : Color.gray, lineWidth: 1.5))
             }
-            .disabled(isChecking[1])
-
         }
         .padding()
         .onAppear{
+            isChecking = [Bool](repeating: false, count: selectedProduct.model!.count)
+            isChecking[0].toggle()
+            
+            detailViewModel.model = selectedProduct.model?[0] ?? ""
+            
+            print(isChecking)
             print("dic text")
             print(productStore.productDic)
         }
     }
-
+    
+    func isCheckingAllFalse() {
+        for i in 0..<selectedProduct.model!.count {
+            isChecking.insert(false, at: i)
+        }
+    }
 }
 
 struct ModelOptionView_Previews: PreviewProvider {
