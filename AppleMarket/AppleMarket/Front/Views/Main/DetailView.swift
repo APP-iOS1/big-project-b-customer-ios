@@ -7,12 +7,14 @@
 
 import SwiftUI
 
+
 class DetailViewModel: ObservableObject {
     @Published var model: String = ""
     @Published var storage: String = ""
     @Published var color: String = ""
     
 }
+
 
 struct DetailView: View {
     @EnvironmentObject var productStore: ProductStore
