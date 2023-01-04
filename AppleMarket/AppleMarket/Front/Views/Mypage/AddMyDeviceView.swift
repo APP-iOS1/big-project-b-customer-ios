@@ -25,6 +25,7 @@ struct AddMyDeviceView: View {
     @State private var deviceDescription: String = ""
     @State private var deviceImage: String = ""
     @State private var deviceType: String = ""
+    @State private var categoryIndex: Int = 0
     
     let categoryDevice: [DeviceCategory] = [
         DeviceCategory(deviceCategory: "iPhone", deviceIconName: "iphone"),
@@ -57,7 +58,7 @@ struct AddMyDeviceView: View {
                         deviceName: deviceType,
                         deviceImage: deviceImage,
                         deviceDescription:
-                            (deviceDescription == "") ? "\(userInfoStore.userInfo!.userName)의 \(deviceType)" : "\(deviceDescription)"))
+                            (deviceDescription == "") ? "\(userInfoStore.userInfo!.userName)의 \(deviceType)" : "\(deviceDescription)의 \(selectedProductCategory)"))
                     isShowingSheet.toggle()
                 } label: {
                     Text("등록하기")
@@ -97,17 +98,19 @@ struct AddMyDeviceView: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 15) {
-                    ForEach(notDuplicatedDeviceInform, id: \.self) { device in
-                        if device.deviceType.contains(selectedProductCategory) {
+                    ForEach(0 ..< notDuplicatedDeviceInform.count, id: \.self) { index in
+                        if notDuplicatedDeviceInform[index].deviceType.contains(selectedProductCategory) {
                             Button {
-                                deviceImage = device.deviceImageName
-                                deviceType = device.deviceType
+                                deviceImage = notDuplicatedDeviceInform[index].deviceImageName
+                                deviceType = notDuplicatedDeviceInform[index].deviceType
+                                categoryIndex = index
                                 print("디바이스 이미지는 \(deviceImage), 디바이스 이름은 \(deviceType)")
+                                print("\(deviceDescription)의 \(selectedProductCategory)")
                             } label: {
-                                Text(device.deviceType)
+                                Text(notDuplicatedDeviceInform[index].deviceType)
                             }
                             .padding(10)
-                            .border(.black, width: 1)
+                            .border((categoryIndex == index) ? Color.blue : Color.black, width: 1)
                         }
                         
                     }
@@ -115,15 +118,15 @@ struct AddMyDeviceView: View {
             }
             .padding(.top, 10)
             
-            TextField("닉네임을 설정해주세요. 예)슾Hyem", text: $deviceDescription)
+            TextField("내 기기의 닉네임을 설정해주세요 예)슾Hyem", text: $deviceDescription)
                 .font(.title3)
             Spacer()
         }
         .foregroundColor(.black)
         .padding()
         .onAppear {
-            catalogueProductStore.fetchData()
-            userInfoStore.fetchUserInfo()
+//            catalogueProductStore.fetchData()
+//            userInfoStore.fetchUserInfo()
         }
     }
 }

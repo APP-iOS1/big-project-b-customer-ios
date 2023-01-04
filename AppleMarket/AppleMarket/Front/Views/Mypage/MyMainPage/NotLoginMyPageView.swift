@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// 로그인이 되지 않았을 때 MyPageView
 struct NotLoginMyPageView: View {
     @State private var isShowingLoginSheet: Bool = false
     @EnvironmentObject var userInfoStore: UserInfoStore
