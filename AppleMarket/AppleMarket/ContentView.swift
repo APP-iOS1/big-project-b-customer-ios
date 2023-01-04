@@ -20,7 +20,8 @@ struct ContentView: View {
     var body: some View {
             TabView(selection: $tabSelection) {
                 NavigationStack {
-                    MainView()
+//                    MainView()
+                    DetailView()
                 }
                     .tabItem {
                         Image(systemName: "macbook.and.iphone")
@@ -60,14 +61,14 @@ struct ContentView: View {
                     .tag(4)
                     
             }
-            .onAppear {
+            .task {
                 // 이전 로그인 기록이 있다면 자동 로그인
                 if let email = UserDefaults.standard.string(forKey: UserDefaults.Keys.email.rawValue) {
                     if let password = UserDefaults.standard.string(forKey: UserDefaults.Keys.password.rawValue) {
                         userInfoStore.emailAuthSignIn(email: email, password: password)
                     }
                 }
-                productStore.fetchProduct()
+                await productStore.fetchProduct()
                 catalogueProductStore.fetchData()
                 if userInfoStore.userInfo != nil {
                     cartStore.fetchCart(uid: userInfoStore.userInfo?.userId ?? "")

@@ -20,22 +20,23 @@ struct MyProductDetailView: View {
     
     var menuImageArray: [String] = ["airtag.fill", "magsafe.batterypack.fill", "figure.run", "battery.100.bolt", "camera.fill", "cable.connector", "signature", "iphone"]
     
-//    let selectedProduct_2: Product
+    //    let selectedProduct_2: Product
     @EnvironmentObject var userInstore: UserInfoStore
     var myProducts: CatalogueProduct
     @EnvironmentObject var catalogueProductStore: CatalogueProductStore
+    @State private var accessoryCount: Int = 0
     // device로 분류
     // 악세서리는 리스트 내 이름으로 분류
     var body: some View {
-         
+        
         ScrollView{
             VStack(alignment: .leading){
                 
-//                let _: String = myProducts.thumbnailImage.isEmpty ? "" : (myProducts.thumbnailImage )
-              
+                //                let _: String = myProducts.thumbnailImage.isEmpty ? "" : (myProducts.thumbnailImage )
+                
                 ForEach(userInstore.userInfo?.myDevices ?? [] ,id:\.self) { product in
                     HStack{
-//                        // 기기 사진
+                        //                        // 기기 사진
                         AsyncImage(url: URL(string: product.deviceImage )) { image in
                             image
                                 .resizable()
@@ -67,47 +68,45 @@ struct MyProductDetailView: View {
                             .padding(.top, 30)
                     }
                 }
-          
-                TabView{
-                    ForEach(catalogueProductStore.catalogueProductStores, id:\.self){ product in
-                        let _ = print("catalogueProductStore : ", catalogueProductStore.catalogueProductStores)
-                            NavigationLink{
-                                DetailView()
-                            } label:{
-                            // 추천 제품 이미지 사용 예정
-                            ZStack{
-                                RoundedRectangle(cornerRadius: 20)
-                                    .frame(width: 330, height: 400)
-                                    .foregroundColor(.white)
-                                    .shadow(radius: 10)
-                                    .frame(width: 350, height: 450)
-
-                                VStack {
-                                    Text(product.productName)
-                                    AsyncImage(url: URL(string: product.thumbnailImage)) { image in
-                                        image
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(height: 180)
-
-                                    } placeholder: {
-                                        ProgressView()
+                
+                    // 추천 제품 이미지 사용 예정
+                    TabView() {
+                        
+                        ForEach(catalogueProductStore.catalogueProductStores, id:\.self){ product in
+                            if product.model?.contains(myProducts.productName) == true {
+                                //model = prodcut.Name 같은것만 디테일 뷰로 넘기기
+                                NavigationLink {
+                                    DetailView(selectedProduct: product)
+                                } label: {
+                                    VStack {
+                                        AsyncImage(url: URL(string: product.thumbnailImage)) { image in
+                                            image
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(height: 180)
+                                            
+                                        } placeholder: {
+                                            ProgressView()
+                                        }
+                                        
+                                        Text(product.productName)
+                                            .padding(.bottom, 1)
+                                        
+                                        Text("₩\(product.price)")
                                     }
-                                    Spacer()
-                                        .frame(height: 50)
-
-                                    Text(product.productName)
-                                        .padding(.bottom, 1)
-
-                                    Text("₩\(product.price)")
+                                    .foregroundColor(.black)
+                                    .padding()
                                 }
 
+                                
+                              
                             }
-                            .foregroundColor(.yellow)
                         }
-                        }
-
-                }.tabViewStyle(.page(indexDisplayMode: .never))
+                    }
+                    .frame(minWidth: 200, minHeight: 300)
+                    .tabViewStyle(PageTabViewStyle())
+                
+              
                 
                 // "기기 종류" 용
                 Text("액세서리 더보기")
@@ -123,7 +122,7 @@ struct MyProductDetailView: View {
                         } label: {
                             Image(systemName: "\(menuImageArray[index])")
                             Text("\(menuArray[index])")
-                           
+                            
                         }
                     }
                 }
@@ -133,10 +132,17 @@ struct MyProductDetailView: View {
                 .frame(height: 400)
                 // \(myProducts.productName)용
             }
-            .padding()
+            .padding(.horizontal, 10)
             // \(myProducts.productName)용
             .navigationBarTitle("\(myProducts.productName)용")
             .navigationBarTitleDisplayMode(.inline)
+        }
+        .onAppear {
+            for catalogItem in catalogueProductStore.catalogueProductStores {
+                if catalogItem.model?.contains(myProducts.productName) == true {
+                    accessoryCount += 1
+                }
+            }
         }
         
     }
@@ -147,22 +153,3 @@ struct MyProductDetailView_Previews: PreviewProvider {
         MyProductDetailView(myProducts: CatalogueProduct(id: "", productName: "", device: [], category: "", description: "", price: 0, thumbnailImage: "", status: 0))
     }
 }
-
-//extension MyProductDetailView {
-//    func getProduct() {
-//        var filtered: [CatalogueProduct]
-//        print("catalogueProductStore: \(catalogueProductStore.catalogueProductStores)")
-//
-//            filtered = catalogueProductStore.catalogueProductStores.filter ({
-//                $0.model?.contains(myProducts.productName) ?? true
-//            })
-//
-//        print("productName : \(myProducts.productName)")
-//        print("\(filtered)")
-//        print("\(myProducts.productName)")
-//        print("2번째: \(catalogueProductStore.catalogueProductStores)")
-//
-//        self.featuredProducts = Array(filtered)
-//        print("filtered: \(featuredProducts)")
-//    }
-//}

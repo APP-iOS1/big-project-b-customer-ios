@@ -22,7 +22,7 @@ struct MyProfileView: View {
                     Section {
                         HStack {
                            Image(systemName: "person.circle")
-                                .font(.title3)
+                                .font(.largeTitle)
                             
                             VStack(alignment:. leading, spacing: 3) {
                                 HStack(alignment: .center) {
@@ -72,7 +72,17 @@ struct MyProfileView: View {
                         }
                     }
                 }
-                .navigationBarTitle("계정")
+//                .navigationBarTitle("계정")
+                .toolbar(content: {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button {
+                            isShowingLoginSheet = false
+                        } label: {
+                            Text("닫기")
+                        }
+
+                    }
+                })
                 .navigationBarTitleDisplayMode(.inline)
                 
             }

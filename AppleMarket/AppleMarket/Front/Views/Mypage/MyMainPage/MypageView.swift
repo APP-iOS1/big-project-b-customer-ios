@@ -12,6 +12,7 @@ struct MypageView: View {
     @EnvironmentObject var userInfoStore: UserInfoStore
     var body: some View {
         VStack {
+            // 로그인 상태에 따라 마이페이지 뷰를 다르게 그림
             if userInfoStore.state == .signedOut {
                 NotLoginMyPageView()
             } else {

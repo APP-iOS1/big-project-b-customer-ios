@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct DetailTestView: View {
-    @Binding var color: String
-    @Binding var selectedProduct: CatalogueProduct
-    @State private var isChecking = [false, false, false ,false, false, false, false]
+    var color: String
+    var selectedProduct: CatalogueProduct
+    @State private var isChecking: [Bool] = []
     let columns = [
         GridItem(.flexible(), spacing: 0),
         GridItem(.flexible())
@@ -25,31 +25,32 @@ struct DetailTestView: View {
             }
             .padding(.bottom, 10)
             
-            LazyVGrid(columns: columns, spacing: 10){
-                ForEach(0..<selectedProduct.color!.count, id: \.self) { index in
-                    Button {
-                        isCheckingAllFalse()
-                        isChecking[index] = true
-                        color = selectedProduct.color?[index] ?? ""
-                    } label: {
-                        
-                        VStack(alignment: .center, spacing: 5) {
-                            Circle()
-                                .frame(width:25 ,height: 25)
-                                .foregroundColor(Color("\(selectedProduct.color?[index] ?? "")"))
-                                .shadow(radius: 1)
-                            Text(selectedProduct.color?[index] ?? "")
+            if !isChecking.isEmpty {
+                LazyVGrid(columns: columns, spacing: 10){
+                    ForEach(0..<selectedProduct.color!.count, id: \.self) { index in
+                        Button {
+                            isCheckingAllFalse()
+                            isChecking[index] = true
+                            //color = selectedProduct.color?[index] ?? ""
+                        } label: {
                             
+                            VStack(alignment: .center, spacing: 5) {
+                                Circle()
+                                    .frame(width:25 ,height: 25)
+                                    .foregroundColor(Color("\(selectedProduct.color?[index] ?? "")"))
+                                    .shadow(radius: 1)
+                                Text(selectedProduct.color?[index] ?? "")
+                                
+                            }
+                            .foregroundColor(.black)
+                            .frame(width:172.5 ,height: 70)
+                            .overlay(RoundedRectangle(cornerRadius: 10)
+                                .stroke(isChecking[index] ? Color("MainColor") : Color.gray, lineWidth: 1.5))
                         }
-                        .foregroundColor(.black)
-                        .frame(width:172.5 ,height: 70)
-                        .overlay(RoundedRectangle(cornerRadius: 10)
-                            .stroke(isChecking[index] ? Color("MainColor") : Color.gray, lineWidth: 1.5))
+                        .disabled(isChecking[index])
                     }
-                    .disabled(isChecking[index])
                 }
             }
-            
             
             
             //            ForEach(0..<selectedProduct.color!.count) { idx in
@@ -73,6 +74,10 @@ struct DetailTestView: View {
             //                }
             //                .disabled(isChecking[idx])
             //            }
+        }
+        .onAppear {
+            isChecking = [Bool](repeating: false, count: selectedProduct.color!.count)
+            print(isChecking)
         }
         .padding()
     }

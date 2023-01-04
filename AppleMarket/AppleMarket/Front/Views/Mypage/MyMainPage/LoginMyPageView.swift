@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// 로그인이 되었을 때 MyPageView
 struct LoginMyPageView: View {
     @State private var isShowingLoginSheet: Bool = false
     @EnvironmentObject var userInfoStore: UserInfoStore
@@ -67,8 +68,8 @@ struct LoginMyPageView: View {
                         }
                         .padding()
                         
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(alignment: .center, spacing: 15) {
+                        ScrollView(.horizontal) {
+                            HStack(alignment: .center) {
                                 if userInfoStore.myDevices.count < 1 {
                                     Text("내 기기를 추가해주세요.")
                                         .padding()
@@ -88,15 +89,19 @@ struct LoginMyPageView: View {
                                             Text(myDevice.deviceName)
                                             
                                             NavigationLink {
-                                                
+//                                                DetailView(selectedProduct: )
                                             } label: {
                                                 Text("액세서리 등을 쇼핑하기")
                                             }
                                         }
+                                        
                                     }
+                                    
                                 }
                             }
+                            .snapScrolling(itemCount: userInfoStore.myDevices.count, itemWidth: 300, spacing: 10)
                         }
+                        .scrollDisabled(true)
                     }
                 }
             }

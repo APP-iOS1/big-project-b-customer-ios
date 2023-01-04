@@ -36,6 +36,7 @@ struct MainMyProductView: View {
             Text("내 기기에 맞는 액세서리 쇼핑하기")
                 .fontWeight(.bold)
                 .font(.system(size: 24))
+                .padding(.leading)
             
             // 등록된 기기가 없을 때
             if ((userInfoStore.userInfo?.myDevices.isEmpty) == true) && userInfoStore.state == .signedIn {
@@ -85,54 +86,44 @@ struct MainMyProductView: View {
             
             //등록된 기기가 있을 때
             else {
-                ScrollView(.horizontal){
-                    HStack(alignment: .center){
-                        
-                        Spacer()
-                            .frame(width: 50)
-                        
-                        ForEach(userInfoStore.userInfo?.myDevices ?? [], id: \.self) { product in
-                            NavigationLink {
-                                MyProductDetailView(myProducts: CatalogueProduct(id: "", productName: product.deviceName, device: [], category: "", description: "", price: 0, thumbnailImage: "", status: 0, descriptionImages: [product.deviceImage], model: [], color: [], storage: [], recommendedProduct: [], netWork: [], processor: [], memory: []))
-                            } label: {
-                                ZStack{
-                                    RoundedRectangle(cornerRadius: 20)
-                                        .frame(height: 250)
-                                        .foregroundColor(.white)
-                                    VStack {
-                                 
-                                        // 기기 사진
-                                        AsyncImage(url: URL(string: product.deviceImage )) { image in
-                                            image
-                                                .resizable()
-                                                .scaledToFit()
-                                                .frame(width: 230, height: 300)
-                                        } placeholder: {
-                                            ProgressView()
-                                        }
-                                        Text(product.deviceDescription)
-                                            .fontWeight(.semibold)
-                                            .padding(.bottom, 1)
-                                        Text(product.deviceName)
-                                    }
-                                   
+                TabView() {
+                    ForEach(userInfoStore.userInfo?.myDevices ?? [], id: \.self) { product in
+                        NavigationLink {
+                            MyProductDetailView(myProducts: CatalogueProduct(id: "", productName: product.deviceName, device: [], category: "", description: "", price: 0, thumbnailImage: "", status: 0, descriptionImages: [product.deviceImage], model: [], color: [], storage: [], recommendedProduct: [], netWork: [], processor: [], memory: []))
+                        } label: {
+                          
+                            VStack {
+                                
+                                // 기기 사진
+                                AsyncImage(url: URL(string: product.deviceImage )) { image in
+                                    image
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 230, height: 300)
+                                        .padding(.top, -30)
+                                } placeholder: {
+                                    ProgressView()
                                 }
-                                .foregroundColor(.black)
+                                Text(product.deviceDescription)
+                                    .fontWeight(.semibold)
+                                    .padding(.bottom, 1)
+                                    .padding(.top, -20)
+                                Text(product.deviceName)
                                 
                             }
-
-                           
+                            .foregroundColor(.black)
                         }
                     }
                 }
+                .frame(width: 400, height: 300)
+                .tabViewStyle(.page)
+                .indexViewStyle(.page)
             }
         }
         .padding(.top, 50)
-        .onAppear{
-//            catalogueProductStore.fetchData()
+        
         }
     }
-}
 struct MainMyProductView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack{
