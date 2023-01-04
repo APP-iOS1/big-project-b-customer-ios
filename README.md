@@ -86,7 +86,7 @@
     - 초기에 페이지 뷰 적용시 데이터 연동이 되지 않은 문제가 있어 사용하지 못하는
     줄 알았지만 해결 방법을 찾아 적용에 성공했음
     
-    해결방법 : .tabViewStyle(.page(indexDisplayMode: .never)) --> .tabViewStyle(.page)
+        - 해결방법 : .tabViewStyle(.page(indexDisplayMode: .never)) --> .tabViewStyle(.page)
           
     - 화면 이동을 해야하는 뷰가 많아서 로직짜는데 시간이 소요가 많이 됨
     
