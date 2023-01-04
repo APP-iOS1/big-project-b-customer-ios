@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct ModelOptionView: View {
+
     @ObservedObject var detailViewModel: DetailViewModel
     
     @State var isChecking: [Bool] = []
     @Binding var selectedProduct: CatalogueProduct
-    @State var productArr: [[Product]]
-    
+    var productDic: [String : [Product]]
 
     
     var body: some View {
@@ -37,9 +37,20 @@ struct ModelOptionView: View {
                                 Text(selectedProduct.model?[index] ?? "")
                             }
                             Spacer()
-                            Text("₩\(selectedProduct.price)부터")
+                            if productDic.isEmpty {
+                              Text("₩0000부터")
                                 .font(.caption)
                                 .foregroundColor(.gray)
+                            } else {
+                                if let products = productDic[model] {
+                                let price = products.sorted{ $0.price < $1.price }.first
+                            
+                                Text("₩\(price?.price ?? 00)부터")
+                                    .font(.caption)
+                                    .foregroundColor(.gray)
+                              }
+                            }
+                               
                         }
                         .foregroundColor(.black)
                         .padding()
@@ -50,15 +61,17 @@ struct ModelOptionView: View {
                 }
             }
         }
-        .onAppear {
+        .padding()
+        .onAppear{
             isChecking = [Bool](repeating: false, count: selectedProduct.model!.count)
             isChecking[0].toggle()
             
             detailViewModel.model = selectedProduct.model?[0] ?? ""
             
             print(isChecking)
+            print("dic text")
+            print(productStore.productDic)
         }
-        .padding()
     }
     
     func isCheckingAllFalse() {

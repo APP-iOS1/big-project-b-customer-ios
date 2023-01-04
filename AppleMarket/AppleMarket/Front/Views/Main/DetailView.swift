@@ -26,7 +26,11 @@ struct DetailView: View {
     @State var model: String = "iPhone 14 Pro"
     @State var memory: String = "256GB"
     @State var color: String = "딥 퍼플"
-    @State var productArr: [[Product]] = [] // 뷰에 모델 종류 보여지는 순서대로 모델에 해당되는 Product 요소들이 배열로 들어감
+    //    @State var productArr: [[Product]] = [] // 뷰에 모델 종류 보여지는 순서대로 모델에 해당되는 Product 요소들이 배열로 들어감
+    
+    
+    
+    
     
     @State var selectedProduct: CatalogueProduct =
     CatalogueProduct(id: "iPhone 14 Pro", productName: "iPhone 14 Pro", device: ["iPhone 14 Pro"], category: "iPhone", description: "IPhone 14 Pro 입니다.", price: 1550000, thumbnailImage: "", status: 1, descriptionImages: [
@@ -41,8 +45,8 @@ struct DetailView: View {
         ScrollView {
             VStack {
                 if !productStore.productStore.isEmpty {
-//                    let _ = searchProduct(catalogueProduct: selectedProduct)
-//                    let _ = print("productArr : \(productArr[0][0])")
+                    //                    let _ = searchProduct(catalogueProduct: selectedProduct)
+                    //                    let _ = print("productArr : \(productArr[0][0])")
                 }
                 
                 TabView {
@@ -72,20 +76,26 @@ struct DetailView: View {
                 
                 
                 if selectedProduct.category == "iPhone" {
+
                     ModelOptionView(detailViewModel: detailViewModel, selectedProduct: $selectedProduct,productArr: productArr)
+
                         .padding(.bottom, 35)
                     ColorOptionView(detailViewModel: detailViewModel,  selectedProduct: $selectedProduct)
                         .padding(.bottom, 50)
                     MemoryOptionView(detailViewModel: detailViewModel,  selectedProduct: $selectedProduct)
                         .padding(.bottom, 35)
                 } else if selectedProduct.category == "iPad" {
+
                     ModelOptionView(detailViewModel: detailViewModel, selectedProduct: $selectedProduct,productArr: productArr)
+
                         .padding(.bottom, 35)
                     ColorOptionView(detailViewModel: detailViewModel,  selectedProduct: $selectedProduct)
                         .padding(.bottom, 50)
                     MemoryOptionView(detailViewModel: detailViewModel,  selectedProduct: $selectedProduct)
                         .padding(.bottom, 35)
                 }
+                
+                
                 
                 VStack {
                     Divider()
@@ -123,47 +133,13 @@ struct DetailView: View {
                     .padding(.vertical, 20)
                 
             }
-            .onChange(of: productStore.productStore, perform: { newValue in
-                searchProduct(catalogueProduct: selectedProduct)
-                print("productArr: ", productArr)
-            })
-
+            
             
         } // ScrollView
-        .task {
-             productStore.fetchProduct()
-            print(productStore.productStore)
-        }
+        
     } //body
     
-    func searchProduct(catalogueProduct: CatalogueProduct) {
-        var tempProduct: [Product] = []
-        
-        for model in catalogueProduct.model!{
-            tempProduct = []
-            for product in productStore.productStore {
-                if model == product.productName{
-                    tempProduct.append(product)
-                }
-            }
-            tempProduct = tempProduct.sorted(by: {$0.price < $1.price})
-            productArr.append(tempProduct)
-        }
-    }
 }
-    // productArr[0][0], productARr[1][0]
-//    for storage in selectedProduct.storage{
-//        productArr[1][0].contains(storage)
-//    }
-    
-  //  productArr[index] = sortProductArr(productArr[index])
-
-//    배열 정렬 함수
-//    func sortProductArr(productArr: [Product]) -> [Product]{
-//        var newProductArr = productArr.sorted(by: {$0.price < $1.price})
-//
-//        return newProductArr
-//    }
     
 
 
