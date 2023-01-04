@@ -10,9 +10,6 @@
 
 1. 쇼핑하기
 
-<img src="https://user-images.githubusercontent.com/76909552/210507118-9bac9eea-d597-4570-9678-a1d36265490b.gif" width="200">
-
-
     - 프로모션 (배너 형식)
         - 할인 하는 것들
         - 연말연시 대폭할인
@@ -28,8 +25,6 @@
         
 2. 검색
 
-<img src="https://user-images.githubusercontent.com/76909552/210507527-805b94d4-d49e-42bc-a517-1dbabd39fb73.gif" width="200">
-
     - 검색
         - 검색기능을 사용해서 원하는 상품 검색 (프론트 엔드 코드로 필터링)
         - 최근 검색 결과 저장 
@@ -40,9 +35,6 @@
             - 상품 구매 페이지로 이동
     
 3. 장바구니 (로그인 시 볼 수 있음)
-
-<img src="https://user-images.githubusercontent.com/76909552/210508841-20997fdc-ada5-4987-bdba-e2be96fdb940.png" width="200">
-
 
     - 삭제
         - 제품 삭제
@@ -60,9 +52,6 @@
         - 제품 합계
         
 4. 결제 프로세스
-
-<img src="https://user-images.githubusercontent.com/76909552/210506538-f0e50121-a790-4a67-90f5-360e6fdd2245.gif" width="200">
-
     - 주문단계 
         - 주문 가능 여부 확인
     - 배송 및 결제 정보
@@ -72,7 +61,6 @@
         - 구매한 제품 결제하기
 
 5. 마이페이지
-<img src="https://user-images.githubusercontent.com/76909552/210508654-865c5ff0-7ceb-43af-9414-a6b8465541ab.png" width="200">
 
     - 내정보
         - 이름
