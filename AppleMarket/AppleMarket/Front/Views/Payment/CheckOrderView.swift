@@ -10,10 +10,12 @@ import SwiftUI
 struct CheckOrderView: View {
     @State var isCheck = false
     // @StateObject var orderStore: OrderStore = OrderStore()
-    // @EnvironmentObject var userStore = UserInfoStore()
-    @ObservedObject var orderStore = OrderStore()
+    @EnvironmentObject var userStore: UserInfoStore
+    @EnvironmentObject var orderStore: OrderStore
     
-    var address: String
+    var orderName: String
+    var orderPhone: String
+    var orderAddress: String
     
     var body: some View {
         NavigationView {
@@ -30,24 +32,29 @@ struct CheckOrderView: View {
                             .font(.title3)
                             .padding(.bottom, 10)
                             .fontWeight(.bold)
+                        var _ = print("orderStore.products : \(orderStore.products)")
+                        
                         HStack {
-                            AsyncImage(url: URL(string: "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/airpods-max-select-silver-202011?wid=470&hei=556&fmt=png-alpha&.v=1604021221000")) { image in
-                                image
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 100, height: 100)
-                            } placeholder: {
-                                ProgressView()
+                            ForEach(orderStore.products, id: \.self) { product in
+                                var _ = print("product : \(product)")
+                                AsyncImage(url: URL(string: product.image[0])) { image in
+                                    image
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 100, height: 100)
+                                } placeholder: {
+                                    ProgressView()
+                                }
+                                VStack(alignment: .leading) {
+                                    Text("\(product.id)")
+                                        .padding(.bottom, -3)
+                                    Text("\(product.productCount)")
+                                        .padding(.bottom, -3)
+                                    Text("₩ \(product.price)")
+                                        .bold()
+                                }
+                                .padding(.leading, 10)
                             }
-                            VStack(alignment: .leading) {
-                                Text("AirPods Max - 실버")
-                                    .padding(.bottom, -3)
-                                Text("1")
-                                    .padding(.bottom, -3)
-                                Text("₩ 750,000")
-                                    .bold()
-                            }
-                            .padding(.leading, 10)
                         }
                         .padding(.bottom, 30)
                         
@@ -60,12 +67,12 @@ struct CheckOrderView: View {
                                 .font(.title3)
                                 .padding(.bottom, 10)
                                 .fontWeight(.bold)
-                            // 바꿔야할부분
-                            Text("김멋사")
-                            Text("010-1234-5678")
-                            Text("\(address)")
-                                .padding(.bottom, 30)
-                        } //
+                            Text("\(orderName)")
+                            Text("\(orderPhone)")
+                            Text("\(orderAddress)")
+                                .padding(.bottom, 20)
+                        }
+                        
                         .padding(.bottom, -1)
                         
                         Divider()
@@ -78,6 +85,7 @@ struct CheckOrderView: View {
                                 .padding(.bottom, 10)
                                 .fontWeight(.bold)
                             Text("결제 수단: 무통장 입금")
+                                .padding(.leading, 3)
                         }
                         .padding(.bottom, -1)
                     }
@@ -99,6 +107,7 @@ struct CheckOrderView: View {
                             } label: {
                                 Image(systemName: isCheck ? "checkmark.square.fill" : "checkmark.square.fill")
                                     .foregroundColor(isCheck ? .blue : .gray)
+                                    .padding(.leading, 3)
                             }
                             HStack {
                                 Text("개인정보 취급방침에 따라 개인정보를 수집 및 사용하고, 제 3자에 제공 및 처리한다는 점에 동의합니다. (필수)")
@@ -113,56 +122,62 @@ struct CheckOrderView: View {
                     
                     // 총액 확인
                     Group {
-                        VStack(alignment: .leading) {
-                            Text("총계")
-                                .font(.title3)
-                                .padding(.bottom, 10)
-                                .fontWeight(.bold)
-                            // 바꿔야할부분
-                            HStack {
-                                Text("소계")
-                                Spacer()
-                                Text("₩ 750,000")
-                            }
-                            .padding(.bottom, 5)
-                            HStack {
-                                Text("배송")
-                                Spacer()
-                                Text("무료")
-                            }
-                            Divider()
-                            HStack {
+                        ForEach(orderStore.products, id: \.self) { product in
+                            var _ = print("product : \(product)")
+                            VStack(alignment: .leading) {
                                 Text("총계")
                                     .font(.title3)
                                     .padding(.bottom, 10)
                                     .fontWeight(.bold)
-                                Spacer()
-                                Text("₩ 750,000")
-                                    .font(.title3)
-                                    .padding(.bottom, 10)
-                                    .fontWeight(.bold) //
+                                // 바꿔야할부분
+                                HStack {
+                                    Text("소계")
+                                        .padding(.leading, 3)
+                                    Spacer()
+                                    Text("₩ \(product.totalPrice)")
+                                }
+                                .padding(.bottom, 5)
+                                HStack {
+                                    Text("배송")
+                                        .padding(.leading, 3)
+                                    Spacer()
+                                    Text("무료")
+                                }
+                                Divider()
+                                HStack {
+                                    Text("총계")
+                                        .font(.title3)
+                                        .padding(.bottom, 10)
+                                        .fontWeight(.bold)
+                                    Spacer()
+                                    Text("₩ \(product.totalPrice)")
+                                        .font(.title3)
+                                        .padding(.bottom, 10)
+                                        .fontWeight(.bold) //
+                                }
+                                .padding(.vertical, 20)
                             }
-                            .padding(.vertical, 20)
                         }
                     }
                     
                     // 결제버튼
-                    
-                    Button(action: {
-                        print("결제완료 및 화면전환")
-                        
-                    }) {
-                        NavigationLink(destination: MyOrderView()) {
-                            Text("결제하기")
-                                .font(.headline)
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                                .frame(width: 310, height: 20)
-                                .padding(20)
-                        }
-                        .background(Color("MainColor"))
-                        .cornerRadius(15)
+                    NavigationLink(destination: MyOrderView()) {
+                        Text("결제하기")
+                            .font(.headline)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                            .frame(width: 310, height: 20)
+                            .padding(20)
                     }
+                    .background(Color("MainColor"))
+                    .cornerRadius(15)
+                    .simultaneousGesture(TapGesture().onEnded {
+                        orderStore.addOrder(user: userStore.userInfo!,
+                                            products: orderStore.products,
+                                            orderInfo: Order(orderName : orderName ,
+                                                             orderPhone : orderPhone ,
+                                                             orderAddress : orderAddress ))
+                    })
                 }
                 .padding(25)
             }
@@ -170,8 +185,9 @@ struct CheckOrderView: View {
     }
 }
 
-struct CheckOrderView_Previews: PreviewProvider {
-    static var previews: some View {
-        CheckOrderView(address: "")
-    }
-}
+//struct CheckOrderView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CheckOrderView(order: Order(orderName: "", orderPhone: "", orderAddress: ""), address: "", receiverName: "", contactNumber: "")
+//
+//    }
+//}

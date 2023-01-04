@@ -7,10 +7,20 @@
 
 import Foundation
 
-struct Cart: Hashable {
-    var productId: String
+struct Cart: Hashable, Identifiable {
+//    var productId: String
+//    var productName: String
+//    var productCount: Int
+//    var productPrice: Int
+//    var productImage: String
+    
+    var id: String
     var productName: String
+    var device: [String]
+    var category: String
+    var storage: String
+    var color: String
     var productCount: Int
-    var productPrice: Int
-    var productImage: String
+    var image: String
+    var price: Int
 }

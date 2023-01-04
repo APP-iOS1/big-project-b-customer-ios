@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CartView: View {
-    @State private var selectProducts: [Bool] = [] // 선택 상품 확인
+    @State private var selectProducts: [Bool] = Array(repeating: false, count: 10) // 선택 상품 확인
     @State private var allSelect: Bool = false // 상품 전체선택 확인
     @State private var disabled: Bool = false // 결제 버튼 활성화
     @State private var isEmptyCart: Bool = false
@@ -55,7 +55,16 @@ struct CartView: View {
                         Button(action: {
                             for index in 0..<cartStore.cartStore.count {
                                 if selectProducts[index] {
-                                    cartStore.removeCart(uid: userInfoStore.userInfo?.userId ?? "", product: Cart(productId: cartStore.cartStore[index].productId, productName: cartStore.cartStore[index].productName, productCount: cartStore.cartStore[index].productCount, productPrice: cartStore.cartStore[index].productPrice, productImage: cartStore.cartStore[index].productImage))
+                                    cartStore.removeCart(uid: userInfoStore.userInfo?.userId ?? "",
+                                                         product: Cart(id: cartStore.cartStore[index].id,
+                                                                       productName: cartStore.cartStore[index].productName,
+                                                                       device: cartStore.cartStore[index].device,
+                                                                       category: cartStore.cartStore[index].category,
+                                                                       storage: cartStore.cartStore[index].storage,
+                                                                       color: cartStore.cartStore[index].color,
+                                                                       productCount: cartStore.cartStore[index].productCount,
+                                                                       image: cartStore.cartStore[index].image,
+                                                                       price: cartStore.cartStore[index].price))
                                 }
                             }
                             selectProducts = Array(repeating: false, count: cartStore.cartStore.count)
@@ -101,7 +110,7 @@ struct CartView: View {
                                 }
                                 
                                 // 상품 이미지
-                                AsyncImage(url: URL(string: cartStore.cartStore[index].productImage)) { image in
+                                AsyncImage(url: URL(string: cartStore.cartStore[index].image)) { image in
                                     image
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
@@ -119,10 +128,20 @@ struct CartView: View {
                                     HStack(spacing: 10) {
                                         // - 버튼
                                         Button(action: {
-                                            let price = cartStore.cartStore[index].productPrice / cartStore.cartStore[index].productCount
+                                            let price = cartStore.cartStore[index].price / cartStore.cartStore[index].productCount
                                             if cartStore.cartStore[index].productCount > 1 {
                                                 cartStore.cartStore[index].productCount -= 1
-                                                cartStore.updateCart(uid: userInfoStore.userInfo?.userId ?? "", product: Cart(productId: cartStore.cartStore[index].productId, productName: cartStore.cartStore[index].productName, productCount: cartStore.cartStore[index].productCount, productPrice: price * cartStore.cartStore[index].productCount, productImage: cartStore.cartStore[index].productImage), productCount: cartStore.cartStore[index].productCount)
+                                                cartStore.updateCart(uid: userInfoStore.userInfo?.userId ?? "",
+                                                                     product: Cart(id: cartStore.cartStore[index].id,
+                                                                                   productName: cartStore.cartStore[index].productName,
+                                                                                   device: cartStore.cartStore[index].device,
+                                                                                   category: cartStore.cartStore[index].category,
+                                                                                   storage: cartStore.cartStore[index].storage,
+                                                                                   color: cartStore.cartStore[index].color,
+                                                                                   productCount: cartStore.cartStore[index].productCount,
+                                                                                   image: cartStore.cartStore[index].image,
+                                                                                   price: price * cartStore.cartStore[index].productCount),
+                                                                     productCount: cartStore.cartStore[index].productCount)
                                             }
                                         }) {
                                             ZStack {
@@ -143,11 +162,21 @@ struct CartView: View {
                                         
                                         // + 버튼
                                         Button(action: {
-                                            let price = cartStore.cartStore[index].productPrice / cartStore.cartStore[index].productCount
+                                            let price = cartStore.cartStore[index].price / cartStore.cartStore[index].productCount
                                             
                                             if cartStore.cartStore[index].productCount < 10 {
                                                 cartStore.cartStore[index].productCount += 1
-                                                cartStore.updateCart(uid: userInfoStore.userInfo?.userId ?? "", product: Cart(productId: cartStore.cartStore[index].productId, productName: cartStore.cartStore[index].productName, productCount: cartStore.cartStore[index].productCount, productPrice: price * cartStore.cartStore[index].productCount, productImage: cartStore.cartStore[index].productImage), productCount: cartStore.cartStore[index].productCount)
+                                                cartStore.updateCart(uid: userInfoStore.userInfo?.userId ?? "",
+                                                                     product: Cart(id: cartStore.cartStore[index].id,
+                                                                                   productName: cartStore.cartStore[index].productName,
+                                                                                   device: cartStore.cartStore[index].device,
+                                                                                   category: cartStore.cartStore[index].category,
+                                                                                   storage: cartStore.cartStore[index].storage,
+                                                                                   color: cartStore.cartStore[index].color,
+                                                                                   productCount: cartStore.cartStore[index].productCount,
+                                                                                   image: cartStore.cartStore[index].image,
+                                                                                   price: price * cartStore.cartStore[index].productCount),
+                                                                     productCount: cartStore.cartStore[index].productCount)
                                             }
                                         }) {
                                             ZStack {
@@ -165,7 +194,7 @@ struct CartView: View {
                                         Spacer()
                                         
                                         // 상품 가격
-                                        Text("₩\(cartStore.cartStore[index].productPrice)")
+                                        Text("₩\(cartStore.cartStore[index].price)")
                                             .fontWeight(.semibold)
                                             .frame(width: 110, alignment: .leading)
                                     }
@@ -189,7 +218,7 @@ struct CartView: View {
                     .padding(.top, 10)
                     
                     // 결제
-                    NavigationLink(destination: PaymentView(carts: [])) {
+                    NavigationLink(destination: PaymentView(carts: setTotalProduct())) {
                         ZStack {
                             RoundedRectangle(cornerRadius: 15)
                                 .fill(disabled ? .secondary : Color("MainColor"))
@@ -218,10 +247,20 @@ struct CartView: View {
         var totalPrice = 0
         for index in 0..<cartStore.cartStore.count {
             if selectProducts[index] {
-                totalPrice += cartStore.cartStore[index].productPrice
+                totalPrice += cartStore.cartStore[index].price
             }
         }
         return totalPrice
+    }
+    
+    func setTotalProduct() -> [Cart] {
+        var cart = [Cart]()
+        for index in 0..<cartStore.cartStore.count {
+            if selectProducts[index] {
+                cart.append(cartStore.cartStore[index])
+            }
+        }
+        return cart
     }
 }
 

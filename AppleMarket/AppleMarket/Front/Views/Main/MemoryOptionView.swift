@@ -8,10 +8,15 @@
 import SwiftUI
 
 struct MemoryOptionView: View {
-    @State private var isChecking = [false, false, false, false]
-    @Binding var memory: String
-    @Binding var selectedProduct: CatalogueProduct
+    @ObservedObject var detailViewModel: DetailViewModel
+    
+    @State private var isChecking: [Bool] = []
 
+    @Binding var selectedProduct: CatalogueProduct
+    let columns = [
+        GridItem(.flexible(), spacing: 0),
+        GridItem(.flexible())
+    ]
     
     var body: some View {
         VStack(alignment: .leading, spacing: 15) {
@@ -22,92 +27,47 @@ struct MemoryOptionView: View {
             }
             .padding(.bottom, 10)
             
-            
-            HStack(alignment: .bottom, spacing: 10) {
-                Button {
-                    isChecking = [true, false, false, false]
-
-                    memory = selectedProduct.storage?[0] ?? ""
-                } label: {
-                    
-                    VStack(alignment: .center, spacing: 5) {
-                        Text(selectedProduct.storage?[0] ?? "")
-                        Text("₩")
-                            .font(.caption)
-                            .foregroundColor(.gray)
-                        
+            if !isChecking.isEmpty {
+                LazyVGrid(columns: columns, spacing: 10) {
+                    ForEach(0..<selectedProduct.storage!.count, id: \.self) { index in
+                        Button {
+                            isCheckingAllFalse()
+                            isChecking[index] = true
+                            detailViewModel.storage = selectedProduct.storage?[index] ?? ""
+                        } label: {
+                            
+                            VStack(alignment: .center, spacing: 5) {
+                                Text(selectedProduct.storage?[index] ?? "")
+                                Text("₩\(selectedProduct.price)")
+                                    .font(.caption)
+                                    .foregroundColor(.gray)
+                                
+                            }
+                            .foregroundColor(.black)
+                            .frame(width:172.5 ,height: 70)
+                            .overlay(RoundedRectangle(cornerRadius: 10)
+                                .stroke(isChecking[index] ? Color("MainColor") : Color.gray, lineWidth: 1.5))
+                        }
+                        .disabled(isChecking[index])
                     }
-                    .foregroundColor(.black)
-                    .frame(width:172.5 ,height: 70)
-                    .overlay(RoundedRectangle(cornerRadius: 10)
-                        .stroke(isChecking[0] ? Color("MainColor") : Color.gray, lineWidth: 1.5))
                 }
-                .disabled(isChecking[0])
-                
-                Button {
-                    isChecking = [false, true, false, false]
-
-                    memory = selectedProduct.storage?[1] ?? ""
-                } label: {
-                    
-                    VStack(alignment: .center, spacing: 5) {
-                        Text(selectedProduct.storage?[1] ?? "")
-                        Text("₩")
-                            .font(.caption)
-                            .foregroundColor(.gray)
-                        
-                    }
-                    .foregroundColor(.black)
-                    .frame(width:172.5 ,height: 70)
-                    .overlay(RoundedRectangle(cornerRadius: 10)
-                        .stroke(isChecking[1] ? Color("MainColor") : Color.gray, lineWidth: 1.5))
-                }
-                .disabled(isChecking[1]) //isChecking2가 true일때 비활성화
             }
+        }
+        .onAppear {
+            isChecking = [Bool](repeating: false, count: selectedProduct.storage!.count)
             
-            HStack(alignment: .bottom, spacing: 10) {
-                Button {
-                    isChecking = [false, false, true, false]
-                    memory = selectedProduct.storage?[2] ?? ""
-                } label: {
-                    
-                    VStack(alignment: .center, spacing: 5) {
-                        Text(selectedProduct.storage?[2] ?? "")
-                        Text("₩")
-                            .font(.caption)
-                            .foregroundColor(.gray)
-                        
-                    }
-                    .foregroundColor(.black)
-                    .frame(width:172.5 ,height: 70)
-                    .overlay(RoundedRectangle(cornerRadius: 10)
-                        .stroke(isChecking[2] ? Color("MainColor") : Color.gray, lineWidth: 1.5))
-                }
-                .disabled(isChecking[2])
-                
-                Button {
-                    isChecking = [false, false, false, true]
-                    memory = selectedProduct.storage?[3] ?? ""
-
-                } label: {
-                    
-                    VStack(alignment: .center, spacing: 5) {
-
-                        Text(selectedProduct.storage?[3] ?? "")
-                        Text("₩")
-                            .font(.caption)
-                            .foregroundColor(.gray)
-                        
-                    }
-                    .foregroundColor(.black)
-                    .frame(width:172.5 ,height: 70)
-                    .overlay(RoundedRectangle(cornerRadius: 10)
-                        .stroke(isChecking[3] ? Color("MainColor") : Color.gray, lineWidth: 1.5))
-                }
-                .disabled(isChecking[3])
-            }
+            isChecking[0].toggle()
             
+            detailViewModel.storage = selectedProduct.storage?[0] ?? ""
             
+            print(isChecking)
+        }
+        .padding()
+    }
+    
+    func isCheckingAllFalse() {
+        for i in 0..<selectedProduct.storage!.count {
+            isChecking.insert(false, at: i)
         }
     }
 }
