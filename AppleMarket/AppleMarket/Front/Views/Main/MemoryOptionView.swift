@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct MemoryOptionView: View {
+    @ObservedObject var detailViewModel: DetailViewModel
+    
     @State private var isChecking: [Bool] = []
-    @Binding var memory: String
+
     @Binding var selectedProduct: CatalogueProduct
     let columns = [
         GridItem(.flexible(), spacing: 0),
@@ -31,12 +33,12 @@ struct MemoryOptionView: View {
                         Button {
                             isCheckingAllFalse()
                             isChecking[index] = true
-                            memory = selectedProduct.storage?[index] ?? ""
+                            detailViewModel.storage = selectedProduct.storage?[index] ?? ""
                         } label: {
                             
                             VStack(alignment: .center, spacing: 5) {
                                 Text(selectedProduct.storage?[index] ?? "")
-                                Text("₩")
+                                Text("₩\(selectedProduct.price)")
                                     .font(.caption)
                                     .foregroundColor(.gray)
                                 
@@ -53,8 +55,14 @@ struct MemoryOptionView: View {
         }
         .onAppear {
             isChecking = [Bool](repeating: false, count: selectedProduct.storage!.count)
+            
+            isChecking[0].toggle()
+            
+            detailViewModel.storage = selectedProduct.storage?[0] ?? ""
+            
             print(isChecking)
         }
+        .padding()
     }
     
     func isCheckingAllFalse() {

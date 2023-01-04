@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct ColorOptionView: View {
+    @ObservedObject var detailViewModel: DetailViewModel
+    
     @State private var isChecking: [Bool] = []
-    @Binding var color: String
+    
     @Binding var selectedProduct: CatalogueProduct
     let columns = [
         GridItem(.flexible(), spacing: 0),
@@ -30,7 +32,7 @@ struct ColorOptionView: View {
                         Button {
                             isCheckingAllFalse()
                             isChecking[index] = true
-                            //color = selectedProduct.color?[index] ?? ""
+                            detailViewModel.color = selectedProduct.color?[index] ?? ""
                         } label: {
                             
                             VStack(alignment: .center, spacing: 5) {
@@ -54,8 +56,14 @@ struct ColorOptionView: View {
         }
         .onAppear {
             isChecking = [Bool](repeating: false, count: selectedProduct.color!.count)
+            
+            isChecking[0].toggle()
+            
+            detailViewModel.color = selectedProduct.color?[0] ?? ""
+            
             print(isChecking)
         }
+        .padding()
     }
     
     

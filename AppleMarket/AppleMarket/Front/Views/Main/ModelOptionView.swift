@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct ModelOptionView: View {
+    @ObservedObject var detailViewModel: DetailViewModel
+    
     @State var isChecking: [Bool] = []
-    @Binding var model: String
     @Binding var selectedProduct: CatalogueProduct
     @State var productArr: [[Product]]
     
@@ -29,7 +30,7 @@ struct ModelOptionView: View {
                     Button {
                         isCheckingAllFalse()
                         isChecking[index] = true
-                        model = selectedProduct.model?[index] ?? ""
+                        detailViewModel.model = selectedProduct.model?[index] ?? ""
                     } label: {
                         HStack {
                             VStack(alignment: .leading, spacing: 5) {
@@ -51,6 +52,10 @@ struct ModelOptionView: View {
         }
         .onAppear {
             isChecking = [Bool](repeating: false, count: selectedProduct.model!.count)
+            isChecking[0].toggle()
+            
+            detailViewModel.model = selectedProduct.model?[0] ?? ""
+            
             print(isChecking)
         }
         .padding()

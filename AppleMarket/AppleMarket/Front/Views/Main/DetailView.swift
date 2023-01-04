@@ -7,8 +7,16 @@
 
 import SwiftUI
 
+class DetailViewModel: ObservableObject {
+    @Published var model: String = ""
+    @Published var storage: String = ""
+    @Published var color: String = ""
+    
+}
+
 struct DetailView: View {
     @EnvironmentObject var productStore: ProductStore
+    @ObservedObject var detailViewModel = DetailViewModel()
     
     @State var price: Int = 0
     @State var memoryPrice: Int = 0
@@ -62,18 +70,18 @@ struct DetailView: View {
                 
                 
                 if selectedProduct.category == "iPhone" {
-                    ModelOptionView(model: $model, selectedProduct: $selectedProduct,productArr: productArr)
+                    ModelOptionView(detailViewModel: detailViewModel, selectedProduct: $selectedProduct,productArr: productArr)
                         .padding(.bottom, 35)
-                    ColorOptionView(color: $color, selectedProduct: $selectedProduct)
+                    ColorOptionView(detailViewModel: detailViewModel,  selectedProduct: $selectedProduct)
                         .padding(.bottom, 50)
-                    MemoryOptionView( memory: $memory, selectedProduct: $selectedProduct)
+                    MemoryOptionView(detailViewModel: detailViewModel,  selectedProduct: $selectedProduct)
                         .padding(.bottom, 35)
                 } else if selectedProduct.category == "iPad" {
-                    ModelOptionView(model: $model, selectedProduct: $selectedProduct, productArr: productArr)
+                    ModelOptionView(detailViewModel: detailViewModel, selectedProduct: $selectedProduct,productArr: productArr)
                         .padding(.bottom, 35)
-                    ColorOptionView(color: $color, selectedProduct: $selectedProduct)
+                    ColorOptionView(detailViewModel: detailViewModel,  selectedProduct: $selectedProduct)
                         .padding(.bottom, 50)
-                    MemoryOptionView( memory: $memory, selectedProduct: $selectedProduct)
+                    MemoryOptionView(detailViewModel: detailViewModel,  selectedProduct: $selectedProduct)
                         .padding(.bottom, 35)
                 }
                 
@@ -95,9 +103,11 @@ struct DetailView: View {
                         
                         
                         VStack(alignment: .leading) {
-                            Text("\(selectedProduct.productName)")
-//                            Text("\(selectedProduct.storage) \(selectedProduct.color)")
-//                                .padding(.bottom, 20)
+                            Text(detailViewModel.model)
+                            HStack{
+                                Text(detailViewModel.storage)
+                                Text(detailViewModel.color)
+                            }.padding(.bottom, 20)
                             Text("₩\(selectedProduct.price)")
                                 .font(.caption)
                         }
@@ -153,6 +163,9 @@ struct DetailView: View {
 //        return newProductArr
 //    }
     
+
+
+
     
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
