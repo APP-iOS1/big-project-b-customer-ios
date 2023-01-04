@@ -13,7 +13,8 @@ struct ModelOptionView: View {
     
     @State var isChecking: [Bool] = []
     @Binding var selectedProduct: CatalogueProduct
-    var productDic: [String : [Product]]
+    
+//    var productDic: [String : [Product]]
 
     
     var body: some View {
@@ -36,20 +37,26 @@ struct ModelOptionView: View {
                             VStack(alignment: .leading, spacing: 5) {
                                 Text(selectedProduct.model?[index] ?? "")
                             }
-                            Spacer()
-                            if productDic.isEmpty {
-                              Text("₩0000부터")
-                                .font(.caption)
-                                .foregroundColor(.gray)
-                            } else {
-                                if let products = productDic[model] {
-                                let price = products.sorted{ $0.price < $1.price }.first
                             
-                                Text("₩\(price?.price ?? 00)부터")
-                                    .font(.caption)
-                                    .foregroundColor(.gray)
-                              }
-                            }
+                            Spacer()
+                            
+                            Text("₩\(selectedProduct.price)부터")
+                              .font(.caption)
+                              .foregroundColor(.gray)
+                            
+//                            if productDic.isEmpty {
+//                              Text("₩0000부터")
+//                                .font(.caption)
+//                                .foregroundColor(.gray)
+//                            } else {
+//                                if let products = productDic[model] {
+//                                let price = products.sorted{ $0.price < $1.price }.first
+//
+//                                Text("₩\(price?.price ?? 00)부터")
+//                                    .font(.caption)
+//                                    .foregroundColor(.gray)
+//                              }
+//                            }
                                
                         }
                         .foregroundColor(.black)
@@ -70,7 +77,7 @@ struct ModelOptionView: View {
             
             print(isChecking)
             print("dic text")
-            print(productStore.productDic)
+//            print(productStore.productDic)
         }
     }
     

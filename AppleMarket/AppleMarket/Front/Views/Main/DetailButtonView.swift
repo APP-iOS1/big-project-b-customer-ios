@@ -15,7 +15,7 @@ struct DetailButtonView: View {
         VStack {
             HStack {
                 Button {
-                    cartStore.addCart(uid: userInfoStore.userInfo?.userId ?? "", product: <#T##CatalogueProduct#>, productCount: 1)
+//                    cartStore.addCart(uid: userInfoStore.userInfo?.userId ?? "", product: <#T##CatalogueProduct#>, productCount: 1)
                 } label: {
                     Text("장바구니")
                         .foregroundColor(.white)

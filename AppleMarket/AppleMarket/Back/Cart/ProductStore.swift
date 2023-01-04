@@ -45,7 +45,7 @@ class ProductStore: ObservableObject {
                 let price: Int = docData["price"] as? Int ?? 0
                 let productName: String = docData["productName"] as? String ?? ""
                 let status: Int = docData["status"] as? Int ?? 0
-                let storage: Int = docData["storage"] as? Int ?? 0
+                let storage: String = docData["storage"] as? String ?? ""
                 
                 let products: Product = Product(id: id, category: category, color: color, description: description, device: device, image: image, price: price, productName: productName, status: status, storage: storage, productCount: 1)
                 

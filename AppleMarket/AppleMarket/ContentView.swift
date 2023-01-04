@@ -20,8 +20,8 @@ struct ContentView: View {
     var body: some View {
             TabView(selection: $tabSelection) {
                 NavigationStack {
-//                    MainView()
-                    DetailView()
+                    MainView()
+                    
                 }
                     .tabItem {
                         Image(systemName: "macbook.and.iphone")

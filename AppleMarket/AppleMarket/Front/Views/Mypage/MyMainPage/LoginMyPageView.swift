@@ -88,11 +88,6 @@ struct LoginMyPageView: View {
                                                 .bold()
                                             Text(myDevice.deviceName)
                                             
-                                            NavigationLink {
-//                                                DetailView(selectedProduct: )
-                                            } label: {
-                                                Text("액세서리 등을 쇼핑하기")
-                                            }
                                         }
                                         
                                     }

@@ -26,7 +26,7 @@ struct DetailView: View {
     @State var model: String = "iPhone 14 Pro"
     @State var memory: String = "256GB"
     @State var color: String = "딥 퍼플"
-    //    @State var productArr: [[Product]] = [] // 뷰에 모델 종류 보여지는 순서대로 모델에 해당되는 Product 요소들이 배열로 들어감
+    @State var productArr: [[Product]] = [] // 뷰에 모델 종류 보여지는 순서대로 모델에 해당되는 Product 요소들이 배열로 들어감
     
     
     
@@ -77,8 +77,7 @@ struct DetailView: View {
                 
                 if selectedProduct.category == "iPhone" {
 
-                    ModelOptionView(detailViewModel: detailViewModel, selectedProduct: $selectedProduct,productArr: productArr)
-
+                    ModelOptionView(detailViewModel: detailViewModel, selectedProduct: $selectedProduct)
                         .padding(.bottom, 35)
                     ColorOptionView(detailViewModel: detailViewModel,  selectedProduct: $selectedProduct)
                         .padding(.bottom, 50)
@@ -86,7 +85,7 @@ struct DetailView: View {
                         .padding(.bottom, 35)
                 } else if selectedProduct.category == "iPad" {
 
-                    ModelOptionView(detailViewModel: detailViewModel, selectedProduct: $selectedProduct,productArr: productArr)
+                    ModelOptionView(detailViewModel: detailViewModel, selectedProduct: $selectedProduct)
 
                         .padding(.bottom, 35)
                     ColorOptionView(detailViewModel: detailViewModel,  selectedProduct: $selectedProduct)
