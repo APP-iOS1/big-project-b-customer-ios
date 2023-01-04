@@ -29,17 +29,15 @@ struct MainProductDetailView: View {
             let width: CGFloat = geo.size.width
             let height: CGFloat = geo.size.height
             let itemWidth: CGFloat = width * 0.8
-            let itemHeight: CGFloat = height * 0.75
+            let itemHeight: CGFloat = itemWidth * 1.525
 
-        
-            //            if categoryProducts.isEmpty || featuredProducts.isEmpty {
-            //                Text("판매중인 상품이 없습니다.")
-            //                    .frame(width: width, height: height)
-            //            } else {
             ScrollView {
+                
+                // featuredItems
                 ScrollView(.horizontal) {
                     Spacer()
                         .frame(height: itemHeight * 0.05)
+                    
                     HStack(spacing: 20) {
                         ForEach(featuredProducts) { product in
                             AsyncImage(url: URL(string: product.thumbnailImage)) { Image in
@@ -50,7 +48,7 @@ struct MainProductDetailView: View {
                                         .frame(width: itemWidth, height: itemHeight)
                                         .clipped()
                                         .cornerRadius(30)
-                                        .shadow(radius: 10)
+                                        .thinShadow()
                                         .overlay{
                                             RoundedRectangle(cornerRadius: 30)
                                                 .fill(LinearGradient(colors: [.black.opacity(0.3), .clear], startPoint: UnitPoint(x:0.5, y: 0), endPoint: UnitPoint(x:0.5, y: 0.5)))
@@ -98,33 +96,34 @@ struct MainProductDetailView: View {
                                 
                                 
                             } placeholder: {
-                                Rectangle()
-                                    .stroke(lineWidth: 0.1)
+                                RoundedRectangle(cornerRadius: 30)
+                                    .stroke(lineWidth: 0.5)
                                     .frame(width: itemWidth, height: itemHeight)
-                                    .cornerRadius(30)
                                     .overlay {
                                         ProgressView()
                                     }
+                                    .thinShadow()
                             }
                             
                             
                         }
                     }
                     .snapScrolling(itemCount: featuredProducts.count , itemWidth: itemWidth, spacing: 20)
+                    
                     Spacer()
                         .frame(height: itemHeight * 0.05)
 
                 }
                 .scrollDisabled(true)
+                // featuredItemsEnd
                 
                 Spacer()
                     .frame(height: itemHeight * 0.05)
-                
                 Divider()
-                
                 Spacer()
                     .frame(height: itemHeight * 0.1)
                 
+                // restItems
                 LazyVStack {
                     ForEach(categoryProducts) { product in
                         let imageWidth: CGFloat = width / 2.5
@@ -133,9 +132,9 @@ struct MainProductDetailView: View {
                             AsyncImage(url: URL(string: product.thumbnailImage)) { image in
                                 image
                                     .resizable()
-                                    .scaledToFill()
+                                    .scaledToFit()
                                     .frame(width: imageWidth, height: imageHeight )
-                                    .clipped()
+//                                    .clipped()
                                     .cornerRadius(10)
                                 
                             } placeholder: {
@@ -146,6 +145,7 @@ struct MainProductDetailView: View {
                                 .frame(height: 25)
                             Text(product.productName)
                                 .font(.headline)
+                                .frame(width: width / 2, alignment: .center)
                             Spacer()
                             Text("₩\(product.price)부터")
                                 .foregroundColor(Color("MainColor"))
@@ -157,20 +157,11 @@ struct MainProductDetailView: View {
                     }
                     
                 }
+                // restItemsEnd
             }
-//        }
-            
-            
         }
         .onAppear {
-            Task {
-                catalogueProductStore.fetchData()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                    getCategoryProducts()
-                }                
-            }
-        
-            
+            getCategoryProducts()
         }
     }
 }
@@ -198,6 +189,7 @@ extension MainProductDetailView {
         
         
     }
+    
 }
 
 struct MainProductDetailView_Previews: PreviewProvider {
