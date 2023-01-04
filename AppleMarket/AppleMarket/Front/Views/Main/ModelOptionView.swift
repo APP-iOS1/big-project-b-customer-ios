@@ -13,7 +13,7 @@ struct ModelOptionView: View {
     @State var isChecking = [false, false]
     @Binding var model: String
     @Binding var selectedProduct: CatalogueProduct
-//    var productDic: [String : [Product]]
+    var productDic: [String : [Product]]
 
     
     var body: some View {
@@ -62,6 +62,19 @@ struct ModelOptionView: View {
 //                    Text("₩\(productStore.productDic[model]!.sorted(by: {$0.price < $1.price})[0].price)부터")
 //                        .font(.caption)
 //                        .foregroundColor(.gray)
+                    if productDic.isEmpty {
+                        Text("₩0000부터")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                    } else {
+                        if let products = productDic[model] {
+                            let price = products.sorted{ $0.price < $1.price }.first
+                            
+                            Text("₩\(price?.price ?? 00)부터")
+                                .font(.caption)
+                                .foregroundColor(.gray)
+                        }
+                    }
                 }
                 .foregroundColor(.black)
                 .padding()

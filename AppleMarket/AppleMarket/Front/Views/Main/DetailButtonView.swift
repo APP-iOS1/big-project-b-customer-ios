@@ -8,11 +8,14 @@
 import SwiftUI
 
 struct DetailButtonView: View {
+    @EnvironmentObject var cartStore: CartStore
+    @EnvironmentObject var userInfoStore: UserInfoStore
+    
     var body: some View {
         VStack {
             HStack {
                 Button {
-                    
+                    cartStore.addCart(uid: userInfoStore.userInfo?.userId ?? "", product: <#T##CatalogueProduct#>, productCount: 1)
                 } label: {
                     Text("장바구니")
                         .foregroundColor(.white)
@@ -33,6 +36,7 @@ struct DetailButtonView: View {
                 
             }
         }
+        
 
     }
 }
