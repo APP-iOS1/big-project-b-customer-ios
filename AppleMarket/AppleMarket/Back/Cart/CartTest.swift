@@ -40,8 +40,8 @@ struct CartTest: View {
             }
             
         }
-        .onAppear {
-            productStore.fetchProduct()
+        .task {
+            await productStore.fetchProduct()
         }
     }
 }

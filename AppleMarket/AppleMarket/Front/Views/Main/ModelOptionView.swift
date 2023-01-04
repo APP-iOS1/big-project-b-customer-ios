@@ -8,14 +8,13 @@
 import SwiftUI
 
 struct ModelOptionView: View {
+    @EnvironmentObject var productStore: ProductStore
+    
     @State var isChecking = [false, false]
     @Binding var model: String
     @Binding var selectedProduct: CatalogueProduct
-    @Binding var productArr: [[Product]]
-    
-    var devicePrice: Int = 0 {
-       didSet { productArr[1][0].price }
-    }
+//    var productDic: [String : [Product]]
+
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -55,9 +54,14 @@ struct ModelOptionView: View {
                         Text(selectedProduct.model?[1] ?? "")
                     }
                     Spacer()
-                    Text("₩\(devicePrice)부터")
-                        .font(.caption)
-                        .foregroundColor(.gray)
+//                    Button{
+//                        print(productDic[model]!.sorted(by: {$0.price < $1.price})[0].price)
+//                    } label: {
+//                        Text("test")
+//                    }
+//                    Text("₩\(productStore.productDic[model]!.sorted(by: {$0.price < $1.price})[0].price)부터")
+//                        .font(.caption)
+//                        .foregroundColor(.gray)
                 }
                 .foregroundColor(.black)
                 .padding()
@@ -68,6 +72,10 @@ struct ModelOptionView: View {
 
         }
         .padding()
+        .onAppear{
+            print("dic text")
+            print(productStore.productDic)
+        }
     }
 
 }

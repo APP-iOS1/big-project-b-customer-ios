@@ -16,7 +16,11 @@ struct DetailView: View {
     @State var model: String = "iPhone 14 Pro"
     @State var memory: String = "256GB"
     @State var color: String = "딥 퍼플"
-    @State var productArr: [[Product]] = [] // 뷰에 모델 종류 보여지는 순서대로 모델에 해당되는 Product 요소들이 배열로 들어감
+//    @State var productArr: [[Product]] = [] // 뷰에 모델 종류 보여지는 순서대로 모델에 해당되는 Product 요소들이 배열로 들어감
+    
+    
+    
+
     
     @State private var selectedProduct: CatalogueProduct =
     CatalogueProduct(id: "iPhone 14 Pro", productName: "iPhone 14 Pro", device: ["iPhone 14 Pro"], category: "iPhone", description: "IPhone 14 Pro 입니다.", price: 1550000, thumbnailImage: "", status: 1, descriptionImages: [
@@ -62,20 +66,22 @@ struct DetailView: View {
                 
                 
                 if selectedProduct.category == "iPhone" {
-                    ModelOptionView(model: $model, selectedProduct: $selectedProduct,productArr: $productArr)
+                    ModelOptionView(model: $model, selectedProduct: $selectedProduct)
                         .padding(.bottom, 35)
                     DetailTestView(color: $color, selectedProduct: $selectedProduct)
                         .padding(.bottom, 50)
                     MemoryOptionView( memory: $memory, selectedProduct: $selectedProduct)
                         .padding(.bottom, 35)
                 } else if selectedProduct.category == "iPad" {
-                    ModelOptionView(model: $model, selectedProduct: $selectedProduct, productArr: $productArr)
+                    ModelOptionView(model: $model, selectedProduct: $selectedProduct)
                         .padding(.bottom, 35)
                     ColorOptionView(color: $color, selectedProduct: $selectedProduct)
                         .padding(.bottom, 50)
                     MemoryOptionView( memory: $memory, selectedProduct: $selectedProduct)
                         .padding(.bottom, 35)
                 }
+                
+
                 
                 VStack {
                     Divider()
@@ -111,33 +117,34 @@ struct DetailView: View {
                     .padding(.vertical, 20)
                 
             }
-            .onChange(of: productStore.productStore, perform: { newValue in
-                searchProduct(catalogueProduct: selectedProduct)
-                print("productArr: ", productArr)
-            })
+//            .task {
+//                await productStore.fetchProduct()
+//                print(productStore.productStore)
+//            }
+//            .onChange(of: productStore.productStore, perform: { newValue in
+//                searchProduct(catalogueProduct: selectedProduct)
+//                print("productArr: ", productArr)
+//            })
 
             
         } // ScrollView
-        .task {
-             productStore.fetchProduct()
-            print(productStore.productStore)
-        }
+
     } //body
     
-    func searchProduct(catalogueProduct: CatalogueProduct) {
-        var tempProduct: [Product] = []
-        
-        for model in catalogueProduct.model!{
-            tempProduct = []
-            for product in productStore.productStore {
-                if model == product.productName{
-                    tempProduct.append(product)
-                }
-            }
-            tempProduct = tempProduct.sorted(by: {$0.price < $1.price})
-            productArr.append(tempProduct)
-        }
-    }
+//    func searchProduct(catalogueProduct: CatalogueProduct) {
+//        var tempProduct: [Product] = []
+//
+//        for model in catalogueProduct.model!{
+//            tempProduct = []
+//            for product in productStore.productStore {
+//                if model == product.productName{
+//                    tempProduct.append(product)
+//                }
+//            }
+//            tempProduct = tempProduct.sorted(by: {$0.price < $1.price})
+//            productArr.append(tempProduct)
+//        }
+//    }
 }
     // productArr[0][0], productARr[1][0]
 //    for storage in selectedProduct.storage{
