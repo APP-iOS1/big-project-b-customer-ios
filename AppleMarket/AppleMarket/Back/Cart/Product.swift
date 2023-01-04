@@ -7,22 +7,20 @@
 
 import Foundation
 
-struct Product: Hashable, Identifiable {
-    var id: String
-    var category: String
-    var color: String
-    var description: String
+struct Product: Identifiable, Hashable {
+    var id: String // UUID? firestore auto ID?
+    var productName: String // 제품명
     var device: String
-    var image: [String]
+    var category: String
+    var description: String
     var price: Int
-    var productName: String
-    var status: Int    
-    var storage: Int
+    var images: [String]
+    var count: Int // 재고 수
     
-    var productCount: Int
-    
-    var totalPrice: Int {
-        productCount * price
-    }
+    var storage: String? // 용량
+    var color: String?
+    var status: Int // 판매 가능 여부
+    var createdAt: Date // 생성 시각
+//    var series : String
 }
 
