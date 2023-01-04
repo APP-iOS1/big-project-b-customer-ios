@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct ModelOptionView: View {
-    @State var isChecking = [false, false]
-    @Binding var model: String
+    @ObservedObject var detailViewModel: DetailViewModel
+    
+    @State var isChecking: [Bool] = []
     @Binding var selectedProduct: CatalogueProduct
     @State var productArr: [[Product]]
     
@@ -24,50 +25,47 @@ struct ModelOptionView: View {
             }
             .padding(.bottom, 10)
             
-            Button {
-                isChecking = [true, false]
-                model = selectedProduct.model?[0] ?? ""
-            } label: {
-                HStack {
-                    VStack(alignment: .leading, spacing: 5) {
-                        Text(selectedProduct.model?[0] ?? "")
+            if !isChecking.isEmpty {
+                ForEach(0..<selectedProduct.model!.count, id: \.self) { index in
+                    Button {
+                        isCheckingAllFalse()
+                        isChecking[index] = true
+                        detailViewModel.model = selectedProduct.model?[index] ?? ""
+                    } label: {
+                        HStack {
+                            VStack(alignment: .leading, spacing: 5) {
+                                Text(selectedProduct.model?[index] ?? "")
+                            }
+                            Spacer()
+                            Text("₩\(selectedProduct.price)부터")
+                                .font(.caption)
+                                .foregroundColor(.gray)
+                        }
+                        .foregroundColor(.black)
+                        .padding()
+                        .overlay(RoundedRectangle(cornerRadius: 10)
+                            .stroke(isChecking[index] ? Color("MainColor") : Color.gray, lineWidth: 1.5))
                     }
-                    Spacer()
-                    Text("₩\(selectedProduct.price)부터")
-                        .font(.caption)
-                        .foregroundColor(.gray)
+                    .disabled(isChecking[index])
                 }
-                .foregroundColor(.black)
-                .padding()
-                .overlay(RoundedRectangle(cornerRadius: 10)
-                    .stroke(isChecking[0] ? Color("MainColor") : Color.gray, lineWidth: 1.5))
             }
-            .disabled(isChecking[0])
-
-            Button {
-                isChecking = [false, true]
-                model = selectedProduct.model?[1] ?? ""
-            } label: {
-                HStack {
-                    VStack(alignment: .leading, spacing: 5) {
-                        Text(selectedProduct.model?[1] ?? "")
-                    }
-                    Spacer()
-                    Text("₩1,750,000부터")
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                }
-                .foregroundColor(.black)
-                .padding()
-                .overlay(RoundedRectangle(cornerRadius: 10)
-                    .stroke(isChecking[1] ? Color("MainColor") : Color.gray, lineWidth: 1.5))
-            }
-            .disabled(isChecking[1])
-
+        }
+        .onAppear {
+            isChecking = [Bool](repeating: false, count: selectedProduct.model!.count)
+            isChecking[0].toggle()
+            
+            detailViewModel.model = selectedProduct.model?[0] ?? ""
+            
+            print(isChecking)
         }
         .padding()
     }
-
+    
+    func isCheckingAllFalse() {
+        for i in 0..<selectedProduct.model!.count {
+            isChecking.insert(false, at: i)
+        }
+    }
 }
 
 struct ModelOptionView_Previews: PreviewProvider {

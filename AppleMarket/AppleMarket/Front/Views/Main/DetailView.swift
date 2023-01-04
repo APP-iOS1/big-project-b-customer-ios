@@ -8,8 +8,17 @@
 import SwiftUI
 
 
+class DetailViewModel: ObservableObject {
+    @Published var model: String = ""
+    @Published var storage: String = ""
+    @Published var color: String = ""
+    
+}
+
+
 struct DetailView: View {
     @EnvironmentObject var productStore: ProductStore
+    @ObservedObject var detailViewModel = DetailViewModel()
     
     @State var price: Int = 0
     @State var memoryPrice: Int = 0
@@ -19,7 +28,7 @@ struct DetailView: View {
     @State var color: String = "딥 퍼플"
     @State var productArr: [[Product]] = [] // 뷰에 모델 종류 보여지는 순서대로 모델에 해당되는 Product 요소들이 배열로 들어감
     
-    @State private var selectedProduct: CatalogueProduct =
+    @State var selectedProduct: CatalogueProduct =
     CatalogueProduct(id: "iPhone 14 Pro", productName: "iPhone 14 Pro", device: ["iPhone 14 Pro"], category: "iPhone", description: "IPhone 14 Pro 입니다.", price: 1550000, thumbnailImage: "", status: 1, descriptionImages: [
         "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone-14-pro-finish-select-202209-6-1inch-silver?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1663703840488",
         "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/iphone-14-pro-finish-select-202209-6-1inch-silver_AV1?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1661969351381",
@@ -63,18 +72,18 @@ struct DetailView: View {
                 
                 
                 if selectedProduct.category == "iPhone" {
-                    ModelOptionView(model: $model, selectedProduct: $selectedProduct,productArr: productArr)
+                    ModelOptionView(detailViewModel: detailViewModel, selectedProduct: $selectedProduct,productArr: productArr)
                         .padding(.bottom, 35)
-                    DetailTestView(color: $color, selectedProduct: $selectedProduct)
+                    ColorOptionView(detailViewModel: detailViewModel,  selectedProduct: $selectedProduct)
                         .padding(.bottom, 50)
-                    MemoryOptionView( memory: $memory, selectedProduct: $selectedProduct)
+                    MemoryOptionView(detailViewModel: detailViewModel,  selectedProduct: $selectedProduct)
                         .padding(.bottom, 35)
                 } else if selectedProduct.category == "iPad" {
-                    ModelOptionView(model: $model, selectedProduct: $selectedProduct, productArr: productArr)
+                    ModelOptionView(detailViewModel: detailViewModel, selectedProduct: $selectedProduct,productArr: productArr)
                         .padding(.bottom, 35)
-                    ColorOptionView(color: $color, selectedProduct: $selectedProduct)
+                    ColorOptionView(detailViewModel: detailViewModel,  selectedProduct: $selectedProduct)
                         .padding(.bottom, 50)
-                    MemoryOptionView( memory: $memory, selectedProduct: $selectedProduct)
+                    MemoryOptionView(detailViewModel: detailViewModel,  selectedProduct: $selectedProduct)
                         .padding(.bottom, 35)
                 }
                 
@@ -96,10 +105,12 @@ struct DetailView: View {
                         
                         
                         VStack(alignment: .leading) {
-                            Text("\(model)")
-                            Text("\(memory) \(color)")
-                                .padding(.bottom, 20)
-                            Text("₩\(price)")
+                            Text(detailViewModel.model)
+                            HStack{
+                                Text(detailViewModel.storage)
+                                Text(detailViewModel.color)
+                            }.padding(.bottom, 20)
+                            Text("₩\(selectedProduct.price)")
                                 .font(.caption)
                         }
                         Spacer()
@@ -154,6 +165,9 @@ struct DetailView: View {
 //        return newProductArr
 //    }
     
+
+
+
     
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
