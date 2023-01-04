@@ -31,9 +31,8 @@ struct MainView: View {
                         
                     }
                     .padding(16)
-                    .navigationBarTitle("쇼핑하기")
                     .toolbar {
-                        ToolbarItem(placement: .navigationBarLeading) {
+                        ToolbarItem(placement: .principal) {
                             Image("applemarket")
                                 .resizable()
                                 .frame(width: 60, height: 60)
