@@ -32,13 +32,19 @@ struct MainView: View {
                     }
                     .padding(16)
                     .navigationBarTitle("쇼핑하기")
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            Image("applemarket")
+                                .resizable()
+                                .frame(width: 60, height: 60)
+                        }
+                    }
                 }
                 .onAppear {
                     catalogueProductStore.fetchData()
                     if userInfostore.userInfo != nil {
                         userInfostore.fetchMyDevice()
                     }
-
                 }
     }
 }
