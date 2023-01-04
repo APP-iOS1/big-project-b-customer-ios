@@ -111,7 +111,7 @@ struct SearchResultView: View {
                         ForEach (Array(viewModel.searchResults.enumerated()), id: \.offset) { index, item in
                             if index > 0 {
                                 NavigationLink {
-                                ContentView()
+                                DetailView(selectedProduct: item)
                             } label: {
                                 HStack {
                                     AsyncImage(url: URL(string: item.thumbnailImage )) { img in
