@@ -10,30 +10,41 @@ import SwiftUI
 struct PaymentView: View {
     @EnvironmentObject var orderStore: OrderStore
     
-    let carts: [CartProduct]
+    let carts: [Cart]
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
+            
             ScrollView {
                 VStack(alignment: .leading) {
                     Text("재고가 있으며, 배송이 가능합니다.")
                         .font(.title)
                         .bold()
-                    List(orderStore.products) { product in
-                        HStack {
-                            AsyncImage(url: URL(string: product.image.first ?? "")) { image in
-                                image
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 60, height: 60)
-                            } placeholder: {
-                                ProgressView()
+                    
+                    var _ = print("orderStore.products : \(orderStore.products)")
+                    
+                    LazyVStack {
+                        ForEach(orderStore.products, id: \.self) { product in
+                            var _ = print("product : \(product)")
+                            HStack {
+                                AsyncImage(url: URL(string: product.image[0])) { image in
+                                    image
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 60, height: 60)
+                                } placeholder: {
+                                    ProgressView()
+                                }
+                                Text("\(product.id)")
+                                    .padding(.leading, 10)
+                                
+                                Text("\(product.productCount)")
+                                Spacer()
                             }
-                            Text("\(product.id)")
-                                .padding(.leading, 10)
                         }
                     }
                     .padding(.bottom, 30)
+                    
                     VStack(alignment: .leading) {
                         Text("배송 방법:")
                             .padding(.bottom, 10)
@@ -70,9 +81,9 @@ struct PaymentView: View {
                         .padding(.bottom, 30)
                     Button(action: {
                     }) {
-
-                        NavigationLink(destination: ShippingView(orderStore: OrderStore())) {
-
+                        
+                        NavigationLink(destination: ShippingView()) {
+                            
                             Text("배송 정보 입력하기")
                                 .font(.headline)
                                 .fontWeight(.bold)
@@ -85,27 +96,30 @@ struct PaymentView: View {
                         .cornerRadius(15)
                     }
                 }
-
+                
                 .padding(.leading, 22)
             }
-        }
-        .onAppear {
-            orderStore.searchProductInfo(carts: carts)
+            .onAppear {
+                print("test")
+                orderStore.searchProductInfo(carts: carts)
+            }
+            
+            
         }
         
     }
 }
 
-struct PaymentView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            PaymentView(carts: [CartProduct(id: "",
-                                         productName: "",
-                                         device: [""],
-                                         category: "",
-                                         storage: "",
-                                         color: "",
-                                         productCount: 1)])
-        }
-    }
-}
+//struct PaymentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NavigationStack {
+//            PaymentView(carts: [CartProduct(id: "",
+//                                         productName: "",
+//                                         device: [""],
+//                                         category: "",
+//                                         storage: "",
+//                                         color: "",
+//                                         productCount: 1)])
+//        }
+//    }
+//}

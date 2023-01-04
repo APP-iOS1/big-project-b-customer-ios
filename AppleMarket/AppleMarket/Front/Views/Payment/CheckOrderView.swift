@@ -10,10 +10,12 @@ import SwiftUI
 struct CheckOrderView: View {
     @State var isCheck = false
     // @StateObject var orderStore: OrderStore = OrderStore()
-    // @EnvironmentObject var userStore = UserInfoStore()
-    @ObservedObject var orderStore = OrderStore()
+    @EnvironmentObject var userStore: UserInfoStore
+    @EnvironmentObject var orderStore: OrderStore
     
-    var address: String
+    var orderName: String
+    var orderPhone: String
+    var orderAddress: String
     
     var body: some View {
         NavigationView {
@@ -60,12 +62,12 @@ struct CheckOrderView: View {
                                 .font(.title3)
                                 .padding(.bottom, 10)
                                 .fontWeight(.bold)
-                            // 바꿔야할부분
-                            Text("김멋사")
-                            Text("010-1234-5678")
-                            Text("\(address)")
-                                .padding(.bottom, 30)
-                        } //
+                            Text("\(orderName)")
+                            Text("\(orderPhone)")
+                            Text("\(orderAddress)")
+                                .padding(.bottom, 20)
+                        }
+                        
                         .padding(.bottom, -1)
                         
                         Divider()
@@ -78,6 +80,7 @@ struct CheckOrderView: View {
                                 .padding(.bottom, 10)
                                 .fontWeight(.bold)
                             Text("결제 수단: 무통장 입금")
+                                .padding(.leading, 3)
                         }
                         .padding(.bottom, -1)
                     }
@@ -99,6 +102,7 @@ struct CheckOrderView: View {
                             } label: {
                                 Image(systemName: isCheck ? "checkmark.square.fill" : "checkmark.square.fill")
                                     .foregroundColor(isCheck ? .blue : .gray)
+                                    .padding(.leading, 3)
                             }
                             HStack {
                                 Text("개인정보 취급방침에 따라 개인정보를 수집 및 사용하고, 제 3자에 제공 및 처리한다는 점에 동의합니다. (필수)")
@@ -121,12 +125,14 @@ struct CheckOrderView: View {
                             // 바꿔야할부분
                             HStack {
                                 Text("소계")
+                                    .padding(.leading, 3)
                                 Spacer()
                                 Text("₩ 750,000")
                             }
                             .padding(.bottom, 5)
                             HStack {
                                 Text("배송")
+                                    .padding(.leading, 3)
                                 Spacer()
                                 Text("무료")
                             }
@@ -147,22 +153,23 @@ struct CheckOrderView: View {
                     }
                     
                     // 결제버튼
-                    
-                    Button(action: {
-                        print("결제완료 및 화면전환")
-                        
-                    }) {
-                        NavigationLink(destination: MyOrderView()) {
-                            Text("결제하기")
-                                .font(.headline)
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                                .frame(width: 310, height: 20)
-                                .padding(20)
-                        }
-                        .background(Color("MainColor"))
-                        .cornerRadius(15)
+                    NavigationLink(destination: MyOrderView()) {
+                        Text("결제하기")
+                            .font(.headline)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                            .frame(width: 310, height: 20)
+                            .padding(20)
                     }
+                    .background(Color("MainColor"))
+                    .cornerRadius(15)
+                    .simultaneousGesture(TapGesture().onEnded {
+                        orderStore.addOrder(user: userStore.userInfo!,
+                                            products: orderStore.products,
+                                            orderInfo: Order(orderName : orderName ,
+                                                             orderPhone : orderPhone ,
+                                                             orderAddress : orderAddress ))
+                    })
                 }
                 .padding(25)
             }
@@ -170,8 +177,9 @@ struct CheckOrderView: View {
     }
 }
 
-struct CheckOrderView_Previews: PreviewProvider {
-    static var previews: some View {
-        CheckOrderView(address: "")
-    }
-}
+//struct CheckOrderView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CheckOrderView(order: Order(orderName: "", orderPhone: "", orderAddress: ""), address: "", receiverName: "", contactNumber: "")
+//
+//    }
+//}

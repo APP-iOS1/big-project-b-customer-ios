@@ -20,7 +20,7 @@ struct OrderTestView: View {
                                        price: 10000,
                                        productName: "iPhone14ProMax",
                                        status: 0,
-                                       storage: 256,
+                                       storage: "256",
                                        productCount: 1),
                                Product(id: "testID",
                                        category: "iPhone",
@@ -31,7 +31,7 @@ struct OrderTestView: View {
                                             "https://www.apple.com/newsroom/images/product/mac/standard/Apple-Mac-Studio-Studio-Display-hero-220308_big.jpg.slideshow-xlarge_2x.jpg"],
                                        price: 10000, productName: "iPhone14ProMax",
                                        status: 0,
-                                       storage: 256,
+                                       storage: "256",
                                        productCount: 2)]
     
     let orderInfo: Order = Order(orderName: "주문자이름", orderPhone: "010-1111-2222", orderAddress: "주문주소")

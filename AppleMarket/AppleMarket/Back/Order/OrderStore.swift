@@ -111,16 +111,25 @@ class OrderStore: ObservableObject {
         
         products.forEach { product in
             
-            let productIDproductID: String = UUID().uuidString
+            let productID: String = UUID().uuidString
             
-            orderTotalPrice += product.price * product.productCount
+            orderTotalPrice = orderTotalPrice + (product.price * product.productCount)
+            
+            print("--------------------------------------")
             print("orderTotalPrice: \(orderTotalPrice)")
+            print("productId: \(productID)")
+            print("productName: \(product.productName)")
+            print("productPrice: \(product.price)")
+            print("productCount: \(product.productCount)")
+            print("--------------------------------------")
             
             database.collection("ConsumerAccount").document(user.userId).collection("OrderList").document(uuid).collection("DetailOrder")
-                .document(productIDproductID)
-                .setData(["productId" : productIDproductID,
+                .document(productID)
+                .setData(["productId" : productID,
                           "productName" : product.productName,
                           "productPrice" : product.price,
+                          "productStorage" : product.storage,
+                          "productColor" : product.color,
                           "productCount" : product.productCount])
         }
         
@@ -205,9 +214,11 @@ class OrderStore: ObservableObject {
     }
     
     // MARK: - 결제창 넘어갈 때
-    func searchProductInfo(carts: [CartProduct]) {
+    func searchProductInfo(carts: [Cart]) {
         
-        carts.forEach { cartProduct in
+        print("searchProductInfo carts : \(carts)")
+        
+        for cartProduct in carts {
             database.collection("Product")
                 .whereField("productName", isEqualTo: cartProduct.productName)
                 .whereField("storage", isEqualTo: cartProduct.storage)
@@ -223,12 +234,11 @@ class OrderStore: ObservableObject {
                             let color: String = docData["color"] as? String ?? ""
                             let description: String = docData["description"] as? String ?? ""
                             let device: String = docData["device"] as? String ?? ""
-                            let image: [String] = docData["image"] as? [String] ?? [""]
+                            let image: [String] = docData["images"] as? [String] ?? [""]
                             let price: Int = docData["price"] as? Int ?? 0
                             let productName: String = docData["productName"] as? String ?? ""
                             let status: Int = docData["status"] as? Int ?? 0
-                            let storage: Int = docData["storage"] as? Int ?? 0
-                            let productCount: Int = docData["productCount"] as? Int ?? 0
+                            let storage: String = docData["storage"] as? String ?? ""
                             
                             let product = Product(id: id ,
                                                   category: category ,
@@ -240,9 +250,11 @@ class OrderStore: ObservableObject {
                                                   productName: productName ,
                                                   status: status ,
                                                   storage: storage ,
-                                                  productCount: productCount )
+                                                  productCount: cartProduct.productCount )
                             
                             self.products.append(product)
+                            print("searchProductInfo product : \(product)")
+                            print("searchProductInfo products : \(self.products)")
                         }
                     }
                 }

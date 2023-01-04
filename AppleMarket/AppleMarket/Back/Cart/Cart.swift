@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Cart: Hashable {
+struct Cart: Hashable, Identifiable {
 //    var productId: String
 //    var productName: String
 //    var productCount: Int
