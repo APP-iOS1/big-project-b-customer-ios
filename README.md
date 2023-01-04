@@ -180,3 +180,31 @@ onAppear로 장바구니 데이터를 호출하기 전에 장바구니가 빈 �
 - [Test] : 테스트 코드, 리펙토링 테스트 코드 추가 
 - [Chore] : 빌드 업무 수정, 패키지 매니저 수정
 ```
+
+## 👥 팀원소개
+
+| 최현종 | 
+| :--: |
+|   <img src = "https://avatars.githubusercontent.com/u/108848166?v=4  " width = "150">   |
+| PM |
+
+
+| 김영서 | 장종환 | 이석준 | 한승수 | 봉혜미 
+| :-: | :-: | :-: | :-: | :-: | 
+| <img src = "https://avatars.githubusercontent.com/u/114224237?v=4  " width = "100"> | <img src = "https://avatars.githubusercontent.com/u/98254580?v=4" width = "100"> | <img src = "https://avatars.githubusercontent.com/u/76909552?v=4  " width = "100"> | <img src = "https://avatars.githubusercontent.com/u/113982605?v=4 " width = "100"> | <img src = "https://avatars.githubusercontent.com/u/98953443?v=4" width = "100"> |
+| 메인 | 장바구니, 메인 | 검색, 팀장 | 검색 | 장바구니 | 
+
+
+
+| 신미지 | 이지연 | 홍수만 | 이소영 | 염성필 | 
+| :-: | :-: | :-: | :-: | :-: |
+|  <img src = "https://avatars.githubusercontent.com/u/62836016?v=4" width = "100"> | <img src = "https://avatars.githubusercontent.com/u/105197393?v=4" width = "100"> | <img src = "https://avatars.githubusercontent.com/u/18048754?v=4" width = "100"> | <img src = "https://avatars.githubusercontent.com/u/114223237?v=4" width = "100"> | <img src = "https://avatars.githubusercontent.com/u/101084872?v=4" width = "100"> | 
+| 마이페이지 | 디테일 | 디테일 | 주문관리 | 유저 | 
+
+
+| 한주희 | 진태영  | 정예슬 | 홍진표 | 윤현기 |
+|  :-: |  :--: | :--: | :--: | :--: | 
+|<img src = "https://avatars.githubusercontent.com/u/107897929?v=4" width = "100"> |   <img src = "https://avatars.githubusercontent.com/u/41459466?v=4" width = "100">   | <img src = "https://avatars.githubusercontent.com/u/71593182?v=4 " width = "100">  | <img src = "https://avatars.githubusercontent.com/u/52193695?v=4" width = "100">  | <img src = "https://avatars.githubusercontent.com/u/84693317?v=4" width = "100"> 
+| 장바구니, 유저 | 유저, 상품, 팀장 |  유저, 상품 |  주문관리 | 결제, 주문 |
+
+* 각 역할은 유동적으로 조정되었음
