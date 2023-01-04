@@ -21,7 +21,7 @@ struct MyDeviceListView: View {
                
                 List {
                     Section {
-                        ForEach(userInfoStore.userInfo?.myDevices ?? [], id: \.self) { myDevice in
+                        ForEach(userInfoStore.myDevices, id: \.self) { myDevice in
                             HStack {
                                 AsyncImage(url: URL(string: myDevice.deviceImage)) { image in
                                     image
@@ -29,14 +29,14 @@ struct MyDeviceListView: View {
                                         .aspectRatio(contentMode: .fit)
                                         .frame(width: 100)
                                 } placeholder: {
-                                    Color.gray
+                                    ProgressView()
                                 }
 
                                 Text(myDevice.deviceDescription)
                             }
-                            .alignmentGuide(.listRowSeparatorLeading) { viewDimensions in
-                                return 0
-                            }
+//                            .alignmentGuide(.listRowSeparatorLeading) { viewDimensions in
+//                                return 0
+//                            }
                         }
                         .onDelete(perform: delete)
                     }
@@ -63,7 +63,7 @@ struct MyDeviceListView: View {
             .navigationBarTitle("내 기기")
             .background(Color("MyPageBGColor"))
             .onAppear {
-                userInfoStore.fetchUserInfo()
+//                userInfoStore.fetchUserInfo()
             }
         }
     }
