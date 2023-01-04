@@ -34,7 +34,7 @@ struct MyProductDetailView: View {
                 
                 //                let _: String = myProducts.thumbnailImage.isEmpty ? "" : (myProducts.thumbnailImage )
                 
-                ForEach(userInstore.userInfo?.myDevices ?? [] ,id:\.self) { product in
+                ForEach(userInstore.myDevices ?? [] ,id:\.self) { product in
                     HStack{
                         //                        // 기기 사진
                         AsyncImage(url: URL(string: product.deviceImage )) { image in

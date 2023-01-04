@@ -148,7 +148,7 @@ final class UserInfoStore: ObservableObject{
                         let myDevice: MyDevice = MyDevice(myDeviceId: deviceId , deviceName: deviceName, deviceImage: deviceImage, deviceDescription: deviceDescription)
                         tempDevice.append(myDevice)
                     }
-                    self.userInfo?.myDevices = tempDevice
+                  //  self.userInfo?.myDevices = tempDevice
                     self.myDevices = tempDevice
                 }
             }
