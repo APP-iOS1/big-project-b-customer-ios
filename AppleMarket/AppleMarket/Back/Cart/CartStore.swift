@@ -25,7 +25,7 @@ class CartStore: ObservableObject {
                     let id: String = docData["id"] as? String ?? ""
                     let productName: String = docData["productName"] as? String ?? ""
                     let device: [String] = docData["device"] as? [String] ?? [""]
-                    let image: String = docData["images"] as? String ?? ""
+                    let image: String = docData["image"] as? String ?? ""
                     let category: String = docData["category"] as? String ?? ""
                     let storage: String = docData["storage"] as? String ?? ""
                     let color: String = docData["color"] as? String ?? ""
