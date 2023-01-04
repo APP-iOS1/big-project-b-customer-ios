@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct DetailView: View {
     @EnvironmentObject var productStore: ProductStore
     

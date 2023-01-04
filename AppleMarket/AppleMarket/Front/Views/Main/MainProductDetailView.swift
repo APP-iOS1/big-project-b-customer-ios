@@ -73,6 +73,8 @@ struct MainProductDetailView: View {
                                                         Spacer()
                                                         
                                                         Button {
+//디테일 뷰 연결부분 product: CatalogueProduct를 넘겨주면 된다
+                                                            DetailView()
 
                                                             
                                                         } label: {
@@ -128,30 +130,36 @@ struct MainProductDetailView: View {
                     ForEach(categoryProducts) { product in
                         let imageWidth: CGFloat = width / 2.5
                         let imageHeight: CGFloat = height / 6
-                        VStack {
-                            AsyncImage(url: URL(string: product.thumbnailImage)) { image in
-                                image
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: imageWidth, height: imageHeight )
-//                                    .clipped()
-                                    .cornerRadius(10)
+                        NavigationLink {
+                            //디테일 뷰 연결 부분 
+                            DetailView()
+                        } label: {
+                            VStack {
+                                AsyncImage(url: URL(string: product.thumbnailImage)) { image in
+                                    image
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: imageWidth, height: imageHeight )
+                                    //                                    .clipped()
+                                        .cornerRadius(10)
+                                    
+                                } placeholder: {
+                                    ProgressView()
+                                        .frame(width: imageWidth, height: imageHeight)
+                                }
+                                Spacer()
+                                    .frame(height: 25)
+                                Text(product.productName)
+                                    .font(.headline)
+                                    .frame(width: width / 2, alignment: .center)
+                                Spacer()
+                                Text("₩\(product.price)부터")
+                                    .foregroundColor(Color("MainColor"))
                                 
-                            } placeholder: {
-                                ProgressView()
-                                    .frame(width: imageWidth, height: imageHeight)
                             }
-                            Spacer()
-                                .frame(height: 25)
-                            Text(product.productName)
-                                .font(.headline)
-                                .frame(width: width / 2, alignment: .center)
-                            Spacer()
-                            Text("₩\(product.price)부터")
-                                .foregroundColor(Color("MainColor"))
-
+                            .padding(.vertical, 32)
                         }
-                        .padding(.vertical, 32)
+
                         
                         
                     }
