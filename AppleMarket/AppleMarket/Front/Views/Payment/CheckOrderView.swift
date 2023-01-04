@@ -32,24 +32,29 @@ struct CheckOrderView: View {
                             .font(.title3)
                             .padding(.bottom, 10)
                             .fontWeight(.bold)
+                        var _ = print("orderStore.products : \(orderStore.products)")
+                        
                         HStack {
-                            AsyncImage(url: URL(string: "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/airpods-max-select-silver-202011?wid=470&hei=556&fmt=png-alpha&.v=1604021221000")) { image in
-                                image
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 100, height: 100)
-                            } placeholder: {
-                                ProgressView()
+                            ForEach(orderStore.products, id: \.self) { product in
+                                var _ = print("product : \(product)")
+                                AsyncImage(url: URL(string: product.image[0])) { image in
+                                    image
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 100, height: 100)
+                                } placeholder: {
+                                    ProgressView()
+                                }
+                                VStack(alignment: .leading) {
+                                    Text("\(product.id)")
+                                        .padding(.bottom, -3)
+                                    Text("\(product.productCount)")
+                                        .padding(.bottom, -3)
+                                    Text("₩ \(product.price)")
+                                        .bold()
+                                }
+                                .padding(.leading, 10)
                             }
-                            VStack(alignment: .leading) {
-                                Text("AirPods Max - 실버")
-                                    .padding(.bottom, -3)
-                                Text("1")
-                                    .padding(.bottom, -3)
-                                Text("₩ 750,000")
-                                    .bold()
-                            }
-                            .padding(.leading, 10)
                         }
                         .padding(.bottom, 30)
                         
@@ -117,38 +122,41 @@ struct CheckOrderView: View {
                     
                     // 총액 확인
                     Group {
-                        VStack(alignment: .leading) {
-                            Text("총계")
-                                .font(.title3)
-                                .padding(.bottom, 10)
-                                .fontWeight(.bold)
-                            // 바꿔야할부분
-                            HStack {
-                                Text("소계")
-                                    .padding(.leading, 3)
-                                Spacer()
-                                Text("₩ 750,000")
-                            }
-                            .padding(.bottom, 5)
-                            HStack {
-                                Text("배송")
-                                    .padding(.leading, 3)
-                                Spacer()
-                                Text("무료")
-                            }
-                            Divider()
-                            HStack {
+                        ForEach(orderStore.products, id: \.self) { product in
+                            var _ = print("product : \(product)")
+                            VStack(alignment: .leading) {
                                 Text("총계")
                                     .font(.title3)
                                     .padding(.bottom, 10)
                                     .fontWeight(.bold)
-                                Spacer()
-                                Text("₩ 750,000")
-                                    .font(.title3)
-                                    .padding(.bottom, 10)
-                                    .fontWeight(.bold) //
+                                // 바꿔야할부분
+                                HStack {
+                                    Text("소계")
+                                        .padding(.leading, 3)
+                                    Spacer()
+                                    Text("₩ \(product.totalPrice)")
+                                }
+                                .padding(.bottom, 5)
+                                HStack {
+                                    Text("배송")
+                                        .padding(.leading, 3)
+                                    Spacer()
+                                    Text("무료")
+                                }
+                                Divider()
+                                HStack {
+                                    Text("총계")
+                                        .font(.title3)
+                                        .padding(.bottom, 10)
+                                        .fontWeight(.bold)
+                                    Spacer()
+                                    Text("₩ \(product.totalPrice)")
+                                        .font(.title3)
+                                        .padding(.bottom, 10)
+                                        .fontWeight(.bold) //
+                                }
+                                .padding(.vertical, 20)
                             }
-                            .padding(.vertical, 20)
                         }
                     }
                     
