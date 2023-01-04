@@ -21,22 +21,18 @@ class ProductStore: ObservableObject {
             if let snapshot {
                 for document in snapshot.documents {
                     let docData = document.data()
-                    let id = docData["id"] as? String ?? ""
-                    let productName = docData["productName"] as? String ?? ""
-                    let device = docData["device"] as? String ?? ""
-                    let category = docData["category"] as? String ?? ""
-                    let description = docData["description"] as? String ?? ""
-                    let price = docData["price"] as? Int ?? 0
-                    let images = docData["images"] as? [String] ?? []
-                    let count = docData["count"] as? Int ?? 0
-                    let storage = docData["storage"] as? String ?? ""
-                    let color = docData["color"] as? String ?? ""
-                    let status = docData["status"] as? Int ?? 0
-                    let createdAt = docData["createdAt"] as? Date ?? Date()
+                    let id: String = document.documentID
+                    let category: String = docData["category"] as? String ?? ""
+                    let color: String = docData["color"] as? String ?? ""
+                    let description: String = docData["description"] as? String ?? ""   
+                    let device: String = docData["device"] as? String ?? ""
+                    let image: [String] = docData["image"] as? [String] ?? []
+                    let price: Int = docData["price"] as? Int ?? 0
+                    let productName: String = docData["productName"] as? String ?? ""
+                    let status: Int = docData["status"] as? Int ?? 0
+                    let storage: Int = docData["storage"] as? Int ?? 0
                     
-                    let model = docData["model"] as? String ?? ""
-                    
-                    let products: Product = Product(id: id, productName: productName, device: device, category: category, description: description, price: price, images: images, count: count, storage: storage, color: color, status: color, createdAt: createdAt)
+                    let products: Product = Product(id: id, category: category, color: color, description: description, device: device, image: image, price: price, productName: productName, status: status, storage: storage, productCount: 1)
                     
                     self.productStore.append(products)
                 }
