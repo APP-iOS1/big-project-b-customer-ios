@@ -76,7 +76,9 @@ struct ContentView: View {
                 }
             }
             .onChange(of: userInfoStore.userInfo) { newValue in
+                print("Onchange")
                 if userInfoStore.userInfo != nil {
+                    print("onChange userInfo fetch start")
                     cartStore.fetchCart(uid: userInfoStore.userInfo?.userId ?? "")
                     orderStore.fetchOrderList(userId: userInfoStore.userInfo?.userId ?? "" )
                 }

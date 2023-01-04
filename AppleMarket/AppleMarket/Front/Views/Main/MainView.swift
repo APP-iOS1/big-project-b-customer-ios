@@ -39,12 +39,12 @@ struct MainView: View {
                         }
                     }
                 }
-                .onAppear {
-                    catalogueProductStore.fetchData()
-                    if userInfostore.userInfo != nil {
-                        userInfostore.fetchMyDevice()
-                    }
-                }
+//                .onAppear {
+//                    catalogueProductStore.fetchData()
+//                    if userInfostore.userInfo != nil {
+//                        userInfostore.fetchMyDevice()
+//                    }
+//                }
     }
 }
 

@@ -75,15 +75,17 @@ struct SearchView: View {
             viewModel.updateRecentResults()
         }
         .onAppear {
-            catalogueProductStore.fetchData()
+//            catalogueProductStore.fetchData()
         }
         .onChange(of: viewModel.searchInput) { input in
+            print("SearchView change 1")
             viewModel.searchingState = .none
             //print(viewModel.searchResults)
             viewModel.searchResults = catalogueProductStore.catalogueProductStores.filter({ $0.productName.localizedCaseInsensitiveContains(input)})
                 
         }
         .onChange(of: viewModel.searchingState ){ state in
+            print("searchView change 2")
             if state == .none {
                 viewModel.clearResults()
             } else {
