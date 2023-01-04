@@ -70,7 +70,7 @@ struct MyDeviceListView: View {
     
     func delete(at offsets: IndexSet) {
         guard let offsets = offsets.first else { return }
-        userInfoStore.removeMyDevice(myDeviceId: userInfoStore.myDevices[offsets].myDeviceId ?? "")
+        userInfoStore.removeMyDevice(myDeviceId: userInfoStore.userInfo?.myDevices[offsets].myDeviceId ?? "")
     }
 }
 

@@ -47,7 +47,7 @@ struct MyDeviceFilterView: View {
                     }
                     
                     // 내 기기에 등록된 개수만큼의 버튼
-                    ForEach (userInfoStore.myDevices, id: \.self) { device in
+                    ForEach (userInfoStore.userInfo?.myDevices ?? [], id: \.self) { device in
                         Button {
                             dismiss()
                             // 필터 동작 함수

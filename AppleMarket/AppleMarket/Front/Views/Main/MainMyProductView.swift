@@ -39,7 +39,7 @@ struct MainMyProductView: View {
                 .padding(.leading)
             
             // 등록된 기기가 없을 때
-            if ((userInfoStore.myDevices.isEmpty) == true) && userInfoStore.state == .signedIn {
+            if ((userInfoStore.userInfo?.myDevices.isEmpty) == true) && userInfoStore.state == .signedIn {
                 
                 Button {
                     isShowingSheet.toggle()
@@ -87,7 +87,7 @@ struct MainMyProductView: View {
             //등록된 기기가 있을 때
             else {
                 TabView() {
-                    ForEach(userInfoStore.myDevices ?? [], id: \.self) { product in
+                    ForEach(userInfoStore.userInfo?.myDevices ?? [], id: \.self) { product in
                         NavigationLink {
                             MyProductDetailView(myProducts: CatalogueProduct(id: "", productName: product.deviceName, device: [], category: "", description: "", price: 0, thumbnailImage: "", status: 0, descriptionImages: [product.deviceImage], model: [], color: [], storage: [], recommendedProduct: [], netWork: [], processor: [], memory: []))
                         } label: {

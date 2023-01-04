@@ -13,7 +13,7 @@ struct UserInfo: Codable, Hashable{
     var userEmail: String // 이메일
     var address: String  // 주소
     var phoneNumber: String  // 전화번호
-   // var myDevices: [MyDevice] = [] // 내 기기
+    var myDevices: [MyDevice] = [] // 내 기기
     //var recentProduct: [String] = []  // 최근 조회 상품
 }
 
