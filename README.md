@@ -4,7 +4,7 @@
 
 <img src="https://user-images.githubusercontent.com/76909552/210501923-e6214805-5559-44a2-8333-efea03af9300.png" width="200" align ="left">
 <img src="https://user-images.githubusercontent.com/76909552/210502128-2fc402f0-d6f9-442a-a7b4-0291846cb67c.png" width="200" >
-![Group 1260](https://user-images.githubusercontent.com/41459466/227640188-f229cafa-657f-4865-a2ed-7f135e7b5fad.jpg)
+![Group 1260](https://user-images.githubusercontent.com/41459466/227640896-ae3304a3-8342-48eb-8e27-792012f727cd.jpg)
 
 애플 디바이스 및 관련 제품을 쉽고 빠르게 구매 할 수 있는 앱입니다.
 
