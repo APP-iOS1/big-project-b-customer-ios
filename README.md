@@ -138,7 +138,7 @@
 
 ```
 
-###Troubleshooting
+### Troubleshooting
 
 1. 메인
     - 초기에 페이지 뷰 적용시 데이터 연동이 되지 않은 문제가 있어 사용하지 못하는
