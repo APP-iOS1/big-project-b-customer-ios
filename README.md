@@ -4,6 +4,8 @@
 
 <img src="https://user-images.githubusercontent.com/76909552/210501923-e6214805-5559-44a2-8333-efea03af9300.png" width="200" align ="left">
 <img src="https://user-images.githubusercontent.com/76909552/210502128-2fc402f0-d6f9-442a-a7b4-0291846cb67c.png" width="200" >
+<img src= "https://user-images.githubusercontent.com/41459466/227640896-ae3304a3-8342-48eb-8e27-792012f727cd.jpg" align = "center">
+
 애플 디바이스 및 관련 제품을 쉽고 빠르게 구매 할 수 있는 앱입니다.
 
 ## ✅ 주요기능
@@ -83,7 +85,60 @@
         - 주소
         - 전화번호
 
-## ❗️ 발생했던 이슈들
+## 문서
+
+### 폴더 컨벤션
+```
+📦 AppleMarket_customer
+|
++ 🗂 Back 종류별 데이터모델, 서버통신 Store 관리
+|
++------🗂 CatalougeProduct   // 판매 상품군 데이터모델, Store
+│
++------🗂 Order  // 주문서 데이터모델, Store
+│
++------🗂 Cart       // 장바구니 데이터모델, Store
+│
++------🗂 UserAuth       // 사용자 데이터모델, Store 
+│
++ 🗂 Front // 클라이언트에 표시되는 View, ViewModifier 관리
+|
++------🗂 ViewModifier      // View에 사용되는 Custom Coponent ViewModifier 관리
+│
++------🗂 Views       // 여러 View를 모음
+│       |
+│       +------🗂 Payment
+│               │
+│               +------🗂 Cart // 결제창 Cart SubView 관리
+│
+│       
+│       +------🗂 Search
+│       |
+│       +------🗂 MyPage
+|               |
+|               +------🗂 MyProfile // Profile SubView 관리
+|               |
+|               +------🗂 MyMainPage // MyPage Main에 해당되는 SubView 관리
+|               |
+|               +------🗂 MyDevice // 내 기기 SubView 관리
+|               |
+|               +------🗂 MyOrder // 내가 주문한 상품 SubView 관리
+|               |
+|               +------🗂 Login&SignUp // 로그인, 회원가입 View 관리
+|
+│       +------🗂 Main
+|               |
+|               +------🗂 MyProduct // 내 기기 관련 상품 View 관리
+|               |
+|               +------🗂 Main // Main 페이지 View 관리
+|               |
+|               +------🗂 Detail // 선택 상품 View 관리
+|
++------🗂 ViewModifier // View에 사용되는 Custom Component에 대한 ViewModifier 관리
+
+```
+
+### Troubleshooting
 
 1. 메인
     - 초기에 페이지 뷰 적용시 데이터 연동이 되지 않은 문제가 있어 사용하지 못하는
@@ -124,7 +179,10 @@
     - 내 기기 정보들은 하위 컬렉션에 독립적으로 담겨있기 때문에 Published로  Device 정보를  직접적으로 담을 수 있는 변수를 만들어 데이터를 담고, 해당 데이터를 불러오는 것으로 해결함 
 
 
-## ♨️ 아쉬운 점
+<details>
+<summary>아쉬운 점</summary>
+<div markdown="1">
+
 1. 메인 뷰 
 - 만들어야 되는 뷰가 많아서 디테일을 살리지 못했음.
 - 데이터 구조를 확실히 이해하지 못한점이 아쉬움
@@ -151,8 +209,13 @@
 - 마이 페이지에서도 기기별 액세서리 쇼핑하기 보여주고 싶었는데 시간이 부족해 구현하지 못함.
 - 주문취소, 반품, 환불 기능을 시간 부족으로 구현하지 못함
 
+</div>
+</details>
 
-## 이 프로젝트를 처음부터 다시 시작한다면 지금과 비교해서 무엇부터 다르게 하고 싶나요?
+<details>
+<summary>이 프로젝트를 처음부터 다시 시작한다면?</summary>
+<div markdown="1">
+
 - 시작 전 충분한 회의를 통해 프론트와 백엔드간의 소통이 있었으면 시간 절약이 되었을 것 같다
     - 프론트와 백엔드가 함께 데이터 구조를 구성하는게 좋았을 것 같다
     - 시작 전 변수명을 잡고 갔으면 좋겠다
@@ -161,6 +224,9 @@
 
 - 클론코딩인지 다른 ADS인지 확실히 잡고 갔으면 좋겠다
     - 의도가 "애플 상점을 만들자!" 인지 "애플 스토어를 기반으로 색다른 ADS를 설정해서 구현하자!"인지 헷갈렸습니다
+
+</div>
+</details>
 
 ## ⚙️  컨벤션
 ```swift
