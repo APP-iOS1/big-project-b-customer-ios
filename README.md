@@ -181,9 +181,9 @@
     - 내 기기 정보들은 하위 컬렉션에 독립적으로 담겨있기 때문에 Published로  Device 정보를  직접적으로 담을 수 있는 변수를 만들어 데이터를 담고, 해당 데이터를 불러오는 것으로 해결함 
 
 </div>
-</detail>
+</details>
 
-<detail>
+<details>
 <summary>회고 - 아쉬운 점</summary>
 <div markdown="1">
 
@@ -214,9 +214,9 @@
 - 주문취소, 반품, 환불 기능을 시간 부족으로 구현하지 못함
 
 </div>
-</detail>
+</details>
 
-<detail>
+<details>
 <summary>이 프로젝트를 처음부터 다시 시작한다면?</summary>
 <div markdown="1">
 
@@ -230,7 +230,7 @@
     - 의도가 "애플 상점을 만들자!" 인지 "애플 스토어를 기반으로 색다른 ADS를 설정해서 구현하자!"인지 헷갈렸습니다
 
 </div>
-</detail>
+</details>
 
 ## ⚙️  컨벤션
 ```swift
