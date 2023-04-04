@@ -138,9 +138,7 @@
 
 ```
 
-<details>
-<summary>Troubleshooting</summary>
-<div markdown="1">
+###Troubleshooting
 
 1. 메인
     - 초기에 페이지 뷰 적용시 데이터 연동이 되지 않은 문제가 있어 사용하지 못하는
@@ -180,11 +178,9 @@
     - 유저 정보를 담는 변수가 옵셔널이고, 안에 배열로 저장한 내 기기 정보들을 불러오는 방식이었는데 비동기처리로 인해 유저 정보를 다시 가져올 때 뷰가 그리는 것 보다 늦게 데이터가 로드되는 현상 발생
     - 내 기기 정보들은 하위 컬렉션에 독립적으로 담겨있기 때문에 Published로  Device 정보를  직접적으로 담을 수 있는 변수를 만들어 데이터를 담고, 해당 데이터를 불러오는 것으로 해결함 
 
-</div>
-</details>
 
 <details>
-<summary>회고 - 아쉬운 점</summary>
+<summary>아쉬운 점</summary>
 <div markdown="1">
 
 1. 메인 뷰 
